@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://remphone-russia.ru/sitemap.xml
+
+# Запрещаем индексацию служебных страниц
+Disallow: /temp/
+Disallow: /backup/
+Disallow: /*.json$
