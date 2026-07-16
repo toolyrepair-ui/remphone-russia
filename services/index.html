@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Услуги ремонта телефонов в Хабаровске — REMPHONE RUSSIA</title>
+    <meta name="description" content="Все услуги по ремонту телефонов в Хабаровске: замена экрана, батареи, зарядки, после воды, камера. Гарантия 90 дней.">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="canonical" href="https://remphone-russia.ru/services/">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Услуги ремонта телефонов — REMPHONE RUSSIA">
+    <meta property="og:description" content="Замена экрана, батареи, зарядки, после воды. Гарантия 90 дней. Выезд мастера.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://remphone-russia.ru/services/">
+    <meta property="og:image" content="https://remphone-russia.ru/og-image.jpg">
+</head>
+<body>
+<header class="header" id="header">
+    <div class="container">
+        <a href="/" class="logo">REMPHONE <span>RUSSIA</span></a>
+        <nav class="nav" id="nav">
+            <a href="../services/">Услуги</a>
+            <a href="../cities/">Города</a>
+            <a href="../reviews.html">Отзывы</a>
+            <a href="../about.html">О нас</a>
+            <a href="../faq.html">FAQ</a>
+            <a href="../contacts.html">Контакты</a>
+        </nav>
+        <a href="https://t.me/REMPHONE_RUSSIA_Bot" target="_blank" class="header-btn">✈️ Заявка в Telegram</a>
+        <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+    </div>
+</header>
+
+<section class="hero" id="hero">
+    <div class="container">
+        <div class="catalog-header">
+            <div>
+                <h1>Услуги ремонта телефонов</h1>
+                <p class="section-subtitle">Что мы чиним чаще всего и сколько это стоит</p>
+            </div>
+            <div class="catalog-filters">
+                <select id="brandFilter">
+                    <option value="">Все бренды</option>
+                    <option value="iPhone">iPhone</option>
+                    <option value="Samsung">Samsung</option>
+                    <option value="Xiaomi">Xiaomi</option>
+                    <option value="Honor">Honor</option>
+                    <option value="Huawei">Huawei</option>
+                    <option value="Realme">Realme</option>
+                </select>
+                <select id="priceFilter">
+                    <option value="">Любая цена</option>
+                    <option value="0-1000">до 1000₽</option>
+                    <option value="1000-2000">1000–2000₽</option>
+                    <option value="2000-99999">от 2000₽</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="services-grid">
+            <a href="screen.html" class="service-card" data-brand="iPhone Samsung Xiaomi Honor Huawei Realme" data-price="1000-2000">
+                <div class="service-icon">📱</div>
+                <h4>Замена экрана</h4>
+                <p>Оригинальные дисплеи для iPhone, Samsung, Xiaomi. Гарантия 90 дней.</p>
+                <span class="service-price">от 1000₽</span>
+            </a>
+            <a href="battery.html" class="service-card" data-brand="iPhone Samsung Xiaomi Honor Huawei Realme" data-price="0-1000">
+                <div class="service-icon">🔋</div>
+                <h4>Замена батареи</h4>
+                <p>Оригинальные аккумуляторы, восстановление ёмкости. Гарантия 90 дней.</p>
+                <span class="service-price">от 800₽</span>
+            </a>
+            <a href="not-on.html" class="service-card" data-brand="iPhone Samsung Xiaomi Honor Huawei Realme" data-price="0-1000">
+                <div class="service-icon">💻</div>
+                <h4>Не включается</h4>
+                <p>Диагностика, замена шлейфа, контроллера питания, ремонт после падения.</p>
+                <span class="service-price">от 500₽</span>
+            </a>
+            <a href="water.html" class="service-card" data-brand="iPhone Samsung Xiaomi Honor Huawei Realme" data-price="0-1000">
+                <div class="service-icon">💧</div>
+                <h4>После воды</h4>
+                <p>Чистка платы, ультразвук, замена повреждённых деталей.</p>
+                <span class="service-price">от 500₽</span>
+            </a>
+            <a href="charge.html" class="service-card" data-brand="iPhone Samsung Xiaomi Honor Huawei Realme" data-price="1000-2000">
+                <div class="service-icon">🔌</div>
+                <h4>Не заряжается</h4>
+                <p>Ремонт разъёма, шлейфа, контроллера заряда, замена аккумулятора.</p>
+                <span class="service-price">от 800₽</span>
+            </a>
+            <a href="camera.html" class="service-card" data-brand="iPhone Samsung Xiaomi Honor Huawei Realme" data-price="1000-2000">
+                <div class="service-icon">📷</div>
+                <h4>Ремонт камеры</h4>
+                <p>Замена модуля камеры, настройка фокуса, ремонт после падения.</p>
+                <span class="service-price">от 1000₽</span>
+            </a>
+            <a href="cleaning.html" class="service-card" data-brand="iPhone Samsung Xiaomi Honor Huawei Realme" data-price="0-1000">
+                <div class="service-icon">🧹</div>
+                <h4>Чистка и обслуживание</h4>
+                <p>Глубокая чистка, замена термопасты, профилактика.</p>
+                <span class="service-price">от 500₽</span>
+            </a>
+        </div>
+
+        <div class="text-center" style="margin-top:40px">
+            <a href="../#form" class="btn-primary">🛠 Оставить заявку</a>
+            <a href="https://t.me/REMPHONE_RUSSIA_Bot" target="_blank" class="btn-secondary" style="margin-left:10px">✈️ В Telegram</a>
+        </div>
+    </div>
+</section>
+
+<div class="sticky-mobile-cta"><a href="../#form">🛠 Оставить заявку</a></div>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div>
+                <div class="logo" style="color:#fff;margin-bottom:8px">REMPHONE <span>RUSSIA</span></div>
+                <p style="font-size:13px;color:rgba(255,255,255,0.4)">Ремонт телефонов в Хабаровске и Хабаровском крае. Быстро, качественно, с гарантией.</p>
+            </div>
+            <div>
+                <h5>Услуги</h5>
+                <a href="screen.html">Замена экрана</a>
+                <a href="battery.html">Замена батареи</a>
+                <a href="not-on.html">Не включается</a>
+                <a href="water.html">После воды</a>
+                <a href="charge.html">Не заряжается</a>
+                <a href="camera.html">Ремонт камеры</a>
+            </div>
+            <div>
+                <h5>О проекте</h5>
+                <a href="../about.html">О нас</a>
+                <a href="../reviews.html">Отзывы</a>
+                <a href="../faq.html">FAQ</a>
+                <a href="../contacts.html">Контакты</a>
+            </div>
+            <div>
+                <h5>Заявка</h5>
+                <a href="../#form">Оставить заявку</a>
+                <a href="https://t.me/REMPHONE_RUSSIA_Bot" target="_blank">Telegram-бот</a>
+                <a href="../privacy.html">Политика</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 REMPHONE RUSSIA</p>
+        </div>
+    </div>
+</footer>
+
+<script src="../script.js"></script>
+</body>
+</html>
