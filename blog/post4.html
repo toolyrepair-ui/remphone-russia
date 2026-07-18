@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Гарантия на ремонт в Хабаровске — REMPHONE RUSSIA</title>
+    <meta name="description" content="Что значит гарантия 90 дней на ремонт телефона в Хабаровске и как она работает.">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<header class="header" id="header">
+    <div class="container">
+        <a href="/" class="logo">REMPHONE <span>RUSSIA</span></a>
+        <nav class="nav" id="nav">
+            <a href="../services/">Услуги</a>
+            <a href="../cities/">Города</a>
+            <a href="../reviews.html">Отзывы</a>
+            <a href="../about.html">О нас</a>
+            <a href="../faq.html">FAQ</a>
+            <a href="../contacts.html">Контакты</a>
+        </nav>
+        <a href="https://t.me/REMPHONE_RUSSIA_Bot" target="_blank" class="header-btn">✈️ Заявка в Telegram</a>
+        <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+    </div>
+</header>
+
+<section class="hero" style="padding:60px 0">
+    <div class="container">
+        <h1 style="font-size:42px;margin-bottom:20px">Гарантия на ремонт</h1>
+        <p style="font-size:18px;opacity:0.9;max-width:700px">Что значит гарантия 90 дней и как она работает</p>
+    </div>
+</section>
+
+<section class="services-preview">
+    <div class="container">
+        <div style="max-width:900px;margin:0 auto">
+            <h2 style="margin-bottom:20px">Что такое гарантия 90 дней</h2>
+            <p style="color:var(--text-light);margin-bottom:30px">Мы даём гарантию 90 дней на все виды ремонта. Это значит, что если в течение 3 месяцев после ремонта появится та же проблема — мы исправим её бесплатно.</p>
+
+            <h2 style="margin-bottom:20px">Что покрывает гарантия</h2>
+            <p style="color:var(--text-light);margin-bottom:30px">Гарантия покрывает работу мастера и установленные запчасти. Если экран снова разбился из-за брака установки, или батарея быстро садится — мы заменим деталь бесплатно.</p>
+
+            <h2 style="margin-bottom:20px">Что не покрывает гарантия</h2>
+            <p style="color:var(--text-light);margin-bottom:30px">Гарантия не покрывает новые повреждения: падения, попадание воды, механические повреждения. Также не распространяется на естественный износ батареи (если вы активно пользовались телефоном).</p>
+
+            <h2 style="margin-bottom:20px">Как работает гарантия</h2>
+            <p style="color:var(--text-light);margin-bottom:30px">После ремонта вы получаете чек с указанием вида работ и гарантийного срока. Если проблема повторится — просто приезжайте к нам с чеком. Мы проведём диагностику и исправим проблему бесплатно.</p>
+
+            <h2 style="margin-bottom:20px">Почему мы даём гарантию</h2>
+            <p style="color:var(--text-light);margin-bottom:30px">Мы уверены в качестве своей работы. Используем оригинальные запчасти, работают опытные мастера. Гарантия 90 дней — это наше обещание, что ремонт будет долговечным.</p>
+        </div>
+    </div>
+</section>
+
+<section class="cta" id="form">
+    <div class="container">
+        <div class="cta-grid">
+            <div>
+                <h2>Нужен ремонт с гарантией?</h2>
+                <p class="cta-desc">Оставьте заявку — мы перезвоним в течение 5 минут</p>
+                <ul class="cta-benefits">
+                    <li>Бесплатная диагностика</li>
+                    <li>Ремонт от 30 минут</li>
+                    <li>Гарантия 90 дней</li>
+                    <li>Оригинальные запчасти</li>
+                </ul>
+            </div>
+            <div>
+                <div class="form-card">
+                    <div id="formContent">
+                        <h3>Заявка на ремонт</h3>
+                        <p class="form-sub">Заполните — мы сразу примем заказ</p>
+                        <form id="repairForm" onsubmit="return submitForm(event)">
+                            <div class="form-group">
+                                <label for="name">Ваше имя *</label>
+                                <input type="text" id="name" placeholder="Алексей" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Номер телефона *</label>
+                                <input type="tel" id="phone" placeholder="+7 999 123-45-67" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="brand">Бренд *</label>
+                                    <select id="brand" required>
+                                        <option value="">Выберите</option>
+                                        <option value="iPhone">iPhone</option>
+                                        <option value="Samsung">Samsung</option>
+                                        <option value="Xiaomi">Xiaomi</option>
+                                        <option value="Honor">Honor</option>
+                                        <option value="Huawei">Huawei</option>
+                                        <option value="Realme">Realme</option>
+                                        <option value="Другой">Другой</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="model">Модель</label>
+                                    <input type="text" id="model" placeholder="iPhone 13, A52...">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="problem">Проблема *</label>
+                                <select id="problem" required>
+                                    <option value="">Выберите</option>
+                                    <option value="Разбит экран">Разбит экран</option>
+                                    <option value="Не включается">Не включается</option>
+                                    <option value="Садится батарея">Садится батарея</option>
+                                    <option value="Не заряжается">Не заряжается</option>
+                                    <option value="Попала вода">Попала вода</option>
+                                    <option value="Не работает звук">Не работает звук</option>
+                                    <option value="Не работает камера">Не работает камера</option>
+                                    <option value="Другое">Другое</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="city">Город *</label>
+                                <input type="text" id="city" placeholder="Хабаровск" required>
+                            </div>
+                            <button type="submit" class="form-submit" id="submitBtn">🛠 Отправить заявку</button>
+                        </form>
+                    </div>
+                    <div class="form-success" id="formSuccess">
+                        <div class="form-success-icon">✅</div>
+                        <h4>Заявка отправлена!</h4>
+                        <p>Мастер свяжется с вами в ближайшее время.</p>
+                        <br>
+                        <a href="https://t.me/REMPHONE_RUSSIA_Bot" target="_blank" class="btn-primary" style="display:inline-flex">✈️ Перейти в Telegram</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="sticky-mobile-cta"><a href="#form">🛠 Оставить заявку</a></div>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div>
+                <div class="logo" style="color:#fff;margin-bottom:8px">REMPHONE <span>RUSSIA</span></div>
+                <p style="font-size:13px;color:rgba(255,255,255,0.4)">Ремонт телефонов в Хабаровске и Хабаровском крае. Быстро, качественно, с гарантией.</p>
+            </div>
+            <div>
+                <h5>Услуги</h5>
+                <a href="../services/screen.html">Замена экрана</a>
+                <a href="../services/battery.html">Замена батареи</a>
+                <a href="../services/not-on.html">Не включается</a>
+                <a href="../services/water.html">После воды</a>
+                <a href="../services/">Все услуги</a>
+            </div>
+            <div>
+                <h5>О проекте</h5>
+                <a href="../about.html">О нас</a>
+                <a href="../reviews.html">Отзывы</a>
+                <a href="../faq.html">FAQ</a>
+                <a href="../contacts.html">Контакты</a>
+            </div>
+            <div>
+                <h5>Заявка</h5>
+                <a href="#form">Оставить заявку</a>
+                <a href="https://t.me/REMPHONE_RUSSIA_Bot" target="_blank">Telegram-бот</a>
+                <a href="../privacy.html">Политика</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 REMPHONE RUSSIA</p>
+        </div>
+    </div>
+</footer>
+
+<script src="../script.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+# Редирект HTTP → HTTPS
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Редирект www → non-www (или наоборот)
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ https://%1/$1 [L,R=301]
+
+# Редирект с rem-phone.ru на remphone-russia.ru (если нужно)
+# RewriteCond %{HTTP_HOST} ^rem-phone\.ru$ [NC]
+# RewriteRule ^(.*)$ https://remphone-russia.ru/$1 [L,R=301]

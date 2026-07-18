@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Услуги ремонта телефонов в Хабаровске — REMPHONE RUSSIA | Каталог</title>
+    <meta name="description" content="Все услуги по ремонту телефонов в Хабаровске: замена экрана, батареи, зарядки, после воды, камера. Гарантия 90 дней. Сравните цены и выберите сервис.">
+    <link rel="stylesheet" href="../styles-new.css">
+    <link rel="canonical" href="https://remphone-russia.ru/services/">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Услуги ремонта телефонов — REMPHONE RUSSIA">
+    <meta property="og:description" content="Замена экрана, батареи, зарядки, после воды. Гарантия 90 дней. Выезд мастера.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://remphone-russia.ru/services/">
+    <meta property="og:image" content="https://remphone-russia.ru/og-image.jpg">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <a href="/" class="logo">
+                <div class="logo-icon">🔧</div>
+                REMPHONE <span>RUSSIA</span>
+            </a>
+            
+            <nav class="nav" id="nav">
+                <a href="/#services">Услуги</a>
+                <a href="/#catalog">Каталог</a>
+                <a href="/#how">Как работает</a>
+                <a href="/#reviews">Отзывы</a>
+                <a href="/#faq">FAQ</a>
+                <a href="/#contacts">Контакты</a>
+            </nav>
+            
+            <div class="header-actions">
+                <a href="https://t.me/REMPHONE_RUSSIA_Bot" target="_blank" class="btn-header">
+                    ✈️ Заявка в Telegram
+                </a>
+                <button class="burger" id="burger" aria-label="Меню">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Services Catalog -->
+    <section class="section" id="services">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Каталог услуг</div>
+                <h1 class="section-title">Все виды ремонта телефонов</h1>
+                <p class="section-subtitle">Выберите тип ремонта и найдите лучший сервис в Хабаровске</p>
+            </div>
+            
+            <!-- Filters -->
+            <div class="catalog-header">
+                <h3 class="catalog-title">Фильтр услуг</h3>
+                <div class="catalog-filters">
+                    <button class="filter-chip active" data-filter="all">Все услуги</button>
+                    <button class="filter-chip" data-filter="screen">Экраны</button>
+                    <button class="filter-chip" data-filter="battery">Батареи</button>
+                    <button class="filter-chip" data-filter="software">Программный</button>
+                    <button class="filter-chip" data-filter="hardware">Аппаратный</button>
+                    <select class="filter-select" id="brandFilter">
+                        <option value="">Все бренды</option>
+                        <option value="iPhone">iPhone</option>
+                        <option value="Samsung">Samsung</option>
+                        <option value="Xiaomi">Xiaomi</option>
+                        <option value="Honor">Honor</option>
+                        <option value="Huawei">Huawei</option>
+                        <option value="Realme">Realme</option>
+                    </select>
+                    <select class="filter-select" id="priceFilter">
+                        <option value="">Любая цена</option>
+                        <option value="0-1000">до 1000₽</option>
+                        <option value="1000-2000">1000–2000₽</option>
+                        <option value="2000-99999">от 2000₽</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Services Grid -->
+            <div class="services-grid">
+                <a href="screen.html" class="service-card" data-category="screen hardware" data-brands="iPhone Samsung Xiaomi Honor Huawei Realme" data-price="1000-2000">
+                    <div class="service-icon">📱</div>
+                    <h3>Замена экрана</h3>
+                    <p>Оригинальные дисплеи для iPhone, Samsung, Xiaomi. Гарантия 90 дней.</p>
+                    <div class="service-footer">
+                        <span class="service-price">от 1000₽</span>
+                        <div class="service-arrow">→</div>
+                    </div>
+                </a>
+
+                <a href="battery.html" class="service-card" data-category="battery hardware" data-brands="iPhone Samsung Xiaomi Honor Huawei Realme" data-price="0-1000">
+                    <div class="service-icon">🔋</div>
+                    <h3>Замена батареи</h3>
+                    <p>Оригинальные аккумуляторы, восстановление ёмкости. Гарантия 90 дней.</p>
+                    <div class="service-footer">
+                        <span class="service-price">от 800₽</span>
+                        <div class="service-arrow">→</div>
+                    </div>
+                </a>
+
+                <a href="not-on.html" class="service-card" data-category="hardware software" data-brands="iPhone Samsung Xiaomi Honor Huawei Realme" data-price="0-1000">
+                    <div class="service-icon">💻</div>
+                    <h3>Не включается</h3>
+                    <p>Диагностика, замена шлейфа, контроллера питания, ремонт после падения.</p>
+                    <div class="service-footer">
+                        <span class="service-price">от 500₽</span>
+                        <div class="service-arrow">→</div>
+                    </div>
+                </a>
+
+                <a href="water.html" class="service-card" data-category="hardware software" data-brands="iPhone Samsung Xiaomi Honor Huawei Realme" data-price="0-1000">
+                    <div class="service-icon">💧</div>
+                    <h3>После воды</h3>
+                    <p>Чистка платы, ультразвук, замена повреждённых деталей.</p>
+                    <div class="service-footer">
+                        <span class="service-price">от 500₽</span>
+                        <div class="service-arrow">→</div>
+                    </div>
+                </a>
+
+                <a href="charge.html" class="service-card" data-category="hardware" data-brands="iPhone Samsung Xiaomi Honor Huawei Realme" data-price="1000-2000">
+                    <div class="service-icon">🔌</div>
+                    <h3>Не заряжается</h3>
+                    <p>Ремонт разъёма, шлейфа, контроллера заряда, замена аккумулятора.</p>
+                    <div class="service-footer">
+                        <span class="service-price">от 800₽</span>
+                        <div class="service-arrow">→</div>
+                    </div>
+                </a>
+
+                <a href="camera.html" class="service-card" data-category="hardware software" data-brands="iPhone Samsung Xiaomi Honor Huawei Realme" data-price="1000-2000">
+                    <div class="service-icon">📷</div>
+                    <h3>Ремонт камеры</h3>
+                    <p>Замена модуля камеры, настройка фокуса, ремонт после падения.</p>
+                    <div class="service-footer">
+                        <span class="service-price">от 1000₽</span>
+                        <div class="service-arrow">→</div>
+                    </div>
+                </a>
+
+                <a href="cleaning.html" class="service-card" data-category="software" data-brands="iPhone Samsung Xiaomi Honor Huawei Realme" data-price="0-1000">
+                    <div class="service-icon">🧹</div>
+                    <h3>Чистка и обслуживание</h3>
+                    <p>Глубокая чистка, замена термопасты, профилактика.</p>
+                    <div class="service-footer">
+                        <span class="service-price">от 500₽</span>
+                        <div class="service-arrow">→</div>
+                    </div>
+                </a>
+
+                <a href="software.html" class="service-card" data-category="software" data-brands="iPhone Samsung Xiaomi Honor Huawei Realme" data-price="0-1000">
+                    <div class="service-icon">💾</div>
+                    <h3>Программный ремонт</h3>
+                    <p>Перепрошивка, разблокировка, восстановление данных, удаление вирусов.</p>
+                    <div class="service-footer">
+                        <span class="service-price">от 500₽</span>
+                        <div class="service-arrow">→</div>
+                    </div>
+                </a>
+
+                <a href="audio.html" class="service-card" data-category="hardware" data-brands="iPhone Samsung Xiaomi Honor Huawei Realme" data-price="0-1000">
+                    <div class="service-icon">🔊</div>
+                    <h3>Ремонт звука</h3>
+                    <p>Замена динамика, микрофона, разъёма наушников, настройка звука.</p>
+                    <div class="service-footer">
+                        <span class="service-price">от 600₽</span>
+                        <div class="service-arrow">→</div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="text-center" style="margin-top: 48px;">
+                <a href="/#form" class="btn-primary">
+                    🛠 Оставить заявку
+                </a>
+                <a href="https://t.me/REMPHONE_RUSSIA_Bot" target="_blank" class="btn-secondary" style="margin-left: 12px;">
+                    ✈️ В Telegram
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="section how-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Простой процесс</div>
+                <h2 class="section-title">Как заказать ремонт</h2>
+                <p class="section-subtitle">От выбора услуги до гарантии — 4 шага</p>
+            </div>
+            
+            <div class="how-grid">
+                <div class="how-step">
+                    <div class="how-step-number">1</div>
+                    <h3>Выберите услугу</h3>
+                    <p>Найдите нужный ремонт в каталоге</p>
+                </div>
+                
+                <div class="how-step">
+                    <div class="how-step-number">2</div>
+                    <h3>Оставьте заявку</h3>
+                    <p>Заполните форму или напишите в Telegram</p>
+                </div>
+                
+                <div class="how-step">
+                    <div class="how-step-number">3</div>
+                    <h3>Мастер приедет</h3>
+                    <p>Выезд за 1 час или приезжайте в сервис</p>
+                </div>
+                
+                <div class="how-step">
+                    <div class="how-step-number">4</div>
+                    <h3>Получите гарантию</h3>
+                    <p>Ремонт за 30 минут и гарантия 90 дней</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="form">
+        <div class="container">
+            <div class="cta-grid">
+                <div>
+                    <h2 class="cta-title">Не нашли нужную услугу?</h2>
+                    <p class="cta-description">
+                        Оставьте заявку — мы поможем с любым ремонтом. 
+                        Бесплатная диагностика и точный расчет стоимости.
+                    </p>
+                    <ul class="cta-benefits">
+                        <li class="cta-benefit">
+                            <div class="cta-benefit-icon">✓</div>
+                            <span>Бесплатная диагностика</span>
+                        </li>
+                        <li class="cta-benefit">
+                            <div class="cta-benefit-icon">✓</div>
+                            <span>Ремонт от 30 минут</span>
+                        </li>
+                        <li class="cta-benefit">
+                            <div class="cta-benefit-icon">✓</div>
+                            <span>Гарантия 90 дней</span>
+                        </li>
+                        <li class="cta-benefit">
+                            <div class="cta-benefit-icon">✓</div>
+                            <span>Оригинальные запчасти</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <div class="cta-form-card">
+                        <div id="formContent">
+                            <h3 class="cta-form-title">Заявка на ремонт</h3>
+                            <p class="cta-form-subtitle">Заполните — мы сразу примем заказ</p>
+                            
+                            <form id="repairForm" onsubmit="return submitForm(event)">
+                                <div class="form-group">
+                                    <label class="form-label" for="name">Ваше имя *</label>
+                                    <input 
+                                        type="text" 
+                                        class="form-input" 
+                                        id="name" 
+                                        placeholder="Алексей" 
+                                        required
+                                    >
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label" for="phone">Номер телефона *</label>
+                                    <input 
+                                        type="tel" 
+                                        class="form-input" 
+                                        id="phone" 
+                                        placeholder="+7 999 123-45-67" 
+                                        required
+                                    >
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label" for="brand">Бренд *</label>
+                                        <select class="form-select" id="brand" required>
+                                            <option value="">Выберите</option>
+                                            <option value="iPhone">iPhone</option>
+                                            <option value="Samsung">Samsung</option>
+                                            <option value="Xiaomi">Xiaomi</option>
+                                            <option value="Honor">Honor</option>
+                                            <option value="Huawei">Huawei</option>
+                                            <option value="Realme">Realme</option>
+                                            <option value="Другой">Другой</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label" for="model">Модель</label>
+                                        <input 
+                                            type="text" 
+                                            class="form-input" 
+                                            id="model" 
+                                            placeholder="iPhone 13, A52..."
+                                        >
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label" for="problem">Проблема *</label>
+                                    <select class="form-select" id="problem" required>
+                                        <option value="">Выберите</option>
+                                        <option value="Разбит экран">Разбит экран</option>
+                                        <option value="Не включается">Не включается</option>
+                                        <option value="Садится батарея">Садится батарея</option>
+                                        <option value="Не заряжается">Не заряжается</option>
+                                        <option value="Попала вода">Попала вода</option>
+                                        <option value="Не работает звук">Не работает звук</option>
+                                        <option value="Не работает камера">Не работает камера</option>
+                                        <option value="Другое">Другое</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label" for="city">Город *</label>
+                                    <input 
+                                        type="text" 
+                                        class="form-input" 
+                                        id="city" 
+                                        placeholder="Хабаровск" 
+                                        required
+                                    >
+                                </div>
+                                
+                                <button type="submit" class="form-submit" id="submitBtn">
+                                    🛠 Отправить заявку
+                                </button>
+                            </form>
+                        </div>
+                        
+                        <div class="form-success" id="formSuccess">
+                            <div class="form-success-icon">✅</div>
+                            <h3>Заявка отправлена!</h3>
+                            <p>Мастер свяжется с вами в ближайшее время.</p>
+                            <br>
+                            <a href="https://t.me/REMPHONE_RUSSIA_Bot" target="_blank" class="btn-primary" style="display:inline-flex">
+                                ✈️ Перейти в Telegram
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contacts">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <div class="logo-icon">🔧</div>
+                        REMPHONE <span>RUSSIA</span>
+                    </div>
+                    <p class="footer-description">
+                        Агрегатор сервисов по ремонту телефонов в Хабаровске и Хабаровском крае. 
+                        Быстро, качественно, с гарантией.
+                    </p>
+                    <div class="footer-social">
+                        <a href="https://t.me/REMPHONE_RUSSIA_Bot" target="_blank" class="social-link">✈️</a>
+                        <a href="https://wa.me/79991234567" target="_blank" class="social-link">💬</a>
+                        <a href="tel:+79991234567" class="social-link">📞</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Услуги</h4>
+                    <ul class="footer-links">
+                        <li><a href="screen.html">Замена экрана</a></li>
+                        <li><a href="battery.html">Замена батареи</a></li>
+                        <li><a href="not-on.html">Не включается</a></li>
+                        <li><a href="water.html">После воды</a></li>
+                        <li><a href="charge.html">Не заряжается</a></li>
+                        <li><a href="camera.html">Ремонт камеры</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>О проекте</h4>
+                    <ul class="footer-links">
+                        <li><a href="../about.html">О нас</a></li>
+                        <li><a href="../reviews.html">Отзывы</a></li>
+                        <li><a href="../faq.html">FAQ</a></li>
+                        <li><a href="../contacts.html">Контакты</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Заявка</h4>
+                    <ul class="footer-links">
+                        <li><a href="/#form">Оставить заявку</a></li>
+                        <li><a href="https://t.me/REMPHONE_RUSSIA_Bot" target="_blank">Telegram-бот</a></li>
+                        <li><a href="../privacy.html">Политика конфиденциальности</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2026 REMPHONE RUSSIA. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="sticky-mobile-cta">
+        <a href="/#form">🛠 Оставить заявку</a>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+</html>

@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ремонт техники в Хабаровске — REMPHONE RUSSIA | Агрегатор сервисов</title>
+    <meta name="description" content="Агрегатор сервисов по ремонту телефонов, ноутбуков, планшетов в Хабаровске. Сравните цены, выберите лучший сервис. Гарантия 90 дней.">
+    <link rel="stylesheet" href="styles-v2.css">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Ремонт техники в Хабаровске — REMPHONE RUSSIA">
+    <meta property="og:description" content="Агрегатор сервисов. Найдите лучший ремонт за 2 минуты. Гарантия 90 дней.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://remphone-russia.ru/">
+    <meta property="og:image" content="https://remphone-russia.ru/og-image.jpg">
+    
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "REMPHONE RUSSIA",
+        "description": "Агрегатор сервисов по ремонту техники в Хабаровске",
+        "url": "https://remphone-russia.ru/",
+        "telephone": "+7 999 123-45-67",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Хабаровск",
+            "addressCountry": "RU"
+        },
+        "areaServed": "Хабаровск, Хабаровский край",
+        "priceRange": "от 500₽"
+    }
+    </script>
+</head>
+<body>
+    <!-- ============================================
+         HEADER — Компактная фиксированная шапка
+         ============================================ -->
+    <header class="header" id="header">
+        <div class="container">
+            <a href="/" class="logo">
+                <div class="logo-icon">🔧</div>
+                <span>REMPHONE</span>
+            </a>
+            
+            <nav class="nav" id="nav">
+                <a href="#categories">Категории</a>
+                <a href="#catalog">Каталог</a>
+                <a href="#how">Как работает</a>
+                <a href="#reviews">Отзывы</a>
+                <a href="#faq">FAQ</a>
+            </nav>
+            
+            <div class="header-actions">
+                <a href="tel:+79991234567" class="header-phone">📞 +7 999 123-45-67</a>
+                <a href="#form" class="btn-header">Оставить заявку</a>
+                <button class="burger" id="burger" aria-label="Меню">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================
+         HERO — Первый экран
+         ============================================ -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Ремонт техники в Хабаровске
+                </h1>
+                <p class="hero-subtitle">
+                    Найдите проверенный сервис за 2 минуты. Сравните цены, рейтинги и отзывы.
+                </p>
+                
+                <div class="hero-search">
+                    <form class="search-form" id="heroSearchForm">
+                        <div class="search-field">
+                            <label>Что нужно починить?</label>
+                            <select id="heroCategory" required>
+                                <option value="">Выберите категорию</option>
+                                <option value="phone">📱 Телефон</option>
+                                <option value="laptop">💻 Ноутбук</option>
+                                <option value="tablet">📱 Планшет</option>
+                                <option value="watch">⌚ Часы</option>
+                                <option value="audio">🎧 Наушники</option>
+                                <option value="console">🎮 Консоль</option>
+                                <option value="router">📡 Роутер</option>
+                            </select>
+                        </div>
+                        <div class="search-field">
+                            <label>Бренд</label>
+                            <select id="heroBrand">
+                                <option value="">Любой</option>
+                                <option value="iPhone">iPhone</option>
+                                <option value="Samsung">Samsung</option>
+                                <option value="Xiaomi">Xiaomi</option>
+                                <option value="Honor">Honor</option>
+                                <option value="Huawei">Huawei</option>
+                            </select>
+                        </div>
+                        <div class="search-field">
+                            <label>Проблема</label>
+                            <select id="heroProblem">
+                                <option value="">Выберите</option>
+                                <option value="screen">Экран</option>
+                                <option value="battery">Батарея</option>
+                                <option value="charge">Зарядка</option>
+                                <option value="water">После воды</option>
+                                <option value="other">Другое</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="search-submit">
+                            🔍 Найти сервис
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="hero-benefits">
+                    <div class="hero-benefit">
+                        <span class="benefit-icon">⚡</span>
+                        <span>Ремонт от 30 минут</span>
+                    </div>
+                    <div class="hero-benefit">
+                        <span class="benefit-icon">🛡️</span>
+                        <span>Гарантия 90 дней</span>
+                    </div>
+                    <div class="hero-benefit">
+                        <span class="benefit-icon">💰</span>
+                        <span>От 500₽</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         CATEGORIES — Блок категорий
+         ============================================ -->
+    <section class="section categories-section" id="categories">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Категории</div>
+                <h2 class="section-title">Что нужно починить?</h2>
+                <p class="section-subtitle">Выберите тип устройства</p>
+            </div>
+            
+            <div class="categories-grid">
+                <a href="services/?category=phone" class="category-card">
+                    <div class="category-icon">📱</div>
+                    <h3>Телефоны</h3>
+                    <p>iPhone, Samsung, Xiaomi</p>
+                </a>
+                
+                <a href="services/?category=laptop" class="category-card">
+                    <div class="category-icon">💻</div>
+                    <h3>Ноутбуки</h3>
+                    <p>MacBook, Windows, Chromebook</p>
+                </a>
+                
+                <a href="services/?category=tablet" class="category-card">
+                    <div class="category-icon">📱</div>
+                    <h3>Планшеты</h3>
+                    <p>iPad, Samsung Tab</p>
+                </a>
+                
+                <a href="services/?category=watch" class="category-card">
+                    <div class="category-icon">⌚</div>
+                    <h3>Часы</h3>
+                    <p>Apple Watch, Galaxy Watch</p>
+                </a>
+                
+                <a href="services/?category=audio" class="category-card">
+                    <div class="category-icon">🎧</div>
+                    <h3>Наушники</h3>
+                    <p>AirPods, Galaxy Buds</p>
+                </a>
+                
+                <a href="services/?category=console" class="category-card">
+                    <div class="category-icon">🎮</div>
+                    <h3>Консоли</h3>
+                    <p>PlayStation, Xbox, Nintendo</p>
+                </a>
+                
+                <a href="services/?category=router" class="category-card">
+                    <div class="category-icon">📡</div>
+                    <h3>Роутеры</h3>
+                    <p>Wi-Fi, Mesh-системы</p>
+                </a>
+                
+                <a href="services/" class="category-card category-card-more">
+                    <div class="category-icon">➕</div>
+                    <h3>Другое</h3>
+                    <p>Все услуги</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FILTERS — Блок поиска и фильтров
+         ============================================ -->
+    <section class="section filters-section" id="filters">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Поиск</div>
+                <h2 class="section-title">Найдите нужный сервис</h2>
+            </div>
+            
+            <div class="filters-card">
+                <div class="filters-row">
+                    <div class="filter-group">
+                        <label>Бренд</label>
+                        <select class="filter-select" id="filterBrand">
+                            <option value="">Все</option>
+                            <option value="iPhone">iPhone</option>
+                            <option value="Samsung">Samsung</option>
+                            <option value="Xiaomi">Xiaomi</option>
+                            <option value="Honor">Honor</option>
+                            <option value="Huawei">Huawei</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label>Услуга</label>
+                        <select class="filter-select" id="filterService">
+                            <option value="">Все</option>
+                            <option value="screen">Экран</option>
+                            <option value="battery">Батарея</option>
+                            <option value="charge">Зарядка</option>
+                            <option value="water">После воды</option>
+                            <option value="camera">Камера</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label>Срочность</label>
+                        <select class="filter-select" id="filterUrgency">
+                            <option value="">Любая</option>
+                            <option value="express">Экспресс (30 мин)</option>
+                            <option value="today">Сегодня</option>
+                            <option value="week">На этой неделе</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label>Цена</label>
+                        <select class="filter-select" id="filterPrice">
+                            <option value="">Любая</option>
+                            <option value="0-1000">до 1000₽</option>
+                            <option value="1000-2000">1000–2000₽</option>
+                            <option value="2000-99999">от 2000₽</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label>Район</label>
+                        <select class="filter-select" id="filterDistrict">
+                            <option value="">Все</option>
+                            <option value="center">Центр</option>
+                            <option value="railway">Вокзальная</option>
+                            <option value="lenin">Ленинский</option>
+                            <option value="industrial">Индустриальный</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label>Рейтинг</label>
+                        <select class="filter-select" id="filterRating">
+                            <option value="">Любой</option>
+                            <option value="4.5">4.5+</option>
+                            <option value="4.7">4.7+</option>
+                            <option value="4.9">4.9+</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="filters-chips">
+                    <button class="filter-chip" data-filter="warranty">✓ Гарантия</button>
+                    <button class="filter-chip" data-filter="visit">🚗 Выезд</button>
+                    <button class="filter-chip" data-filter="original">🔧 Оригинал</button>
+                    <button class="filter-chip" data-filter="express">⚡ Экспресс</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         CATALOG — Каталог сервисов
+         ============================================ -->
+    <section class="section catalog-section" id="catalog">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Каталог</div>
+                <h2 class="section-title">Лучшие сервисы в Хабаровске</h2>
+                <p class="section-subtitle">Сравните цены, рейтинги и условия</p>
+            </div>
+            
+            <div class="providers-grid">
+                <!-- Provider 1 -->
+                <div class="provider-card">
+                    <div class="provider-header">
+                        <div class="provider-logo">🔧</div>
+                        <div class="provider-info">
+                            <h3 class="provider-name">REMPHONE Service</h3>
+                            <div class="provider-meta">
+                                <span class="provider-rating">⭐ 4.9</span>
+                                <span class="provider-district">Центр</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="provider-badges">
+                        <span class="badge success">✓ Гарантия 90 дней</span>
+                        <span class="badge primary">⭐ Топ сервис</span>
+                    </div>
+                    
+                    <div class="provider-services">
+                        <span class="service-tag">Экран</span>
+                        <span class="service-tag">Батарея</span>
+                        <span class="service-tag">Зарядка</span>
+                        <span class="service-tag">Камера</span>
+                    </div>
+                    
+                    <div class="provider-details">
+                        <div class="provider-detail">
+                            <span class="detail-label">Цена</span>
+                            <span class="detail-value">от 1000₽</span>
+                        </div>
+                        <div class="provider-detail">
+                            <span class="detail-label">Срок</span>
+                            <span class="detail-value">30 мин</span>
+                        </div>
+                        <div class="provider-detail">
+                            <span class="detail-label">Гарантия</span>
+                            <span class="detail-value">90 дней</span>
+                        </div>
+                    </div>
+                    
+                    <div class="provider-footer">
+                        <div class="provider-price">от 1000₽</div>
+                        <a href="#form" class="btn-provider">Выбрать</a>
+                    </div>
+                </div>
+
+                <!-- Provider 2 -->
+                <div class="provider-card">
+                    <div class="provider-header">
+                        <div class="provider-logo">📱</div>
+                        <div class="provider-info">
+                            <h3 class="provider-name">Mobile Fix Pro</h3>
+                            <div class="provider-meta">
+                                <span class="provider-rating">⭐ 4.8</span>
+                                <span class="provider-district">Вокзальная</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="provider-badges">
+                        <span class="badge success">✓ Выезд 1 час</span>
+                        <span class="badge primary">⚡ Быстрый</span>
+                    </div>
+                    
+                    <div class="provider-services">
+                        <span class="service-tag">Экран</span>
+                        <span class="service-tag">После воды</span>
+                        <span class="service-tag">Программный</span>
+                    </div>
+                    
+                    <div class="provider-details">
+                        <div class="provider-detail">
+                            <span class="detail-label">Цена</span>
+                            <span class="detail-value">от 900₽</span>
+                        </div>
+                        <div class="provider-detail">
+                            <span class="detail-label">Срок</span>
+                            <span class="detail-value">40 мин</span>
+                        </div>
+                        <div class="provider-detail">
+                            <span class="detail-label">Гарантия</span>
+                            <span class="detail-value">90 дней</span>
+                        </div>
+                    </div>
+                    
+                    <div class="provider-footer">
+                        <div class="provider-price">от 900₽</div>
+                        <a href="#form" class="btn-provider">Выбрать</a>
+                    </div>
+                </div>
+
+                <!-- Provider 3 -->
+                <div class="provider-card">
+                    <div class="provider-header">
+                        <div class="provider-logo">⚡</div>
+                        <div class="provider-info">
+                            <h3 class="provider-name">Express Repair</h3>
+                            <div class="provider-meta">
+                                <span class="provider-rating">⭐ 4.7</span>
+                                <span class="provider-district">Ленинский</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="provider-badges">
+                        <span class="badge success">✓ Оригинал</span>
+                        <span class="badge primary">💰 Выгодно</span>
+                    </div>
+                    
+                    <div class="provider-services">
+                        <span class="service-tag">Батарея</span>
+                        <span class="service-tag">Зарядка</span>
+                        <span class="service-tag">Диагностика</span>
+                    </div>
+                    
+                    <div class="provider-details">
+                        <div class="provider-detail">
+                            <span class="detail-label">Цена</span>
+                            <span class="detail-value">от 800₽</span>
+                        </div>
+                        <div class="provider-detail">
+                            <span class="detail-label">Срок</span>
+                            <span class="detail-value">45 мин</span>
+                        </div>
+                        <div class="provider-detail">
+                            <span class="detail-label">Гарантия</span>
+                            <span class="detail-value">90 дней</span>
+                        </div>
+                    </div>
+                    
+                    <div class="provider-footer">
+                        <div class="provider-price">от 800₽</div>
+                        <a href="#form" class="btn-provider">Выбрать</a>
+                    </div>
+                </div>
+
+                <!-- Provider 4 -->
+                <div class="provider-card">
+                    <div class="provider-header">
+                        <div class="provider-logo">🛡️</div>
+                        <div class="provider-info">
+                            <h3 class="provider-name">Quality Service</h3>
+                            <div class="provider-meta">
+                                <span class="provider-rating">⭐ 4.9</span>
+                                <span class="provider-district">Индустриальный</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="provider-badges">
+                        <span class="badge success">✓ Гарантия 180 дней</span>
+                        <span class="badge primary">🏆 Премиум</span>
+                    </div>
+                    
+                    <div class="provider-services">
+                        <span class="service-tag">Экран</span>
+                        <span class="service-tag">Камера</span>
+                        <span class="service-tag">После воды</span>
+                    </div>
+                    
+                    <div class="provider-details">
+                        <div class="provider-detail">
+                            <span class="detail-label">Цена</span>
+                            <span class="detail-value">от 1200₽</span>
+                        </div>
+                        <div class="provider-detail">
+                            <span class="detail-label">Срок</span>
+                            <span class="detail-value">1 час</span>
+                        </div>
+                        <div class="provider-detail">
+                            <span class="detail-label">Гарантия</span>
+                            <span class="detail-value">180 дней</span>
+                        </div>
+                    </div>
+                    
+                    <div class="provider-footer">
+                        <div class="provider-price">от 1200₽</div>
+                        <a href="#form" class="btn-provider">Выбрать</a>
+                    </div>
+                </div>
+
+                <!-- Provider 5 -->
+                <div class="provider-card">
+                    <div class="provider-header">
+                        <div class="provider-logo">💎</div>
+                        <div class="provider-info">
+                            <h3 class="provider-name">Apple Specialist</h3>
+                            <div class="provider-meta">
+                                <span class="provider-rating">⭐ 5.0</span>
+                                <span class="provider-district">Центр</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="provider-badges">
+                        <span class="badge success">✓ Только iPhone</span>
+                        <span class="badge primary">🍎 Официальный</span>
+                    </div>
+                    
+                    <div class="provider-services">
+                        <span class="service-tag">iPhone</span>
+                        <span class="service-tag">iPad</span>
+                        <span class="service-tag">MacBook</span>
+                    </div>
+                    
+                    <div class="provider-details">
+                        <div class="provider-detail">
+                            <span class="detail-label">Цена</span>
+                            <span class="detail-value">от 1500₽</span>
+                        </div>
+                        <div class="provider-detail">
+                            <span class="detail-label">Срок</span>
+                            <span class="detail-value">30 мин</span>
+                        </div>
+                        <div class="provider-detail">
+                            <span class="detail-label">Гарантия</span>
+                            <span class="detail-value">90 дней</span>
+                        </div>
+                    </div>
+                    
+                    <div class="provider-footer">
+                        <div class="provider-price">от 1500₽</div>
+                        <a href="#form" class="btn-provider">Выбрать</a>
+                    </div>
+                </div>
+
+                <!-- Provider 6 -->
+                <div class="provider-card">
+                    <div class="provider-header">
+                        <div class="provider-logo">🔧</div>
+                        <div class="provider-info">
+                            <h3 class="provider-name">Budget Repair</h3>
+                            <div class="provider-meta">
+                                <span class="provider-rating">⭐ 4.6</span>
+                                <span class="provider-district">Кировский</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="provider-badges">
+                        <span class="badge success">✓ Низкие цены</span>
+                        <span class="badge primary">💵 Эконом</span>
+                    </div>
+                    
+                    <div class="provider-services">
+                        <span class="service-tag">Экран</span>
+                        <span class="service-tag">Батарея</span>
+                        <span class="service-tag">Все бренды</span>
+                    </div>
+                    
+                    <div class="provider-details">
+                        <div class="provider-detail">
+                            <span class="detail-label">Цена</span>
+                            <span class="detail-value">от 700₽</span>
+                        </div>
+                        <div class="provider-detail">
+                            <span class="detail-label">Срок</span>
+                            <span class="detail-value">1 час</span>
+                        </div>
+                        <div class="provider-detail">
+                            <span class="detail-label">Гарантия</span>
+                            <span class="detail-value">90 дней</span>
+                        </div>
+                    </div>
+                    
+                    <div class="provider-footer">
+                        <div class="provider-price">от 700₽</div>
+                        <a href="#form" class="btn-provider">Выбрать</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         BENEFITS — Блок преимуществ
+         ============================================ -->
+    <section class="section benefits-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Почему мы</div>
+                <h2 class="section-title">Преимущества</h2>
+            </div>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">🆓</div>
+                    <h3>Бесплатная диагностика</h3>
+                    <p>Определим проблему бесплатно за 10 минут</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">🛡️</div>
+                    <h3>Гарантия 90 дней</h3>
+                    <p>На все работы и запчасти</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">⚡</div>
+                    <h3>Срочный ремонт</h3>
+                    <p>Большинство за 30–60 минут</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">✅</div>
+                    <h3>Проверенные сервисы</h3>
+                    <p>Только проверные мастера</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">🔍</div>
+                    <h3>Удобный подбор</h3>
+                    <p>Сравните цены и выберите лучшее</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">💎</div>
+                    <h3>Прозрачные условия</h3>
+                    <p>Цена указана upfront, нет скрытых платежей</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         HOW IT WORKS — Как это работает
+         ============================================ -->
+    <section class="section how-section" id="how">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Процесс</div>
+                <h2 class="section-title">Как это работает</h2>
+                <p class="section-subtitle">3 простых шага до ремонта</p>
+            </div>
+            
+            <div class="how-grid">
+                <div class="how-step">
+                    <div class="how-step-number">1</div>
+                    <h3>Выберите устройство</h3>
+                    <p>Укажите что нужно починить</p>
+                </div>
+                
+                <div class="how-step">
+                    <div class="how-step-number">2</div>
+                    <h3>Сравните предложения</h3>
+                    <p>Изучите цены и рейтинги</p>
+                </div>
+                
+                <div class="how-step">
+                    <div class="how-step-number">3</div>
+                    <h3>Оставьте заявку</h3>
+                    <p>Мастер свяжется с вами</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         TRUST — Блок доверия
+         ============================================ -->
+    <section class="section trust-section" id="reviews">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Доверие</div>
+                <h2 class="section-title">Что говорят клиенты</h2>
+            </div>
+            
+            <div class="trust-stats">
+                <div class="trust-stat">
+                    <div class="trust-stat-value">500+</div>
+                    <div class="trust-stat-label">Ремонтов</div>
+                </div>
+                <div class="trust-stat">
+                    <div class="trust-stat-value">98%</div>
+                    <div class="trust-stat-label">Довольных</div>
+                </div>
+                <div class="trust-stat">
+                    <div class="trust-stat-value">4.8</div>
+                    <div class="trust-stat-label">Средний рейтинг</div>
+                </div>
+                <div class="trust-stat">
+                    <div class="trust-stat-value">90 дней</div>
+                    <div class="trust-stat-label">Гарантия</div>
+                </div>
+            </div>
+            
+            <div class="reviews-grid">
+                <div class="review-card" data-city="москва" data-service="экран">
+                    <div class="review-header">
+                        <div class="review-avatar" style="background:linear-gradient(135deg,#6c63ff,#a78bfa)">А</div>
+                        <div class="review-info">
+                            <div class="review-name">Алексей</div>
+                            <div class="review-meta">Москва · Samsung S23</div>
+                        </div>
+                    </div>
+                    <div class="review-text">"Мастер приехал домой за 1 час. Починили за 40 минут, экран оригинал."</div>
+                    <div class="review-rating">★★★★★</div>
+                </div>
+
+                <div class="review-card" data-city="санкт-петербург" data-service="зарядка">
+                    <div class="review-header">
+                        <div class="review-avatar" style="background:linear-gradient(135deg,#f97316,#fbbf24)">Е</div>
+                        <div class="review-info">
+                            <div class="review-name">Елена</div>
+                            <div class="review-meta">СПб · iPhone 12</div>
+                        </div>
+                    </div>
+                    <div class="review-text">"В сервисе сказали ждать неделю. Через REMPHONE всё решили за один день."</div>
+                    <div class="review-rating">★★★★★</div>
+                </div>
+
+                <div class="review-card" data-city="казань" data-service="вода">
+                    <div class="review-header">
+                        <div class="review-avatar" style="background:linear-gradient(135deg,#14b8a6,#2dd4bf)">М</div>
+                        <div class="review-info">
+                            <div class="review-name">Максим</div>
+                            <div class="review-meta">Казань · Xiaomi</div>
+                        </div>
+                    </div>
+                    <div class="review-text">"Уронил в воду. Высушили, почистили, заменили шлейф — работает как новый."</div>
+                    <div class="review-rating">★★★★★</div>
+                </div>
+
+                <div class="review-card" data-city="новосибирск" data-service="вода">
+                    <div class="review-header">
+                        <div class="review-avatar" style="background:linear-gradient(135deg,#ef4444,#f87171)">О</div>
+                        <div class="review-info">
+                            <div class="review-name">Ольга</div>
+                            <div class="review-meta">Новосибирск · iPhone 13</div>
+                        </div>
+                    </div>
+                    <div class="review-text">"Выезд за 2 часа, всё починили. Телефон как новый, даже камера работает."</div>
+                    <div class="review-rating">★★★★★</div>
+                </div>
+
+                <div class="review-card" data-city="екатеринбург" data-service="экран">
+                    <div class="review-header">
+                        <div class="review-avatar" style="background:linear-gradient(135deg,#8b5cf6,#c084fc)">Д</div>
+                        <div class="review-info">
+                            <div class="review-name">Дмитрий</div>
+                            <div class="review-meta">Екатеринбург · Samsung</div>
+                        </div>
+                    </div>
+                    <div class="review-text">"Не включался после падения. Диагностика бесплатно, ремонт за час."</div>
+                    <div class="review-rating">★★★★★</div>
+                </div>
+
+                <div class="review-card" data-city="москва" data-service="батарея">
+                    <div class="review-header">
+                        <div class="review-avatar" style="background:linear-gradient(135deg,#f59e0b,#fbbf24)">И</div>
+                        <div class="review-info">
+                            <div class="review-name">Ирина</div>
+                            <div class="review-meta">Москва · iPhone 11</div>
+                        </div>
+                    </div>
+                    <div class="review-text">"Быстро, недорого, дали гарантию 90 дней. Телефон держит заряд как новый."</div>
+                    <div class="review-rating">★★★★★</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         POPULAR — Популярные запросы
+         ============================================ -->
+    <section class="section popular-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Популярное</div>
+                <h2 class="section-title">Частые запросы</h2>
+            </div>
+            
+            <div class="popular-grid">
+                <a href="services/screen.html" class="popular-card">
+                    <div class="popular-icon">📱</div>
+                    <div class="popular-info">
+                        <h4>iPhone не заряжается</h4>
+                        <p>Замена разъема, шлейфа</p>
+                    </div>
+                </a>
+                
+                <a href="services/screen.html" class="popular-card">
+                    <div class="popular-icon">📱</div>
+                    <div class="popular-info">
+                        <h4>Samsung не включается</h4>
+                        <p>Диагностика, ремонт</p>
+                    </div>
+                </a>
+                
+                <a href="services/screen.html" class="popular-card">
+                    <div class="popular-icon">🔋</div>
+                    <div class="popular-info">
+                        <h4>Замена экрана</h4>
+                        <p>iPhone, Samsung, Xiaomi</p>
+                    </div>
+                </a>
+                
+                <a href="services/battery.html" class="popular-card">
+                    <div class="popular-icon">🔋</div>
+                    <div class="popular-info">
+                        <h4>Замена батареи</h4>
+                        <p>Восстановление ёмкости</p>
+                    </div>
+                </a>
+                
+                <a href="services/charge.html" class="popular-card">
+                    <div class="popular-icon">🔌</div>
+                    <div class="popular-info">
+                        <h4>Ремонт разъема</h4>
+                        <p>Зарядка, наушники</p>
+                    </div>
+                </a>
+                
+                <a href="services/water.html" class="popular-card">
+                    <div class="popular-icon">💧</div>
+                    <div class="popular-info">
+                        <h4>После воды</h4>
+                        <p>Чистка, восстановление</p>
+                    </div>
+                </a>
+                
+                <a href="services/not-on.html" class="popular-card">
+                    <div class="popular-icon">💻</div>
+                    <div class="popular-info">
+                        <h4>Диагностика</h4>
+                        <p>Бесплатно за 10 минут</p>
+                    </div>
+                </a>
+                
+                <a href="services/camera.html" class="popular-card">
+                    <div class="popular-icon">📷</div>
+                    <div class="popular-info">
+                        <h4>Ремонт камеры</h4>
+                        <p>Замена модуля, фокуса</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         MAP — Блок карты и географии
+         ============================================ -->
+    <section class="section map-section" id="map">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">География</div>
+                <h2 class="section-title">Сервисы по районам</h2>
+            </div>
+            
+            <div class="map-content">
+                <div class="map-placeholder">
+                    <div class="map-icon">🗺️</div>
+                    <p>Интерактивная карта</p>
+                    <p class="map-subtitle">Все сервисы на карте Хабаровска</p>
+                </div>
+                
+                <div class="districts-list">
+                    <div class="district-item">
+                        <h4>🏢 Центр</h4>
+                        <p>5 сервисов</p>
+                    </div>
+                    <div class="district-item">
+                        <h4>🚉 Вокзальная</h4>
+                        <p>3 сервиса</p>
+                    </div>
+                    <div class="district-item">
+                        <h4>🏭 Ленинский</h4>
+                        <p>4 сервиса</p>
+                    </div>
+                    <div class="district-item">
+                        <h4>🏗️ Индустриальный</h4>
+                        <p>2 сервиса</p>
+                    </div>
+                    <div class="district-item">
+                        <h4>🏘️ Кировский</h4>
+                        <p>3 сервиса</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FAQ — Частые вопросы
+         ============================================ -->
+    <section class="section faq-section" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">FAQ</div>
+                <h2 class="section-title">Частые вопросы</h2>
+            </div>
+            
+            <div class="faq-list">
+                <div class="faq-item active">
+                    <div class="faq-question">
+                        <span>Сколько стоит диагностика?</span>
+                        <div class="faq-icon">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        Бесплатно. Мы определяем проблему за 10 минут без оплаты.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Какая гарантия?</span>
+                        <div class="faq-icon">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        На все работы и запчасти — 90 дней. На некоторые услуги до 180 дней.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Как быстро ремонтируют?</span>
+                        <div class="faq-icon">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        Большинство за 30–60 минут. Сложные случаи — до 24 часов.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Как оставить заявку?</span>
+                        <div class="faq-icon">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        Заполните форму на сайте или напишите в Telegram-бот. Мастер перезвонит за 5 минут.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Есть ли выезд?</span>
+                        <div class="faq-icon">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        Да, мастера выезжают по адресу в течение 1 часа.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Используете оригинальные запчасти?</span>
+                        <div class="faq-icon">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        Да, только оригинальные или сертифицированные аналоги с гарантией.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         CTA — Форма заявки
+         ============================================ -->
+    <section class="cta-section" id="form">
+        <div class="container">
+            <div class="cta-grid">
+                <div>
+                    <h2 class="cta-title">Оставьте заявку на ремонт</h2>
+                    <p class="cta-description">
+                        Заполните форму — мы перезвоним в течение 5 минут и назовём точную стоимость.
+                    </p>
+                    <ul class="cta-benefits">
+                        <li class="cta-benefit">
+                            <div class="cta-benefit-icon">✓</div>
+                            <span>Бесплатная диагностика</span>
+                        </li>
+                        <li class="cta-benefit">
+                            <div class="cta-benefit-icon">✓</div>
+                            <span>Ремонт от 30 минут</span>
+                        </li>
+                        <li class="cta-benefit">
+                            <div class="cta-benefit-icon">✓</div>
+                            <span>Гарантия 90 дней</span>
+                        </li>
+                        <li class="cta-benefit">
+                            <div class="cta-benefit-icon">✓</div>
+                            <span>Оригинальные запчасти</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="cta-form-card">
+                    <div id="formContent">
+                        <h3 class="cta-form-title">Заявка на ремонт</h3>
+                        <p class="cta-form-subtitle">Заполните — мы сразу примем заказ</p>
+                        
+                        <form id="repairForm" onsubmit="return submitForm(event)">
+                            <div class="form-group">
+                                <label class="form-label" for="name">Ваше имя *</label>
+                                <input type="text" class="form-input" id="name" placeholder="Алексей" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="phone">Номер телефона *</label>
+                                <input type="tel" class="form-input" id="phone" placeholder="+7 999 123-45-67" required>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label" for="brand">Бренд *</label>
+                                    <select class="form-select" id="brand" required>
+                                        <option value="">Выберите</option>
+                                        <option value="iPhone">iPhone</option>
+                                        <option value="Samsung">Samsung</option>
+                                        <option value="Xiaomi">Xiaomi</option>
+                                        <option value="Honor">Honor</option>
+                                        <option value="Huawei">Huawei</option>
+                                        <option value="Другой">Другой</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label" for="model">Модель</label>
+                                    <input type="text" class="form-input" id="model" placeholder="iPhone 13">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="problem">Проблема *</label>
+                                <select class="form-select" id="problem" required>
+                                    <option value="">Выберите</option>
+                                    <option value="Экран">Разбит экран</option>
+                                    <option value="Батарея">Садится батарея</option>
+                                    <option value="Зарядка">Не заряжается</option>
+                                    <option value="Вода">Попала вода</option>
+                                    <option value="Камера">Не работает камера</option>
+                                    <option value="Другое">Другое</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="city">Город *</label>
+                                <input type="text" class="form-input" id="city" placeholder="Хабаровск" required>
+                            </div>
+                            
+                            <button type="submit" class="form-submit" id="submitBtn">
+                                🛠 Отправить заявку
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <div class="form-success" id="formSuccess">
+                        <div class="form-success-icon">✅</div>
+                        <h3>Заявка отправлена!</h3>
+                        <p>Мастер свяжется с вами в ближайшее время.</p>
+                        <br>
+                        <a href="https://t.me/REMPHONE_RUSSIA_Bot" target="_blank" class="btn-primary" style="display:inline-flex">
+                            ✈️ Перейти в Telegram
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FOOTER — Подвал
+         ============================================ -->
+    <footer class="footer" id="contacts">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <div class="logo-icon">🔧</div>
+                        <span>REMPHONE <strong>RUSSIA</strong></span>
+                    </div>
+                    <p class="footer-description">
+                        Агрегатор сервисов по ремонту техники в Хабаровске. Быстро, качественно, с гарантией.
+                    </p>
+                    <div class="footer-contacts">
+                        <a href="tel:+79991234567" class="footer-contact">📞 +7 999 123-45-67</a>
+                        <a href="mailto:info@remphone-russia.ru" class="footer-contact">✉️ info@remphone-russia.ru</a>
+                        <p class="footer-hours">🕐 Ежедневно 9:00–21:00</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="https://t.me/REMPHONE_RUSSIA_Bot" target="_blank" class="social-link">✈️</a>
+                        <a href="https://wa.me/79991234567" target="_blank" class="social-link">💬</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Услуги</h4>
+                    <ul class="footer-links">
+                        <li><a href="services/screen.html">Замена экрана</a></li>
+                        <li><a href="services/battery.html">Замена батареи</a></li>
+                        <li><a href="services/not-on.html">Не включается</a></li>
+                        <li><a href="services/water.html">После воды</a></li>
+                        <li><a href="services/">Все услуги</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>О проекте</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">О нас</a></li>
+                        <li><a href="#reviews">Отзывы</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Помощь</h4>
+                    <ul class="footer-links">
+                        <li><a href="#form">Оставить заявку</a></li>
+                        <li><a href="https://t.me/REMPHONE_RUSSIA_Bot" target="_blank">Telegram-бот</a></li>
+                        <li><a href="privacy.html">Политика конфиденциальности</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2026 REMPHONE RUSSIA. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="sticky-mobile-cta">
+        <a href="tel:+79991234567" class="sticky-phone">📞</a>
+        <a href="#form" class="sticky-cta">🛠 Оставить заявку</a>
+    </div>
+
+    <script src="script-v2.js"></script>
+</body>
+</html>
