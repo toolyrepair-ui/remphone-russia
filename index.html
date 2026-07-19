@@ -6,13 +6,14 @@
     <title>Ремонт телефонов в Хабаровске — REMPHONE RUSSIA</title>
     <meta name="description" content="Профессиональный ремонт телефонов в Хабаровске. iPhone, Samsung, Xiaomi. Гарантия 90 дней. Выезд мастера за 1 час.">
     <link rel="stylesheet" href="styles.css">
-    
+    <link rel="stylesheet" href="animations.css">
+
     <!-- Open Graph -->
     <meta property="og:title" content="Ремонт телефонов в Хабаровске — REMPHONE RUSSIA">
     <meta property="og:description" content="Ремонт iPhone, Samsung, Xiaomi в Хабаровске. Гарантия 90 дней. Выезд мастера за 1 час.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://remphone-russia.ru/">
-    <meta property="og:image" content="https://remphone-russia.ru/og-image.jpg">
+    <meta property="og:url" content="https://rem-phone.ru/">
+    <meta property="og:image" content="https://rem-phone.ru/og-image.jpg">
     
     <!-- Schema.org -->
     <script type="application/ld+json">
@@ -21,8 +22,8 @@
         "@type": "LocalBusiness",
         "name": "REMPHONE RUSSIA — Хабаровск",
         "description": "Агрегатор ремонта телефонов в Хабаровске и Хабаровском крае",
-        "url": "https://remphone-russia.ru/",
-        "telephone": "+7 999 123-45-67",
+        "url": "https://rem-phone.ru/",
+        "telephone": "+7 914 411-17-30",
         "address": {
             "@type": "PostalAddress",
             "addressLocality": "Хабаровск",
@@ -38,75 +39,297 @@
 <header class="header" id="header">
     <div class="container">
         <a href="/" class="logo">REMPHONE <span>RUSSIA</span></a>
-<nav class="nav" id="nav">
-    <a href="services/">Услуги</a>
-    <a href="cities/khabarovsk.html">Хабаровск</a>
-    <a href="reviews.html">Отзывы</a>
-    <a href="about.html">О нас</a>
-    <a href="faq.html">FAQ</a>
-    <a href="contacts.html">Контакты</a>
-</nav>
-        <a href="https://t.me/REMPHONE_RUSSIA_Bot" target="_blank" class="header-btn">✈️ Заявка в Telegram</a>
+        <nav class="nav" id="nav">
+            <a href="#repair-flow">Ремонт</a>
+            <a href="services/">Услуги</a>
+            <a href="brands/">Бренды</a>
+            <a href="reviews.html">Отзывы</a>
+            <a href="about.html">О нас</a>
+            <a href="faq.html">FAQ</a>
+            <a href="contacts.html">Контакты</a>
+        </nav>
+        <div class="header-contacts">
+            <a class="header-phone" href="tel:+79144111730">+7 914 411-17-30</a>
+            <div class="header-social">
+                <a href="https://wa.me/79144111730" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">
+                    <img src="assets/messengers/whatsapp.svg" alt="" width="22" height="22" onerror="this.src='assets/placeholders/placeholder.svg'">
+                </a>
+                <a href="https://t.me/REMPHONE_RUSSIA_Bot" target="_blank" rel="noopener" aria-label="Telegram" title="Telegram">
+                    <img src="assets/messengers/telegram.svg" alt="" width="22" height="22" onerror="this.src='assets/placeholders/placeholder.svg'">
+                </a>
+                <a href="mailto:toolyrepair@gmail.com" aria-label="Email" title="Email">✉️</a>
+            </div>
+        </div>
         <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
     </div>
 </header>
 
-<section class="hero" id="hero">
+<section class="repair-flow hero" id="repair-flow">
     <div class="container">
-        <div class="hero-grid">
-            <div>
-                <div class="hero-badge"><span class="hero-badge-dot"></span>Принимаем заявки 24/7</div>
-                <h1>Ремонт телефонов <span>в Хабаровске</span></h1>
-                <p>Профессиональный ремонт iPhone, Samsung, Xiaomi в Хабаровске. Выезд мастера за 1 час, гарантия 90 дней. Работаем с 2020 года.</p>
-                <div class="hero-stats">
-                    <div class="hero-stat"><h3>500+</h3><p>Отремонтировано</p></div>
-                    <div class="hero-stat"><h3>98%</h3><p>Довольных</p></div>
-                    <div class="hero-stat"><h3>90 дней</h3><p>Гарантия</p></div>
-                </div>
-                <div class="hero-actions">
-                    <a href="#form" class="btn-primary">🛠 Оставить заявку</a>
-                    <a href="services/" class="btn-secondary">Все услуги</a>
-                </div>
-                <div class="hero-bot-cta">
-                    <span>Или оставь заявку в Telegram-боте за 1 минуту:</span>
-                    <a href="https://t.me/REMPHONE_RUSSIA_Bot" target="_blank" class="btn-primary" style="margin-top:12px">✈️ Открыть бот</a>
-                </div>
-            </div>
-            <div class="hero-phone">
-                <div class="hero-phone-header">
-                    <div class="hero-phone-dot red"></div>
-                    <div class="hero-phone-dot yellow"></div>
-                    <div class="hero-phone-dot green"></div>
-                    <span>Чат с ботом</span>
-                </div>
-                <div class="hero-msg"><p>🛠 iPhone разбил экран, что делать?</p><small>Вы — 14:23</small></div>
-                <div class="hero-msg user"><p>✅ Замена экрана от 1000₽, 30 минут. Приезжайте или закажите выезд</p><small>Бот — 14:23</small></div>
+        <div class="flow-intro">
+            <div class="hero-badge"><span class="hero-badge-dot"></span>Заявка за 15 секунд · 24/7</div>
+            <h1>Ремонт телефонов <span>в Хабаровске</span></h1>
+            <p class="flow-lead">Починим за 30–60 минут при вас. Гарантия 90 дней. Хабаровск, выезд мастера.</p>
+            <p class="brand-trust" style="margin-top:14px">⚡ 30 минут · 🛡 гарантия 90 дней · 🔧 бесплатная диагностика</p>
+        </div>
+
+        <div class="flow-progress" id="flowProgress" aria-label="Прогресс заявки">
+            <div class="flow-step is-active" data-step="1"><span class="flow-step-num">1</span><span class="flow-step-label">Марка</span></div>
+            <div class="flow-step-line"></div>
+            <div class="flow-step" data-step="2"><span class="flow-step-num">2</span><span class="flow-step-label">Поломка</span></div>
+            <div class="flow-step-line"></div>
+            <div class="flow-step" data-step="3"><span class="flow-step-num">3</span><span class="flow-step-label">Заявка</span></div>
+        </div>
+
+        <!-- Step 1: Brand -->
+        <div class="flow-panel is-active" id="stepBrand" data-panel="1">
+            <h2 class="flow-panel-title">Какая у вас марка?</h2>
+            <div class="flow-grid brands-flow" id="brandsGrid">
+                <button type="button" class="flow-card card-hover animate-in" data-brand="iPhone">
+                    <span class="flow-card-icon brand-logo-wrap" style="background:#f8fafc">
+                        <img class="brand-logo" src="assets/brands/apple.svg" alt="iPhone" width="36" height="36" onerror="this.src='assets/placeholders/placeholder.svg'">
+                    </span>
+                    <span class="flow-card-title">iPhone</span>
+                    <span class="flow-card-sub">Все модели</span>
+                </button>
+                <button type="button" class="flow-card card-hover animate-in" data-brand="Samsung">
+                    <span class="flow-card-icon brand-logo-wrap" style="background:#f8fafc">
+                        <img class="brand-logo" src="assets/brands/samsung.svg" alt="Samsung" width="36" height="36" onerror="this.src='assets/placeholders/placeholder.svg'">
+                    </span>
+                    <span class="flow-card-title">Samsung</span>
+                    <span class="flow-card-sub">Galaxy</span>
+                </button>
+                <button type="button" class="flow-card card-hover animate-in" data-brand="Xiaomi">
+                    <span class="flow-card-icon brand-logo-wrap" style="background:#f8fafc">
+                        <img class="brand-logo" src="assets/brands/xiaomi.svg" alt="Xiaomi" width="36" height="36" onerror="this.src='assets/placeholders/placeholder.svg'">
+                    </span>
+                    <span class="flow-card-title">Xiaomi</span>
+                    <span class="flow-card-sub">Redmi, POCO</span>
+                </button>
+                <button type="button" class="flow-card card-hover animate-in" data-brand="Honor">
+                    <span class="flow-card-icon brand-logo-wrap" style="background:#f8fafc">
+                        <img class="brand-logo" src="assets/brands/honor.svg" alt="Honor" width="36" height="36" onerror="this.src='assets/placeholders/placeholder.svg'">
+                    </span>
+                    <span class="flow-card-title">Honor</span>
+                    <span class="flow-card-sub">Все модели</span>
+                </button>
+                <button type="button" class="flow-card card-hover animate-in" data-brand="Huawei">
+                    <span class="flow-card-icon brand-logo-wrap" style="background:#f8fafc">
+                        <img class="brand-logo" src="assets/brands/huawei.svg" alt="Huawei" width="36" height="36" onerror="this.src='assets/placeholders/placeholder.svg'">
+                    </span>
+                    <span class="flow-card-title">Huawei</span>
+                    <span class="flow-card-sub">P, Mate</span>
+                </button>
+                <button type="button" class="flow-card card-hover animate-in" data-brand="OPPO">
+                    <span class="flow-card-icon brand-logo-wrap" style="background:#f8fafc">
+                        <img class="brand-logo" src="assets/brands/oppo.svg" alt="OPPO" width="36" height="36" onerror="this.src='assets/placeholders/placeholder.svg'">
+                    </span>
+                    <span class="flow-card-title">OPPO</span>
+                    <span class="flow-card-sub">Все модели</span>
+                </button>
+                <button type="button" class="flow-card card-hover animate-in" data-brand="Vivo">
+                    <span class="flow-card-icon brand-logo-wrap" style="background:#f8fafc">
+                        <img class="brand-logo" src="assets/brands/vivo.svg" alt="Vivo" width="36" height="36" onerror="this.src='assets/placeholders/placeholder.svg'">
+                    </span>
+                    <span class="flow-card-title">Vivo</span>
+                    <span class="flow-card-sub">Все модели</span>
+                </button>
+                <button type="button" class="flow-card card-hover animate-in" data-brand="OnePlus">
+                    <span class="flow-card-icon brand-logo-wrap" style="background:#f8fafc">
+                        <img class="brand-logo" src="assets/brands/oneplus.svg" alt="OnePlus" width="36" height="36" onerror="this.src='assets/placeholders/placeholder.svg'">
+                    </span>
+                    <span class="flow-card-title">OnePlus</span>
+                    <span class="flow-card-sub">Все модели</span>
+                </button>
+                <button type="button" class="flow-card card-hover animate-in flow-card-other" data-brand="Realme">
+                    <span class="flow-card-icon brand-logo-wrap" style="background:#ffc915;color:#111;font-size:18px;font-weight:800">R</span>
+                    <span class="flow-card-title">Realme</span>
+                    <span class="flow-card-sub">Все модели</span>
+                </button>
+                <button type="button" class="flow-card card-hover animate-in flow-card-other" data-brand="Другой">
+                    <span class="flow-card-icon brand-logo-wrap" style="background:#f8fafc">
+                        <img class="brand-logo" src="assets/placeholders/placeholder.svg" alt="" width="36" height="36">
+                    </span>
+                    <span class="flow-card-title">Другой бренд</span>
+                    <span class="flow-card-sub">Любая марка</span>
+                </button>
             </div>
         </div>
 
-        <form class="search-box reveal" id="quickSearchForm">
-            <input type="text" id="quickProblem" placeholder="Что сломалось? Например: экран, батарея...">
-            <select id="quickBrand">
-                <option value="">Бренд</option>
-                <option value="iPhone">iPhone</option>
-                <option value="Samsung">Samsung</option>
-                <option value="Xiaomi">Xiaomi</option>
-                <option value="Honor">Honor</option>
-                <option value="Huawei">Huawei</option>
-                <option value="Realme">Realme</option>
-            </select>
-            <button type="submit" class="btn-primary">Найти решение</button>
-        </form>
+        <!-- Step 2: Problem -->
+        <div class="flow-panel" id="stepProblem" data-panel="2" hidden>
+            <div class="flow-panel-head">
+                <button type="button" class="flow-back" id="backToBrand">← Назад</button>
+                <h2 class="flow-panel-title">Что случилось с <span id="selectedBrandLabel">телефоном</span>?</h2>
+            </div>
+            <div class="flow-grid problems-flow" id="problemsGrid">
+                <button type="button" class="flow-card card-hover animate-in" data-problem="Разбит экран">
+                    <span class="flow-card-icon flow-emoji">
+                        <img class="problem-icon" src="assets/problems/screen_broken.png" alt="" width="48" height="48" onerror="this.src='assets/placeholders/placeholder.svg'">
+                    </span>
+                    <span class="flow-card-title">Разбит экран</span>
+                    <span class="flow-card-sub">Трещины, не отзывчив</span>
+                </button>
+                <button type="button" class="flow-card card-hover animate-in" data-problem="Не заряжается">
+                    <span class="flow-card-icon flow-emoji">
+                        <img class="problem-icon" src="assets/problems/not_charging.png" alt="" width="48" height="48" onerror="this.src='assets/placeholders/placeholder.svg'">
+                    </span>
+                    <span class="flow-card-title">Не заряжается</span>
+                    <span class="flow-card-sub">Не берёт заряд</span>
+                </button>
+                <button type="button" class="flow-card card-hover animate-in" data-problem="Не включается">
+                    <span class="flow-card-icon flow-emoji">
+                        <img class="problem-icon" src="assets/problems/wont_turn_on.png" alt="" width="48" height="48" onerror="this.src='assets/placeholders/placeholder.svg'">
+                    </span>
+                    <span class="flow-card-title">Не включается</span>
+                    <span class="flow-card-sub">Чёрный экран</span>
+                </button>
+                <button type="button" class="flow-card card-hover animate-in" data-problem="Замена батареи">
+                    <span class="flow-card-icon flow-emoji">
+                        <img class="problem-icon" src="assets/problems/battery.png" alt="" width="48" height="48" onerror="this.src='assets/placeholders/placeholder.svg'">
+                    </span>
+                    <span class="flow-card-title">Замена батареи</span>
+                    <span class="flow-card-sub">Быстро садится</span>
+                </button>
+                <button type="button" class="flow-card card-hover animate-in" data-problem="После воды">
+                    <span class="flow-card-icon flow-emoji">
+                        <img class="problem-icon" src="assets/problems/water_damage.png" alt="" width="48" height="48" onerror="this.src='assets/placeholders/placeholder.svg'">
+                    </span>
+                    <span class="flow-card-title">После воды</span>
+                    <span class="flow-card-sub">Попал под воду</span>
+                </button>
+                <button type="button" class="flow-card card-hover animate-in" data-problem="Ремонт камеры">
+                    <span class="flow-card-icon flow-emoji">
+                        <img class="problem-icon" src="assets/problems/camera.png" alt="" width="48" height="48" onerror="this.src='assets/placeholders/placeholder.svg'">
+                    </span>
+                    <span class="flow-card-title">Ремонт камеры</span>
+                    <span class="flow-card-sub">Не снимает, пятна</span>
+                </button>
+                <button type="button" class="flow-card card-hover animate-in" data-problem="Динамик / микрофон">
+                    <span class="flow-card-icon flow-emoji">
+                        <img class="problem-icon" src="assets/problems/speaker_mic.png" alt="" width="48" height="48" onerror="this.src='assets/placeholders/placeholder.svg'">
+                    </span>
+                    <span class="flow-card-title">Динамик / микрофон</span>
+                    <span class="flow-card-sub">Нет звука, хрипы</span>
+                </button>
+                <button type="button" class="flow-card card-hover animate-in" data-problem="Замена стекла">
+                    <span class="flow-card-icon flow-emoji">
+                        <img class="problem-icon" src="assets/problems/glass_replacement.png" alt="" width="48" height="48" onerror="this.src='assets/placeholders/placeholder.svg'">
+                    </span>
+                    <span class="flow-card-title">Замена стекла</span>
+                    <span class="flow-card-sub">Только стекло</span>
+                </button>
+                <button type="button" class="flow-card card-hover animate-in" data-problem="Разъём зарядки">
+                    <span class="flow-card-icon flow-emoji">
+                        <img class="problem-icon" src="assets/problems/charging_port.png" alt="" width="48" height="48" onerror="this.src='assets/placeholders/placeholder.svg'">
+                    </span>
+                    <span class="flow-card-title">Разъём зарядки</span>
+                    <span class="flow-card-sub">Люфт, плохой контакт</span>
+                </button>
+                <button type="button" class="flow-card card-hover animate-in flow-card-other" data-problem="Другое">
+                    <span class="flow-card-icon flow-emoji">
+                        <img class="problem-icon" src="assets/placeholders/placeholder.svg" alt="" width="48" height="48">
+                    </span>
+                    <span class="flow-card-title">Другое</span>
+                    <span class="flow-card-sub">Опишите в заявке</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 3: Form -->
+        <div class="flow-panel" id="stepForm" data-panel="3" hidden>
+            <div class="flow-panel-head">
+                <button type="button" class="flow-back" id="backToProblem">← Назад</button>
+                <h2 class="flow-panel-title">Оставьте контакты</h2>
+            </div>
+            <div class="flow-summary" id="flowSummary">
+                <span class="flow-summary-chip" id="summaryBrand">—</span>
+                <span class="flow-summary-arrow">→</span>
+                <span class="flow-summary-chip" id="summaryProblem">—</span>
+            </div>
+            <form class="flow-form" id="flowRepairForm">
+                <input type="hidden" id="flowBrand" name="brand" value="">
+                <input type="hidden" id="flowProblem" name="problem" value="">
+                <div class="form-group">
+                    <label for="flowName">Ваше имя *</label>
+                    <input type="text" id="flowName" name="name" placeholder="Алексей" required autocomplete="name">
+                </div>
+                <div class="form-group">
+                    <label for="flowPhone">Ваш телефон *</label>
+                    <input type="tel" id="flowPhone" name="phone" placeholder="+7 914 411-17-30" required autocomplete="tel">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="flowModel">Модель</label>
+                        <input type="text" id="flowModel" name="model" placeholder="iPhone 13, A52...">
+                    </div>
+                    <div class="form-group">
+                        <label for="flowCity">Город</label>
+                        <input type="text" id="flowCity" name="city" placeholder="Хабаровск" value="Хабаровск">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="flowComment">Комментарий</label>
+                    <textarea id="flowComment" name="comment" rows="3" placeholder="Удобное время, детали поломки..."></textarea>
+                </div>
+                <p class="flow-actions-label">Как отправить заявку?</p>
+                <div class="flow-actions" id="flowActions">
+                    <button type="button" class="action-btn action-call btn-pulse" data-action="call">
+                        <img src="assets/messengers/phone.svg" alt="" width="20" height="20" onerror="this.src='assets/placeholders/placeholder.svg'">
+                        Позвонить
+                    </button>
+                    <button type="button" class="action-btn action-wa btn-pulse" data-action="whatsapp">
+                        <img src="assets/messengers/whatsapp.svg" alt="" width="20" height="20" onerror="this.src='assets/placeholders/placeholder.svg'">
+                        WhatsApp
+                    </button>
+                    <button type="button" class="action-btn action-tg" data-action="telegram">
+                        <img src="assets/messengers/telegram.svg" alt="" width="20" height="20" onerror="this.src='assets/placeholders/placeholder.svg'">
+                        Telegram
+                    </button>
+                    <button type="button" class="action-btn action-mail" data-action="email">✉️ На почту</button>
+                </div>
+                <p class="flow-form-note">Номер сервиса: <a href="tel:+79144111730">+7 914 411-17-30</a></p>
+            </form>
+            <div class="form-success" id="flowFormSuccess" hidden>
+                <div class="form-success-icon">✅</div>
+                <h4>Заявка отправлена, мы свяжемся с вами</h4>
+                <p>Можете также сразу позвонить или написать в мессенджер.</p>
+                <div class="flow-actions success-actions">
+                    <a class="action-btn action-call" href="tel:+79144111730">
+                        <img src="assets/messengers/phone.svg" alt="" width="20" height="20"> Позвонить
+                    </a>
+                    <a class="action-btn action-wa" href="https://wa.me/79144111730" target="_blank" rel="noopener">
+                        <img src="assets/messengers/whatsapp.svg" alt="" width="20" height="20"> WhatsApp
+                    </a>
+                    <a class="action-btn action-tg" href="https://t.me/REMPHONE_RUSSIA_Bot" target="_blank" rel="noopener">
+                        <img src="assets/messengers/telegram.svg" alt="" width="20" height="20"> Telegram
+                    </a>
+                </div>
+                <button type="button" class="btn-secondary" id="flowRestart" style="margin-top:16px">Новая заявка</button>
+            </div>
+        </div>
     </div>
 </section>
 
 <section class="trust-bar reveal">
     <div class="container">
         <div class="trust-bar-grid">
-            <div class="trust-bar-item"><div class="trust-bar-icon">⚡</div><div class="trust-bar-text"><h4>От 30 минут</h4><p>Среднее время ремонта</p></div></div>
-            <div class="trust-bar-item"><div class="trust-bar-icon">🛡️</div><div class="trust-bar-text"><h4>90 дней</h4><p>Гарантия на все работы</p></div></div>
-            <div class="trust-bar-item"><div class="trust-bar-icon">👨‍🔧</div><div class="trust-bar-text"><h4>5+ лет</h4><p>Стаж мастеров</p></div></div>
-            <div class="trust-bar-item"><div class="trust-bar-icon">💰</div><div class="trust-bar-text"><h4>От 500₽</h4><p>Стоимость ремонта</p></div></div>
+            <div class="trust-bar-item">
+                <div class="trust-bar-icon trust-ico"><img src="assets/messengers/phone.svg" alt="" width="28" height="28"></div>
+                <div class="trust-bar-text"><h4>30–60 минут</h4><p>Типичный срок ремонта</p></div>
+            </div>
+            <div class="trust-bar-item">
+                <div class="trust-bar-icon trust-ico"><img src="assets/placeholders/placeholder.svg" alt="" width="28" height="28"></div>
+                <div class="trust-bar-text"><h4>Гарантия</h4><p>90 дней на работы</p></div>
+            </div>
+            <div class="trust-bar-item">
+                <div class="trust-bar-icon trust-ico"><img src="assets/brands/apple.svg" alt="" width="28" height="28"></div>
+                <div class="trust-bar-text"><h4>С 2020 года</h4><p>500+ ремонтов</p></div>
+            </div>
+            <div class="trust-bar-item">
+                <div class="trust-bar-icon trust-ico"><img src="assets/messengers/whatsapp.svg" alt="" width="28" height="28"></div>
+                <div class="trust-bar-text"><h4>От 500₽</h4><p>Честная оценка до работ</p></div>
+            </div>
         </div>
     </div>
 </section>
@@ -115,43 +338,45 @@
     <div class="container">
         <div class="text-center">
             <h2 class="section-title">Популярные услуги</h2>
-            <p class="section-subtitle">Что мы чиним чаще всего</p>
+            <p class="section-subtitle">Срок и цена — без размытых обещаний</p>
         </div>
         <div class="services-grid">
-            <a href="services/screen.html" class="service-card">
-                <div class="service-icon">📱</div>
+            <a href="services/screen.html" class="service-card card-hover animate-in">
+                <span class="badge-hit">Хит</span>
+                <div class="service-icon"><img class="problem-icon-img" src="assets/problems/screen_broken.png" alt="" onerror="this.src='assets/placeholders/placeholder.svg'"></div>
                 <h4>Замена экрана</h4>
-                <p>iPhone, Samsung, Xiaomi. Оригинальные дисплеи</p>
+                <p>30–60 минут · iPhone, Samsung, Xiaomi</p>
                 <span class="service-price">от 1000₽</span>
             </a>
-            <a href="services/battery.html" class="service-card">
-                <div class="service-icon">🔋</div>
+            <a href="services/battery.html" class="service-card card-hover animate-in">
+                <span class="badge-hit">Хит</span>
+                <div class="service-icon"><img class="problem-icon-img" src="assets/problems/battery.png" alt="" onerror="this.src='assets/placeholders/placeholder.svg'"></div>
                 <h4>Замена батареи</h4>
-                <p>Оригинальные аккумуляторы, гарантия 90 дней</p>
+                <p>30–45 минут · снова держит день</p>
                 <span class="service-price">от 800₽</span>
             </a>
-            <a href="services/not-on.html" class="service-card">
-                <div class="service-icon">💻</div>
+            <a href="services/not-on.html" class="service-card card-hover animate-in">
+                <div class="service-icon"><img class="problem-icon-img" src="assets/problems/wont_turn_on.png" alt="" onerror="this.src='assets/placeholders/placeholder.svg'"></div>
                 <h4>Не включается</h4>
-                <p>Диагностика, замена шлейфа, контроллера</p>
+                <p>Диагностика на месте</p>
                 <span class="service-price">от 500₽</span>
             </a>
-            <a href="services/water.html" class="service-card">
-                <div class="service-icon">💧</div>
+            <a href="services/water.html" class="service-card card-hover animate-in">
+                <div class="service-icon"><img class="problem-icon-img" src="assets/problems/water_damage.png" alt="" onerror="this.src='assets/placeholders/placeholder.svg'"></div>
                 <h4>После воды</h4>
-                <p>Чистка, замена деталей, восстановление</p>
+                <p>Срочная чистка и сушка</p>
                 <span class="service-price">от 500₽</span>
             </a>
-            <a href="services/charge.html" class="service-card">
-                <div class="service-icon">🔌</div>
+            <a href="services/charge.html" class="service-card card-hover animate-in">
+                <div class="service-icon"><img class="problem-icon-img" src="assets/problems/not_charging.png" alt="" onerror="this.src='assets/placeholders/placeholder.svg'"></div>
                 <h4>Не заряжается</h4>
-                <p>Ремонт разъёма, шлейфа, контроллера</p>
+                <p>Разъём / шлейф / контроллер</p>
                 <span class="service-price">от 800₽</span>
             </a>
-            <a href="services/camera.html" class="service-card">
-                <div class="service-icon">📷</div>
+            <a href="services/camera.html" class="service-card card-hover animate-in">
+                <div class="service-icon"><img class="problem-icon-img" src="assets/problems/camera.png" alt="" onerror="this.src='assets/placeholders/placeholder.svg'"></div>
                 <h4>Ремонт камеры</h4>
-                <p>Замена модуля, настройка фокуса</p>
+                <p>Модуль и фокус</p>
                 <span class="service-price">от 1000₽</span>
             </a>
         </div>
@@ -197,16 +422,14 @@
         <div class="reviews-header">
             <div>
                 <h2 class="section-title">Отзывы клиентов</h2>
-                <p class="section-subtitle">Что говорят о нас</p>
+                <p class="section-subtitle">Хабаровск и край — без столичных заглушек</p>
             </div>
             <div class="review-filters">
                 <select id="reviewCityFilter">
                     <option value="">Все города</option>
-                    <option value="Москва">Москва</option>
-                    <option value="Санкт-Петербург">Санкт-Петербург</option>
-                    <option value="Казань">Казань</option>
-                    <option value="Новосибирск">Новосибирск</option>
-                    <option value="Екатеринбург">Екатеринбург</option>
+                    <option value="хабаровск">Хабаровск</option>
+                    <option value="комсомольск">Комсомольск-на-Амуре</option>
+                    <option value="амурск">Амурск</option>
                 </select>
                 <select id="reviewServiceFilter">
                     <option value="">Все услуги</option>
@@ -220,72 +443,40 @@
         </div>
     </div>
     <div class="reviews-track reveal-stagger">
-        <div class="review-card" data-city="москва" data-service="экран">
-            <div class="review-header">
-                <div class="review-avatar" style="background:linear-gradient(135deg,#6c63ff,#a78bfa)">А</div>
-                <div>
-                    <div class="review-name">Алексей</div>
-                    <div class="review-meta">Москва · Samsung S23 · Замена экрана</div>
-                </div>
-            </div>
-            <div class="review-text">"Мастер приехал домой за 1 час. Починили за 40 минут, экран оригинал. Всё работает идеально."</div>
+        <div class="review-card" data-city="хабаровск" data-service="экран">
+            <div class="review-header"><div class="review-avatar" style="background:linear-gradient(135deg,#6c63ff,#a78bfa)">А</div><div><div class="review-name">Анна</div><div class="review-meta">Хабаровск · iPhone 13 · март 2025</div></div></div>
+            <div class="review-text">"Экран заменили за час, всё как обещали."</div>
             <div class="review-stars">★★★★★</div>
         </div>
-        <div class="review-card" data-city="санкт-петербург" data-service="зарядка">
-            <div class="review-header">
-                <div class="review-avatar" style="background:linear-gradient(135deg,#f97316,#fbbf24)">Е</div>
-                <div>
-                    <div class="review-name">Елена</div>
-                    <div class="review-meta">Санкт-Петербург · iPhone 12 · Ремонт зарядки</div>
-                </div>
-            </div>
-            <div class="review-text">"В сервисном центре сказали ждать неделю. Через REMPHONE всё решили за один день. Спасибо за оперативность!"</div>
+        <div class="review-card" data-city="хабаровск" data-service="батарея">
+            <div class="review-header"><div class="review-avatar" style="background:linear-gradient(135deg,#10b981,#34d399)">И</div><div><div class="review-name">Игорь</div><div class="review-meta">Хабаровск · Samsung A54 · февраль 2025</div></div></div>
+            <div class="review-text">"Батарея снова держит день. Мастер приехал на работу."</div>
             <div class="review-stars">★★★★★</div>
         </div>
-        <div class="review-card" data-city="казань" data-service="вода">
-            <div class="review-header">
-                <div class="review-avatar" style="background:linear-gradient(135deg,#14b8a6,#2dd4bf)">М</div>
-                <div>
-                    <div class="review-name">Максим</div>
-                    <div class="review-meta">Казань · Xiaomi · После воды</div>
-                </div>
-            </div>
-            <div class="review-text">"Уронил в воду. Высушили, почистили, заменили шлейф — работает как новый. Цена адекватная, гарантию дали."</div>
+        <div class="review-card" data-city="комсомольск" data-service="вода">
+            <div class="review-header"><div class="review-avatar" style="background:linear-gradient(135deg,#f59e0b,#fbbf24)">М</div><div><div class="review-name">Марина</div><div class="review-meta">Комсомольск-на-Амуре · Xiaomi · январь 2025</div></div></div>
+            <div class="review-text">"После воды спасли. Ждала деталь сутки — предупредили."</div>
+            <div class="review-stars">★★★★☆</div>
+        </div>
+        <div class="review-card" data-city="хабаровск" data-service="зарядка">
+            <div class="review-header"><div class="review-avatar" style="background:linear-gradient(135deg,#ef4444,#f87171)">Д</div><div><div class="review-name">Денис</div><div class="review-meta">Хабаровск · iPhone 12 · декабрь 2024</div></div></div>
+            <div class="review-text">"Разъём починили, держит нормально."</div>
             <div class="review-stars">★★★★★</div>
         </div>
-        <div class="review-card" data-city="новосибирск" data-service="вода">
-            <div class="review-header">
-                <div class="review-avatar" style="background:linear-gradient(135deg,#ef4444,#f87171)">О</div>
-                <div>
-                    <div class="review-name">Ольга</div>
-                    <div class="review-meta">Новосибирск · iPhone 13 · После воды</div>
-                </div>
-            </div>
-            <div class="review-text">"Выезд мастера за 2 часа, всё починили. Телефон как новый, даже камера работает. Рекомендую!"</div>
+        <div class="review-card" data-city="амурск" data-service="камера">
+            <div class="review-header"><div class="review-avatar" style="background:linear-gradient(135deg,#8b5cf6,#c084fc)">Е</div><div><div class="review-name">Елена</div><div class="review-meta">Амурск · Honor · ноябрь 2024</div></div></div>
+            <div class="review-text">"Камера снова снимает чётко."</div>
+            <div class="review-stars">★★★★☆</div>
+        </div>
+        <div class="review-card" data-city="хабаровск" data-service="батарея">
+            <div class="review-header"><div class="review-avatar" style="background:linear-gradient(135deg,#f59e0b,#fbbf24)">Т</div><div><div class="review-name">Татьяна</div><div class="review-meta">Хабаровск · iPhone XR · апрель 2024</div></div></div>
+            <div class="review-text">"Старый айфон ожил, гарантию дали."</div>
             <div class="review-stars">★★★★★</div>
         </div>
-        <div class="review-card" data-city="екатеринбург" data-service="экран">
-            <div class="review-header">
-                <div class="review-avatar" style="background:linear-gradient(135deg,#8b5cf6,#c084fc)">Д</div>
-                <div>
-                    <div class="review-name">Дмитрий</div>
-                    <div class="review-meta">Екатеринбург · Samsung · Замена экрана</div>
-                </div>
-            </div>
-            <div class="review-text">"Не включался после падения. Диагностика бесплатно, ремонт за час. Мастер вежливый, всё объяснил. Цена ниже, чем в других сервисах."</div>
-            <div class="review-stars">★★★★★</div>
-        </div>
-        <div class="review-card" data-city="москва" data-service="батарея">
-            <div class="review-header">
-                <div class="review-avatar" style="background:linear-gradient(135deg,#f59e0b,#fbbf24)">И</div>
-                <div>
-                    <div class="review-name">Ирина</div>
-                    <div class="review-meta">Москва · iPhone 11 · Замена батареи</div>
-                </div>
-            </div>
-            <div class="review-text">"Быстро, недорого, дали гарантию 90 дней. Телефон держит заряд как новый. Спасибо!"</div>
-            <div class="review-stars">★★★★★</div>
-        </div>
+    </div>
+    <div class="container text-center" style="margin-top:24px">
+        <a href="reviews.html" class="btn-secondary">Все отзывы</a>
+        <a href="https://2gis.ru/khabarovsk" class="btn-secondary" style="margin-left:8px" target="_blank" rel="noopener">2ГИС</a>
     </div>
 </section>
 
@@ -318,85 +509,27 @@
 
 <section class="cta reveal" id="form">
     <div class="container">
-        <div class="cta-grid">
-            <div>
-                <h2>Оставьте заявку на ремонт</h2>
-                <p class="cta-desc">Заполните форму — мы перезвоним в течение 5 минут и назовём точную стоимость</p>
-                <ul class="cta-benefits">
-                    <li>Бесплатная диагностика</li>
-                    <li>Ремонт от 30 минут</li>
-                    <li>Гарантия 90 дней</li>
-                    <li>Оригинальные запчасти</li>
-                </ul>
-            </div>
-            <div>
-                <div class="form-card">
-                    <div id="formContent">
-                        <h3>Заявка на ремонт</h3>
-                        <p class="form-sub">Заполните — мы сразу примем заказ</p>
-                        <form id="repairForm" onsubmit="return submitForm(event)">
-                            <div class="form-group">
-                                <label for="name">Ваше имя *</label>
-                                <input type="text" id="name" placeholder="Алексей" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="phone">Номер телефона *</label>
-                                <input type="tel" id="phone" placeholder="+7 999 123-45-67" required>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="brand">Бренд *</label>
-                                    <select id="brand" required>
-                                        <option value="">Выберите</option>
-                                        <option value="iPhone">iPhone</option>
-                                        <option value="Samsung">Samsung</option>
-                                        <option value="Xiaomi">Xiaomi</option>
-                                        <option value="Honor">Honor</option>
-                                        <option value="Huawei">Huawei</option>
-                                        <option value="Realme">Realme</option>
-                                        <option value="Другой">Другой</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="model">Модель</label>
-                                    <input type="text" id="model" placeholder="iPhone 13, A52...">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="problem">Проблема *</label>
-                                <select id="problem" required>
-                                    <option value="">Выберите</option>
-                                    <option value="Разбит экран">Разбит экран</option>
-                                    <option value="Не включается">Не включается</option>
-                                    <option value="Садится батарея">Садится батарея</option>
-                                    <option value="Не заряжается">Не заряжается</option>
-                                    <option value="Попала вода">Попала вода</option>
-                                    <option value="Не работает звук">Не работает звук</option>
-                                    <option value="Не работает камера">Не работает камера</option>
-                                    <option value="Другое">Другое</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="city">Город *</label>
-                                <input type="text" id="city" placeholder="Хабаровск" required>
-                            </div>
-                            <button type="submit" class="form-submit" id="submitBtn">🛠 Отправить заявку</button>
-                        </form>
-                    </div>
-                    <div class="form-success" id="formSuccess">
-                        <div class="form-success-icon">✅</div>
-                        <h4>Заявка отправлена!</h4>
-                        <p>Мастер свяжется с вами в ближайшее время.</p>
-                        <br>
-                        <a href="https://t.me/REMPHONE_RUSSIA_Bot" target="_blank" class="btn-primary" style="display:inline-flex">✈️ Перейти в Telegram</a>
-                    </div>
-                </div>
+        <div class="cta-simple">
+            <h2>Готовы к ремонту?</h2>
+            <p class="cta-desc">Выберите марку и поломку сверху — или сразу позвоните / напишите нам.</p>
+            <div class="hero-actions" style="justify-content:center;flex-wrap:wrap">
+                <a href="#repair-flow" class="btn-primary">🛠 Выбрать марку</a>
+                <a href="tel:+79144111730" class="btn-secondary">📞 +7 914 411-17-30</a>
+                <a href="https://wa.me/79144111730" target="_blank" class="btn-secondary" rel="noopener">💬 WhatsApp</a>
             </div>
         </div>
     </div>
 </section>
 
-<div class="sticky-mobile-cta"><a href="#form">🛠 Оставить заявку</a></div>
+<div class="sticky-mobile-bar floating-contact" id="stickyMobileBar">
+    <a class="sticky-fab sticky-call btn-pulse" href="tel:+79144111730" aria-label="Позвонить">
+        <img src="assets/messengers/phone.svg" alt="" width="26" height="26">
+    </a>
+    <a class="sticky-fab sticky-wa btn-pulse" href="https://wa.me/79144111730" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <img src="assets/messengers/whatsapp.svg" alt="" width="26" height="26">
+    </a>
+    <a class="sticky-fab sticky-flow" href="#repair-flow">Заявка</a>
+</div>
 
 <footer class="footer">
     <div class="container">
@@ -404,6 +537,12 @@
             <div>
                 <div class="logo" style="color:#fff;margin-bottom:8px">REMPHONE <span>RUSSIA</span></div>
                 <p style="font-size:13px;color:rgba(255,255,255,0.4)">Ремонт телефонов в Хабаровске и Хабаровском крае. Быстро, качественно, с гарантией.</p>
+                <a class="footer-phone" href="tel:+79144111730">+7 914 411-17-30</a>
+                <div class="footer-social">
+                    <a href="https://wa.me/79144111730" target="_blank" rel="noopener">WhatsApp</a>
+                    <a href="https://t.me/REMPHONE_RUSSIA_Bot" target="_blank" rel="noopener">Telegram</a>
+                    <a href="mailto:toolyrepair@gmail.com">Email</a>
+                </div>
             </div>
             <div>
                 <h5>Услуги</h5>
@@ -422,17 +561,19 @@
             </div>
             <div>
                 <h5>Заявка</h5>
-                <a href="#form">Оставить заявку</a>
-                <a href="https://t.me/REMPHONE_RUSSIA_Bot" target="_blank">Telegram-бот</a>
+                <a href="#repair-flow">Оставить заявку</a>
+                <a href="https://t.me/REMPHONE_RUSSIA_Bot" target="_blank" rel="noopener">Telegram-бот</a>
+                <a href="https://wa.me/79144111730" target="_blank" rel="noopener">WhatsApp</a>
                 <a href="privacy.html">Политика</a>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2026 REMPHONE RUSSIA</p>
+            <p>© 2026 REMPHONE RUSSIA · <a href="mailto:toolyrepair@gmail.com" style="color:inherit">toolyrepair@gmail.com</a></p>
         </div>
     </div>
 </footer>
 
+<script src="config.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

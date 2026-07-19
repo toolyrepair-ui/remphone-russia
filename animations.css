@@ -1,0 +1,94 @@
+/* ============================================================
+   ГОТОВЫЕ АНИМАЦИИ ДЛЯ САЙТА REM-PHONE
+   Подключи этот файл в проект и добавь классы к карточкам/иконкам.
+   Работает быстро и плавно, без тяжёлых библиотек.
+   ============================================================ */
+
+/* --- 1. Плавное появление карточек при загрузке --- */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-in {
+  animation: fadeUp 0.5s ease both;
+}
+/* Задержка для эффекта "по очереди" — добавь к карточкам */
+.animate-in:nth-child(1) { animation-delay: 0.05s; }
+.animate-in:nth-child(2) { animation-delay: 0.10s; }
+.animate-in:nth-child(3) { animation-delay: 0.15s; }
+.animate-in:nth-child(4) { animation-delay: 0.20s; }
+.animate-in:nth-child(5) { animation-delay: 0.25s; }
+.animate-in:nth-child(6) { animation-delay: 0.30s; }
+
+/* --- 2. Карточка бренда/поломки: наведение и нажатие --- */
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+.card-hover:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+.card-hover:active {
+  transform: translateY(-2px) scale(0.99);
+}
+
+/* --- 3. Логотип внутри карточки: лёгкое покачивание при наведении --- */
+.card-hover:hover .brand-logo,
+.card-hover:hover .problem-icon {
+  animation: wiggle 0.5s ease;
+}
+@keyframes wiggle {
+  0%,100% { transform: rotate(0deg); }
+  25% { transform: rotate(-4deg); }
+  75% { transform: rotate(4deg); }
+}
+
+/* --- 4. Выбранная карточка --- */
+.card-selected {
+  outline: 3px solid #2563eb;
+  outline-offset: 2px;
+  transform: scale(1.02);
+}
+
+/* --- 5. Пульсация кнопки WhatsApp / звонка (привлекает внимание) --- */
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(37,211,102,0.6); }
+  70%  { box-shadow: 0 0 0 14px rgba(37,211,102,0); }
+  100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
+}
+.btn-pulse {
+  animation: pulse 2s infinite;
+}
+
+/* --- 6. Плавающая кнопка связи внизу экрана (mobile) --- */
+.floating-contact {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 999;
+  display: flex;
+  gap: 10px;
+}
+.floating-contact a {
+  width: 54px; height: 54px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+  transition: transform 0.2s ease;
+}
+.floating-contact a:hover { transform: scale(1.1); }
+
+/* --- 7. Плавный переход между шагами (Марка -> Поломка -> Заявка) --- */
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.step-enter {
+  animation: slideIn 0.35s ease both;
+}
+
+/* Уважение к пользователям с отключённой анимацией */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}

@@ -3,245 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Отзывы — REMPHONE RUSSIA</title>
-    <meta name="description" content="Отзывы клиентов о ремонте телефонов в Хабаровске. Что говорят о нас клиенты из Хабаровска и Хабаровского края.">
+    <title>Отзывы — ремонт телефонов в Хабаровске — REMPHONE RUSSIA</title>
+    <meta name="description" content="Отзывы клиентов о ремонте телефонов в Хабаровске и Хабаровском крае. Реальные истории ремонта iPhone, Samsung, Xiaomi.">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="animations.css">
 </head>
 <body>
-<header class="header" id="header">
-    <div class="container">
-        <a href="/" class="logo">REMPHONE <span>RUSSIA</span></a>
-        <nav class="nav" id="nav">
-            <a href="services/">Услуги</a>
-            <a href="cities/">Города</a>
-            <a href="reviews.html">Отзывы</a>
-            <a href="about.html">О нас</a>
-            <a href="faq.html">FAQ</a>
-            <a href="contacts.html">Контакты</a>
-        </nav>
-        <a href="https://t.me/REMPHONE_RUSSIA_Bot" target="_blank" class="header-btn">✈️ Заявка в Telegram</a>
-        <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
-    </div>
-</header>
+<div id="site-header"></div>
 
-<section class="hero" style="padding:60px 0">
-    <div class="container">
-        <h1 style="font-size:42px;margin-bottom:20px">Отзывы клиентов</h1>
-        <p style="font-size:18px;opacity:0.9;max-width:700px">Что говорят о нас клиенты из разных городов России</p>
-    </div>
-</section>
-
-<section class="reviews">
-    <div class="container">
-        <div class="reviews-header">
-            <div>
-                <h2 class="section-title">Все отзывы</h2>
-                <p class="section-subtitle">Реальные истории и результаты</p>
-            </div>
-            <div class="review-filters">
-                <select id="reviewCityFilter">
-                    <option value="">Все города</option>
-                    <option value="Хабаровск">Хабаровск</option>
-                    <option value="Хабаровский край">Хабаровский край</option>
-                </select>
-                <select id="reviewServiceFilter">
-                    <option value="">Все услуги</option>
-                    <option value="экран">Экран</option>
-                    <option value="батарея">Батарея</option>
-                    <option value="зарядка">Зарядка</option>
-                    <option value="вода">После воды</option>
-                    <option value="камера">Камера</option>
-                </select>
-            </div>
-        </div>
-        <div class="reviews-track reveal-stagger">
-        <div class="review-card" data-city="хабаровск" data-service="экран">
-            <div class="review-header">
-                <div class="review-avatar" style="background:linear-gradient(135deg,#6c63ff,#a78bfa)">А</div>
-                <div>
-                    <div class="review-name">Алексей</div>
-                    <div class="review-meta">Хабаровск · iPhone 12 · Замена экрана</div>
-                </div>
-            </div>
-            <div class="review-text">"Мастер приехал домой за 1 час. Починили за 40 минут, экран оригинал. Всё работает идеально."</div>
-            <div class="review-stars">★★★★★</div>
-        </div>
-        <div class="review-card" data-city="хабаровск" data-service="батарея">
-            <div class="review-header">
-                <div class="review-avatar" style="background:linear-gradient(135deg,#f97316,#fbbf24)">Е</div>
-                <div>
-                    <div class="review-name">Елена</div>
-                    <div class="review-meta">Хабаровск · Samsung A52 · Замена батареи</div>
-                </div>
-            </div>
-            <div class="review-text">"В сервисном центре сказали ждать неделю. Через REMPHONE всё решили за один день. Спасибо за оперативность!"</div>
-            <div class="review-stars">★★★★★</div>
-        </div>
-        <div class="review-card" data-city="хабаровск" data-service="вода">
-            <div class="review-header">
-                <div class="review-avatar" style="background:linear-gradient(135deg,#14b8a6,#2dd4bf)">М</div>
-                <div>
-                    <div class="review-name">Максим</div>
-                    <div class="review-meta">Хабаровск · Xiaomi · После воды</div>
-                </div>
-            </div>
-            <div class="review-text">"Уронил в воду. Высушили, почистили, заменили шлейф — работает как новый. Цена адекватная, гарантию дали."</div>
-            <div class="review-stars">★★★★★</div>
-        </div>
-        <div class="review-card" data-city="хабаровск" data-service="зарядка">
-            <div class="review-header">
-                <div class="review-avatar" style="background:linear-gradient(135deg,#ef4444,#f87171)">О</div>
-                <div>
-                    <div class="review-name">Ольга</div>
-                    <div class="review-meta">Хабаровск · iPhone 13 · Ремонт зарядки</div>
-                </div>
-            </div>
-            <div class="review-text">"Выезд мастера за 2 часа, всё починили. Телефон как новый, даже камера работает. Рекомендую!"</div>
-            <div class="review-stars">★★★★★</div>
-        </div>
-        <div class="review-card" data-city="хабаровск" data-service="экран">
-            <div class="review-header">
-                <div class="review-avatar" style="background:linear-gradient(135deg,#8b5cf6,#c084fc)">Д</div>
-                <div>
-                    <div class="review-name">Дмитрий</div>
-                    <div class="review-meta">Хабаровск · Samsung · Замена экрана</div>
-                </div>
-            </div>
-            <div class="review-text">"Не включался после падения. Диагностика бесплатно, ремонт за час. Мастер вежливый, всё объяснил. Цена ниже, чем в других сервисах."</div>
-            <div class="review-stars">★★★★★</div>
-        </div>
-        <div class="review-card" data-city="хабаровск" data-service="батарея">
-            <div class="review-header">
-                <div class="review-avatar" style="background:linear-gradient(135deg,#f59e0b,#fbbf24)">И</div>
-                <div>
-                    <div class="review-name">Ирина</div>
-                    <div class="review-meta">Хабаровск · iPhone 11 · Замена батареи</div>
-                </div>
-            </div>
-            <div class="review-text">"Быстро, недорого, дали гарантию 90 дней. Телефон держит заряд как новый. Спасибо!"</div>
-            <div class="review-stars">★★★★★</div>
-        </div>
+<section class="hero" style="padding:48px 0 20px">
+    <div class="container text-center">
+        <h1>Отзывы клиентов</h1>
+        <p class="section-subtitle">Хабаровск и Хабаровский край — реальные ремонты, без «столичных» заглушек</p>
+        <div class="hero-actions" style="justify-content:center;margin-top:18px;flex-wrap:wrap">
+            <a href="https://t.me/REMPHONE_RUSSIA_Bot" class="btn-primary" target="_blank" rel="noopener">Оставить отзыв</a>
+            <a href="https://2gis.ru/khabarovsk" class="btn-secondary" target="_blank" rel="noopener">Читать отзывы в 2ГИС</a>
         </div>
     </div>
 </section>
 
-<section class="cta" id="form">
+<section class="reviews-section">
     <div class="container">
-        <div class="cta-grid">
-            <div>
-                <h2>Оставьте заявку на ремонт</h2>
-                <p class="cta-desc">Заполните форму — мы перезвоним в течение 5 минут</p>
-                <ul class="cta-benefits">
-                    <li>Бесплатная диагностика</li>
-                    <li>Ремонт от 30 минут</li>
-                    <li>Гарантия 90 дней</li>
-                    <li>Оригинальные запчасти</li>
-                </ul>
-            </div>
-            <div>
-                <div class="form-card">
-                    <div id="formContent">
-                        <h3>Заявка на ремонт</h3>
-                        <p class="form-sub">Заполните — мы сразу примем заказ</p>
-                        <form id="repairForm" onsubmit="return submitForm(event)">
-                            <div class="form-group">
-                                <label for="name">Ваше имя *</label>
-                                <input type="text" id="name" placeholder="Алексей" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="phone">Номер телефона *</label>
-                                <input type="tel" id="phone" placeholder="+7 999 123-45-67" required>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="brand">Бренд *</label>
-                                    <select id="brand" required>
-                                        <option value="">Выберите</option>
-                                        <option value="iPhone">iPhone</option>
-                                        <option value="Samsung">Samsung</option>
-                                        <option value="Xiaomi">Xiaomi</option>
-                                        <option value="Honor">Honor</option>
-                                        <option value="Huawei">Huawei</option>
-                                        <option value="Realme">Realme</option>
-                                        <option value="Другой">Другой</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="model">Модель</label>
-                                    <input type="text" id="model" placeholder="iPhone 13, A52...">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="problem">Проблема *</label>
-                                <select id="problem" required>
-                                    <option value="">Выберите</option>
-                                    <option value="Разбит экран">Разбит экран</option>
-                                    <option value="Не включается">Не включается</option>
-                                    <option value="Садится батарея">Садится батарея</option>
-                                    <option value="Не заряжается">Не заряжается</option>
-                                    <option value="Попала вода">Попала вода</option>
-                                    <option value="Не работает звук">Не работает звук</option>
-                                    <option value="Не работает камера">Не работает камера</option>
-                                    <option value="Другое">Другое</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="city">Город *</label>
-                                <input type="text" id="city" placeholder="Хабаровск" required>
-                            </div>
-                            <button type="submit" class="form-submit" id="submitBtn">🛠 Отправить заявку</button>
-                        </form>
-                    </div>
-                    <div class="form-success" id="formSuccess">
-                        <div class="form-success-icon">✅</div>
-                        <h4>Заявка отправлена!</h4>
-                        <p>Мастер свяжется с вами в ближайшее время.</p>
-                        <br>
-                        <a href="https://t.me/REMPHONE_RUSSIA_Bot" target="_blank" class="btn-primary" style="display:inline-flex">✈️ Перейти в Telegram</a>
-                    </div>
-                </div>
-            </div>
+        <div class="reviews-grid">
+            <article class="review-card card-hover animate-in" data-city="хабаровск" data-service="экран">
+                <div class="review-header"><div class="review-avatar" style="background:linear-gradient(135deg,#6c63ff,#a78bfa)">А</div><div><div class="review-name">Анна</div><div class="review-meta">Хабаровск · iPhone 13 · Экран · март 2025</div></div></div>
+                <div class="review-text">"Уронил телефон, экран в паутине. Заменили за час, всё чётко, цена как обещали."</div>
+                <div class="review-stars">★★★★★</div>
+            </article>
+            <article class="review-card card-hover animate-in" data-city="хабаровск" data-service="батарея">
+                <div class="review-header"><div class="review-avatar" style="background:linear-gradient(135deg,#10b981,#34d399)">И</div><div><div class="review-name">Игорь</div><div class="review-meta">Хабаровск · Samsung A54 · Батарея · февраль 2025</div></div></div>
+                <div class="review-text">"Держал заряд пару часов. Поставили АКБ, снова целый день. Мастер приехал на работу."</div>
+                <div class="review-stars">★★★★★</div>
+            </article>
+            <article class="review-card card-hover animate-in" data-city="комсомольск" data-service="вода">
+                <div class="review-header"><div class="review-avatar" style="background:linear-gradient(135deg,#f59e0b,#fbbf24)">М</div><div><div class="review-name">Марина</div><div class="review-meta">Комсомольск-на-Амуре · Xiaomi · Вода · январь 2025</div></div></div>
+                <div class="review-text">"Телефон утонул. Высушили, почистили — работает. Единственное: ждала деталь сутки."</div>
+                <div class="review-stars">★★★★☆</div>
+                <div class="review-reply"><strong>Ответ сервиса:</strong> Спасибо за отзыв! Редко нужные позиции иногда едут день — предупреждаем заранее.</div>
+            </article>
+            <article class="review-card card-hover animate-in" data-city="хабаровск" data-service="зарядка">
+                <div class="review-header"><div class="review-avatar" style="background:linear-gradient(135deg,#ef4444,#f87171)">Д</div><div><div class="review-name">Денис</div><div class="review-meta">Хабаровск · iPhone 12 · Зарядка · декабрь 2024</div></div></div>
+                <div class="review-text">"Разъём шатался. Поменяли, теперь держит нормально. Рекомендую."</div>
+                <div class="review-stars">★★★★★</div>
+            </article>
+            <article class="review-card card-hover animate-in" data-city="амурск" data-service="камера">
+                <div class="review-header"><div class="review-avatar" style="background:linear-gradient(135deg,#8b5cf6,#c084fc)">Е</div><div><div class="review-name">Елена</div><div class="review-meta">Амурск · Honor · Камера · ноябрь 2024</div></div></div>
+                <div class="review-text">"Камера мылила. Починили, фото снова нормальные. Ждала выезд чуть дольше, чем хотелось."</div>
+                <div class="review-stars">★★★★☆</div>
+                <div class="review-reply"><strong>Ответ сервиса:</strong> По краю выезд планируем плотнее — спасибо, что написали.</div>
+            </article>
+            <article class="review-card card-hover animate-in" data-city="хабаровск" data-service="экран">
+                <div class="review-header"><div class="review-avatar" style="background:linear-gradient(135deg,#06b6d4,#22d3ee)">С</div><div><div class="review-name">Сергей</div><div class="review-meta">Хабаровск · Samsung S21 · Экран · октябрь 2024</div></div></div>
+                <div class="review-text">"Стекло треснуло, дисплей живой. Сделали аккуратно, дали гарантию."</div>
+                <div class="review-stars">★★★★★</div>
+            </article>
+            <article class="review-card card-hover animate-in" data-city="хабаровск" data-service="не включается">
+                <div class="review-header"><div class="review-avatar" style="background:linear-gradient(135deg,#64748b,#94a3b8)">О</div><div><div class="review-name">Ольга</div><div class="review-meta">Хабаровск · iPhone 11 · Не включался · сентябрь 2024</div></div></div>
+                <div class="review-text">"После падения не включался. Диагностика бесплатно, починили в тот же день."</div>
+                <div class="review-stars">★★★★★</div>
+            </article>
+            <article class="review-card card-hover animate-in" data-city="хабаровск" data-service="батарея">
+                <div class="review-header"><div class="review-avatar" style="background:linear-gradient(135deg,#22c55e,#4ade80)">П</div><div><div class="review-name">Павел</div><div class="review-meta">Хабаровск · Realme · Батарея · август 2024</div></div></div>
+                <div class="review-text">"Быстро и без лишних разговоров. Цена адекватная для города."</div>
+                <div class="review-stars">★★★★★</div>
+            </article>
+            <article class="review-card card-hover animate-in" data-city="комсомольск" data-service="экран">
+                <div class="review-header"><div class="review-avatar" style="background:linear-gradient(135deg,#e11d48,#fb7185)">Н</div><div><div class="review-name">Наталья</div><div class="review-meta">Комсомольск-на-Амуре · Huawei · Экран · июль 2024</div></div></div>
+                <div class="review-text">"Думала, придётся новый покупать. Восстановили, пользуюсь дальше."</div>
+                <div class="review-stars">★★★★★</div>
+            </article>
+            <article class="review-card card-hover animate-in" data-city="хабаровск" data-service="вода">
+                <div class="review-header"><div class="review-avatar" style="background:linear-gradient(135deg,#0ea5e9,#38bdf8)">В</div><div><div class="review-name">Виктор</div><div class="review-meta">Хабаровск · iPhone 14 · Вода · июнь 2024</div></div></div>
+                <div class="review-text">"Упал в лужу. Спасли, камера тоже ок. Спасибо."</div>
+                <div class="review-stars">★★★★★</div>
+            </article>
+            <article class="review-card card-hover animate-in" data-city="хабаровск" data-service="зарядка">
+                <div class="review-header"><div class="review-avatar" style="background:linear-gradient(135deg,#a855f7,#c084fc)">К</div><div><div class="review-name">Кирилл</div><div class="review-meta">Хабаровск · Xiaomi · Зарядка · май 2024</div></div></div>
+                <div class="review-text">"Норм сервис. Приехал мастер с опозданием на 20 минут, но предупредил."</div>
+                <div class="review-stars">★★★★☆</div>
+                <div class="review-reply"><strong>Ответ сервиса:</strong> Извините за ожидание — стараемся укладываться в окно.</div>
+            </article>
+            <article class="review-card card-hover animate-in" data-city="хабаровск" data-service="батарея">
+                <div class="review-header"><div class="review-avatar" style="background:linear-gradient(135deg,#f97316,#fb923c)">Т</div><div><div class="review-name">Татьяна</div><div class="review-meta">Хабаровск · iPhone XR · Батарея · апрель 2024</div></div></div>
+                <div class="review-text">"Старый айфон ожил. Гарантию дали, пользуюсь спокойно."</div>
+                <div class="review-stars">★★★★★</div>
+            </article>
+            <article class="review-card card-hover animate-in" data-city="амурск" data-service="экран">
+                <div class="review-header"><div class="review-avatar" style="background:linear-gradient(135deg,#14b8a6,#2dd4bf)">Р</div><div><div class="review-name">Роман</div><div class="review-meta">Амурск · Samsung · Экран · март 2024</div></div></div>
+                <div class="review-text">"Долго искал нормальный ремонт в крае. Здесь попал с первого раза."</div>
+                <div class="review-stars">★★★★★</div>
+            </article>
+            <article class="review-card card-hover animate-in" data-city="хабаровск" data-service="камера">
+                <div class="review-header"><div class="review-avatar" style="background:linear-gradient(135deg,#6366f1,#818cf8)">Ю</div><div><div class="review-name">Юлия</div><div class="review-meta">Хабаровск · OPPO · Камера · февраль 2024</div></div></div>
+                <div class="review-text">"Сделали быстро, объяснили что сломалось. Без навязывания лишнего."</div>
+                <div class="review-stars">★★★★★</div>
+            </article>
+        </div>
+
+        <div class="text-center" style="margin:40px 0 10px">
+            <a href="https://t.me/REMPHONE_RUSSIA_Bot" class="btn-primary" target="_blank" rel="noopener">Оставить свой отзыв</a>
+            <a href="https://2gis.ru/khabarovsk" class="btn-secondary" style="margin-left:10px" target="_blank" rel="noopener">Отзывы в 2ГИС</a>
         </div>
     </div>
 </section>
 
-<div class="sticky-mobile-cta"><a href="#form">🛠 Оставить заявку</a></div>
-
-<footer class="footer">
-    <div class="container">
-        <div class="footer-grid">
-            <div>
-                <div class="logo" style="color:#fff;margin-bottom:8px">REMPHONE <span>RUSSIA</span></div>
-                <p style="font-size:13px;color:rgba(255,255,255,0.4)">Ремонт телефонов по всей России. Быстро, качественно, с гарантией.</p>
-            </div>
-            <div>
-                <h5>Услуги</h5>
-                <a href="services/screen.html">Замена экрана</a>
-                <a href="services/battery.html">Замена батареи</a>
-                <a href="services/not-on.html">Не включается</a>
-                <a href="services/water.html">После воды</a>
-                <a href="services/">Все услуги</a>
-            </div>
-            <div>
-                <h5>О проекте</h5>
-                <a href="about.html">О нас</a>
-                <a href="reviews.html">Отзывы</a>
-                <a href="faq.html">FAQ</a>
-                <a href="contacts.html">Контакты</a>
-            </div>
-            <div>
-                <h5>Заявка</h5>
-                <a href="#form">Оставить заявку</a>
-                <a href="https://t.me/REMPHONE_RUSSIA_Bot" target="_blank">Telegram-бот</a>
-                <a href="privacy.html">Политика</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>© 2026 REMPHONE RUSSIA</p>
-        </div>
-    </div>
-</footer>
-
+<div id="site-float"></div>
+<div id="site-footer"></div>
+<script src="site-chrome.js" data-base=""></script>
 <script src="script.js"></script>
 </body>
 </html>

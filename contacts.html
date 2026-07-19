@@ -3,51 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Контакты — Ремонт телефонов в Хабаровске — REMPHONE RUSSIA</title>
-    <meta name="description" content="Контакты REMPHONE RUSSIA в Хабаровске. Телефон, адрес, Telegram. Ремонт телефонов в Хабаровске и Хабаровском крае.">
+    <title>Контакты — REMPHONE RUSSIA Хабаровск</title>
+    <meta name="description" content="Контакты REMPHONE RUSSIA: телефон +7 914 411-17-30, WhatsApp, Telegram, email. Ремонт телефонов в Хабаровске, выезд мастера.">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="animations.css">
 </head>
 <body>
-<header class="header" id="header">
-    <div class="container">
-        <a href="/" class="logo">REMPHONE <span>RUSSIA</span></a>
-        <nav class="nav" id="nav">
-            <a href="services/">Услуги</a>
-            <a href="reviews.html">Отзывы</a>
-            <a href="about.html">О нас</a>
-            <a href="faq.html">FAQ</a>
-            <a href="contacts.html">Контакты</a>
-        </nav>
-        <a href="https://t.me/REMPHONE_RUSSIA_Bot" target="_blank" class="header-btn">✈️ Заявка в Telegram</a>
-        <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
-    </div>
-</header>
+<div id="site-header"></div>
 
-<section class="hero" style="padding:60px 0">
+<section class="hero" style="padding:48px 0 24px">
     <div class="container">
-        <h1 style="font-size:42px;margin-bottom:20px">Контакты</h1>
-        <p style="font-size:18px;opacity:0.9;max-width:700px">Свяжитесь с нами любым удобным способом</p>
+        <h1 style="font-size:clamp(28px,5vw,42px);margin-bottom:12px">Контакты</h1>
+        <p style="font-size:18px;color:var(--text-light);max-width:640px">Свяжитесь удобным способом — отвечаем быстро, работаем по Хабаровску и краю.</p>
     </div>
 </section>
 
 <section class="services-preview">
     <div class="container">
-        <div class="services-grid" style="grid-template-columns: repeat(3, 1fr);">
-            <div class="service-card" style="text-align:center">
-                <div class="service-icon">📞</div>
-                <h4>Телефон</h4>
-                <p>+7 999 123-45-67</p>
-            </div>
-            <div class="service-card" style="text-align:center">
-                <div class="service-icon">✈️</div>
+        <div class="services-grid contact-channels">
+            <a class="service-card card-hover animate-in" href="tel:+79144111730">
+                <div class="service-icon"><img src="assets/messengers/phone.svg" alt="" width="40" height="40" onerror="this.src='assets/placeholders/placeholder.svg'"></div>
+                <h4>Позвонить</h4>
+                <p class="contact-strong">+7 914 411-17-30</p>
+                <span class="service-price">Круглосуточно</span>
+            </a>
+            <a class="service-card card-hover animate-in" href="https://wa.me/79144111730" target="_blank" rel="noopener">
+                <div class="service-icon"><img src="assets/messengers/whatsapp.svg" alt="" width="40" height="40" onerror="this.src='assets/placeholders/placeholder.svg'"></div>
+                <h4>WhatsApp</h4>
+                <p>Написать в WhatsApp</p>
+                <span class="service-price">Ответ за минуты</span>
+            </a>
+            <a class="service-card card-hover animate-in" href="https://t.me/REMPHONE_RUSSIA_Bot" target="_blank" rel="noopener">
+                <div class="service-icon"><img src="assets/messengers/telegram.svg" alt="" width="40" height="40" onerror="this.src='assets/placeholders/placeholder.svg'"></div>
                 <h4>Telegram</h4>
                 <p>@REMPHONE_RUSSIA_Bot</p>
-            </div>
-            <div class="service-card" style="text-align:center">
-                <div class="service-icon">📍</div>
-                <h4>Адрес</h4>
-                <p>Хабаровск, ул. Примерная, 1</p>
-            </div>
+                <span class="service-price">Заявка в боте</span>
+            </a>
+            <a class="service-card card-hover animate-in" href="mailto:toolyrepair@gmail.com">
+                <div class="service-icon" style="font-size:36px">✉️</div>
+                <h4>Email</h4>
+                <p>toolyrepair@gmail.com</p>
+                <span class="service-price">Для документов</span>
+            </a>
+        </div>
+
+        <div class="contact-hours card-hover animate-in">
+            <h3>Режим работы</h3>
+            <p><strong>Приём заявок:</strong> 24/7</p>
+            <p><strong>Ремонт / выезд мастера:</strong> ежедневно 09:00–21:00</p>
+            <p class="contact-note">Стационарного адреса пока нет — мастер приезжает к вам по Хабаровску и Хабаровскому краю.</p>
+        </div>
+
+        <div class="contact-visit card-hover animate-in">
+            <h3>Выезд мастера</h3>
+            <p>Хабаровск, Комсомольск-на-Амуре, Амурск и населённые пункты края. Точное время согласуем при заявке.</p>
         </div>
     </div>
 </section>
@@ -57,19 +66,23 @@
         <div class="cta-grid">
             <div>
                 <h2>Оставьте заявку на ремонт</h2>
-                <p class="cta-desc">Заполните форму — мы перезвоним в течение 5 минут</p>
+                <p class="cta-desc">Или сразу позвоните / напишите в WhatsApp — так быстрее.</p>
                 <ul class="cta-benefits">
                     <li>Бесплатная диагностика</li>
                     <li>Ремонт от 30 минут</li>
                     <li>Гарантия 90 дней</li>
-                    <li>Оригинальные запчасти</li>
+                    <li>Выезд по городу и краю</li>
                 </ul>
+                <div class="hero-actions" style="margin-top:16px;flex-wrap:wrap">
+                    <a href="tel:+79144111730" class="btn-primary">📞 Позвонить</a>
+                    <a href="https://wa.me/79144111730" class="btn-secondary" target="_blank" rel="noopener">WhatsApp</a>
+                </div>
             </div>
             <div>
                 <div class="form-card">
                     <div id="formContent">
                         <h3>Заявка на ремонт</h3>
-                        <p class="form-sub">Заполните — мы сразу примем заказ</p>
+                        <p class="form-sub">Заполните — мы свяжемся с вами</p>
                         <form id="repairForm" onsubmit="return submitForm(event)">
                             <div class="form-group">
                                 <label for="name">Ваше имя *</label>
@@ -77,7 +90,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="phone">Номер телефона *</label>
-                                <input type="tel" id="phone" placeholder="+7 999 123-45-67" required>
+                                <input type="tel" id="phone" placeholder="+7 914 411-17-30" required>
                             </div>
                             <div class="form-row">
                                 <div class="form-group">
@@ -89,7 +102,6 @@
                                         <option value="Xiaomi">Xiaomi</option>
                                         <option value="Honor">Honor</option>
                                         <option value="Huawei">Huawei</option>
-                                        <option value="Realme">Realme</option>
                                         <option value="Другой">Другой</option>
                                     </select>
                                 </div>
@@ -107,24 +119,21 @@
                                     <option value="Садится батарея">Садится батарея</option>
                                     <option value="Не заряжается">Не заряжается</option>
                                     <option value="Попала вода">Попала вода</option>
-                                    <option value="Не работает звук">Не работает звук</option>
                                     <option value="Не работает камера">Не работает камера</option>
                                     <option value="Другое">Другое</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="city">Город *</label>
-                                <input type="text" id="city" placeholder="Хабаровск" required>
+                                <input type="text" id="city" placeholder="Хабаровск" value="Хабаровск" required>
                             </div>
-                            <button type="submit" class="form-submit" id="submitBtn">🛠 Отправить заявку</button>
+                            <button type="submit" class="form-submit" id="submitBtn">Отправить заявку</button>
                         </form>
                     </div>
                     <div class="form-success" id="formSuccess">
                         <div class="form-success-icon">✅</div>
-                        <h4>Заявка отправлена!</h4>
-                        <p>Мастер свяжется с вами в ближайшее время.</p>
-                        <br>
-                        <a href="https://t.me/REMPHONE_RUSSIA_Bot" target="_blank" class="btn-primary" style="display:inline-flex">✈️ Перейти в Telegram</a>
+                        <h4>Заявка отправлена, мы свяжемся с вами</h4>
+                        <a href="tel:+79144111730" class="btn-primary">Позвонить сейчас</a>
                     </div>
                 </div>
             </div>
@@ -132,43 +141,9 @@
     </div>
 </section>
 
-<div class="sticky-mobile-cta"><a href="#form">🛠 Оставить заявку</a></div>
-
-<footer class="footer">
-    <div class="container">
-        <div class="footer-grid">
-            <div>
-                <div class="logo" style="color:#fff;margin-bottom:8px">REMPHONE <span>RUSSIA</span></div>
-                <p style="font-size:13px;color:rgba(255,255,255,0.4)">Ремонт телефонов в Хабаровске и Хабаровском крае. Быстро, качественно, с гарантией.</p>
-            </div>
-            <div>
-                <h5>Услуги</h5>
-                <a href="services/screen.html">Замена экрана</a>
-                <a href="services/battery.html">Замена батареи</a>
-                <a href="services/not-on.html">Не включается</a>
-                <a href="services/water.html">После воды</a>
-                <a href="services/">Все услуги</a>
-            </div>
-            <div>
-                <h5>О проекте</h5>
-                <a href="about.html">О нас</a>
-                <a href="reviews.html">Отзывы</a>
-                <a href="faq.html">FAQ</a>
-                <a href="contacts.html">Контакты</a>
-            </div>
-            <div>
-                <h5>Заявка</h5>
-                <a href="#form">Оставить заявку</a>
-                <a href="https://t.me/REMPHONE_RUSSIA_Bot" target="_blank">Telegram-бот</a>
-                <a href="privacy.html">Политика</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>© 2026 REMPHONE RUSSIA</p>
-        </div>
-    </div>
-</footer>
-
+<div id="site-float"></div>
+<div id="site-footer"></div>
+<script src="site-chrome.js" data-base=""></script>
 <script src="script.js"></script>
 </body>
 </html>

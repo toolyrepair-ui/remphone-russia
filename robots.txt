@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
-Sitemap: https://remphone-russia.ru/sitemap.xml
+Sitemap: https://rem-phone.ru/sitemap.xml
 
 # Запрещаем индексацию служебных страниц
 Disallow: /temp/

@@ -4,40 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Услуги ремонта телефонов в Хабаровске — REMPHONE RUSSIA</title>
-    <meta name="description" content="Все услуги по ремонту телефонов в Хабаровске: замена экрана, батареи, зарядки, после воды, камера. Гарантия 90 дней.">
+    <meta name="description" content="Услуги ремонта: экран, батарея, зарядка, вода, камера, планшеты, смарт-часы. Сроки 30–60 мин, гарантия 90 дней.">
     <link rel="stylesheet" href="../styles.css">
-    <link rel="canonical" href="https://remphone-russia.ru/services/">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="Услуги ремонта телефонов — REMPHONE RUSSIA">
-    <meta property="og:description" content="Замена экрана, батареи, зарядки, после воды. Гарантия 90 дней. Выезд мастера.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://remphone-russia.ru/services/">
-    <meta property="og:image" content="https://remphone-russia.ru/og-image.jpg">
+    <link rel="stylesheet" href="../animations.css">
+    <link rel="canonical" href="https://rem-phone.ru/services/">
 </head>
 <body>
-<header class="header" id="header">
-    <div class="container">
-        <a href="/" class="logo">REMPHONE <span>RUSSIA</span></a>
-        <nav class="nav" id="nav">
-            <a href="../services/">Услуги</a>
-            <a href="../cities/">Города</a>
-            <a href="../reviews.html">Отзывы</a>
-            <a href="../about.html">О нас</a>
-            <a href="../faq.html">FAQ</a>
-            <a href="../contacts.html">Контакты</a>
-        </nav>
-        <a href="https://t.me/REMPHONE_RUSSIA_Bot" target="_blank" class="header-btn">✈️ Заявка в Telegram</a>
-        <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
-    </div>
-</header>
+<div id="site-header"></div>
 
 <section class="hero" id="hero">
     <div class="container">
         <div class="catalog-header">
             <div>
-                <h1>Услуги ремонта телефонов</h1>
-                <p class="section-subtitle">Что мы чиним чаще всего и сколько это стоит</p>
+                <h1>Услуги ремонта</h1>
+                <p class="section-subtitle">Срок, выгода и ориентир по цене — без воды</p>
             </div>
             <div class="catalog-filters">
                 <select id="brandFilter">
@@ -47,7 +27,7 @@
                     <option value="Xiaomi">Xiaomi</option>
                     <option value="Honor">Honor</option>
                     <option value="Huawei">Huawei</option>
-                    <option value="Realme">Realme</option>
+                    <option value="Other">Другие</option>
                 </select>
                 <select id="priceFilter">
                     <option value="">Любая цена</option>
@@ -58,96 +38,147 @@
             </div>
         </div>
 
-        <div class="services-grid">
-            <a href="screen.html" class="service-card" data-brand="iPhone Samsung Xiaomi Honor Huawei Realme" data-price="1000-2000">
-                <div class="service-icon">📱</div>
+        <div class="services-grid" id="servicesGrid">
+            <a href="screen.html" class="service-card card-hover animate-in" data-brand="iPhone Samsung Xiaomi Honor Huawei Other" data-price="1000">
+                <span class="badge-hit">Хит</span>
+                <div class="service-icon"><img class="problem-icon-img" src="../assets/problems/screen_broken.png" alt="" onerror="this.src='../assets/placeholders/placeholder.svg'"></div>
                 <h4>Замена экрана</h4>
-                <p>Оригинальные дисплеи для iPhone, Samsung, Xiaomi. Гарантия 90 дней.</p>
+                <p>30–60 минут · качественный дисплей под модель</p>
                 <span class="service-price">от 1000₽</span>
             </a>
-            <a href="battery.html" class="service-card" data-brand="iPhone Samsung Xiaomi Honor Huawei Realme" data-price="0-1000">
-                <div class="service-icon">🔋</div>
+            <a href="battery.html" class="service-card card-hover animate-in" data-brand="iPhone Samsung Xiaomi Honor Huawei Other" data-price="800">
+                <span class="badge-hit">Хит</span>
+                <div class="service-icon"><img class="problem-icon-img" src="../assets/problems/battery.png" alt="" onerror="this.src='../assets/placeholders/placeholder.svg'"></div>
                 <h4>Замена батареи</h4>
-                <p>Оригинальные аккумуляторы, восстановление ёмкости. Гарантия 90 дней.</p>
+                <p>30–45 минут · снова держит целый день</p>
                 <span class="service-price">от 800₽</span>
             </a>
-            <a href="not-on.html" class="service-card" data-brand="iPhone Samsung Xiaomi Honor Huawei Realme" data-price="0-1000">
-                <div class="service-icon">💻</div>
+            <a href="not-on.html" class="service-card card-hover animate-in" data-brand="iPhone Samsung Xiaomi Honor Huawei Other" data-price="500">
+                <div class="service-icon"><img class="problem-icon-img" src="../assets/problems/wont_turn_on.png" alt="" onerror="this.src='../assets/placeholders/placeholder.svg'"></div>
                 <h4>Не включается</h4>
-                <p>Диагностика, замена шлейфа, контроллера питания, ремонт после падения.</p>
+                <p>Диагностика на месте · часто чиним в день обращения</p>
                 <span class="service-price">от 500₽</span>
             </a>
-            <a href="water.html" class="service-card" data-brand="iPhone Samsung Xiaomi Honor Huawei Realme" data-price="0-1000">
-                <div class="service-icon">💧</div>
+            <a href="water.html" class="service-card card-hover animate-in" data-brand="iPhone Samsung Xiaomi Honor Huawei Other" data-price="500">
+                <div class="service-icon"><img class="problem-icon-img" src="../assets/problems/water_damage.png" alt="" onerror="this.src='../assets/placeholders/placeholder.svg'"></div>
                 <h4>После воды</h4>
-                <p>Чистка платы, ультразвук, замена повреждённых деталей.</p>
+                <p>Срочная сушка и чистка · чем раньше — тем выше шанс</p>
                 <span class="service-price">от 500₽</span>
             </a>
-            <a href="charge.html" class="service-card" data-brand="iPhone Samsung Xiaomi Honor Huawei Realme" data-price="1000-2000">
-                <div class="service-icon">🔌</div>
+            <a href="charge.html" class="service-card card-hover animate-in" data-brand="iPhone Samsung Xiaomi Honor Huawei Other" data-price="800">
+                <div class="service-icon"><img class="problem-icon-img" src="../assets/problems/not_charging.png" alt="" onerror="this.src='../assets/placeholders/placeholder.svg'"></div>
                 <h4>Не заряжается</h4>
-                <p>Ремонт разъёма, шлейфа, контроллера заряда, замена аккумулятора.</p>
+                <p>30–60 минут · разъём / шлейф / контроллер</p>
                 <span class="service-price">от 800₽</span>
             </a>
-            <a href="camera.html" class="service-card" data-brand="iPhone Samsung Xiaomi Honor Huawei Realme" data-price="1000-2000">
-                <div class="service-icon">📷</div>
+            <a href="camera.html" class="service-card card-hover animate-in" data-brand="iPhone Samsung Xiaomi Honor Huawei Other" data-price="1000">
+                <div class="service-icon"><img class="problem-icon-img" src="../assets/problems/camera.png" alt="" onerror="this.src='../assets/placeholders/placeholder.svg'"></div>
                 <h4>Ремонт камеры</h4>
-                <p>Замена модуля камеры, настройка фокуса, ремонт после падения.</p>
+                <p>Модуль и фокус · фото снова как надо</p>
                 <span class="service-price">от 1000₽</span>
             </a>
-            <a href="cleaning.html" class="service-card" data-brand="iPhone Samsung Xiaomi Honor Huawei Realme" data-price="0-1000">
-                <div class="service-icon">🧹</div>
-                <h4>Чистка и обслуживание</h4>
-                <p>Глубокая чистка, замена термопасты, профилактика.</p>
+            <a href="cleaning.html" class="service-card card-hover animate-in" data-brand="iPhone Samsung Xiaomi Honor Huawei Other" data-price="500">
+                <div class="service-icon"><img class="problem-icon-img" src="../assets/problems/speaker_mic.png" alt="" onerror="this.src='../assets/placeholders/placeholder.svg'"></div>
+                <h4>Динамик / микрофон</h4>
+                <p>Чистка или замена · слышно собеседника снова</p>
+                <span class="service-price">от 800₽</span>
+            </a>
+            <a href="../index.html#repair-flow" class="service-card card-hover animate-in" data-brand="iPhone Samsung Xiaomi Honor Huawei Other" data-price="700">
+                <div class="service-icon"><img class="problem-icon-img" src="../assets/problems/glass_replacement.png" alt="" onerror="this.src='../assets/placeholders/placeholder.svg'"></div>
+                <h4>Замена стекла</h4>
+                <p>Когда дисплей жив · дешевле полной замены</p>
+                <span class="service-price">от 700₽</span>
+            </a>
+            <a href="../index.html#repair-flow" class="service-card card-hover animate-in" data-brand="iPhone Samsung Xiaomi Honor Huawei Other" data-price="900">
+                <div class="service-icon"><img class="problem-icon-img" src="../assets/problems/charging_port.png" alt="" onerror="this.src='../assets/placeholders/placeholder.svg'"></div>
+                <h4>Разъём зарядки</h4>
+                <p>Люфт и плохой контакт · фиксируем надёжно</p>
+                <span class="service-price">от 900₽</span>
+            </a>
+            <a href="../index.html#repair-flow" class="service-card card-hover animate-in" data-brand="iPhone Samsung Xiaomi Honor Huawei Other" data-price="1500">
+                <div class="service-icon"><img src="../assets/placeholders/placeholder.svg" alt="" width="64" height="64"></div>
+                <h4>Ремонт планшетов</h4>
+                <p>Экраны, зарядка, после удара · iPad и Android</p>
+                <span class="service-price">от 1500₽</span>
+            </a>
+            <a href="../index.html#repair-flow" class="service-card card-hover animate-in" data-brand="iPhone Samsung Xiaomi Honor Huawei Other" data-price="2000">
+                <div class="service-icon"><img src="../assets/placeholders/placeholder.svg" alt="" width="64" height="64"></div>
+                <h4>Смарт-часы</h4>
+                <p>Apple Watch / Galaxy Watch · экран, батарея</p>
+                <span class="service-price">от 2000₽</span>
+            </a>
+            <a href="../index.html#repair-flow" class="service-card card-hover animate-in" data-brand="iPhone Samsung Xiaomi Honor Huawei Other" data-price="1000">
+                <div class="service-icon"><img src="../assets/placeholders/placeholder.svg" alt="" width="64" height="64"></div>
+                <h4>Восстановление данных</h4>
+                <p>Когда телефон не включается · по возможности</p>
+                <span class="service-price">от 1000₽</span>
+            </a>
+            <a href="cleaning.html" class="service-card card-hover animate-in" data-brand="iPhone Samsung Xiaomi Honor Huawei Other" data-price="500">
+                <div class="service-icon"><img class="problem-icon-img" src="../assets/problems/water_damage.png" alt="" onerror="this.src='../assets/placeholders/placeholder.svg'"></div>
+                <h4>Чистка после воды</h4>
+                <p>Промывка и сушка платы · спасает от коррозии</p>
                 <span class="service-price">от 500₽</span>
+            </a>
+            <a href="../index.html#repair-flow" class="service-card card-hover animate-in" data-brand="iPhone Samsung Xiaomi Honor Huawei Other" data-price="800">
+                <div class="service-icon"><img src="../assets/placeholders/placeholder.svg" alt="" width="64" height="64"></div>
+                <h4>Разблокировка</h4>
+                <p>Забыли пароль / Apple ID / Google · по ситуации</p>
+                <span class="service-price">от 800₽</span>
             </a>
         </div>
 
+        <div class="price-table-wrap card-hover animate-in">
+            <h2>Ориентир цен на топ-модели</h2>
+            <p class="section-subtitle" style="text-align:left">Точная сумма — после осмотра. Таблица помогает понять порядок цен.</p>
+            <div class="price-table-scroll">
+                <table class="price-table">
+                    <thead>
+                        <tr><th>Модель</th><th>Экран</th><th>Батарея</th><th>Зарядка</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>iPhone 13</td><td>от 4500₽</td><td>от 2500₽</td><td>от 1800₽</td></tr>
+                        <tr><td>iPhone 14</td><td>от 5500₽</td><td>от 2800₽</td><td>от 2000₽</td></tr>
+                        <tr><td>iPhone 15</td><td>от 6500₽</td><td>от 3200₽</td><td>от 2200₽</td></tr>
+                        <tr><td>Samsung A-серия</td><td>от 2800₽</td><td>от 1800₽</td><td>от 1200₽</td></tr>
+                        <tr><td>Xiaomi / Redmi</td><td>от 2200₽</td><td>от 1500₽</td><td>от 1000₽</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
         <div class="text-center" style="margin-top:40px">
-            <a href="../#form" class="btn-primary">🛠 Оставить заявку</a>
-            <a href="https://t.me/REMPHONE_RUSSIA_Bot" target="_blank" class="btn-secondary" style="margin-left:10px">✈️ В Telegram</a>
+            <a href="../index.html#repair-flow" class="btn-primary">Оставить заявку</a>
+            <a href="tel:+79144111730" class="btn-secondary" style="margin-left:10px">+7 914 411-17-30</a>
         </div>
     </div>
 </section>
 
-<div class="sticky-mobile-cta"><a href="../#form">🛠 Оставить заявку</a></div>
-
-<footer class="footer">
-    <div class="container">
-        <div class="footer-grid">
-            <div>
-                <div class="logo" style="color:#fff;margin-bottom:8px">REMPHONE <span>RUSSIA</span></div>
-                <p style="font-size:13px;color:rgba(255,255,255,0.4)">Ремонт телефонов в Хабаровске и Хабаровском крае. Быстро, качественно, с гарантией.</p>
-            </div>
-            <div>
-                <h5>Услуги</h5>
-                <a href="screen.html">Замена экрана</a>
-                <a href="battery.html">Замена батареи</a>
-                <a href="not-on.html">Не включается</a>
-                <a href="water.html">После воды</a>
-                <a href="charge.html">Не заряжается</a>
-                <a href="camera.html">Ремонт камеры</a>
-            </div>
-            <div>
-                <h5>О проекте</h5>
-                <a href="../about.html">О нас</a>
-                <a href="../reviews.html">Отзывы</a>
-                <a href="../faq.html">FAQ</a>
-                <a href="../contacts.html">Контакты</a>
-            </div>
-            <div>
-                <h5>Заявка</h5>
-                <a href="../#form">Оставить заявку</a>
-                <a href="https://t.me/REMPHONE_RUSSIA_Bot" target="_blank">Telegram-бот</a>
-                <a href="../privacy.html">Политика</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>© 2026 REMPHONE RUSSIA</p>
-        </div>
-    </div>
-</footer>
-
+<div id="site-float"></div>
+<div id="site-footer"></div>
+<script src="../site-chrome.js" data-base="../"></script>
 <script src="../script.js"></script>
+<script>
+(function () {
+  var brand = document.getElementById('brandFilter');
+  var price = document.getElementById('priceFilter');
+  var cards = document.querySelectorAll('#servicesGrid .service-card');
+  function apply() {
+    var b = brand.value;
+    var p = price.value;
+    cards.forEach(function (card) {
+      var brands = (card.dataset.brand || '');
+      var min = parseInt(card.dataset.price || '0', 10);
+      var brandOk = !b || brands.indexOf(b) !== -1;
+      var priceOk = true;
+      if (p === '0-1000') priceOk = min <= 1000;
+      else if (p === '1000-2000') priceOk = min >= 1000 && min < 2000;
+      else if (p === '2000-99999') priceOk = min >= 2000;
+      card.style.display = brandOk && priceOk ? '' : 'none';
+    });
+  }
+  if (brand) brand.addEventListener('change', apply);
+  if (price) price.addEventListener('change', apply);
+})();
+</script>
 </body>
 </html>

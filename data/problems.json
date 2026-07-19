@@ -1,0 +1,11 @@
+[
+  { "id": "screen_broken",  "name": "Разбит экран",       "desc": "Трещины, битые пиксели, не отзывчив",   "price": "от 1000₽", "emoji": "📱", "image": "assets/problems/screen_broken.png" },
+  { "id": "battery",        "name": "Садится батарея",    "desc": "Быстро разряжается, не держит заряд",   "price": "от 800₽",  "emoji": "🔋", "image": "assets/problems/battery.png" },
+  { "id": "not_charging",   "name": "Не заряжается",      "desc": "Не подключается к зарядке, не льётся",  "price": "от 800₽",  "emoji": "🔌", "image": "assets/problems/not_charging.png" },
+  { "id": "water_damage",   "name": "Попала вода",        "desc": "После падения в воду, под дождь",       "price": "от 500₽",  "emoji": "💧", "image": "assets/problems/water_damage.png" },
+  { "id": "camera",         "name": "Не работает камера", "desc": "Не фотографирует, полосы, размытие",    "price": "от 1000₽", "emoji": "📷", "image": "assets/problems/camera.png" },
+  { "id": "wont_turn_on",   "name": "Не включается",      "desc": "Полностью выключился, не включается",   "price": "от 500₽",  "emoji": "💻", "image": "assets/problems/wont_turn_on.png" },
+  { "id": "speaker_mic",       "name": "Динамик / микрофон", "desc": "Не слышно звук, не работает микрофон", "price": "от 800₽",  "emoji": "🔊", "image": "assets/problems/speaker_mic.png" },
+  { "id": "glass_replacement", "name": "Замена стекла",      "desc": "Целый дисплей, разбито только стекло",  "price": "от 700₽",  "emoji": "🪟", "image": "assets/problems/glass_replacement.png" },
+  { "id": "charging_port",     "name": "Разъём зарядки",     "desc": "Шатается разъём, плохой контакт",       "price": "от 900₽",  "emoji": "🔌", "image": "assets/problems/charging_port.png" }
+]

@@ -13,7 +13,7 @@
 
 ### Что проверить перед запуском:
 1. **Хостинг**: задеплоить сайт на Vercel/Netlify/GitHub Pages
-2. **Домен**: подключить remphone-russia.ru
+2. **Домен**: подключить rem-phone.ru
 3. **HTTPS**: включить SSL-сертификат
 4. **Скорость**: проверить на PageSpeed Insights (цель: >80)
 5. **Формы**: убедиться, что заявки с сайта приходят
@@ -22,10 +22,10 @@
 
 ### Яндекс.Вебмастер
 1. Зайти на https://webmaster.yandex.ru
-2. Добавить сайт remphone-russia.ru
+2. Добавить сайт rem-phone.ru
 3. Подтвердить права (DNS-запись или HTML-файл)
-4. Загрузить sitemap.xml: https://remphone-russia.ru/sitemap.xml
-5. Проверить индексацию: https://remphone-russia.ru/robots.txt
+4. Загрузить sitemap.xml: https://rem-phone.ru/sitemap.xml
+5. Проверить индексацию: https://rem-phone.ru/robots.txt
 
 ### Google Search Console
 1. Зайти на https://search.google.com/search-console
@@ -36,12 +36,12 @@
 ## 3. Первые SEO-страницы (приоритет)
 
 ### Высокий приоритет (индексировать сразу):
-- Главная: https://remphone-russia.ru/
-- Услуги: https://remphone-russia.ru/services/
-- Хабаровск: https://remphone-russia.ru/cities/khabarovsk.html
-- Отзывы: https://remphone-russia.ru/reviews.html
-- FAQ: https://remphone-russia.ru/faq.html
-- Контакты: https://remphone-russia.ru/contacts.html
+- Главная: https://rem-phone.ru/
+- Услуги: https://rem-phone.ru/services/
+- Хабаровск: https://rem-phone.ru/cities/khabarovsk.html
+- Отзывы: https://rem-phone.ru/reviews.html
+- FAQ: https://rem-phone.ru/faq.html
+- Контакты: https://rem-phone.ru/contacts.html
 
 ### Средний приоритет (добавить в течение недели):
 - Замена экрана: /services/screen.html
@@ -190,7 +190,7 @@
 
 - Telegram: @REMPHONE_RUSSIA_Bot
 - Телефон: +7 999 123-45-67
-- Сайт: https://remphone-russia.ru
+- Сайт: https://rem-phone.ru
 - Город: Хабаровск, Хабаровский край
 
 ---

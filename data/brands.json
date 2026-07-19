@@ -1,0 +1,10 @@
+[
+  { "id": "apple",   "name": "iPhone",  "logo": "assets/brands/apple.svg",   "color": "#000000" },
+  { "id": "samsung", "name": "Samsung", "logo": "assets/brands/samsung.svg", "color": "#1428A0" },
+  { "id": "xiaomi",  "name": "Xiaomi",  "logo": "assets/brands/xiaomi.svg",  "color": "#FF6900" },
+  { "id": "honor",   "name": "Honor",   "logo": "assets/brands/honor.svg",   "color": "#0060FF" },
+  { "id": "huawei",  "name": "Huawei",  "logo": "assets/brands/huawei.svg",  "color": "#FF0000" },
+  { "id": "oppo",    "name": "OPPO",    "logo": "assets/brands/oppo.svg",    "color": "#046A38" },
+  { "id": "vivo",    "name": "Vivo",    "logo": "assets/brands/vivo.svg",    "color": "#415FFF" },
+  { "id": "oneplus", "name": "OnePlus", "logo": "assets/brands/oneplus.svg", "color": "#EB0029" }
+]
