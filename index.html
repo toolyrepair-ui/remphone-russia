@@ -272,13 +272,16 @@
                     <label for="flowComment">Комментарий</label>
                     <textarea id="flowComment" name="comment" rows="3" placeholder="Удобное время, детали поломки..."></textarea>
                 </div>
-                <p class="flow-actions-label">Как отправить заявку?</p>
-                <div class="flow-actions" id="flowActions">
-                    <button type="button" class="action-btn action-call btn-pulse" data-action="call">
+                <p class="flow-actions-label">Отправить заявку</p>
+                <button type="submit" class="form-submit flow-submit-primary" id="flowSubmitBtn">🛠 Отправить заявку</button>
+                <p id="flowSubmitError" class="flow-submit-error" hidden></p>
+                <p class="flow-actions-label flow-actions-label-secondary">Или быстрая связь</p>
+                <div class="flow-actions flow-actions-secondary" id="flowActions">
+                    <button type="button" class="action-btn action-call" data-action="call">
                         <img src="assets/messengers/phone.svg" alt="" width="20" height="20" onerror="this.src='assets/placeholders/placeholder.svg'">
                         Позвонить
                     </button>
-                    <button type="button" class="action-btn action-wa btn-pulse" data-action="whatsapp">
+                    <button type="button" class="action-btn action-wa" data-action="whatsapp">
                         <img src="assets/messengers/whatsapp.svg" alt="" width="20" height="20" onerror="this.src='assets/placeholders/placeholder.svg'">
                         WhatsApp
                     </button>
@@ -286,9 +289,8 @@
                         <img src="assets/messengers/telegram.svg" alt="" width="20" height="20" onerror="this.src='assets/placeholders/placeholder.svg'">
                         Telegram
                     </button>
-                    <button type="button" class="action-btn action-mail" data-action="email">✉️ На почту</button>
                 </div>
-                <p class="flow-form-note">Номер сервиса: <a href="tel:+79144111730">+7 914 411-17-30</a></p>
+                <p class="flow-form-note">Резерв: <a href="tel:+79144111730">+7 914 411-17-30</a> · <a href="https://t.me/REMPHONE_RUSSIA_Bot" target="_blank" rel="noopener">@REMPHONE_RUSSIA_Bot</a></p>
             </form>
             <div class="form-success" id="flowFormSuccess" hidden>
                 <div class="form-success-icon">✅</div>

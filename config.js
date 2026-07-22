@@ -1,6 +1,6 @@
 /* Контакты и отправка заявок rem-phone.ru
- * Email: если WEB3FORMS_ACCESS_KEY пустой — используется FormSubmit на EMAIL.
- * Ключ Web3Forms: https://web3forms.com → Create Access Key → указать toolyrepair@gmail.com
+ * relayUrl — Cloudflare Worker, который пересылает заявку в Telegram владельцу.
+ * Токен бота в коде сайта НЕ хранится.
  */
 window.REMPHONE_CONFIG = {
     phoneTel: '+79144111730',
@@ -8,6 +8,6 @@ window.REMPHONE_CONFIG = {
     whatsapp: '79144111730',
     telegramBot: 'REMPHONE_RUSSIA_Bot',
     email: 'toolyrepair@gmail.com',
-    /* Вставьте ключ с https://web3forms.com — тогда письма пойдут через Web3Forms */
-    web3formsAccessKey: ''
+    ownerTelegramId: '7553859784',
+    relayUrl: 'https://rem-phone-relay.toolyrepair.workers.dev'
 };

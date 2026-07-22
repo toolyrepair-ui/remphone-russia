@@ -167,10 +167,10 @@ if (quickForm) {
 
     const cfg = window.REMPHONE_CONFIG || {};
     const phoneTel = cfg.phoneTel || '+79144111730';
+    const phoneDisplay = cfg.phoneDisplay || '+7 914 411-17-30';
     const whatsapp = cfg.whatsapp || '79144111730';
     const telegramBot = cfg.telegramBot || 'REMPHONE_RUSSIA_Bot';
-    const emailTo = cfg.email || 'toolyrepair@gmail.com';
-    const web3Key = (cfg.web3formsAccessKey || '').trim();
+    const relayUrl = (cfg.relayUrl || '').trim();
 
     const state = { brand: '', problem: '' };
     const panels = {
@@ -186,6 +186,8 @@ if (quickForm) {
     const flowProblem = document.getElementById('flowProblem');
     const form = document.getElementById('flowRepairForm');
     const success = document.getElementById('flowFormSuccess');
+    const submitBtn = document.getElementById('flowSubmitBtn');
+    const errorBox = document.getElementById('flowSubmitError');
 
     function goTo(step) {
         Object.keys(panels).forEach((key) => {
@@ -196,7 +198,6 @@ if (quickForm) {
             panel.classList.toggle('is-active', active);
             if (active) {
                 panel.classList.remove('step-enter');
-                // restart animation
                 void panel.offsetWidth;
                 panel.classList.add('step-enter');
             }
@@ -213,11 +214,11 @@ if (quickForm) {
         return {
             brand: state.brand || (flowBrand && flowBrand.value) || '',
             problem: state.problem || (flowProblem && flowProblem.value) || '',
-            name: (document.getElementById('flowName') || {}).value || '',
-            phone: (document.getElementById('flowPhone') || {}).value || '',
-            model: (document.getElementById('flowModel') || {}).value || '',
-            city: (document.getElementById('flowCity') || {}).value || '',
-            comment: (document.getElementById('flowComment') || {}).value || '',
+            name: ((document.getElementById('flowName') || {}).value || '').trim(),
+            phone: ((document.getElementById('flowPhone') || {}).value || '').trim(),
+            model: ((document.getElementById('flowModel') || {}).value || '').trim(),
+            city: ((document.getElementById('flowCity') || {}).value || '').trim(),
+            comment: ((document.getElementById('flowComment') || {}).value || '').trim(),
         };
     }
 
@@ -241,7 +242,7 @@ if (quickForm) {
             goTo(1);
             return false;
         }
-        if (requireContacts && (!data.name.trim() || !data.phone.trim())) {
+        if (requireContacts && (!data.name || !data.phone)) {
             alert('Укажите имя и телефон');
             return false;
         }
@@ -249,6 +250,7 @@ if (quickForm) {
     }
 
     function showSuccess() {
+        hideError();
         if (form) form.hidden = true;
         if (success) {
             success.hidden = false;
@@ -256,50 +258,87 @@ if (quickForm) {
         }
     }
 
-    async function sendEmail(data) {
-        const subject = `Заявка rem-phone.ru: ${data.brand} — ${data.problem}`;
-        const payload = {
-            name: data.name,
-            phone: data.phone,
-            brand: data.brand,
-            model: data.model || '—',
-            problem: data.problem,
-            city: data.city || '—',
-            comment: data.comment || '—',
-            subject: subject,
-        };
-
-        if (web3Key) {
-            const res = await fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-                body: JSON.stringify({
-                    access_key: web3Key,
-                    subject: subject,
-                    from_name: data.name,
-                    ...payload,
-                }),
-            });
-            const json = await res.json();
-            if (!res.ok || json.success === false) {
-                throw new Error(json.message || 'Web3Forms error');
-            }
+    function showError(message) {
+        if (!errorBox) {
+            alert(message);
             return;
         }
+        errorBox.hidden = false;
+        errorBox.textContent = message;
+    }
 
-        // FormSubmit — без ключа, письмо на EMAIL (первый раз подтвердите адрес)
-        const res = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(emailTo)}`, {
+    function hideError() {
+        if (errorBox) {
+            errorBox.hidden = true;
+            errorBox.textContent = '';
+        }
+    }
+
+    function isRelayConfigured() {
+        if (!relayUrl) return false;
+        if (/ВСТАВИТЬ|YOUR_|example\.com|localhost/i.test(relayUrl)) return false;
+        return /^https?:\/\//i.test(relayUrl);
+    }
+
+    async function sendToRelay(data) {
+        if (!isRelayConfigured()) {
+            throw new Error('relay_not_configured');
+        }
+
+        const res = await fetch(relayUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
             body: JSON.stringify({
-                ...payload,
-                _subject: subject,
-                _template: 'table',
+                name: data.name,
+                phone: data.phone,
+                brand: data.brand,
+                model: data.model || '',
+                problem: data.problem,
+                city: data.city || '',
+                comment: data.comment || '',
+                source: 'rem-phone.ru',
             }),
         });
-        const json = await res.json().catch(() => ({}));
-        if (!res.ok || json.success === 'false' || json.success === false) {
-            throw new Error(json.message || 'Не удалось отправить на почту');
+
+        let json = {};
+        try {
+            json = await res.json();
+        } catch (e) {
+            json = {};
+        }
+
+        if (!res.ok || json.success === false) {
+            throw new Error(json.message || json.error || ('HTTP ' + res.status));
+        }
+        return json;
+    }
+
+    async function handlePrimarySubmit(event) {
+        if (event) event.preventDefault();
+        hideError();
+
+        const data = readFields();
+        if (!validateForMessenger(data, true)) return;
+
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Отправка...';
+        }
+
+        try {
+            await sendToRelay(data);
+            showSuccess();
+        } catch (err) {
+            console.error('Relay submit failed', err);
+            showError(
+                'Не удалось отправить автоматически. Напишите нам в Telegram или позвоните: ' +
+                    phoneDisplay
+            );
+        } finally {
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = '🛠 Отправить заявку';
+            }
         }
     }
 
@@ -338,14 +377,13 @@ if (quickForm) {
 
     const actions = document.getElementById('flowActions');
     if (actions) {
-        actions.addEventListener('click', async (event) => {
+        actions.addEventListener('click', (event) => {
             const btn = event.target.closest('[data-action]');
             if (!btn) return;
 
             const action = btn.dataset.action;
             const data = readFields();
             const needContacts = action !== 'call';
-
             if (!validateForMessenger(data, needContacts)) return;
 
             const text = buildMessage(data);
@@ -354,47 +392,22 @@ if (quickForm) {
                 window.location.href = `tel:${phoneTel}`;
                 return;
             }
-
             if (action === 'whatsapp') {
                 window.open(`https://wa.me/${whatsapp}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
-                showSuccess();
                 return;
             }
-
             if (action === 'telegram') {
                 window.open(
                     `https://t.me/${telegramBot}?text=${encodeURIComponent(text)}`,
                     '_blank',
                     'noopener'
                 );
-                showSuccess();
-                return;
-            }
-
-            if (action === 'email') {
-                const original = btn.textContent;
-                btn.disabled = true;
-                btn.textContent = 'Отправка...';
-                try {
-                    await sendEmail(data);
-                    showSuccess();
-                } catch (err) {
-                    console.error(err);
-                    const mailto = `mailto:${emailTo}?subject=${encodeURIComponent(
-                        `Заявка rem-phone.ru: ${data.brand} — ${data.problem}`
-                    )}&body=${encodeURIComponent(text)}`;
-                    window.location.href = mailto;
-                    showSuccess();
-                } finally {
-                    btn.disabled = false;
-                    btn.textContent = original;
-                }
             }
         });
     }
 
     if (form) {
-        form.addEventListener('submit', (event) => event.preventDefault());
+        form.addEventListener('submit', handlePrimarySubmit);
     }
 
     const restart = document.getElementById('flowRestart');
@@ -415,6 +428,7 @@ if (quickForm) {
                 success.hidden = true;
                 success.classList.remove('show');
             }
+            hideError();
             if (flowBrand) flowBrand.value = '';
             if (flowProblem) flowProblem.value = '';
             goTo(1);

@@ -984,6 +984,32 @@ section {
     box-shadow: 0 12px 24px rgba(108,99,255,0.35);
 }
 
+.form-submit:disabled,
+.flow-submit-primary:disabled {
+    opacity: 0.75;
+    cursor: wait;
+    transform: none;
+    box-shadow: none;
+}
+
+.flow-submit-primary {
+    margin-bottom: 8px;
+    font-size: 16px;
+    padding: 16px;
+    min-height: 52px;
+}
+
+.flow-submit-error {
+    margin: 0 0 12px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #991b1b;
+    font-size: 14px;
+    line-height: 1.45;
+}
+
 .form-success {
     display: none;
     text-align: center;
@@ -1107,10 +1133,28 @@ section {
     margin: 4px 0 12px;
 }
 
+.flow-actions-label-secondary {
+    margin-top: 18px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted, #64748b);
+}
+
 .flow-actions {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
+}
+
+.flow-actions-secondary {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.flow-actions-secondary .action-btn {
+    font-size: 13px;
+    padding: 11px 8px;
+    min-height: 44px;
+    font-weight: 600;
 }
 
 .action-btn {
@@ -1141,7 +1185,6 @@ section {
 .action-call { background: #16a34a; }
 .action-wa { background: #25d366; }
 .action-tg { background: #229ed9; }
-.action-mail { background: #4f46e5; }
 
 .success-actions {
     margin-top: 18px;
@@ -1183,6 +1226,10 @@ section {
     }
 
     .flow-actions {
+        grid-template-columns: 1fr;
+    }
+
+    .flow-actions-secondary {
         grid-template-columns: 1fr;
     }
 }
