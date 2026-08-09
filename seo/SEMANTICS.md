@@ -56,12 +56,13 @@
 11. `/faq.html` — FAQPage schema
 12. `/brands/iphone.html` — следующий на усиление текста
 
-## Следующая волна (не делать тонкие doorway)
+## Следующая волна (в работе / сделано)
 
-Только после трафика на ядре:
-
-- `/cities/khabarovsk/` × услуга (screen/battery/water) — уникальный текст под район/срок
-- бренд × услуга × Хабаровск (например замена экрана iPhone)
+- [x] `/brands/iphone.html`, `samsung.html`, `xiaomi.html` — усилены
+- [x] `/cities/khabarovsk/screen|battery|water.html` — услуга×город
+- [x] `/brands/iphone-screen.html` — бренд×услуга×гео
+- [ ] samsung-screen / xiaomi-screen — после появления спроса в Вебмастере
+- [ ] Усилить Honor/Huawei полным текстом (сейчас meta + карточки проблем)
 
 ## Как проверить Wordstat
 

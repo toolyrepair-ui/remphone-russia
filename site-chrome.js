@@ -54,9 +54,12 @@
     '<div><h5>Услуги</h5>' +
     '<a href="' + base + 'services/screen.html">Замена экрана</a>' +
     '<a href="' + base + 'services/battery.html">Замена батареи</a>' +
+    '<a href="' + base + 'cities/khabarovsk.html">Хабаровск</a>' +
+    '<a href="' + base + 'brands/iphone.html">iPhone</a>' +
     '<a href="' + base + 'services/">Все услуги</a></div>' +
     '<div><h5>О проекте</h5>' +
     '<a href="' + base + 'about.html">О нас</a>' +
+    '<a href="' + base + 'brands/">Бренды</a>' +
     '<a href="' + base + 'reviews.html">Отзывы</a>' +
     '<a href="' + base + 'faq.html">FAQ</a>' +
     '<a href="' + base + 'contacts.html">Контакты</a></div>' +
