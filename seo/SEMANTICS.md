@@ -28,15 +28,16 @@
 | замена экрана iPhone Хабаровск | `/brands/iphone-screen.html` | done |
 | замена экрана Samsung Хабаровск | `/brands/samsung-screen.html` | done |
 | замена экрана Xiaomi Хабаровск | `/brands/xiaomi-screen.html` | done |
+| замена батареи iPhone Хабаровск | `/brands/iphone-battery.html` | done |
+| замена батареи Samsung Хабаровск | `/brands/samsung-battery.html` | done |
 | ремонт Honor Хабаровск | `/brands/honor.html` | done |
 | ремонт Huawei Хабаровск | `/brands/huawei.html` | done |
 
 ## Бэклог следующей волны
 
-1. `/brands/samsung-battery.html` — если будет спрос в Вебмастере  
-2. `/brands/iphone-battery.html`  
-3. `/cities/komsomolsk` × screen (только после трафика на city-страницу)  
-4. Blog: 1 инфо-статья/мес. → ссылка на услугу  
+1. `/brands/xiaomi-battery.html`  
+2. `/cities/komsomolsk` × screen (только после трафика на city-страницу)  
+3. Blog: 1 инфо-статья/мес. → ссылка на услугу  
 
 ## Off-geo (noindex)
 
