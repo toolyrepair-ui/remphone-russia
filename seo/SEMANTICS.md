@@ -1,71 +1,47 @@
 # Семантика и приоритетные посадочные — rem-phone.ru
 
-Собрано под локальный спрос Хабаровска и края (ориентир: подсказки Яндекса / Wordstat). Частотности уточняйте в Wordstat перед массовым наращиванием страниц.
+Собрано под локальный спрос Хабаровска и края. Частотности уточняйте в Wordstat.
 
 ## Кластеры
 
-### Гео (высокий приоритет)
+### Гео
 
-| Запрос | Посадочная |
-|--------|------------|
-| ремонт телефонов Хабаровск | `/`, `/cities/khabarovsk.html` |
-| ремонт айфонов Хабаровск | `/brands/iphone.html`, `/cities/khabarovsk.html` |
-| выезд мастера ремонт телефона Хабаровск | `/cities/khabarovsk.html` |
-| ремонт телефонов Комсомольск-на-Амуре | `/cities/komsomolsk.html` |
-| ремонт телефонов Амурск | `/cities/amursk.html` |
-| ремонт телефонов Хабаровский край | `/cities/khabarovsk_region.html` |
+| Запрос | Посадочная | Статус |
+|--------|------------|--------|
+| ремонт телефонов Хабаровск | `/`, `/cities/khabarovsk.html` | done |
+| ремонт телефонов КнА | `/cities/komsomolsk.html` | done |
+| ремонт телефонов Амурск | `/cities/amursk.html` | done |
+| Хабаровский край | `/cities/khabarovsk_region.html` | done |
 
-### Услуги + гео
+### Услуга × гео
 
-| Запрос | Посадочная |
-|--------|------------|
-| замена экрана iPhone Хабаровск | `/services/screen.html` |
-| замена батареи Хабаровск | `/services/battery.html` |
-| телефон после воды Хабаровск | `/services/water.html` |
-| телефон не включается Хабаровск | `/services/not-on.html` |
-| не заряжается телефон Хабаровск | `/services/charge.html` |
-| ремонт камеры телефона Хабаровск | `/services/camera.html` |
+| Запрос | Посадочная | Статус |
+|--------|------------|--------|
+| замена экрана Хабаровск | `/cities/khabarovsk/screen.html`, `/services/screen.html` | done |
+| замена батареи Хабаровск | `/cities/khabarovsk/battery.html` | done |
+| после воды Хабаровск | `/cities/khabarovsk/water.html` | done |
 
-### Бренд + гео
+### Бренд × услуга × гео
 
-| Запрос | Посадочная |
-|--------|------------|
-| ремонт Samsung Хабаровск | `/brands/samsung.html` |
-| ремонт Xiaomi Хабаровск | `/brands/xiaomi.html` |
-| ремонт Honor Хабаровск | `/brands/honor.html` |
+| Запрос | Посадочная | Статус |
+|--------|------------|--------|
+| замена экрана iPhone Хабаровск | `/brands/iphone-screen.html` | done |
+| замена экрана Samsung Хабаровск | `/brands/samsung-screen.html` | done |
+| замена экрана Xiaomi Хабаровск | `/brands/xiaomi-screen.html` | done |
+| ремонт Honor Хабаровск | `/brands/honor.html` | done |
+| ремонт Huawei Хабаровск | `/brands/huawei.html` | done |
 
-### Интент цены / гарантии
+## Бэклог следующей волны
 
-| Запрос | Посадочная |
-|--------|------------|
-| ремонт телефона Хабаровск цены | `/services/`, `/faq.html` |
-| гарантия ремонт телефона | `/faq.html`, `/` |
+1. `/brands/samsung-battery.html` — если будет спрос в Вебмастере  
+2. `/brands/iphone-battery.html`  
+3. `/cities/komsomolsk` × screen (только после трафика на city-страницу)  
+4. Blog: 1 инфо-статья/мес. → ссылка на услугу  
 
-## Приоритетный бэклог URL (8–12)
+## Off-geo (noindex)
 
-1. `/` — усилена
-2. `/cities/khabarovsk.html` — усилена
-3. `/cities/komsomolsk.html` — новая
-4. `/cities/amursk.html` — новая
-5. `/cities/khabarovsk_region.html` — новая
-6. `/services/screen.html` — усилена
-7. `/services/battery.html` — усилена
-8. `/services/water.html` — усилена
-9. `/services/not-on.html` — усилена
-10. `/services/charge.html` — усилена
-11. `/faq.html` — FAQPage schema
-12. `/brands/iphone.html` — следующий на усиление текста
+`cities/moscow|spb|kazan|novosibirsk|ekaterinburg|other` — не в sitemap, `noindex` обязателен (`node seo/audit-monthly.mjs`).
 
-## Следующая волна (в работе / сделано)
+## Wordstat
 
-- [x] `/brands/iphone.html`, `samsung.html`, `xiaomi.html` — усилены
-- [x] `/cities/khabarovsk/screen|battery|water.html` — услуга×город
-- [x] `/brands/iphone-screen.html` — бренд×услуга×гео
-- [ ] samsung-screen / xiaomi-screen — после появления спроса в Вебмастере
-- [ ] Усилить Honor/Huawei полным текстом (сейчас meta + карточки проблем)
-
-## Как проверить Wordstat
-
-1. https://wordstat.yandex.ru → регион Хабаровский край  
-2. Запросы из таблиц выше  
-3. Если частотность около нуля — не плодите отдельные URL
+См. [`MONTHLY_AUDIT.md`](MONTHLY_AUDIT.md).

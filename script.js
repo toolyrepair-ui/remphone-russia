@@ -211,14 +211,23 @@ if (quickForm) {
     }
 
     function readFields() {
+        const params = new URLSearchParams(window.location.search || '');
+        const utm = {};
+        ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach((k) => {
+            const v = params.get(k);
+            if (v) utm[k] = v;
+        });
+        const cityEl = document.getElementById('flowCity');
+        if (cityEl && !String(cityEl.value || '').trim()) cityEl.value = 'Хабаровск';
         return {
             brand: state.brand || (flowBrand && flowBrand.value) || '',
             problem: state.problem || (flowProblem && flowProblem.value) || '',
             name: ((document.getElementById('flowName') || {}).value || '').trim(),
             phone: ((document.getElementById('flowPhone') || {}).value || '').trim(),
             model: ((document.getElementById('flowModel') || {}).value || '').trim(),
-            city: ((document.getElementById('flowCity') || {}).value || '').trim(),
+            city: ((cityEl || {}).value || 'Хабаровск').trim() || 'Хабаровск',
             comment: ((document.getElementById('flowComment') || {}).value || '').trim(),
+            utm,
         };
     }
 
@@ -297,10 +306,12 @@ if (quickForm) {
                 brand: data.brand,
                 model: data.model || '',
                 problem: data.problem,
-                city: data.city || '',
+                city: data.city || 'Хабаровск',
                 comment: data.comment || '',
                 source: 'site',
                 client_request_id: 'site-' + String(data.phone || '').replace(/\D/g, '') + '-' + Date.now(),
+                utm: data.utm || {},
+                page: typeof location !== 'undefined' ? location.pathname : '',
             }),
         });
 

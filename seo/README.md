@@ -29,9 +29,21 @@ Workflow: `.github/workflows/seo-health.yml`
 
 | Файл | Назначение |
 |------|------------|
+| `seo/AGENT_RITUAL.md` | Еженедельный ритуал агента |
+| `seo/LEAD_PIPELINE.md` | Чеклист выката заявок сайт→бот |
+| `seo/MONTHLY_AUDIT.md` | Ежемесячный аудит |
 | `seo/CHECKLIST.md` | Чеклист релиза страницы |
 | `seo/SEMANTICS.md` | Кластеры и приоритет URL |
 | `seo/WEBMASTER_METRICA.md` | Вебмастер / GSC / Метрика |
 | `seo/YANDEX_BUSINESS.md` | Карточка Яндекс Бизнес |
 | `seo/WEEKLY_REPORT.md` | Шаблон недельного отчёта |
 | `seo/pages.json` | Источник правды для sitemap |
+
+## Автозапуск недели / месяца
+
+```bash
+node seo/weekly-run.mjs
+node seo/weekly-run.mjs --live
+node seo/audit-monthly.mjs
+node seo/audit-monthly.mjs --fix-noindex
+```
