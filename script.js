@@ -475,7 +475,7 @@ if (quickForm) {
         link('preconnect', 'https://fonts.gstatic.com', { crossOrigin: 'anonymous' });
         link(
             'stylesheet',
-            'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap'
+            'https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Space+Grotesk:wght@600;700&display=swap'
         );
     }
 
@@ -590,6 +590,23 @@ if (quickForm) {
         });
     }
 
+    function preferProblemWebp() {
+        document.querySelectorAll('img[src*="assets/problems/"]').forEach(function (img) {
+            var src = img.getAttribute('src') || '';
+            if (!/\.png(\?|$)/i.test(src)) return;
+            var webp = src.replace(/\.png(\?|$)/i, '.webp$1');
+            var probe = new Image();
+            probe.onload = function () {
+                img.src = webp;
+            };
+            probe.src = webp;
+            if (!img.getAttribute('width')) img.setAttribute('width', '76');
+            if (!img.getAttribute('height')) img.setAttribute('height', '76');
+            img.decoding = 'async';
+            if (!img.loading) img.loading = 'lazy';
+        });
+    }
+
     function lazyBelowFoldImages() {
         var imgs = document.querySelectorAll('img:not([loading])');
         imgs.forEach(function (img, i) {
@@ -604,11 +621,13 @@ if (quickForm) {
         document.addEventListener('DOMContentLoaded', function () {
             bindMeshCursor();
             bindRepairsCounter();
+            preferProblemWebp();
             lazyBelowFoldImages();
         });
     } else {
         bindMeshCursor();
         bindRepairsCounter();
+        preferProblemWebp();
         lazyBelowFoldImages();
     }
 })();

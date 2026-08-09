@@ -185,9 +185,28 @@
     });
   }
 
+  function scheduleBoot() {
+    var run = function () {
+      boot();
+    };
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(run, { timeout: 2500 });
+    } else {
+      window.setTimeout(run, 1200);
+    }
+  }
+
+  function afterFirstPaint() {
+    if (document.readyState === 'complete') {
+      scheduleBoot();
+    } else {
+      window.addEventListener('load', scheduleBoot, { once: true });
+    }
+  }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', boot);
+    document.addEventListener('DOMContentLoaded', afterFirstPaint);
   } else {
-    boot();
+    afterFirstPaint();
   }
 })();
