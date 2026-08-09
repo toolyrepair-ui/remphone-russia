@@ -86,9 +86,21 @@
     if (f) f.outerHTML = footerHtml;
     if (fl) fl.outerHTML = floatHtml;
 
-    var analytics = document.createElement('script');
-    analytics.src = asset('analytics.js');
-    document.body.appendChild(analytics);
+    function loadAnalytics() {
+      if (document.querySelector('script[src*="analytics.js"]')) return;
+      var analytics = document.createElement('script');
+      analytics.src = asset('analytics.js');
+      document.body.appendChild(analytics);
+    }
+    if (!window.REMPHONE_CONFIG) {
+      var config = document.createElement('script');
+      config.src = asset('config.js');
+      config.onload = loadAnalytics;
+      config.onerror = loadAnalytics;
+      document.body.appendChild(config);
+    } else {
+      loadAnalytics();
+    }
 
     var burger = document.getElementById('burger');
     var nav = document.getElementById('nav');
