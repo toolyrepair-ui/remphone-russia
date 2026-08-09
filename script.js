@@ -184,6 +184,7 @@ if (quickForm) {
     const summaryProblem = document.getElementById('summaryProblem');
     const flowBrand = document.getElementById('flowBrand');
     const flowProblem = document.getElementById('flowProblem');
+    const flowPartPreference = document.getElementById('flowPartPreference');
     const form = document.getElementById('flowRepairForm');
     const success = document.getElementById('flowFormSuccess');
     const submitBtn = document.getElementById('flowSubmitBtn');
@@ -222,6 +223,7 @@ if (quickForm) {
         return {
             brand: state.brand || (flowBrand && flowBrand.value) || '',
             problem: state.problem || (flowProblem && flowProblem.value) || '',
+            part_preference: (flowPartPreference && flowPartPreference.value) || '',
             name: ((document.getElementById('flowName') || {}).value || '').trim(),
             phone: ((document.getElementById('flowPhone') || {}).value || '').trim(),
             model: ((document.getElementById('flowModel') || {}).value || '').trim(),
@@ -232,6 +234,8 @@ if (quickForm) {
     }
 
     function buildMessage(data) {
+        const prefMap = { original: 'оригинал', analog: 'аналог' };
+        const pref = prefMap[data.part_preference] || data.part_preference || '—';
         return [
             'Заявка на ремонт rem-phone.ru',
             '',
@@ -240,6 +244,7 @@ if (quickForm) {
             `Марка: ${data.brand || '—'}`,
             `Модель: ${data.model || '—'}`,
             `Поломка: ${data.problem || '—'}`,
+            `Деталь: ${pref}`,
             `Город: ${data.city || '—'}`,
             `Комментарий: ${data.comment || '—'}`,
         ].join('\n');
@@ -306,6 +311,7 @@ if (quickForm) {
                 brand: data.brand,
                 model: data.model || '',
                 problem: data.problem,
+                part_preference: data.part_preference || '',
                 city: data.city || 'Хабаровск',
                 comment: data.comment || '',
                 source: 'site',
@@ -446,9 +452,48 @@ if (quickForm) {
             hideError();
             if (flowBrand) flowBrand.value = '';
             if (flowProblem) flowProblem.value = '';
+            if (flowPartPreference) flowPartPreference.value = '';
             goTo(1);
         });
     }
+
+    window.REMPHONE_APPLY_DISPLAY_PREFERENCE = function (opts) {
+        opts = opts || {};
+        const brand = opts.brand || '';
+        const preference = opts.part_preference || '';
+        const problem = opts.problem || 'Разбит экран';
+
+        state.brand = brand;
+        state.problem = problem;
+        if (flowBrand) flowBrand.value = brand;
+        if (flowProblem) flowProblem.value = problem;
+        if (flowPartPreference) flowPartPreference.value = preference;
+        if (brandLabel) brandLabel.textContent = brand;
+        if (summaryBrand) summaryBrand.textContent = brand || '—';
+        if (summaryProblem) summaryProblem.textContent = problem || '—';
+
+        document.querySelectorAll('#stepBrand .flow-card').forEach((c) => {
+            const on = (c.dataset.brand || '') === brand;
+            c.classList.toggle('is-selected', on);
+            c.classList.toggle('card-selected', on);
+        });
+        document.querySelectorAll('#stepProblem .flow-card').forEach((c) => {
+            const on = (c.dataset.problem || '') === problem;
+            c.classList.toggle('is-selected', on);
+            c.classList.toggle('card-selected', on);
+        });
+
+        if (form) {
+            form.hidden = false;
+            form.classList.remove('show');
+        }
+        if (success) {
+            success.hidden = true;
+            success.classList.remove('show');
+        }
+        hideError();
+        goTo(3);
+    };
 })();
 
 /* ——— Visual: fonts preconnect, mesh cursor, repairs counter ——— */

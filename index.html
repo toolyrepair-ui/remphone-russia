@@ -313,6 +313,7 @@
             <form class="flow-form" id="flowRepairForm">
                 <input type="hidden" id="flowBrand" name="brand" value="">
                 <input type="hidden" id="flowProblem" name="problem" value="">
+                <input type="hidden" id="flowPartPreference" name="part_preference" value="">
                 <div class="form-group">
                     <label for="flowName">Ваше имя *</label>
                     <input type="text" id="flowName" name="name" placeholder="Алексей" required autocomplete="name">
@@ -455,6 +456,61 @@
             <a href="brands/iphone-screen.html">Экран iPhone</a> ·
             <a href="cities/komsomolsk.html">КнА</a>
         </p>
+    </div>
+</section>
+
+<section class="display-compare reveal" id="displayCompare" data-config="displays-config.json" hidden aria-label="Сравнение оригинального и аналогового дисплея">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-title">Оригинал или аналог?</h2>
+            <p class="section-subtitle">Сравните варианты дисплея без давления — гарантия одинаковая</p>
+        </div>
+
+        <div class="dc-tabs" data-dc-tabs role="tablist" aria-label="Бренд"></div>
+
+        <div class="dc-slider-wrap">
+            <div class="dc-slider-labels">
+                <span data-dc-side-orig>Оригинал</span>
+                <span data-dc-side-analog>Аналог</span>
+            </div>
+            <input
+                class="dc-slider"
+                data-dc-slider
+                type="range"
+                min="0"
+                max="100"
+                value="50"
+                aria-label="Соотношение оригинал и аналог"
+            >
+            <p class="dc-slider-hint" data-dc-label>Нейтральная позиция</p>
+        </div>
+
+        <div class="dc-card">
+            <div class="dc-card-grid">
+                <div class="dc-metric">
+                    <span class="dc-metric-label">Цена</span>
+                    <span class="dc-metric-value" data-dc-price>от —₽</span>
+                </div>
+                <div class="dc-metric">
+                    <span class="dc-metric-label">Средний срок службы</span>
+                    <span class="dc-metric-value dc-metric-value-sm" data-dc-lifespan>~— мес.</span>
+                </div>
+            </div>
+            <div class="dc-features-block">
+                <span class="dc-metric-label">Особенности</span>
+                <ul class="dc-features" data-dc-features></ul>
+            </div>
+            <div class="dc-warranty" aria-label="Гарантия">
+                <span class="dc-warranty-label">Гарантия REMPHONE</span>
+                <strong class="dc-warranty-value" data-dc-warranty>90 дней</strong>
+                <span class="dc-warranty-note">Одинаково для оригинала и аналога</span>
+            </div>
+        </div>
+
+        <div class="dc-cta">
+            <button type="button" class="btn-primary" data-dc-cta="original">Хочу оригинал</button>
+            <button type="button" class="btn-secondary" data-dc-cta="analog">Устроит аналог</button>
+        </div>
     </div>
 </section>
 
@@ -647,6 +703,7 @@
 
 <script src="config.js"></script>
 <script src="script.js"></script>
+<script src="displays-compare.js"></script>
 <script src="analytics.js"></script>
 <!-- Yandex.Metrika counter noscript -->
 <noscript><div><img src="https://mc.yandex.ru/watch/110956593" style="position:absolute; left:-9999px;" alt="" /></div></noscript>

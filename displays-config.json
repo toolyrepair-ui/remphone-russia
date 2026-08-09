@@ -1,0 +1,88 @@
+{
+  "_comment": "Редактируйте цены и срок службы без правки кода. price и lifespan — числа (для слайдера). features — тексты.",
+  "warranty": "90 дней",
+  "brands": {
+    "iphone": {
+      "label": "iPhone",
+      "original": {
+        "price": 8500,
+        "lifespan": 36,
+        "lifespanUnit": "мес.",
+        "features": [
+          "True Tone работает полностью",
+          "Face ID без рисков конфликта",
+          "Точная калибровка цвета"
+        ]
+      },
+      "analog": {
+        "price": 4500,
+        "lifespan": 18,
+        "lifespanUnit": "мес.",
+        "features": [
+          "Возможна просадка яркости 15–20%",
+          "На моделях X+ может показывать «Неизвестная деталь» в настройках",
+          "Более холодный оттенок экрана"
+        ]
+      }
+    },
+    "samsung": {
+      "label": "Samsung",
+      "original": {
+        "price": 7800,
+        "lifespan": 36,
+        "lifespanUnit": "мес.",
+        "features": [
+          "AMOLED-матрица сохраняется",
+          "Точная цветопередача"
+        ]
+      },
+      "analog": {
+        "price": 3800,
+        "lifespan": 18,
+        "lifespanUnit": "мес.",
+        "features": [
+          "Более холодный оттенок",
+          "Чуть хуже отклик сенсора на бюджетных копиях"
+        ]
+      }
+    },
+    "xiaomi": {
+      "label": "Xiaomi",
+      "original": {
+        "price": 5200,
+        "lifespan": 30,
+        "lifespanUnit": "мес.",
+        "features": [
+          "Заводское качество матрицы"
+        ]
+      },
+      "analog": {
+        "price": 2800,
+        "lifespan": 20,
+        "lifespanUnit": "мес.",
+        "features": [
+          "Минимальная разница в качестве с оригиналом среди всех брендов"
+        ]
+      }
+    },
+    "honor": {
+      "label": "Honor",
+      "original": {
+        "price": 5600,
+        "lifespan": 30,
+        "lifespanUnit": "мес.",
+        "features": [
+          "Ограниченная доступность из-за цепочек поставок"
+        ]
+      },
+      "analog": {
+        "price": 3000,
+        "lifespan": 18,
+        "lifespanUnit": "мес.",
+        "features": [
+          "Основной вариант при дефиците оригинала"
+        ]
+      }
+    }
+  }
+}

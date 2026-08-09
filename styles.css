@@ -2213,6 +2213,204 @@ section {
     .about-grid, .photo-placeholders { grid-template-columns: 1fr; }
 }
 
+/* —— Display compare: оригинал vs аналог —— */
+.display-compare {
+    --slider-position: 50;
+    padding: 72px 0;
+    background:
+        radial-gradient(ellipse 50% 40% at 20% 0%, rgba(108, 99, 255, 0.08), transparent 60%),
+        radial-gradient(ellipse 45% 35% at 90% 20%, rgba(249, 115, 22, 0.06), transparent 55%),
+        var(--gray);
+}
+
+.display-compare .container {
+    max-width: 760px;
+}
+
+.dc-tabs {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    padding: 4px 2px 16px;
+    margin: 8px 0 8px;
+}
+
+.dc-tab {
+    flex: 0 0 auto;
+    border: 1px solid var(--border);
+    background: #fff;
+    color: var(--text);
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 14px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+
+.dc-tab:hover {
+    border-color: rgba(108, 99, 255, 0.35);
+}
+
+.dc-tab.is-active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+}
+
+.dc-slider-wrap {
+    margin: 8px 0 24px;
+}
+
+.dc-slider-labels {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--dark);
+    margin-bottom: 10px;
+}
+
+.dc-slider {
+    width: 100%;
+    accent-color: var(--primary);
+    height: 28px;
+    cursor: pointer;
+}
+
+.dc-slider-hint {
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-light);
+    margin-top: 8px;
+}
+
+.dc-card {
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow);
+}
+
+.dc-card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.dc-metric-label {
+    display: block;
+    font-size: 13px;
+    color: var(--text-light);
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.dc-metric-value {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.6rem, 4vw, 2.1rem);
+    letter-spacing: -0.03em;
+    color: var(--dark);
+    line-height: 1.25;
+    transition: opacity 160ms ease;
+}
+
+.dc-metric-value-sm {
+    font-size: clamp(1.25rem, 3vw, 1.6rem);
+}
+
+.dc-metric-value.is-updating,
+.dc-features.is-updating {
+    opacity: 0.35;
+}
+
+.dc-features-block {
+    margin-bottom: 20px;
+}
+
+.dc-features {
+    margin: 8px 0 0 18px;
+    color: var(--text);
+    line-height: 1.55;
+    font-family: var(--font-body);
+    font-size: 15px;
+}
+
+.dc-features li + li {
+    margin-top: 6px;
+}
+
+.dc-warranty {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 8px 14px;
+    padding: 14px 16px;
+    border-radius: var(--radius-sm);
+    background: var(--primary-light);
+    border: 1px solid rgba(108, 99, 255, 0.18);
+}
+
+.dc-warranty-label {
+    font-size: 13px;
+    color: var(--primary-dark);
+    font-weight: 500;
+    width: 100%;
+}
+
+.dc-warranty-value {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.35rem;
+    color: var(--dark);
+}
+
+.dc-warranty-note {
+    font-size: 13px;
+    color: var(--text-light);
+}
+
+.dc-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 24px;
+}
+
+.dc-cta .btn-primary,
+.dc-cta .btn-secondary {
+    min-width: 180px;
+}
+
+@media (max-width: 640px) {
+    .dc-card-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    .dc-cta {
+        flex-direction: column;
+    }
+    .dc-cta .btn-primary,
+    .dc-cta .btn-secondary {
+        width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .dc-metric-value,
+    .dc-tab {
+        transition: none;
+    }
+}
+
 /* —— Visual enhance: glass on mobile, reduced motion —— */
 .service-icon {
     font-size: 44px;
