@@ -10,6 +10,5 @@ window.REMPHONE_CONFIG = {
     email: 'toolyrepair@gmail.com',
     ownerTelegramId: '7553859784',
     relayUrl: 'https://rem-phone-relay.toolyrepair.workers.dev',
-    /* Числовой ID счётчика из metrika.yandex.ru — после создания вставьте сюда */
-    metrikaId: null
+    metrikaId: 110956593
 };
