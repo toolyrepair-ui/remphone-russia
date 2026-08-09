@@ -1,4 +1,6 @@
 /* Reset и базовые стили */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -22,6 +24,22 @@
     --shadow: 0 1px 3px rgba(0,0,0,0.05), 0 6px 20px rgba(0,0,0,0.04);
     --shadow-hover: 0 10px 30px rgba(0,0,0,0.08);
     --transition: 200ms ease;
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --mesh-x: 50%;
+    --mesh-y: 30%;
+}
+
+@property --mesh-x {
+    syntax: '<percentage>';
+    inherits: true;
+    initial-value: 50%;
+}
+
+@property --mesh-y {
+    syntax: '<percentage>';
+    inherits: true;
+    initial-value: 30%;
 }
 
 html {
@@ -29,11 +47,39 @@ html {
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family: var(--font-body);
+    font-weight: 400;
     line-height: 1.6;
     color: var(--text);
     background: var(--bg);
     -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3,
+.logo,
+.section-title,
+.flow-intro h1,
+.hero-stat h3,
+.trust-bar-text h4,
+.about-stat h3,
+.stat-count,
+.flow-step-num {
+    font-family: var(--font-display);
+    font-weight: 600;
+}
+
+h1, .flow-intro h1, .hero h1 {
+    font-weight: 700;
+    letter-spacing: -0.03em;
+}
+
+.btn-primary,
+.btn-secondary,
+.header-btn,
+.faq-question,
+.nav a {
+    font-family: var(--font-body);
+    font-weight: 500;
 }
 
 .container {
@@ -62,7 +108,8 @@ body {
 
 .logo {
     font-size: 22px;
-    font-weight: 800;
+    font-weight: 700;
+    font-family: var(--font-display);
     color: var(--dark);
     text-decoration: none;
     letter-spacing: -0.3px;
@@ -184,13 +231,24 @@ body {
     transition: transform var(--transition), opacity var(--transition);
 }
 
-/* Hero */
+/* Hero — mesh-градиент + зерно */
 .hero {
-    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    --mesh-x: 52%;
+    --mesh-y: 28%;
+    background-color: #f4f6fb;
+    background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E"),
+        radial-gradient(ellipse 58% 48% at var(--mesh-x) var(--mesh-y), rgba(108, 99, 255, 0.32), transparent 58%),
+        radial-gradient(ellipse 48% 42% at calc(var(--mesh-x) + 22%) calc(var(--mesh-y) + 18%), rgba(99, 102, 241, 0.2), transparent 55%),
+        radial-gradient(ellipse 42% 38% at calc(var(--mesh-x) - 24%) calc(var(--mesh-y) + 32%), rgba(139, 92, 246, 0.16), transparent 52%),
+        linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
+    background-blend-mode: soft-light, normal, normal, normal, normal;
+    background-size: 180px 180px, auto, auto, auto, auto;
     padding: 80px 0 60px;
     position: relative;
     overflow: hidden;
     border-bottom: 1px solid var(--border);
+    transition: --mesh-x 0.45s ease-out, --mesh-y 0.45s ease-out;
 }
 
 .hero-grid {
@@ -230,11 +288,12 @@ body {
 }
 
 .hero h1 {
-    font-size: 52px;
+    font-size: clamp(2rem, 5vw, 3.35rem);
     margin-bottom: 18px;
-    line-height: 1.15;
-    letter-spacing: -0.6px;
+    line-height: 1.18;
+    letter-spacing: -0.04em;
     color: var(--dark);
+    font-weight: 700;
 }
 
 .hero h1 span {
@@ -255,10 +314,12 @@ body {
 }
 
 .hero-stat h3 {
-    font-size: 28px;
+    font-size: clamp(1.5rem, 3vw, 2rem);
     color: var(--dark);
     margin-bottom: 4px;
-    letter-spacing: -0.3px;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    line-height: 1.25;
 }
 
 .hero-stat p {
@@ -471,14 +532,27 @@ body {
 }
 
 .trust-bar-text h4 {
-    font-size: 16px;
+    font-size: 17px;
     margin-bottom: 2px;
     color: var(--dark);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
 }
 
 .trust-bar-text p {
     font-size: 13px;
     color: var(--text-light);
+    font-weight: 400;
+}
+
+.trust-bar-text .stat-count {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.15em;
+    letter-spacing: -0.02em;
+    line-height: 1.35;
+    color: var(--primary-dark);
 }
 
 /* Sections */
@@ -515,13 +589,16 @@ section {
 }
 
 .service-card {
-    background: #fff;
-    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.65);
     border-radius: var(--radius);
     padding: 26px;
     text-decoration: none;
     color: var(--text);
-    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition), background var(--transition);
     display: block;
     position: relative;
     overflow: hidden;
@@ -530,18 +607,23 @@ section {
 .service-card:hover {
     transform: translateY(-4px);
     box-shadow: var(--shadow-hover);
-    border-color: var(--primary);
+    border-color: rgba(108, 99, 255, 0.35);
+    background: rgba(255, 255, 255, 0.88);
 }
 
-.service-icon {
-    font-size: 44px;
-    margin-bottom: 14px;
+.service-card h4,
+.service-card p,
+.service-card .service-price {
+    position: relative;
+    z-index: 1;
 }
 
 .service-card h4 {
     font-size: 18px;
     margin-bottom: 8px;
     color: var(--dark);
+    font-family: var(--font-display);
+    font-weight: 600;
 }
 
 .service-card p {
@@ -1586,10 +1668,19 @@ section {
 /* ========== Repair flow (марка → поломка → заявка) ========== */
 .repair-flow {
     padding: 36px 0 56px;
-    background:
-        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(108, 99, 255, 0.12), transparent),
+    --mesh-x: 50%;
+    --mesh-y: 22%;
+    background-color: #f4f6fb;
+    background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E"),
+        radial-gradient(ellipse 70% 55% at var(--mesh-x) var(--mesh-y), rgba(108, 99, 255, 0.26), transparent 60%),
+        radial-gradient(ellipse 50% 40% at calc(var(--mesh-x) + 28%) calc(var(--mesh-y) + 30%), rgba(99, 102, 241, 0.16), transparent 55%),
+        radial-gradient(ellipse 45% 35% at calc(var(--mesh-x) - 26%) calc(var(--mesh-y) + 40%), rgba(139, 92, 246, 0.14), transparent 50%),
         linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+    background-blend-mode: soft-light, normal, normal, normal, normal;
+    background-size: 180px 180px, auto, auto, auto, auto;
     min-height: calc(100vh - 72px);
+    transition: --mesh-x 0.45s ease-out, --mesh-y 0.45s ease-out;
 }
 
 .flow-intro {
@@ -1599,11 +1690,12 @@ section {
 }
 
 .flow-intro h1 {
-    font-size: clamp(1.75rem, 5vw, 2.75rem);
-    line-height: 1.15;
-    letter-spacing: -0.03em;
+    font-size: clamp(1.85rem, 5vw, 3rem);
+    line-height: 1.18;
+    letter-spacing: -0.04em;
     color: var(--dark);
     margin: 14px 0 12px;
+    font-weight: 700;
 }
 
 .flow-intro h1 span {
@@ -2087,4 +2179,38 @@ section {
 @media (max-width: 900px) {
     .contact-channels { grid-template-columns: repeat(2, 1fr) !important; }
     .about-grid, .photo-placeholders { grid-template-columns: 1fr; }
+}
+
+/* —— Visual enhance: glass on mobile, reduced motion —— */
+.service-icon {
+    font-size: 44px;
+    margin-bottom: 14px;
+    position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 768px) {
+    .hero,
+    .repair-flow {
+        background-size: 120px 120px, auto, auto, auto, auto;
+    }
+    .service-card {
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        background: rgba(255, 255, 255, 0.88);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    .hero,
+    .repair-flow {
+        transition: none;
+    }
+    .hero-badge-dot,
+    .stat-count {
+        animation: none !important;
+    }
 }

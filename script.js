@@ -450,3 +450,151 @@ if (quickForm) {
         });
     }
 })();
+
+/* ——— Visual: fonts preconnect, mesh cursor, repairs counter ——— */
+(function () {
+    if (window.__REMPHONE_VISUAL__) return;
+    window.__REMPHONE_VISUAL__ = true;
+
+    function injectFonts() {
+        if (document.querySelector('link[data-rp-fonts]')) return;
+        var head = document.head;
+        function link(rel, href, extra) {
+            var el = document.createElement('link');
+            el.rel = rel;
+            el.href = href;
+            el.setAttribute('data-rp-fonts', '1');
+            if (extra) {
+                Object.keys(extra).forEach(function (k) {
+                    el[k] = extra[k];
+                });
+            }
+            head.appendChild(el);
+        }
+        link('preconnect', 'https://fonts.googleapis.com');
+        link('preconnect', 'https://fonts.gstatic.com', { crossOrigin: 'anonymous' });
+        /* stylesheet уже через @import в styles.css (display=swap) */
+    }
+
+    function reducedMotion() {
+        return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    }
+
+    function canHoverMesh() {
+        return (
+            window.matchMedia &&
+            window.matchMedia('(hover: hover) and (pointer: fine)').matches &&
+            !reducedMotion()
+        );
+    }
+
+    function bindMeshCursor() {
+        if (!canHoverMesh()) return;
+        var targets = document.querySelectorAll('.hero, .repair-flow');
+        if (!targets.length) return;
+
+        var pending = null;
+        var lastX = 50;
+        var lastY = 30;
+
+        function apply() {
+            pending = null;
+            for (var i = 0; i < targets.length; i++) {
+                targets[i].style.setProperty('--mesh-x', lastX.toFixed(2) + '%');
+                targets[i].style.setProperty('--mesh-y', lastY.toFixed(2) + '%');
+            }
+        }
+
+        document.addEventListener(
+            'mousemove',
+            function (e) {
+                lastX = (e.clientX / Math.max(window.innerWidth, 1)) * 100;
+                lastY = (e.clientY / Math.max(window.innerHeight, 1)) * 100;
+                if (pending != null) return;
+                pending = window.requestAnimationFrame(apply);
+            },
+            { passive: true }
+        );
+    }
+
+    function animateCount(el, target, suffix, duration) {
+        var start = performance.now();
+        function frame(now) {
+            var t = Math.min(1, (now - start) / duration);
+            var eased = 1 - Math.pow(1 - t, 3);
+            el.textContent = Math.round(target * eased) + suffix;
+            if (t < 1) requestAnimationFrame(frame);
+            else el.textContent = target + suffix;
+        }
+        requestAnimationFrame(frame);
+    }
+
+    function bindRepairsCounter() {
+        var target =
+            (window.REMPHONE_CONFIG && Number(window.REMPHONE_CONFIG.repairsCount)) || 500;
+        var nodes = document.querySelectorAll('.trust-bar-text p, .about-stat h3, .hero-stat h3');
+        var candidates = [];
+
+        nodes.forEach(function (node) {
+            var text = (node.textContent || '').trim();
+            var m = text.match(/^(\d+)\+(\s*.*)$/);
+            if (!m) return;
+            if (node.getAttribute('data-count-ready')) return;
+            node.setAttribute('data-count-ready', '1');
+            var rest = m[2] || '';
+            var span = document.createElement('span');
+            span.className = 'stat-count';
+            span.setAttribute('data-target', String(target));
+            span.textContent = reducedMotion() ? target + '+' : '0+';
+            node.textContent = '';
+            node.appendChild(span);
+            if (rest) node.appendChild(document.createTextNode(rest));
+            candidates.push(span);
+        });
+
+        if (!candidates.length) return;
+
+        if (reducedMotion()) {
+            candidates.forEach(function (span) {
+                span.textContent = target + '+';
+            });
+            return;
+        }
+
+        if (!('IntersectionObserver' in window)) {
+            candidates.forEach(function (span) {
+                animateCount(span, target, '+', 1200);
+            });
+            return;
+        }
+
+        var io = new IntersectionObserver(
+            function (entries) {
+                entries.forEach(function (entry) {
+                    if (!entry.isIntersecting) return;
+                    var span = entry.target;
+                    if (span.getAttribute('data-counted')) return;
+                    span.setAttribute('data-counted', '1');
+                    animateCount(span, target, '+', 1300);
+                    io.unobserve(span);
+                });
+            },
+            { threshold: 0.35 }
+        );
+
+        candidates.forEach(function (span) {
+            io.observe(span);
+        });
+    }
+
+    injectFonts();
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function () {
+            bindMeshCursor();
+            bindRepairsCounter();
+        });
+    } else {
+        bindMeshCursor();
+        bindRepairsCounter();
+    }
+})();
