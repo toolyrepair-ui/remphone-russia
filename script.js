@@ -299,7 +299,8 @@ if (quickForm) {
                 problem: data.problem,
                 city: data.city || '',
                 comment: data.comment || '',
-                source: 'rem-phone.ru',
+                source: 'site',
+                client_request_id: 'site-' + String(data.phone || '').replace(/\D/g, '') + '-' + Date.now(),
             }),
         });
 
