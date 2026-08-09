@@ -9,5 +9,7 @@ window.REMPHONE_CONFIG = {
     telegramBot: 'REMPHONE_RUSSIA_Bot',
     email: 'toolyrepair@gmail.com',
     ownerTelegramId: '7553859784',
-    relayUrl: 'https://rem-phone-relay.toolyrepair.workers.dev'
+    relayUrl: 'https://rem-phone-relay.toolyrepair.workers.dev',
+    /* Числовой ID счётчика из metrika.yandex.ru — после создания вставьте сюда */
+    metrikaId: null
 };

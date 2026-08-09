@@ -83,6 +83,10 @@
     if (f) f.outerHTML = footerHtml;
     if (fl) fl.outerHTML = floatHtml;
 
+    var analytics = document.createElement('script');
+    analytics.src = asset('analytics.js');
+    document.body.appendChild(analytics);
+
     var burger = document.getElementById('burger');
     var nav = document.getElementById('nav');
     if (burger && nav) {

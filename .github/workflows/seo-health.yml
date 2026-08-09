@@ -1,0 +1,35 @@
+/*
+name: SEO health-check
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+  push:
+    paths:
+      - '**/*.html'
+      - 'seo/**'
+      - 'sitemap.xml'
+      - 'robots.txt'
+jobs:
+  seo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Generate sitemap
+        run: node seo/generate-sitemap.mjs
+      - name: Fail if sitemap drifted
+        run: |
+          if ! git diff --quiet -- sitemap.xml; then
+            echo "sitemap.xml is out of date. Run: node seo/generate-sitemap.mjs"
+            git diff -- sitemap.xml
+            exit 1
+          fi
+      - name: Local health-check
+        run: node seo/health-check.mjs
+      - name: Live health-check
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        run: node seo/health-check.mjs --live
+        continue-on-error: true

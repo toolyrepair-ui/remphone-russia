@@ -1,10 +1,12 @@
 User-agent: *
 Allow: /
+
 Disallow: /api/
-
-Sitemap: https://rem-phone.ru/sitemap.xml
-
-# Запрещаем индексацию служебных страниц
 Disallow: /temp/
 Disallow: /backup/
+Disallow: /seo/
 Disallow: /*.json$
+Disallow: /.github/
+
+Host: https://rem-phone.ru
+Sitemap: https://rem-phone.ru/sitemap.xml

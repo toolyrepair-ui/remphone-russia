@@ -256,6 +256,9 @@ if (quickForm) {
             success.hidden = false;
             success.classList.add('show');
         }
+        if (typeof window.REMPHONE_REACH === 'function') {
+            window.REMPHONE_REACH('form_submit');
+        }
     }
 
     function showError(message) {
