@@ -473,7 +473,10 @@ if (quickForm) {
         }
         link('preconnect', 'https://fonts.googleapis.com');
         link('preconnect', 'https://fonts.gstatic.com', { crossOrigin: 'anonymous' });
-        /* stylesheet уже через @import в styles.css (display=swap) */
+        link(
+            'stylesheet',
+            'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap'
+        );
     }
 
     function reducedMotion() {
@@ -587,14 +590,25 @@ if (quickForm) {
         });
     }
 
+    function lazyBelowFoldImages() {
+        var imgs = document.querySelectorAll('img:not([loading])');
+        imgs.forEach(function (img, i) {
+            if (i < 2) return;
+            img.loading = 'lazy';
+            img.decoding = 'async';
+        });
+    }
+
     injectFonts();
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', function () {
             bindMeshCursor();
             bindRepairsCounter();
+            lazyBelowFoldImages();
         });
     } else {
         bindMeshCursor();
         bindRepairsCounter();
+        lazyBelowFoldImages();
     }
 })();
