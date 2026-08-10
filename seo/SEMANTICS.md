@@ -39,6 +39,8 @@
 | замена экрана Владивосток | `/vladivostok/screen.html` | done |
 | замена батареи Владивосток | `/vladivostok/battery.html` | done |
 | после воды Владивосток | `/vladivostok/water.html` | done |
+| установка приложений (APK / вне магазинов) | `/services/apps.html` (+ 3 города) | done |
+| замена корпуса / задней крышки | `/services/body.html` (+ 3 города) | done |
 | не включается / зарядка / камера × 3 города | city + `/services/*` | backlog позже |
 
 ### Бренд × услуга × гео

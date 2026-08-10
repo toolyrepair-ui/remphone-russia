@@ -55,6 +55,18 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://rem-phone.ru/services/apps.html</loc>
+    <lastmod>2026-08-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://rem-phone.ru/services/body.html</loc>
+    <lastmod>2026-08-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://rem-phone.ru/cities/</loc>
     <lastmod>2026-08-10</lastmod>
     <changefreq>weekly</changefreq>
