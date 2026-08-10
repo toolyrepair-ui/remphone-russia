@@ -44,7 +44,7 @@
     '<div class="footer-grid">' +
     '<div>' +
     '<div class="logo" style="color:#fff;margin-bottom:8px">REMPHONE <span>RUSSIA</span></div>' +
-    '<p style="font-size:13px;color:rgba(255,255,255,0.4)">Ремонт телефонов в Хабаровске и Хабаровском крае.</p>' +
+    '<p style="font-size:13px;color:rgba(255,255,255,0.4)">Ремонт телефонов в Хабаровске, Комсомольске-на-Амуре и Владивостоке.</p>' +
     '<a class="footer-phone" href="tel:' + phoneTel + '">' + phoneShow + '</a>' +
     '<div class="footer-social">' +
     '<a href="' + wa + '" target="_blank" rel="noopener">WhatsApp</a>' +
@@ -54,9 +54,9 @@
     '<div><h5>Услуги</h5>' +
     '<a href="' + base + 'services/screen.html">Замена экрана</a>' +
     '<a href="' + base + 'services/battery.html">Замена батареи</a>' +
-    '<a href="' + base + 'cities/khabarovsk.html">Хабаровск</a>' +
-    '<a href="' + base + 'brands/iphone.html">iPhone</a>' +
-    '<a href="' + base + 'services/">Все услуги</a></div>' +
+    '<a href="/khabarovsk/">Хабаровск</a>' +
+    '<a href="/komsomolsk-na-amure/">Комсомольск-на-Амуре</a>' +
+    '<a href="/vladivostok/">Владивосток</a></div>' +
     '<div><h5>О проекте</h5>' +
     '<a href="' + base + 'about.html">О нас</a>' +
     '<a href="' + base + 'brands/">Бренды</a>' +

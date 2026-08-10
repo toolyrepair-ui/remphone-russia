@@ -1,0 +1,6 @@
+# Cloudflare Pages redirects (301)
+/cities/khabarovsk.html /khabarovsk/ 301
+/cities/komsomolsk.html /komsomolsk-na-amure/ 301
+/cities/vladivostok.html /vladivostok/ 301
+/cities/khabarovsk /khabarovsk/ 301
+/cities/komsomolsk /komsomolsk-na-amure/ 301

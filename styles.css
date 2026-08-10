@@ -2444,3 +2444,74 @@ section {
         animation: none !important;
     }
 }
+
+/* Multi-city picker + nearby partners */
+.city-picker {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+}
+.city-chip {
+    border: 1px solid rgba(15, 23, 42, 0.12);
+    background: rgba(255, 255, 255, 0.85);
+    color: #0f172a;
+    border-radius: 999px;
+    padding: 10px 16px;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+.city-chip.is-active {
+    background: #0f172a;
+    color: #fff;
+    border-color: #0f172a;
+}
+.nearby-partners {
+    text-align: left;
+    margin: 20px 0;
+    padding: 16px;
+    border-radius: 16px;
+    background: rgba(15, 23, 42, 0.04);
+}
+.nearby-partners-title {
+    margin: 0 0 6px;
+    font-size: 1.05rem;
+}
+.nearby-partners-note {
+    margin: 0 0 14px;
+    font-size: 0.9rem;
+    opacity: 0.75;
+}
+.nearby-partners-list {
+    display: grid;
+    gap: 12px;
+}
+.nearby-partner-card {
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: #fff;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+}
+.nearby-partner-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    margin-bottom: 6px;
+    color: #166534;
+    background: #dcfce7;
+    border-radius: 999px;
+    padding: 3px 8px;
+}
+.nearby-partner-name {
+    display: block;
+    margin-bottom: 4px;
+}
+.nearby-partner-spec,
+.nearby-partner-district {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+

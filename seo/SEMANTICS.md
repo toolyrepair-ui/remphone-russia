@@ -8,15 +8,18 @@
 
 | Запрос | Посадочная | Статус |
 |--------|------------|--------|
-| ремонт телефонов Хабаровск | `/`, `/cities/khabarovsk.html` | done |
-| ремонт телефонов КнА | `/cities/komsomolsk.html` | done |
+| ремонт телефонов Хабаровск | `/`, `/khabarovsk/` | done |
+| ремонт телефонов КнА / Комсомольск-на-Амуре | `/komsomolsk-na-amure/` | done |
+| ремонт телефонов Владивосток | `/vladivostok/` | done |
 | ремонт телефонов Амурск | `/cities/amursk.html` | done |
 | Хабаровский край | `/cities/khabarovsk_region.html` | done |
 
-### Услуга × гео
+### Услуга × гео (расширение)
 
 | Запрос | Посадочная | Статус |
 |--------|------------|--------|
+| замена экрана Комсомольск-на-Амуре | `/komsomolsk-na-amure/`, `/services/screen.html` | done |
+| замена батареи Владивосток | `/vladivostok/`, `/services/battery.html` | done |
 | замена экрана Хабаровск | `/cities/khabarovsk/screen.html`, `/services/screen.html` | done |
 | замена батареи Хабаровск | `/cities/khabarovsk/battery.html` | done |
 | после воды Хабаровск | `/cities/khabarovsk/water.html` | done |

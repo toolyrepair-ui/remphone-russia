@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ремонт телефонов в Хабаровске — REMPHONE RUSSIA</title>
-    <meta name="description" content="Профессиональный ремонт телефонов в Хабаровске. iPhone, Samsung, Xiaomi. Гарантия 90 дней. Выезд мастера за 1 час.">
+    <title>Ремонт телефонов в Хабаровске, Комсомольске-на-Амуре и Владивостоке — REMPHONE</title>
+    <meta name="description" content="Быстрый подбор сервиса для ремонта телефона в Хабаровске, Комсомольске-на-Амуре и Владивостоке. Заявка за 15 секунд, гарантия 90 дней через партнёрские сервисы.">
     <link rel="canonical" href="https://rem-phone.ru/">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,8 +14,8 @@
     <link rel="stylesheet" href="animations.css">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Ремонт телефонов в Хабаровске — REMPHONE RUSSIA">
-    <meta property="og:description" content="Ремонт iPhone, Samsung, Xiaomi в Хабаровске. Гарантия 90 дней. Выезд мастера за 1 час.">
+    <meta property="og:title" content="Ремонт телефонов в Хабаровске, КнА и Владивостоке — REMPHONE">
+    <meta property="og:description" content="Отправьте заявку — подберём партнёрский сервис рядом с вами. Гарантия 90 дней.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://rem-phone.ru/">
     <meta property="og:image" content="https://rem-phone.ru/og-image.jpg">
@@ -27,8 +27,8 @@
         "@context": "https://schema.org",
         "@type": ["LocalBusiness", "ElectronicsStore"],
         "name": "REMPHONE RUSSIA",
-        "alternateName": "Ремфон Хабаровск",
-        "description": "Ремонт телефонов в Хабаровске и Хабаровском крае: экран, батарея, после воды, зарядка. Выезд мастера, гарантия 90 дней.",
+        "alternateName": "Ремфон",
+        "description": "Подбор партнёрского сервиса для ремонта телефонов в Хабаровске, Комсомольске-на-Амуре и Владивостоке. Заявка онлайн, гарантия 90 дней.",
         "url": "https://rem-phone.ru/",
         "telephone": "+79144111730",
         "email": "toolyrepair@gmail.com",
@@ -131,8 +131,18 @@
     <div class="container">
         <div class="flow-intro">
             <div class="hero-badge"><span class="hero-badge-dot"></span>Заявка за 15 секунд · 24/7</div>
-            <h1>Ремонт телефонов <span>в Хабаровске</span></h1>
-            <p class="flow-lead">Починим за 30–60 минут при вас. Гарантия 90 дней. Хабаровск, выезд мастера.</p>
+            <h1 id="heroCityTitle">Ремонт телефонов <span>в Хабаровске, Комсомольске-на-Амуре и Владивостоке</span></h1>
+            <p class="flow-lead" id="heroCityLead">Отправьте заявку — подберём партнёрский сервис рядом с вами. Гарантия 90 дней.</p>
+            <div class="city-picker" id="cityPicker" role="group" aria-label="Выбор города">
+                <button type="button" class="city-chip is-active" data-city-id="khabarovsk" data-city-name="Хабаровск" data-city-prep="в Хабаровске">Хабаровск</button>
+                <button type="button" class="city-chip" data-city-id="komsomolsk" data-city-name="Комсомольск-на-Амуре" data-city-prep="в Комсомольске-на-Амуре">Комсомольск-на-Амуре</button>
+                <button type="button" class="city-chip" data-city-id="vladivostok" data-city-name="Владивосток" data-city-prep="во Владивостоке">Владивосток</button>
+            </div>
+            <p class="city-links" style="margin-top:12px;font-size:14px">
+                <a href="/khabarovsk/">Хабаровск</a> ·
+                <a href="/komsomolsk-na-amure/">Комсомольск-на-Амуре</a> ·
+                <a href="/vladivostok/">Владивосток</a>
+            </p>
             <p class="brand-trust" style="margin-top:14px">⚡ 30 минут · 🛡 гарантия 90 дней · 🔧 бесплатная диагностика</p>
         </div>
 
@@ -328,8 +338,13 @@
                         <input type="text" id="flowModel" name="model" placeholder="iPhone 13, A52...">
                     </div>
                     <div class="form-group">
-                        <label for="flowCity">Город</label>
-                        <input type="text" id="flowCity" name="city" placeholder="Хабаровск" value="Хабаровск">
+                        <label for="flowCity">Город *</label>
+                        <select id="flowCity" name="city" required>
+                            <option value="khabarovsk" data-name="Хабаровск">Хабаровск</option>
+                            <option value="komsomolsk" data-name="Комсомольск-на-Амуре">Комсомольск-на-Амуре</option>
+                            <option value="vladivostok" data-name="Владивосток">Владивосток</option>
+                        </select>
+                        <input type="hidden" id="flowCityId" name="city_id" value="khabarovsk">
                     </div>
                 </div>
                 <div class="form-group">
@@ -359,10 +374,15 @@
             <div class="form-success" id="flowFormSuccess" hidden>
                 <div class="form-success-icon">✅</div>
                 <h4>Заявка отправлена, мы свяжемся с вами</h4>
-                <p>Можете также сразу позвонить или написать в мессенджер.</p>
+                <p>Мастер из партнёрского сервиса перезвонит. Можете также написать нам в мессенджер.</p>
+                <div id="nearbyPartners" class="nearby-partners" hidden>
+                    <h5 class="nearby-partners-title">Сервисы рядом с вами</h5>
+                    <p class="nearby-partners-note">С кем мы работаем в вашем городе (контакты сервиса передадим после обработки заявки)</p>
+                    <div id="nearbyPartnersList" class="nearby-partners-list"></div>
+                </div>
                 <div class="flow-actions success-actions">
                     <a class="action-btn action-call" href="tel:+79144111730">
-                        <img src="assets/messengers/phone.svg" alt="" width="20" height="20"> Позвонить
+                        <img src="assets/messengers/phone.svg" alt="" width="20" height="20"> Позвонить нам
                     </a>
                     <a class="action-btn action-wa" href="https://wa.me/79144111730" target="_blank" rel="noopener">
                         <img src="assets/messengers/whatsapp.svg" alt="" width="20" height="20"> WhatsApp
@@ -448,13 +468,13 @@
         </div>
         <div class="text-center" style="margin-top:40px">
             <a href="services/" class="btn-secondary">Все услуги</a>
-            <a href="cities/khabarovsk.html" class="btn-secondary" style="margin-left:10px">Хабаровск</a>
-            <a href="brands/iphone.html" class="btn-secondary" style="margin-left:10px">iPhone</a>
+            <a href="/khabarovsk/" class="btn-secondary" style="margin-left:10px">Хабаровск</a>
+            <a href="/vladivostok/" class="btn-secondary" style="margin-left:10px">Владивосток</a>
         </div>
         <p class="text-center" style="margin-top:16px;font-size:14px;opacity:.8">
             <a href="cities/khabarovsk/screen.html">Экран в Хабаровске</a> ·
             <a href="brands/iphone-screen.html">Экран iPhone</a> ·
-            <a href="cities/komsomolsk.html">КнА</a>
+            <a href="/komsomolsk-na-amure/">КнА</a>
         </p>
     </div>
 </section>
@@ -529,12 +549,12 @@
             <div class="how-step">
                 <div class="how-num">2</div>
                 <h4>Связь</h4>
-                <p>Мастер перезванивает за 5 минут, уточняет детали</p>
+                <p>Мастер из партнёрского сервиса перезванивает за 5 минут</p>
             </div>
             <div class="how-step">
                 <div class="how-num">3</div>
                 <h4>Ремонт</h4>
-                <p>Чиним телефон, используем оригинальные запчасти</p>
+                <p>Партнёрский сервис чинит телефон — обычно 30–60 минут</p>
             </div>
             <div class="how-step">
                 <div class="how-num">4</div>
@@ -550,14 +570,14 @@
         <div class="reviews-header">
             <div>
                 <h2 class="section-title">Отзывы клиентов</h2>
-                <p class="section-subtitle">Хабаровск и край — без столичных заглушек</p>
+                <p class="section-subtitle">Хабаровск, Комсомольск-на-Амуре, Владивосток</p>
             </div>
             <div class="review-filters">
                 <select id="reviewCityFilter">
                     <option value="">Все города</option>
                     <option value="хабаровск">Хабаровск</option>
                     <option value="комсомольск">Комсомольск-на-Амуре</option>
-                    <option value="амурск">Амурск</option>
+                    <option value="владивосток">Владивосток</option>
                 </select>
                 <select id="reviewServiceFilter">
                     <option value="">Все услуги</option>
@@ -664,7 +684,7 @@
         <div class="footer-grid">
             <div>
                 <div class="logo" style="color:#fff;margin-bottom:8px">REMPHONE <span>RUSSIA</span></div>
-                <p style="font-size:13px;color:rgba(255,255,255,0.4)">Ремонт телефонов в Хабаровске и Хабаровском крае. Быстро, качественно, с гарантией.</p>
+                <p style="font-size:13px;color:rgba(255,255,255,0.4)">Ремонт телефонов в Хабаровске, Комсомольске-на-Амуре и Владивостоке. Быстро, с гарантией через партнёров.</p>
                 <a class="footer-phone" href="tel:+79144111730">+7 914 411-17-30</a>
                 <div class="footer-social">
                     <a href="https://wa.me/79144111730" target="_blank" rel="noopener">WhatsApp</a>

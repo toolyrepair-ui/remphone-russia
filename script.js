@@ -172,7 +172,12 @@ if (quickForm) {
     const telegramBot = cfg.telegramBot || 'REMPHONE_RUSSIA_Bot';
     const relayUrl = (cfg.relayUrl || '').trim();
 
-    const state = { brand: '', problem: '' };
+    const state = { brand: '', problem: '', cityId: 'khabarovsk', cityName: 'Хабаровск' };
+    const CITY_MAP = {
+        khabarovsk: { name: 'Хабаровск', prep: 'в Хабаровске', href: '/khabarovsk/' },
+        komsomolsk: { name: 'Комсомольск-на-Амуре', prep: 'в Комсомольске-на-Амуре', href: '/komsomolsk-na-amure/' },
+        vladivostok: { name: 'Владивосток', prep: 'во Владивостоке', href: '/vladivostok/' },
+    };
     const panels = {
         1: document.getElementById('stepBrand'),
         2: document.getElementById('stepProblem'),
@@ -189,7 +194,53 @@ if (quickForm) {
     const success = document.getElementById('flowFormSuccess');
     const submitBtn = document.getElementById('flowSubmitBtn');
     const errorBox = document.getElementById('flowSubmitError');
+    const flowCity = document.getElementById('flowCity');
+    const flowCityId = document.getElementById('flowCityId');
+    const heroTitle = document.getElementById('heroCityTitle');
+    const heroLead = document.getElementById('heroCityLead');
+    const nearbyBox = document.getElementById('nearbyPartners');
+    const nearbyList = document.getElementById('nearbyPartnersList');
 
+    function setCity(cityId, opts) {
+        const syncHero = !opts || opts.syncHero !== false;
+        const meta = CITY_MAP[cityId] || CITY_MAP.khabarovsk;
+        state.cityId = meta === CITY_MAP[cityId] ? cityId : 'khabarovsk';
+        if (!CITY_MAP[cityId]) cityId = 'khabarovsk';
+        state.cityId = cityId;
+        state.cityName = CITY_MAP[cityId].name;
+        try { sessionStorage.setItem('remphone_city_id', cityId); } catch (e) {}
+        if (flowCity) flowCity.value = cityId;
+        if (flowCityId) flowCityId.value = cityId;
+        document.querySelectorAll('#cityPicker .city-chip').forEach((btn) => {
+            btn.classList.toggle('is-active', btn.dataset.cityId === cityId);
+        });
+        if (syncHero && heroTitle) {
+            heroTitle.innerHTML = 'Ремонт телефонов <span>' + CITY_MAP[cityId].prep + '</span>';
+        }
+        if (syncHero && heroLead) {
+            heroLead.textContent = 'Отправьте заявку — подберём партнёрский сервис ' + CITY_MAP[cityId].prep + '.';
+        }
+    }
+
+    function initCityFromQuery() {
+        const params = new URLSearchParams(window.location.search || '');
+        let cityId = (params.get('city') || params.get('city_id') || '').toLowerCase();
+        if (cityId === 'komsomolsk-na-amure') cityId = 'komsomolsk';
+        if (!CITY_MAP[cityId]) {
+            try { cityId = sessionStorage.getItem('remphone_city_id') || ''; } catch (e) { cityId = ''; }
+        }
+        if (!CITY_MAP[cityId]) cityId = 'khabarovsk';
+        setCity(cityId, { syncHero: true });
+    }
+
+    initCityFromQuery();
+
+    document.querySelectorAll('#cityPicker .city-chip').forEach((btn) => {
+        btn.addEventListener('click', () => setCity(btn.dataset.cityId || 'khabarovsk'));
+    });
+    if (flowCity) {
+        flowCity.addEventListener('change', () => setCity(flowCity.value || 'khabarovsk'));
+    }
     function goTo(step) {
         Object.keys(panels).forEach((key) => {
             const panel = panels[key];
@@ -219,7 +270,12 @@ if (quickForm) {
             if (v) utm[k] = v;
         });
         const cityEl = document.getElementById('flowCity');
-        if (cityEl && !String(cityEl.value || '').trim()) cityEl.value = 'Хабаровск';
+        const cityId = (cityEl && cityEl.value) || state.cityId || 'khabarovsk';
+        const cityName =
+            (cityEl && cityEl.options[cityEl.selectedIndex] && cityEl.options[cityEl.selectedIndex].dataset.name) ||
+            (CITY_MAP[cityId] && CITY_MAP[cityId].name) ||
+            state.cityName ||
+            'Хабаровск';
         return {
             brand: state.brand || (flowBrand && flowBrand.value) || '',
             problem: state.problem || (flowProblem && flowProblem.value) || '',
@@ -227,7 +283,8 @@ if (quickForm) {
             name: ((document.getElementById('flowName') || {}).value || '').trim(),
             phone: ((document.getElementById('flowPhone') || {}).value || '').trim(),
             model: ((document.getElementById('flowModel') || {}).value || '').trim(),
-            city: ((cityEl || {}).value || 'Хабаровск').trim() || 'Хабаровск',
+            city: cityName,
+            city_id: cityId,
             comment: ((document.getElementById('flowComment') || {}).value || '').trim(),
             utm,
         };
@@ -263,13 +320,42 @@ if (quickForm) {
         return true;
     }
 
-    function showSuccess() {
+    function renderNearbyPartners(partners) {
+        if (!nearbyBox || !nearbyList) return;
+        nearbyList.innerHTML = '';
+        if (!partners || !partners.length) {
+            nearbyBox.hidden = true;
+            return;
+        }
+        partners.slice(0, 3).forEach((p) => {
+            const card = document.createElement('div');
+            card.className = 'nearby-partner-card';
+            card.innerHTML =
+                '<div class="nearby-partner-badge">' +
+                (p.badge || 'Наш партнёр') +
+                '</div>' +
+                '<strong class="nearby-partner-name">' +
+                (p.name || 'Партнёрский сервис') +
+                '</strong>' +
+                '<p class="nearby-partner-spec">' +
+                (p.specialization || 'Ремонт телефонов, 3+ года опыта') +
+                '</p>' +
+                (p.district
+                    ? '<p class="nearby-partner-district">' + p.district + '</p>'
+                    : '');
+            nearbyList.appendChild(card);
+        });
+        nearbyBox.hidden = false;
+    }
+
+    function showSuccess(partners) {
         hideError();
         if (form) form.hidden = true;
         if (success) {
             success.hidden = false;
             success.classList.add('show');
         }
+        renderNearbyPartners(partners || []);
         if (typeof window.REMPHONE_REACH === 'function') {
             window.REMPHONE_REACH('request-form-submit');
         }
@@ -313,6 +399,7 @@ if (quickForm) {
                 problem: data.problem,
                 part_preference: data.part_preference || '',
                 city: data.city || 'Хабаровск',
+                city_id: data.city_id || 'khabarovsk',
                 comment: data.comment || '',
                 source: 'site',
                 client_request_id: 'site-' + String(data.phone || '').replace(/\D/g, '') + '-' + Date.now(),
@@ -347,8 +434,8 @@ if (quickForm) {
         }
 
         try {
-            await sendToRelay(data);
-            showSuccess();
+            const result = await sendToRelay(data);
+            showSuccess(result.partners || []);
         } catch (err) {
             console.error('Relay submit failed', err);
             showError(
