@@ -1,11 +1,12 @@
-/* analytics.js — Яндекс.Метрика для rem-phone.ru
- * Счётчик: window.REMPHONE_CONFIG.metrikaId (config.js)
- * Цели (JS-события в кабинете):
+/* analytics.js — Яндекс.Метрика + Google Analytics для rem-phone.ru
+ * Счётчики: window.REMPHONE_CONFIG.metrikaId / gaId (config.js)
+ * Цели Метрики (JS-события):
  *   request-form-submit, request-form-open, make-call, whatsapp, telegram
  */
 (function () {
   var TAG = 'https://mc.yandex.ru/metrika/tag.js';
   var started = false;
+  var gaStarted = false;
 
   function scriptDir() {
     var scripts = document.getElementsByTagName('script');
@@ -40,11 +41,35 @@
     else document.documentElement.appendChild(ns);
   }
 
+  function startGa(measurementId) {
+    if (gaStarted || !measurementId) return;
+    gaStarted = true;
+    measurementId = String(measurementId);
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      window.dataLayer.push(arguments);
+    }
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', measurementId);
+
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(measurementId);
+    (document.head || document.documentElement).appendChild(s);
+  }
+
   function bindGoals(id) {
     function reach(goal) {
       try {
-        if (typeof ym === 'function') ym(id, 'reachGoal', goal);
+        if (id && typeof ym === 'function') ym(id, 'reachGoal', goal);
       } catch (e) {}
+      try {
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', goal, { event_category: 'engagement' });
+        }
+      } catch (e2) {}
     }
 
     window.REMPHONE_REACH = reach;
@@ -171,17 +196,24 @@
     bindGoals(id);
   }
 
+  function startAll(cfg) {
+    cfg = cfg || {};
+    if (cfg.gaId) startGa(cfg.gaId);
+    if (cfg.metrikaId) startMetrika(cfg.metrikaId);
+    else if (cfg.gaId && !window.REMPHONE_REACH) {
+      bindGoals(0);
+    }
+  }
+
   function boot() {
     var cfg = window.REMPHONE_CONFIG || {};
-    if (cfg.metrikaId) {
-      startMetrika(cfg.metrikaId);
+    if (cfg.metrikaId || cfg.gaId) {
+      startAll(cfg);
       return;
     }
-    // config.js ещё не загружен — подтянуть относительно analytics.js
     var base = scriptDir();
     loadScript(base + 'config.js', function () {
-      var id = (window.REMPHONE_CONFIG || {}).metrikaId;
-      if (id) startMetrika(id);
+      startAll(window.REMPHONE_CONFIG || {});
     });
   }
 
