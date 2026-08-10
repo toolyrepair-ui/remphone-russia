@@ -50,17 +50,17 @@
 | замена экрана iPhone Хабаровск | `/brands/iphone-screen.html` | done |
 | замена экрана Samsung Хабаровск | `/brands/samsung-screen.html` | done |
 | замена экрана Xiaomi Хабаровск | `/brands/xiaomi-screen.html` | done |
-| замена батареи iPhone Хабаровск | `/brands/iphone-battery.html` | done |
-| замена батареи Samsung Хабаровск | `/brands/samsung-battery.html` | done |
+| замена батареи iPhone | `/brands/iphone-battery.html` (+ 3 города) | done |
+| замена батареи Samsung | `/brands/samsung-battery.html` (+ 3 города) | done |
+| замена батареи Xiaomi | `/brands/xiaomi-battery.html` (+ 3 города) | done |
 | ремонт Honor / Huawei Хабаровск | `/brands/honor.html`, `huawei.html` | done |
-| бренд × КнА / Владивосток | отдельные URL | backlog (не раньше волны 2) |
+| бренд × КнА / Владивосток (отдельные URL) | — | backlog (не раньше волны 2) |
 
 ## Бэклог следующей волны (порядок)
 
-1. `/brands/xiaomi-battery.html`  
-2. Blog: 1 инфо-статья/мес. → ссылка на услугу + один из трёх городов  
-3. Услуга×город для charge / not-on / camera (КнА и Владивосток) — после трафика на screen/battery  
-4. Не открывать 4-й город, пока нет стабильных заявок с текущих трёх
+1. Blog: 1 инфо-статья/мес. → ссылка на услугу + один из трёх городов  
+2. Услуга×город для charge / not-on / camera (КнА и Владивосток) — после трафика на screen/battery  
+3. Не открывать 4-й город, пока нет стабильных заявок с текущих трёх
 
 ## Off-geo (noindex)
 

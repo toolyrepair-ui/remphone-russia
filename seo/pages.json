@@ -30,6 +30,7 @@
   { "path": "/brands/samsung.html", "changefreq": "weekly", "priority": 0.85 },
   { "path": "/brands/samsung-screen.html", "changefreq": "weekly", "priority": 0.9 },
   { "path": "/brands/samsung-battery.html", "changefreq": "weekly", "priority": 0.9 },
+  { "path": "/brands/xiaomi-battery.html", "changefreq": "weekly", "priority": 0.9 },
   { "path": "/brands/xiaomi.html", "changefreq": "weekly", "priority": 0.85 },
   { "path": "/brands/xiaomi-screen.html", "changefreq": "weekly", "priority": 0.9 },
   { "path": "/brands/honor.html", "changefreq": "weekly", "priority": 0.8 },
