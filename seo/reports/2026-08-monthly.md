@@ -1,6 +1,24 @@
-# Monthly SEO note — 2026-08
+# Ежемесячный SEO-аудит — август 2026
 
-- Off-geo cities: noindex verified (`audit-monthly.mjs`)
-- Sitemap size: 37 URLs
-- Next Wordstat pass: compare brand×screen queries for Samsung/Xiaomi vs iPhone
-- Blog posts still thin on canonical — low priority vs commercial landings
+Дата: 2026-08-10
+
+## Off-geo
+
+- `moscow|spb|kazan|novosibirsk|ekaterinburg|other` — `noindex` OK, добавлены canonical на `/`
+
+## Гео-фокус
+
+Три города: Хабаровск, Комсомольск-на-Амуре, Владивосток.  
+Корневые URL в sitemap. Услуга×город: Хабаровск (есть) + КнА/Владивосток screen/battery/water (добавлено).
+
+## Wordstat (вручную владельцу)
+
+1. Регион **Хабаровский край** — «ремонт телефонов», «замена экрана», «замена батареи» + КнА  
+2. Регион **Приморский край** — те же запросы + Владивосток  
+3. Сверить с `seo/SEMANTICS.md`, отметить нулевые хвосты
+
+## Следующий месяц
+
+- Не плодить 4-й город  
+- Смотреть трафик на `/vladivostok/*` и `/komsomolsk-na-amure/*`  
+- При росте — charge/not-on × город

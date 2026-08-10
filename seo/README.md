@@ -33,9 +33,9 @@ Workflow: `.github/workflows/seo-health.yml`
 | `seo/LEAD_PIPELINE.md` | Чеклист выката заявок сайт→бот |
 | `seo/MONTHLY_AUDIT.md` | Ежемесячный аудит |
 | `seo/CHECKLIST.md` | Чеклист релиза страницы |
-| `seo/SEMANTICS.md` | Кластеры и приоритет URL |
+| `seo/SEMANTICS.md` | Кластеры 3 городов и приоритет URL |
 | `seo/WEBMASTER_METRICA.md` | Вебмастер / GSC / Метрика |
-| `seo/YANDEX_BUSINESS.md` | Карточка Яндекс Бизнес |
+| `seo/YANDEX_BUSINESS.md` | Карточка Яндекс Бизнес (зона = 3 города) |
 | `seo/WEEKLY_REPORT.md` | Шаблон недельного отчёта |
 | `seo/pages.json` | Источник правды для sitemap |
 
