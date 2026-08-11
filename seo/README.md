@@ -37,6 +37,7 @@ Workflow: `.github/workflows/seo-health.yml`
 | `seo/WEBMASTER_METRICA.md` | Вебмастер / GSC / Метрика |
 | `seo/YANDEX_BUSINESS.md` | Карточка Яндекс Бизнес (зона = 3 города) |
 | `seo/WEEKLY_REPORT.md` | Шаблон недельного отчёта |
+| `seo/WORDSTAT.md` | Wordstat API: ключи и запуск сбора частот |
 | `seo/pages.json` | Источник правды для sitemap |
 
 ## Автозапуск недели / месяца

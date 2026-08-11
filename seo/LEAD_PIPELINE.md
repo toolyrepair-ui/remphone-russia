@@ -5,7 +5,7 @@
 ## Статус выката (отметить вручную)
 
 - [ ] Render: бот как **Web Service** (не Background Worker)
-- [ ] Env: `TELEGRAM_TOKEN`, `ADMIN_ID=7553859784`, `LEAD_API_SECRET`, `METRIKA_COUNTER_ID=110956593`
+- [ ] Env: `TELEGRAM_TOKEN`, `ADMIN_ID=7553859784`, `LEAD_API_SECRET`, `METRIKA_COUNTER_ID=111453492`
 - [ ] Health: `GET https://<bot-host>/health` → `{"ok":true}`
 - [ ] Worker secrets: `LEAD_API_URL`, `LEAD_API_SECRET`, `TELEGRAM_TOKEN`, `ADMIN_CHAT_ID`
 - [ ] Worker задеплоен из `remphone-bot/relay/`

@@ -77,4 +77,5 @@
 
 ## Wordstat
 
-См. [`MONTHLY_AUDIT.md`](MONTHLY_AUDIT.md). Регионы: Хабаровский край, Приморский край.
+См. [`WORDSTAT.md`](WORDSTAT.md) — API‑сбор частот (`python seo/wordstat_fetch.py`).  
+Регионы: Хабаровский край + Приморский край. Ручной UI: [`MONTHLY_AUDIT.md`](MONTHLY_AUDIT.md).

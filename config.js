@@ -10,7 +10,7 @@ window.REMPHONE_CONFIG = {
     email: 'toolyrepair@gmail.com',
     ownerTelegramId: '7553859784',
     relayUrl: 'https://rem-phone-relay.toolyrepair.workers.dev',
-    metrikaId: 110956593,
+    metrikaId: 111453492,
     gaId: 'G-53F13EFHZQ',
     /** Целевое число для анимации «N+ ремонтов» (обновлять вручную) */
     repairsCount: 500
