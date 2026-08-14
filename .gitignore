@@ -17,10 +17,12 @@ Thumbs.db
 *.log
 npm-debug.log*
 
-# Environment
 .env
 .env.local
 .env.production
+.env.ai-gateway
+.env.mcp
+.env.wordstat
 
 # Build output (если будет)
 dist/
@@ -30,4 +32,15 @@ build/
 *.tmp
 *.temp
 .cursor/
+!.cursor/settings.json
+!.cursor/mcp.json.example
+!.cursor/rules/
+
+# OmniRoute local install (not committed)
+.omniroute-src/
+tools/omniroute/node_modules/
+tools/omniroute/omniroute.tgz
+tools/omniroute/omniroute-3.8.49.tgz
+tools/omniroute/OmniRoute.exe
+tools/omniroute/server-app/
 
