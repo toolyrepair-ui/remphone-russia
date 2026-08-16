@@ -28,16 +28,19 @@
 metrikaId: 12345678  // ваш ID
 ```
 
-3. Создайте цели типа **JavaScript-событие**:
+3. Создайте цели типа **JavaScript-событие** (id должны совпадать с `analytics.js`):
 
 | Имя цели в интерфейсе | Идентификатор цели |
 |-----------------------|--------------------|
-| Клик телефон | `phone_click` |
-| WhatsApp | `whatsapp_click` |
-| Telegram | `telegram_click` |
-| Отправка формы | `form_submit` |
+| Клик телефон | `make-call` |
+| WhatsApp | `whatsapp` |
+| Telegram | `telegram` |
+| Открытие формы | `request-form-open` |
+| Отправка формы | `request-form-submit` |
 
-Код целей уже в `analytics.js` (подключается с главной и через `site-chrome.js`).
+Подробнее: [`METRIKA_GOALS.md`](METRIKA_GOALS.md).
+
+Код целей уже в `analytics.js`.
 
 4. Проверка: в Метрике → Отчёты → Конверсии после тестовых кликов по `tel:` / WhatsApp / Telegram.
 
