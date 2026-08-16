@@ -1,0 +1,1016 @@
+{
+  "analytics.js": {
+    "mtime": 1786851579.7890706,
+    "seen": 1786871283.681159,
+    "ast_hash": "d3cd9054ebea4c9efde5730a553f1668",
+    "semantic_hash": "d3cd9054ebea4c9efde5730a553f1668"
+  },
+  "config.js": {
+    "mtime": 1786456640.8997436,
+    "seen": 1786871283.681159,
+    "ast_hash": "7b44e7f85efc4459f15a6ad52ffb2a0b",
+    "semantic_hash": "7b44e7f85efc4459f15a6ad52ffb2a0b"
+  },
+  "displays-compare.js": {
+    "mtime": 1786292592.681183,
+    "seen": 1786871283.681159,
+    "ast_hash": "094b6fe1adeec8b8a3a3099620b02945",
+    "semantic_hash": "094b6fe1adeec8b8a3a3099620b02945"
+  },
+  "script.js": {
+    "mtime": 1786339224.8632245,
+    "seen": 1786871283.681159,
+    "ast_hash": "f1a41767e1d839acf515c541d5924062",
+    "semantic_hash": "f1a41767e1d839acf515c541d5924062"
+  },
+  "scripts/fix-cursor-install.ps1": {
+    "mtime": 1786851579.9030342,
+    "seen": 1786871283.681159,
+    "ast_hash": "26be6152d905a1db1ecc042ebbb49098",
+    "semantic_hash": "26be6152d905a1db1ecc042ebbb49098"
+  },
+  "scripts/setup-all.ps1": {
+    "mtime": 1786870425.9054132,
+    "seen": 1786871283.681159,
+    "ast_hash": "3a3ed93b8c6001dd9d5638c1d00c47ce",
+    "semantic_hash": "3a3ed93b8c6001dd9d5638c1d00c47ce"
+  },
+  "scripts/setup-mcp.ps1": {
+    "mtime": 1786870426.0943525,
+    "seen": 1786871283.681159,
+    "ast_hash": "c58b547b96a2d71a6c837f6756a331f7",
+    "semantic_hash": "c58b547b96a2d71a6c837f6756a331f7"
+  },
+  "scripts/test_seo_retry.py": {
+    "mtime": 1786870426.0943525,
+    "seen": 1786871283.681159,
+    "ast_hash": "437d96dbe533a2ed5763bddf6124e355",
+    "semantic_hash": "437d96dbe533a2ed5763bddf6124e355"
+  },
+  "seo/audit-monthly.mjs": {
+    "mtime": 1786288769.561198,
+    "seen": 1786871283.681159,
+    "ast_hash": "0f24a928207f379a75ec7ac817274fde",
+    "semantic_hash": "0f24a928207f379a75ec7ac817274fde"
+  },
+  "seo/build-brand-screens.mjs": {
+    "mtime": 1786288799.515728,
+    "seen": 1786871283.681159,
+    "ast_hash": "e959e775312ed06d91be78c83572a583",
+    "semantic_hash": "e959e775312ed06d91be78c83572a583"
+  },
+  "seo/build-service-pages.mjs": {
+    "mtime": 1786286171.1443055,
+    "seen": 1786871283.681159,
+    "ast_hash": "043d5a1cccd9ed14a92b8f62ed262422",
+    "semantic_hash": "043d5a1cccd9ed14a92b8f62ed262422"
+  },
+  "seo/build-wave2.mjs": {
+    "mtime": 1786287653.7949355,
+    "seen": 1786871283.681159,
+    "ast_hash": "af1f8eab8e8425b469e1502c942eaf29",
+    "semantic_hash": "af1f8eab8e8425b469e1502c942eaf29"
+  },
+  "seo/generate-landing.mjs": {
+    "mtime": 1786285952.8369393,
+    "seen": 1786871283.681159,
+    "ast_hash": "b75be5c7665eac8bd7f7e98cfaf9ab8b",
+    "semantic_hash": "b75be5c7665eac8bd7f7e98cfaf9ab8b"
+  },
+  "seo/generate-sitemap.mjs": {
+    "mtime": 1786285899.8449526,
+    "seen": 1786871283.681159,
+    "ast_hash": "5a7e43f73853cbb58f70c4482a4ead4d",
+    "semantic_hash": "5a7e43f73853cbb58f70c4482a4ead4d"
+  },
+  "seo/health-check.mjs": {
+    "mtime": 1786867678.5939388,
+    "seen": 1786871283.681159,
+    "ast_hash": "e0549ffb8061ac96c55918b4bdca4244",
+    "semantic_hash": ""
+  },
+  "seo/weekly-run.mjs": {
+    "mtime": 1786456640.9117398,
+    "seen": 1786871283.681159,
+    "ast_hash": "8e610d8f620b9c95ee998899e9339970",
+    "semantic_hash": "8e610d8f620b9c95ee998899e9339970"
+  },
+  "seo/wordstat_fetch.py": {
+    "mtime": 1786851579.9060335,
+    "seen": 1786871283.681159,
+    "ast_hash": "f15792e54a1c1a7f2b8c48e1b3ec28c0",
+    "semantic_hash": "f15792e54a1c1a7f2b8c48e1b3ec28c0"
+  },
+  "site-chrome.js": {
+    "mtime": 1786339332.0750737,
+    "seen": 1786871283.681159,
+    "ast_hash": "4529af96fdc3cbff0d850ae023020ce0",
+    "semantic_hash": "4529af96fdc3cbff0d850ae023020ce0"
+  },
+  "dashboard/collect.mjs": {
+    "mtime": 1786867724.3279045,
+    "seen": 1786871283.681159,
+    "ast_hash": "7bd0c5137b5545e9ad7297289e2ab788",
+    "semantic_hash": ""
+  },
+  ".github/workflows/dashboard.yml": {
+    "mtime": 1786867673.544156,
+    "seen": 1786871283.681159,
+    "ast_hash": "eef50fa026d6414e328f021de794e142",
+    "semantic_hash": ""
+  },
+  ".github/workflows/seo-health.yml": {
+    "mtime": 1786285957.8659468,
+    "seen": 1786871283.681159,
+    "ast_hash": "e46c9a0dbc97a65248a1b710c49f1613",
+    "semantic_hash": ""
+  },
+  "3d-viewer-iphone15.html": {
+    "mtime": 1786851579.9050336,
+    "seen": 1786871283.681159,
+    "ast_hash": "479d9c951eaa80dd7cfe637daaee0229",
+    "semantic_hash": ""
+  },
+  "AGENTS.md": {
+    "mtime": 1786871278.4333017,
+    "seen": 1786871283.681159,
+    "ast_hash": "0cea158968d676bcbe0227b45bae6d8e",
+    "semantic_hash": ""
+  },
+  "FIX_SSL_ISSUES.md": {
+    "mtime": 1786285753.774871,
+    "seen": 1786871283.681159,
+    "ast_hash": "42494b7c90422b5ecdb9d5e303cb015a",
+    "semantic_hash": ""
+  },
+  "INSTALL.md": {
+    "mtime": 1786285753.7758713,
+    "seen": 1786871283.681159,
+    "ast_hash": "76d84e2688e7b08c9585b4c828d16e76",
+    "semantic_hash": ""
+  },
+  "REDESIGN_README.md": {
+    "mtime": 1786285753.7768707,
+    "seen": 1786871283.681159,
+    "ast_hash": "781198bf306eca01c8dbb376bdc52878",
+    "semantic_hash": ""
+  },
+  "SEO_LAUNCH.md": {
+    "mtime": 1786340171.2460423,
+    "seen": 1786871283.681159,
+    "ast_hash": "6a1b5b72e299f6654e2ee65bec676547",
+    "semantic_hash": ""
+  },
+  "SSL_CHECK_RESULT.md": {
+    "mtime": 1786285753.7778704,
+    "seen": 1786871283.681159,
+    "ast_hash": "f435b4ba92ed6204601f8a8a51866ab3",
+    "semantic_hash": ""
+  },
+  "about.html": {
+    "mtime": 1786456640.8967438,
+    "seen": 1786871283.681159,
+    "ast_hash": "dc00614494a0b86b8bae52c3e668316f",
+    "semantic_hash": ""
+  },
+  "blog/index.html": {
+    "mtime": 1786870102.459774,
+    "seen": 1786871283.681159,
+    "ast_hash": "2ca47d26bbf29617d8763eb479c9cefb",
+    "semantic_hash": ""
+  },
+  "blog/post1.html": {
+    "mtime": 1786456640.94073,
+    "seen": 1786871283.681159,
+    "ast_hash": "73bed5370a59dd299fb97a5132070865",
+    "semantic_hash": ""
+  },
+  "blog/post2.html": {
+    "mtime": 1786456640.9417298,
+    "seen": 1786871283.681159,
+    "ast_hash": "ad91e8159da1b4d7da6b37aea8f9c37c",
+    "semantic_hash": ""
+  },
+  "blog/post3.html": {
+    "mtime": 1786456640.9427292,
+    "seen": 1786871283.681159,
+    "ast_hash": "6893b8c2a3e19aceeb17d4eb6a2a8d65",
+    "semantic_hash": ""
+  },
+  "blog/post4.html": {
+    "mtime": 1786456640.9447289,
+    "seen": 1786871283.681159,
+    "ast_hash": "d31e0ec755aa6c60ea78bcc5a1c330ca",
+    "semantic_hash": ""
+  },
+  "brands/honor.html": {
+    "mtime": 1786456640.9497275,
+    "seen": 1786871283.681159,
+    "ast_hash": "56f6ed43a201fc7b6588c768828fb4f5",
+    "semantic_hash": ""
+  },
+  "brands/huawei.html": {
+    "mtime": 1786456640.950727,
+    "seen": 1786871283.681159,
+    "ast_hash": "35d517f9fcf6a133d452244c33b891f2",
+    "semantic_hash": ""
+  },
+  "brands/index.html": {
+    "mtime": 1786456640.953726,
+    "seen": 1786871283.681159,
+    "ast_hash": "879e760f32b2adc8327657cfa2f7eb7a",
+    "semantic_hash": ""
+  },
+  "brands/iphone-battery.html": {
+    "mtime": 1786345528.4728322,
+    "seen": 1786871283.681159,
+    "ast_hash": "caaa12769958f9d94fc0cc067dae7236",
+    "semantic_hash": ""
+  },
+  "brands/iphone-screen.html": {
+    "mtime": 1786851011.9457889,
+    "seen": 1786871283.681159,
+    "ast_hash": "55195fcb3f909d59cfbfc6387749980f",
+    "semantic_hash": ""
+  },
+  "brands/iphone.html": {
+    "mtime": 1786456640.9567251,
+    "seen": 1786871283.681159,
+    "ast_hash": "a5a1b51ff2ea0e8fc90c497f6891f199",
+    "semantic_hash": ""
+  },
+  "brands/other.html": {
+    "mtime": 1786456640.9577248,
+    "seen": 1786871283.681159,
+    "ast_hash": "6b6f5ad5a88c05a2010e028a712bb28f",
+    "semantic_hash": ""
+  },
+  "brands/samsung-battery.html": {
+    "mtime": 1786345528.476832,
+    "seen": 1786871283.681159,
+    "ast_hash": "5dd7fe9a81db440c478e2295173af8a6",
+    "semantic_hash": ""
+  },
+  "brands/samsung-screen.html": {
+    "mtime": 1786851579.9060335,
+    "seen": 1786871283.681159,
+    "ast_hash": "8b5b20c10849fdbf02e92b033e651f60",
+    "semantic_hash": ""
+  },
+  "brands/samsung.html": {
+    "mtime": 1786456640.9607246,
+    "seen": 1786871283.681159,
+    "ast_hash": "221d01e32eeb6f10c86d493e5c4f4931",
+    "semantic_hash": ""
+  },
+  "brands/xiaomi-battery.html": {
+    "mtime": 1786345528.4808297,
+    "seen": 1786871283.681159,
+    "ast_hash": "ed5dc8dd2841a92d04f0d0c3bef46007",
+    "semantic_hash": ""
+  },
+  "brands/xiaomi-screen.html": {
+    "mtime": 1786851579.9060335,
+    "seen": 1786871283.681159,
+    "ast_hash": "7171a29f448a8b538373ba36c941ce33",
+    "semantic_hash": ""
+  },
+  "brands/xiaomi.html": {
+    "mtime": 1786456640.963723,
+    "seen": 1786871283.681159,
+    "ast_hash": "b43e1f8a77d0084f3bd33066d51403e8",
+    "semantic_hash": ""
+  },
+  "cities/amursk.html": {
+    "mtime": 1786456640.9687214,
+    "seen": 1786871283.681159,
+    "ast_hash": "d5c0102f3b3243a7ce416cffd4d001d8",
+    "semantic_hash": ""
+  },
+  "cities/ekaterinburg.html": {
+    "mtime": 1786456640.9707205,
+    "seen": 1786871283.681159,
+    "ast_hash": "bff2bbad29c106183e52646836bbf005",
+    "semantic_hash": ""
+  },
+  "cities/index.html": {
+    "mtime": 1786456640.9717205,
+    "seen": 1786871283.681159,
+    "ast_hash": "14466c6da0aa19878c177d1f5395c69b",
+    "semantic_hash": ""
+  },
+  "cities/kazan.html": {
+    "mtime": 1786456640.9737198,
+    "seen": 1786871283.681159,
+    "ast_hash": "f210604a1b136535637fdafc01fd1e44",
+    "semantic_hash": ""
+  },
+  "cities/khabarovsk.html": {
+    "mtime": 1786851579.9070332,
+    "seen": 1786871283.681159,
+    "ast_hash": "4675093d1c974c75759b4585133da36e",
+    "semantic_hash": ""
+  },
+  "cities/khabarovsk/battery.html": {
+    "mtime": 1786456640.9647224,
+    "seen": 1786871283.681159,
+    "ast_hash": "efaa208d6a9c9506354508c425ed2de0",
+    "semantic_hash": ""
+  },
+  "cities/khabarovsk/charge.html": {
+    "mtime": 1786678508.7123744,
+    "seen": 1786871283.681159,
+    "ast_hash": "05ef5b3aafb89b9a01e885198329e771",
+    "semantic_hash": ""
+  },
+  "cities/khabarovsk/not-on.html": {
+    "mtime": 1786678508.7133749,
+    "seen": 1786871283.681159,
+    "ast_hash": "9890d295e7140454f42d4c05d95759d6",
+    "semantic_hash": ""
+  },
+  "cities/khabarovsk/screen.html": {
+    "mtime": 1786456640.966722,
+    "seen": 1786871283.681159,
+    "ast_hash": "9e08a5f3066ce16458d0aa00cf5a4419",
+    "semantic_hash": ""
+  },
+  "cities/khabarovsk/water.html": {
+    "mtime": 1786456640.967722,
+    "seen": 1786871283.681159,
+    "ast_hash": "a203ee31c3c9543d5ca2290da1e12a52",
+    "semantic_hash": ""
+  },
+  "cities/khabarovsk_region.html": {
+    "mtime": 1786456640.978718,
+    "seen": 1786871283.681159,
+    "ast_hash": "d9e6e9022cba750d29b9ffc5c79d1878",
+    "semantic_hash": ""
+  },
+  "cities/komsomolsk.html": {
+    "mtime": 1786456640.9797177,
+    "seen": 1786871283.681159,
+    "ast_hash": "30f50efd422d412e4d709fa6dd71d8e6",
+    "semantic_hash": ""
+  },
+  "cities/moscow.html": {
+    "mtime": 1786456640.9807177,
+    "seen": 1786871283.681159,
+    "ast_hash": "6d625c7efbfd03a548fae7d255479037",
+    "semantic_hash": ""
+  },
+  "cities/novosibirsk.html": {
+    "mtime": 1786456640.9827166,
+    "seen": 1786871283.681159,
+    "ast_hash": "0193d98e4cb50fec227dbb4ade404bb3",
+    "semantic_hash": ""
+  },
+  "cities/other.html": {
+    "mtime": 1786456640.9847164,
+    "seen": 1786871283.681159,
+    "ast_hash": "5dab32aa4b40098dbd9f3795fb3e4f7c",
+    "semantic_hash": ""
+  },
+  "cities/spb.html": {
+    "mtime": 1786456641.0037103,
+    "seen": 1786871283.681159,
+    "ast_hash": "f4c8211feb2866344cad4d583097df3e",
+    "semantic_hash": ""
+  },
+  "cities/vladivostok.html": {
+    "mtime": 1786345528.497825,
+    "seen": 1786871283.681159,
+    "ast_hash": "4125b21ed084ae423edea704c8ef6d4c",
+    "semantic_hash": ""
+  },
+  "contacts.html": {
+    "mtime": 1786456640.9017422,
+    "seen": 1786871283.681159,
+    "ast_hash": "df7f0de260bef291dcdb8fa549b80f62",
+    "semantic_hash": ""
+  },
+  "dashboard/README.md": {
+    "mtime": 1786867670.1387715,
+    "seen": 1786871283.681159,
+    "ast_hash": "de9eded4f98ac21c094df5ddddfe5953",
+    "semantic_hash": ""
+  },
+  "dashboard/index.html": {
+    "mtime": 1786868211.7301016,
+    "seen": 1786871283.681159,
+    "ast_hash": "812a01fff04a7f2f0b4f0868fc56eb3c",
+    "semantic_hash": ""
+  },
+  "docs/CURSOR_AUTOMATION_SEO.md": {
+    "mtime": 1786851579.9060335,
+    "seen": 1786871283.681159,
+    "ast_hash": "a0335456038233cca0182f94e50121f5",
+    "semantic_hash": ""
+  },
+  "docs/MCP_SETUP.md": {
+    "mtime": 1786870426.0943525,
+    "seen": 1786871283.681159,
+    "ast_hash": "d0c32b54a391d11fc34d6029aeca400e",
+    "semantic_hash": ""
+  },
+  "docs/business-memory/business-model.md": {
+    "mtime": 1786870102.0849981,
+    "seen": 1786871283.681159,
+    "ast_hash": "459735c690b729dd1d5efc9a8955d3c0",
+    "semantic_hash": ""
+  },
+  "docs/business-memory/clients.md": {
+    "mtime": 1786870102.087997,
+    "seen": 1786871283.681159,
+    "ast_hash": "562de9f670a30ec2213667bf40694673",
+    "semantic_hash": ""
+  },
+  "docs/business-memory/marketing.md": {
+    "mtime": 1786870102.089996,
+    "seen": 1786871283.681159,
+    "ast_hash": "87b40c2ebdd158c1377fac248db131f3",
+    "semantic_hash": ""
+  },
+  "docs/business-memory/pains.md": {
+    "mtime": 1786870102.0909958,
+    "seen": 1786871283.681159,
+    "ast_hash": "314827b1bf5f89c5aab8e411183cf873",
+    "semantic_hash": ""
+  },
+  "docs/business-memory/prices.md": {
+    "mtime": 1786870102.0919957,
+    "seen": 1786871283.681159,
+    "ast_hash": "2f8fda93ac4d0905101d869789c78693",
+    "semantic_hash": ""
+  },
+  "docs/business-memory/product.md": {
+    "mtime": 1786870102.0929952,
+    "seen": 1786871283.681159,
+    "ast_hash": "885cb9eaa7015f242c60424c88dae85c",
+    "semantic_hash": ""
+  },
+  "docs/cursor-project-memory.md": {
+    "mtime": 1786870102.0979943,
+    "seen": 1786871283.681159,
+    "ast_hash": "661b374b1236721c1b3f487352115297",
+    "semantic_hash": ""
+  },
+  "faq.html": {
+    "mtime": 1786456640.902742,
+    "seen": 1786871283.681159,
+    "ast_hash": "65f5c537f7b283bfa3e0c4a7d240068a",
+    "semantic_hash": ""
+  },
+  "google1c0f82854377489e.html": {
+    "mtime": 1786285753.8635695,
+    "seen": 1786871283.681159,
+    "ast_hash": "12d10191c4d96742892181021e061373",
+    "semantic_hash": ""
+  },
+  "index.html": {
+    "mtime": 1786456640.9047418,
+    "seen": 1786871283.681159,
+    "ast_hash": "3ccfb7c8e7f4b639568c0137228b4118",
+    "semantic_hash": ""
+  },
+  "khabarovsk/index.html": {
+    "mtime": 1786851579.9070332,
+    "seen": 1786871283.681159,
+    "ast_hash": "270237b34d09cc36defcfb59705cae7a",
+    "semantic_hash": ""
+  },
+  "komsomolsk-na-amure/battery.html": {
+    "mtime": 1786345528.5168195,
+    "seen": 1786871283.681159,
+    "ast_hash": "78beeecd5a4dcc97e3ff8ee29999d11e",
+    "semantic_hash": ""
+  },
+  "komsomolsk-na-amure/charge.html": {
+    "mtime": 1786678508.7133749,
+    "seen": 1786871283.681159,
+    "ast_hash": "ab92e6974844830e3c4d3ae31811f2c7",
+    "semantic_hash": ""
+  },
+  "komsomolsk-na-amure/index.html": {
+    "mtime": 1786851579.9070332,
+    "seen": 1786871283.681159,
+    "ast_hash": "7b9207622f4ff93a97473671866ad114",
+    "semantic_hash": ""
+  },
+  "komsomolsk-na-amure/not-on.html": {
+    "mtime": 1786678508.7143743,
+    "seen": 1786871283.681159,
+    "ast_hash": "a7c7729a007d29ba948c8c8721d9ec3c",
+    "semantic_hash": ""
+  },
+  "komsomolsk-na-amure/screen.html": {
+    "mtime": 1786345528.518818,
+    "seen": 1786871283.681159,
+    "ast_hash": "63ffed9322a4093bb00c0b621bf5b4ed",
+    "semantic_hash": ""
+  },
+  "komsomolsk-na-amure/water.html": {
+    "mtime": 1786345528.5198174,
+    "seen": 1786871283.681159,
+    "ast_hash": "cc227aa7b1c7c5312fea83d4d1ae3bcb",
+    "semantic_hash": ""
+  },
+  "privacy.html": {
+    "mtime": 1786456640.9067419,
+    "seen": 1786871283.681159,
+    "ast_hash": "07b7e001e5bf4b19db19b4e09c967c4b",
+    "semantic_hash": ""
+  },
+  "reviews.html": {
+    "mtime": 1786456640.9087405,
+    "seen": 1786871283.681159,
+    "ast_hash": "e370fb6b803447b843caee753bd1a80b",
+    "semantic_hash": ""
+  },
+  "robots.txt": {
+    "mtime": 1786867678.0330994,
+    "seen": 1786871283.681159,
+    "ast_hash": "0764e08ae6125ff19374254b72bb79e2",
+    "semantic_hash": ""
+  },
+  "seo/AGENT_RITUAL.md": {
+    "mtime": 1786340115.0860188,
+    "seen": 1786871283.681159,
+    "ast_hash": "a36f236a1490639710e75c459ef5d13c",
+    "semantic_hash": ""
+  },
+  "seo/CHECKLIST.md": {
+    "mtime": 1786285958.1087286,
+    "seen": 1786871283.681159,
+    "ast_hash": "2ef888b09bf6c2085fda6b48c847b644",
+    "semantic_hash": ""
+  },
+  "seo/LEAD_PIPELINE.md": {
+    "mtime": 1786456640.9097402,
+    "seen": 1786871283.681159,
+    "ast_hash": "0577a9b6322bd035923c93de9e8ffb69",
+    "semantic_hash": ""
+  },
+  "seo/METRIKA_GOALS.md": {
+    "mtime": 1786851579.9060335,
+    "seen": 1786871283.681159,
+    "ast_hash": "eea18bec09ede63380d3617e399e922b",
+    "semantic_hash": ""
+  },
+  "seo/MONTHLY_AUDIT.md": {
+    "mtime": 1786851579.7550006,
+    "seen": 1786871283.681159,
+    "ast_hash": "8587dde6cc8f173c8fbf90c75986d156",
+    "semantic_hash": ""
+  },
+  "seo/README.md": {
+    "mtime": 1786851579.7890706,
+    "seen": 1786871283.681159,
+    "ast_hash": "5ff60e38d254d6b446a7560ea9f33419",
+    "semantic_hash": ""
+  },
+  "seo/SEMANTICS.md": {
+    "mtime": 1786870102.4657724,
+    "seen": 1786871283.681159,
+    "ast_hash": "ab2c20bd210bd1ac87a4ac4188b2b0be",
+    "semantic_hash": ""
+  },
+  "seo/SEO-MASTER-PLAN.md": {
+    "mtime": 1786850501.069796,
+    "seen": 1786871283.681159,
+    "ast_hash": "07510809d8d1dbcf234b884bbf6bc74c",
+    "semantic_hash": ""
+  },
+  "seo/SEO_PROMOTION_PLAN.md": {
+    "mtime": 1786851579.9050336,
+    "seen": 1786871283.681159,
+    "ast_hash": "11d4e9d627b656422edf9e58b3180984",
+    "semantic_hash": ""
+  },
+  "seo/TZ_CHARGE_NOTON.md": {
+    "mtime": 1786851579.9070332,
+    "seen": 1786871283.681159,
+    "ast_hash": "8f84809f5fdc48dbc3ce2746da1431d9",
+    "semantic_hash": ""
+  },
+  "seo/WEBMASTER_METRICA.md": {
+    "mtime": 1786851579.9050336,
+    "seen": 1786871283.681159,
+    "ast_hash": "cefec13b337e2a2e82539df6260df31e",
+    "semantic_hash": ""
+  },
+  "seo/WEEKLY_REPORT.md": {
+    "mtime": 1786286250.997944,
+    "seen": 1786871283.681159,
+    "ast_hash": "b745c3c1976713f37049a2ffa10281d1",
+    "semantic_hash": ""
+  },
+  "seo/WORDSTAT.md": {
+    "mtime": 1786851579.862047,
+    "seen": 1786871283.681159,
+    "ast_hash": "660f828afe3108d90c76fdd53ef70f14",
+    "semantic_hash": ""
+  },
+  "seo/YANDEX_BUSINESS.md": {
+    "mtime": 1786340136.4683514,
+    "seen": 1786871283.681159,
+    "ast_hash": "c319136d3dc676a7c2fe70d2c334c25a",
+    "semantic_hash": ""
+  },
+  "seo/reports/2026-08-09.md": {
+    "mtime": 1786286330.4403143,
+    "seen": 1786871283.681159,
+    "ast_hash": "5df4f9008ca427d8be3ca30e3b6ad569",
+    "semantic_hash": ""
+  },
+  "seo/reports/2026-08-10.md": {
+    "mtime": 1786456640.9137387,
+    "seen": 1786871283.681159,
+    "ast_hash": "0c0e36dcad2386c79fef6d306b3c7d27",
+    "semantic_hash": ""
+  },
+  "seo/reports/2026-08-16.md": {
+    "mtime": 1786870107.2529516,
+    "seen": 1786871283.681159,
+    "ast_hash": "ed1e3f8fefc407f0523dda1cb61e11bf",
+    "semantic_hash": ""
+  },
+  "seo/reports/2026-08-monthly.md": {
+    "mtime": 1786340419.4698057,
+    "seen": 1786871283.681159,
+    "ast_hash": "4b545d11240b3c9226bf11fb045d8e16",
+    "semantic_hash": ""
+  },
+  "seo/reports/wordstat-2026-08-14.md": {
+    "mtime": 1786677969.5104718,
+    "seen": 1786871283.681159,
+    "ast_hash": "1e23ffc84af5296191b44d46eadbe456",
+    "semantic_hash": ""
+  },
+  "seo/seo-agents-config.md": {
+    "mtime": 1786851579.9070332,
+    "seen": 1786871283.681159,
+    "ast_hash": "c5d17059079ef542617bc02fc826820d",
+    "semantic_hash": ""
+  },
+  "services/apps.html": {
+    "mtime": 1786345528.5238166,
+    "seen": 1786871283.681159,
+    "ast_hash": "7d0d8e062e85573746dc2e7c4d8218c4",
+    "semantic_hash": ""
+  },
+  "services/battery.html": {
+    "mtime": 1786851579.8630464,
+    "seen": 1786871283.681159,
+    "ast_hash": "0fc31d3a06bea8f32660d670dee657b3",
+    "semantic_hash": ""
+  },
+  "services/body.html": {
+    "mtime": 1786851579.9050336,
+    "seen": 1786871283.681159,
+    "ast_hash": "e9a76669dd86116e1233f16b9cf9554d",
+    "semantic_hash": ""
+  },
+  "services/camera.html": {
+    "mtime": 1786456641.0067093,
+    "seen": 1786871283.681159,
+    "ast_hash": "e81af2a6f85a6ac580c41f00c4099dc4",
+    "semantic_hash": ""
+  },
+  "services/charge.html": {
+    "mtime": 1786851579.7550006,
+    "seen": 1786871283.681159,
+    "ast_hash": "d087908d09efe056c691c31d535e495d",
+    "semantic_hash": ""
+  },
+  "services/cleaning.html": {
+    "mtime": 1786456641.0097084,
+    "seen": 1786871283.681159,
+    "ast_hash": "d56aaf6abcce7f4be9772449cc73131f",
+    "semantic_hash": ""
+  },
+  "services/index.html": {
+    "mtime": 1786851579.9060335,
+    "seen": 1786871283.681159,
+    "ast_hash": "e9978a3047d41bf11ac3d262558e9dbd",
+    "semantic_hash": ""
+  },
+  "services/not-on.html": {
+    "mtime": 1786870102.4727702,
+    "seen": 1786871283.681159,
+    "ast_hash": "3713218aedf5cb14175a826d5602827b",
+    "semantic_hash": ""
+  },
+  "services/screen.html": {
+    "mtime": 1786851579.9060335,
+    "seen": 1786871283.681159,
+    "ast_hash": "38e8b4e828f1cdb658de1a017a5f7c06",
+    "semantic_hash": ""
+  },
+  "services/water.html": {
+    "mtime": 1786456641.0157068,
+    "seen": 1786871283.681159,
+    "ast_hash": "425127d611a21ad3862fd4ad40a5726e",
+    "semantic_hash": ""
+  },
+  "vladivostok/battery.html": {
+    "mtime": 1786345528.5338137,
+    "seen": 1786871283.681159,
+    "ast_hash": "750e64ed3b4ee144d3416c39dc004de1",
+    "semantic_hash": ""
+  },
+  "vladivostok/charge.html": {
+    "mtime": 1786678508.7153735,
+    "seen": 1786871283.681159,
+    "ast_hash": "ac02e5caa0e0d86a57457242a6779a34",
+    "semantic_hash": ""
+  },
+  "vladivostok/index.html": {
+    "mtime": 1786851579.9070332,
+    "seen": 1786871283.681159,
+    "ast_hash": "21b0fd2deeca8b16e8e60cab9432cceb",
+    "semantic_hash": ""
+  },
+  "vladivostok/not-on.html": {
+    "mtime": 1786678508.7173738,
+    "seen": 1786871283.681159,
+    "ast_hash": "57000c42bff000b95ee3d2b189412657",
+    "semantic_hash": ""
+  },
+  "vladivostok/screen.html": {
+    "mtime": 1786345528.5358136,
+    "seen": 1786871283.681159,
+    "ast_hash": "6ae15fe646c655802d49c18b1f0e7802",
+    "semantic_hash": ""
+  },
+  "vladivostok/water.html": {
+    "mtime": 1786345528.537054,
+    "seen": 1786871283.681159,
+    "ast_hash": "50dc3ad6d0adce5993d2ee630977c245",
+    "semantic_hash": ""
+  },
+  "yandex_93ed52511661d246.html": {
+    "mtime": 1786345528.5380542,
+    "seen": 1786871283.681159,
+    "ast_hash": "c63685fa468991fc1a52ba0246fa3bd6",
+    "semantic_hash": ""
+  },
+  "\u0418\u041d\u0421\u0422\u0420\u0423\u041a\u0426\u0418\u042f.md": {
+    "mtime": 1786285753.89256,
+    "seen": 1786871283.681159,
+    "ast_hash": "f36799c728f7a58adfa0de84c0ed0297",
+    "semantic_hash": ""
+  },
+  "\u041d\u0410\u0421\u0422\u0420\u041e\u0419\u041a\u0410_SSL.md": {
+    "mtime": 1786285753.8935597,
+    "seen": 1786871283.681159,
+    "ast_hash": "f44f1d3483ce9afd6caf337d99fcc345",
+    "semantic_hash": ""
+  },
+  "assets/brands/apple.svg": {
+    "mtime": 1786285753.7808695,
+    "seen": 1786871283.681159,
+    "ast_hash": "0aa32a2fcb19d81c2ff8104b796484d9",
+    "semantic_hash": ""
+  },
+  "assets/brands/honor.svg": {
+    "mtime": 1786285753.781869,
+    "seen": 1786871283.681159,
+    "ast_hash": "77e48c2dec8a87fc30e0525c128f8ec1",
+    "semantic_hash": ""
+  },
+  "assets/brands/huawei.svg": {
+    "mtime": 1786285753.781869,
+    "seen": 1786871283.681159,
+    "ast_hash": "bed1efc9af55128b372bfc01a12c3f21",
+    "semantic_hash": ""
+  },
+  "assets/brands/oneplus.svg": {
+    "mtime": 1786285753.7828693,
+    "seen": 1786871283.681159,
+    "ast_hash": "ada6aac112709a3e0f04b12867bd67ae",
+    "semantic_hash": ""
+  },
+  "assets/brands/oppo.svg": {
+    "mtime": 1786285753.7828693,
+    "seen": 1786871283.681159,
+    "ast_hash": "7494ae7de3c7ab515d8c4bfd4da6e469",
+    "semantic_hash": ""
+  },
+  "assets/brands/samsung.svg": {
+    "mtime": 1786285753.7838688,
+    "seen": 1786871283.681159,
+    "ast_hash": "69b19248f6d26f5d9c776476e4bf10db",
+    "semantic_hash": ""
+  },
+  "assets/brands/vivo.svg": {
+    "mtime": 1786285753.7838688,
+    "seen": 1786871283.681159,
+    "ast_hash": "9c2e839fbc14e18a729becb2e043b88d",
+    "semantic_hash": ""
+  },
+  "assets/brands/xiaomi.svg": {
+    "mtime": 1786285753.7848678,
+    "seen": 1786871283.681159,
+    "ast_hash": "8cf1f1df7050268a8d97216ab82d154c",
+    "semantic_hash": ""
+  },
+  "assets/messengers/phone.svg": {
+    "mtime": 1786285753.7858677,
+    "seen": 1786871283.681159,
+    "ast_hash": "2d16fd782964cd6c9fd1054f334080e5",
+    "semantic_hash": ""
+  },
+  "assets/messengers/telegram.svg": {
+    "mtime": 1786285753.7868674,
+    "seen": 1786871283.681159,
+    "ast_hash": "d677ed03f1b9a1f7946c0a96404a2d2c",
+    "semantic_hash": ""
+  },
+  "assets/messengers/whatsapp.svg": {
+    "mtime": 1786285753.7868674,
+    "seen": 1786871283.681159,
+    "ast_hash": "3cd8e40d2927b7d2d98cdeb32e57ca96",
+    "semantic_hash": ""
+  },
+  "assets/overlays/cracks.svg": {
+    "mtime": 1786851579.756001,
+    "seen": 1786871283.681159,
+    "ast_hash": "45fb8dabdeef123b512469959f88f363",
+    "semantic_hash": ""
+  },
+  "assets/placeholders/placeholder.svg": {
+    "mtime": 1786285753.7878675,
+    "seen": 1786871283.681159,
+    "ast_hash": "f4620b85ffa3f94302ac54d2518ecb33",
+    "semantic_hash": ""
+  },
+  "favicon.svg": {
+    "mtime": 1786345497.6000319,
+    "seen": 1786871283.681159,
+    "ast_hash": "445ccfe447ac54f5dacdfa55c58fa562",
+    "semantic_hash": ""
+  },
+  "images/phones/honor.svg": {
+    "mtime": 1786285753.8705668,
+    "seen": 1786871283.681159,
+    "ast_hash": "748d08831518d90a9cb95c0c002f5be7",
+    "semantic_hash": ""
+  },
+  "images/phones/huawei.svg": {
+    "mtime": 1786285753.871568,
+    "seen": 1786871283.681159,
+    "ast_hash": "748d08831518d90a9cb95c0c002f5be7",
+    "semantic_hash": ""
+  },
+  "images/phones/iphone11.svg": {
+    "mtime": 1786285753.871568,
+    "seen": 1786871283.681159,
+    "ast_hash": "748d08831518d90a9cb95c0c002f5be7",
+    "semantic_hash": ""
+  },
+  "images/phones/iphone12.svg": {
+    "mtime": 1786285753.8725665,
+    "seen": 1786871283.681159,
+    "ast_hash": "748d08831518d90a9cb95c0c002f5be7",
+    "semantic_hash": ""
+  },
+  "images/phones/iphone13.svg": {
+    "mtime": 1786285753.8725665,
+    "seen": 1786871283.681159,
+    "ast_hash": "748d08831518d90a9cb95c0c002f5be7",
+    "semantic_hash": ""
+  },
+  "images/phones/iphone14.svg": {
+    "mtime": 1786285753.8735662,
+    "seen": 1786871283.681159,
+    "ast_hash": "748d08831518d90a9cb95c0c002f5be7",
+    "semantic_hash": ""
+  },
+  "images/phones/iphone15.svg": {
+    "mtime": 1786285753.8735662,
+    "seen": 1786871283.681159,
+    "ast_hash": "748d08831518d90a9cb95c0c002f5be7",
+    "semantic_hash": ""
+  },
+  "images/phones/iphone16pro.svg": {
+    "mtime": 1786285753.8745666,
+    "seen": 1786871283.681159,
+    "ast_hash": "748d08831518d90a9cb95c0c002f5be7",
+    "semantic_hash": ""
+  },
+  "images/phones/iphone17pro.svg": {
+    "mtime": 1786285753.8755672,
+    "seen": 1786871283.681159,
+    "ast_hash": "044f932a45f0911594be7edb282284b1",
+    "semantic_hash": ""
+  },
+  "images/phones/iphoneSE.svg": {
+    "mtime": 1786285753.8755672,
+    "seen": 1786871283.681159,
+    "ast_hash": "748d08831518d90a9cb95c0c002f5be7",
+    "semantic_hash": ""
+  },
+  "images/phones/iphoneXS.svg": {
+    "mtime": 1786285753.8765657,
+    "seen": 1786871283.681159,
+    "ast_hash": "748d08831518d90a9cb95c0c002f5be7",
+    "semantic_hash": ""
+  },
+  "images/phones/samsungA.svg": {
+    "mtime": 1786285753.8765657,
+    "seen": 1786871283.681159,
+    "ast_hash": "748d08831518d90a9cb95c0c002f5be7",
+    "semantic_hash": ""
+  },
+  "images/phones/samsungS.svg": {
+    "mtime": 1786285753.8775668,
+    "seen": 1786871283.681159,
+    "ast_hash": "748d08831518d90a9cb95c0c002f5be7",
+    "semantic_hash": ""
+  },
+  "images/phones/samsungZ.svg": {
+    "mtime": 1786285753.8775668,
+    "seen": 1786871283.681159,
+    "ast_hash": "748d08831518d90a9cb95c0c002f5be7",
+    "semantic_hash": ""
+  },
+  "images/phones/xiaomi.svg": {
+    "mtime": 1786285753.8785655,
+    "seen": 1786871283.681159,
+    "ast_hash": "748d08831518d90a9cb95c0c002f5be7",
+    "semantic_hash": ""
+  },
+  "data/brands.json": {
+    "mtime": 1786285753.8605704,
+    "seen": 1786871283.681159,
+    "ast_hash": "8af7ed23297bc12da8d9bef71e543ee7",
+    "semantic_hash": ""
+  },
+  "data/contacts.json": {
+    "mtime": 1786285753.8605704,
+    "seen": 1786871283.681159,
+    "ast_hash": "fbc4312bba4957f6d84ddf17356921db",
+    "semantic_hash": ""
+  },
+  "data/problems.json": {
+    "mtime": 1786285753.8615706,
+    "seen": 1786871283.681159,
+    "ast_hash": "0ef29e570149500806bceb148d4650bf",
+    "semantic_hash": ""
+  },
+  "displays-config.json": {
+    "mtime": 1786292665.7449167,
+    "seen": 1786871283.681159,
+    "ast_hash": "c057c5acef843258929165c6e2ab0f85",
+    "semantic_hash": ""
+  },
+  "seo/pages.json": {
+    "mtime": 1786870102.4697716,
+    "seen": 1786871283.681159,
+    "ast_hash": "3c999148b7c9f271e9cba436bdd40681",
+    "semantic_hash": ""
+  },
+  "seo/reports/wordstat-2026-08-14.json": {
+    "mtime": 1786677969.5094724,
+    "seen": 1786871283.681159,
+    "ast_hash": "c9b287d20b938a067023a0518205f9ae",
+    "semantic_hash": ""
+  },
+  "seo/wordstat/phrases.json": {
+    "mtime": 1786851579.8630464,
+    "seen": 1786871283.681159,
+    "ast_hash": "1c288b6d77b2f7e2a34d45dd37eb1605",
+    "semantic_hash": ""
+  },
+  ".cursor/settings.json": {
+    "mtime": 1786870426.0943525,
+    "seen": 1786871283.681159,
+    "ast_hash": "01bc4e99a7381279daa508112c6109f7",
+    "semantic_hash": ""
+  },
+  "dashboard/data.json": {
+    "mtime": 1786870101.7599466,
+    "seen": 1786871283.681159,
+    "ast_hash": "843440342e8f300f3a8ddc17904509ea",
+    "semantic_hash": ""
+  },
+  ".cursor/skills/content-writer/SKILL.md": {
+    "mtime": 1786870302.1751738,
+    "seen": 1786871283.681159,
+    "ast_hash": "7a32c764a3d8813ba468fdca2b92564d",
+    "semantic_hash": ""
+  },
+  "blog/telefon-ne-vklyuchaetsya.html": {
+    "mtime": 1786870102.4637735,
+    "seen": 1786871283.681159,
+    "ast_hash": "96ebbd6612fb513bf8fd1f21262b84af",
+    "semantic_hash": ""
+  },
+  ".github/workflows/weekly-content-writer.yml": {
+    "mtime": 1786871270.0791483,
+    "seen": 1786871283.681159,
+    "ast_hash": "0c8e0fc60c9ceb968b04ea21f211ead5",
+    "semantic_hash": ""
+  }
+}

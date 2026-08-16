@@ -1,0 +1,27 @@
+# Graphify: не индексировать шум (сборка, кэш, логи, бинарники)
+node_modules/
+.next/
+dist/
+build/
+.cache/
+coverage/
+tmp/
+logs/
+*.log
+
+# Крупные медиа и служебные фото
+yandex-biz-photos/
+assets/models/*.glb
+*.webp
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.mp4
+*.glb
+
+# Секреты и локальный мусор
+.env
+.env.*
+.omniroute-src/
+tools/omniroute/

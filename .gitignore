@@ -48,3 +48,6 @@ tools/omniroute/omniroute-3.8.49.tgz
 tools/omniroute/OmniRoute.exe
 tools/omniroute/server-app/
 
+# Graphify: keep report/map, skip cache
+graphify-out/cache/
+

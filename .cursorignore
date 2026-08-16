@@ -1,0 +1,24 @@
+﻿# Шум контекста Cursor — не индексировать
+node_modules/
+.next/
+dist/
+build/
+.cache/
+coverage/
+tmp/
+logs/
+*.log
+
+# Кэш графа (сами артефакты graph.json / GRAPH_REPORT.md / graph.html нужны)
+graphify-out/cache/
+
+# Крупные бинарники и служебные фото
+yandex-biz-photos/
+assets/models/*.glb
+
+# Локальные установки
+.omniroute-src/
+tools/omniroute/node_modules/
+tools/omniroute/*.tgz
+tools/omniroute/OmniRoute.exe
+tools/omniroute/server-app/
