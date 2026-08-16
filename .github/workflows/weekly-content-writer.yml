@@ -1,0 +1,96 @@
+# Воскресенье 10:00 Хабаровск (00:00 UTC). Если вс не сработал — понедельник.
+name: Weekly content-writer
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'
+    - cron: '0 0 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  draft:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Skip Monday if this week already has a draft PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          DOW=$(date -u +%u)
+          if [ "$DOW" != "1" ]; then
+            echo "Not Monday — run the draft."
+            exit 0
+          fi
+          SINCE=$(date -u -d '6 days ago' +%Y-%m-%d)
+          COUNT=$(gh pr list --repo "${{ github.repository }}" --state all --search "seo: weekly content-writer draft created:>=${SINCE}" --json number --jq 'length')
+          echo "Weekly PRs since ${SINCE}: ${COUNT}"
+          if [ "${COUNT}" != "0" ]; then
+            echo "Sunday already produced a draft — skip Monday."
+            echo "SKIP=1" >> "$GITHUB_ENV"
+          fi
+
+      - name: Require CURSOR_API_KEY
+        if: env.SKIP != '1'
+        env:
+          CURSOR_API_KEY: ${{ secrets.CURSOR_API_KEY }}
+        run: |
+          if [ -z "${CURSOR_API_KEY}" ]; then
+            echo "Add GitHub secret CURSOR_API_KEY (Cursor Dashboard → Integrations), then re-run this workflow."
+            exit 1
+          fi
+
+      - name: Install Cursor CLI
+        if: env.SKIP != '1'
+        run: |
+          curl https://cursor.com/install -fsS | bash
+          echo "$HOME/.cursor/bin" >> "$GITHUB_PATH"
+
+      - name: Write one SEO draft
+        if: env.SKIP != '1'
+        env:
+          CURSOR_API_KEY: ${{ secrets.CURSOR_API_KEY }}
+        run: |
+          agent -p --force "You write SEO pages for rem-phone.ru. Follow .cursor/skills/content-writer/SKILL.md.
+
+          Read docs/business-memory/ (especially pains.md, clients.md, product.md), seo/SEMANTICS.md, the latest seo/reports/wordstat-*.md, and the style sample services/body.html.
+
+          Hard rules:
+          - Exactly one page (new URL or strengthen an existing one). Not a content factory.
+          - Topic from Wordstat frequency. No thin brand x city URLs. No fourth city.
+          - Prices only from docs/business-memory/prices.md; otherwise say the price is calculated individually.
+          - Unique title and h1. CTA: /#repair-flow, Telegram @REMPHONE_RUSSIA_Bot, phone +7 914 411-17-30.
+          - Warranty 90 days on all work. Do not invent workshop addresses.
+          - Add the URL to seo/pages.json, run node seo/generate-sitemap.mjs, then node seo/health-check.mjs and fix blocking errors.
+          - Do NOT git commit, push, merge, or open a PR. Only change files in the working tree.
+
+          When done, print the new path, title, h1, and Wordstat query."
+
+      - name: Open pull request
+        if: env.SKIP != '1'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet && git diff --cached --quiet; then
+            echo "Agent made no file changes — no PR."
+            exit 0
+          fi
+          STAMP=$(date -u +%Y-%m-%d)
+          BRANCH="seo/weekly-${STAMP}"
+          git checkout -B "$BRANCH"
+          git add -A
+          git reset HEAD -- graphify-out/cache 2>/dev/null || true
+          git commit -m "seo: weekly content-writer draft (${STAMP})"
+          git push -u origin "$BRANCH"
+          gh pr create --title "seo: weekly content-writer draft" --body "Weekly content-writer draft for ${STAMP}. Review before merge. Do not merge without Fedya's OK."

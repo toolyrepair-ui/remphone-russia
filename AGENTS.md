@@ -22,3 +22,5 @@ CLI Graphify (Windows): бинарник `C:\Users\PC\.local\bin\graphify.exe`.
 Жёсткие ограничения: три города (Хабаровск, КнА, Владивосток); не менять `config.js` `relayUrl`; не плодить thin URL модель×город; не выдумывать адреса мастерских.
 
 SEO-страницы: скилл `.cursor/skills/content-writer/` («автор статей»). Не коммитить черновик без одобрения.
+
+Расписание: GitHub Action `Weekly content-writer` — воскресенье 10:00 Хабаровск, если вс не сработал — понедельник. Нужен секрет `CURSOR_API_KEY`. Черновик приходит pull request, не сразу на сайт.
