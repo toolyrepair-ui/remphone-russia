@@ -19,6 +19,7 @@ jobs:
       - name: Collect stats
         env:
           YANDEX_METRIKA_TOKEN: ${{ secrets.YANDEX_METRIKA_TOKEN }}
+          YANDEX_WEBMASTER_TOKEN: ${{ secrets.YANDEX_WEBMASTER_TOKEN }}
           LEAD_STATS_URL: ${{ secrets.LEAD_STATS_URL }}
           LEAD_API_SECRET: ${{ secrets.LEAD_API_SECRET }}
         run: node dashboard/collect.mjs

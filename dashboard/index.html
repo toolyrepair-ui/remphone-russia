@@ -79,7 +79,7 @@
 <body>
   <div class="wrap">
     <h1>Контроль REMPHONE <span id="pill" class="pill wait">загрузка</span></h1>
-    <p class="sub">Визиты, заявки, конверсия, страницы в sitemap. Страница закрыта от поиска.</p>
+    <p class="sub">Визиты, заявки, конверсия, страницы в sitemap и в поиске Яндекса. Страница закрыта от поиска.</p>
 
     <div class="grid">
       <div class="card">
@@ -105,7 +105,12 @@
       <div class="card">
         <div class="label">URL в sitemap</div>
         <div class="value" id="idx">—</div>
-        <div class="hint" id="idx-h">индексация Яндекс/Google — позже</div>
+        <div class="hint">сколько страниц на сайте</div>
+      </div>
+      <div class="card">
+        <div class="label">В поиске Яндекса</div>
+        <div class="value" id="idx-ya">—</div>
+        <div class="hint" id="idx-h">нужен токен Вебмастера</div>
       </div>
     </div>
 
@@ -140,6 +145,7 @@
         document.getElementById('l-week-h').textContent = (d.leads && d.leads.source) ? d.leads.source : 'цель Метрики request-form-submit';
         document.getElementById('conv').textContent = conv(d.conversion_visit_to_lead);
         document.getElementById('idx').textContent = fmt(d.index && d.index.sitemap_urls);
+        document.getElementById('idx-ya').textContent = fmt(d.index && d.index.yandex_indexed);
         document.getElementById('idx-h').textContent = d.index && d.index.note ? d.index.note : '';
         document.getElementById('updated').textContent = d.updated_at ? new Date(d.updated_at).toLocaleString('ru-RU') : '—';
         document.getElementById('source').textContent = d.source || '—';

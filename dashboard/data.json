@@ -1,16 +1,16 @@
 {
-  "updated_at": "2026-08-16T08:31:17.005Z",
+  "updated_at": "2026-08-16T09:31:20.033Z",
   "metrika_id": 111453492,
   "source": "metrika",
   "visits": {
-    "day": 2,
-    "week": 13,
-    "month": 13
+    "day": 4,
+    "week": 15,
+    "month": 15
   },
   "pageviews": {
-    "day": 3,
-    "week": 24,
-    "month": 24
+    "day": 6,
+    "week": 27,
+    "month": 27
   },
   "leads": {
     "day": 0,
@@ -18,12 +18,13 @@
     "month": 1,
     "source": "metrika_goal_request-form-submit"
   },
-  "conversion_visit_to_lead": 7.7,
+  "conversion_visit_to_lead": 6.7,
   "index": {
-    "sitemap_urls": 55,
-    "yandex_indexed": null,
+    "sitemap_urls": 56,
+    "yandex_indexed": 2,
     "google_indexed": null,
-    "note": "Индексация Вебмастера/GSC — позже, когда будет API-токен"
+    "google_indexed_approx": null,
+    "note": "Яндекс — страницы в поиске (searchable_pages_count). Google: точного числа нет, оценка пока не подключена."
   },
   "series": [
     {
@@ -64,8 +65,8 @@
     },
     {
       "date": "2026-08-16",
-      "visits": 2,
-      "pageviews": 3,
+      "visits": 4,
+      "pageviews": 6,
       "leads": 0
     }
   ],

@@ -1,16 +1,16 @@
 # Graph Report - remphone-russia  (2026-08-16)
 
 ## Corpus Check
-- 67 files · ~86,621 words
+- 67 files · ~87,481 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 548 nodes · 559 edges · 51 communities (46 shown, 5 thin omitted)
+- 552 nodes · 565 edges · 51 communities (46 shown, 5 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 5 edges (avg confidence: 0.5)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `7068c874`
+- Built from commit: `15e1ff90`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -72,8 +72,8 @@
 6. `MCP-серверы для Remphone (Cursor)` - 10 edges
 7. `Автор статей (content-writer)` - 9 edges
 8. `План SEO‑продвижения rem-phone.ru` - 9 edges
-9. `Яндекс Бизнес — карточка REMPHONE RUSSIA (3 города)` - 8 edges
-10. `Мастер-план SEO для rem-phone.ru` - 8 edges
+9. `Мастер-план SEO для rem-phone.ru` - 8 edges
+10. `Еженедельный SEO-отчёт — rem-phone.ru` - 8 edges
 
 ## Surprising Connections (you probably didn't know these)
 - None detected - all connections are within the same source files.
@@ -144,8 +144,8 @@ Cohesion: 0.07
 Nodes (28): 1. Техническая готовность сайта, 2. Подключение к поисковикам, 3. Первые SEO-страницы (приоритет), 4. Бесплатное продвижение (без бюджета), 5. Контент-план (быстрый запуск), 6. SEO-ключи (ядро), 7. Метрики успеха, 8. Важно (+20 more)
 
 ### Community 22 - "collect.mjs"
-Cohesion: 0.12
-Nodes (13): data, __dirname, fetchMetrika(), leadSecret, leadUrl, metrika(), notes, outPath (+5 more)
+Cohesion: 0.11
+Nodes (17): data, __dirname, fetchMetrika(), fetchWebmasterIndex(), leadSecret, leadUrl, metrika(), notes (+9 more)
 
 ### Community 23 - "План SEO‑продвижения rem-phone.ru"
 Cohesion: 0.11
@@ -252,7 +252,7 @@ Cohesion: 0.20
 Nodes (9): Автор статей (content-writer), Выбор темы, Коммит, Перед стартом (каждый раз), Регулярный прогон, Тон и факты, Формат результата, Цены (+1 more)
 
 ## Knowledge Gaps
-- **326 isolated node(s):** `Перед стартом (каждый раз)`, `Выбор темы`, `Цены`, `Тон и факты`, `Формат результата` (+321 more)
+- **327 isolated node(s):** `__dirname`, `root`, `outPath`, `token`, `webmasterToken` (+322 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **5 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -263,8 +263,8 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.011) - this node is a cross-community bridge._
 - **Why does `Семантика — rem-phone.ru (3 города)` connect `Семантика — rem-phone.ru (3 города)` to `Яндекс Бизнес — карточка REMPHONE RUSSIA (3 города)`?**
   _High betweenness centrality (0.006) - this node is a cross-community bridge._
-- **What connects `Перед стартом (каждый раз)`, `Выбор темы`, `Цены` to the rest of the system?**
-  _326 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **What connects `__dirname`, `root`, `outPath` to the rest of the system?**
+  _327 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `script.js` be split into smaller, more focused modules?**
   _Cohesion score 0.0855614973262032 - nodes in this community are weakly interconnected._
 - **Should `Яндекс Бизнес — карточка REMPHONE RUSSIA (3 города)` be split into smaller, more focused modules?**

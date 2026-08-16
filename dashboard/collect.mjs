@@ -20,8 +20,10 @@ loadEnvFile(join(root, '.env.dashboard'));
 loadEnvFile(join(root, '.env'));
 
 const token = (process.env.YANDEX_METRIKA_TOKEN || '').trim();
+const webmasterToken = (process.env.YANDEX_WEBMASTER_TOKEN || token).trim();
 const leadUrl = (process.env.LEAD_STATS_URL || '').trim();
 const leadSecret = (process.env.LEAD_API_SECRET || '').trim();
+const WM_API = 'https://api.webmaster.yandex.net/v4';
 
 function loadEnvFile(path) {
   if (!existsSync(path)) return;
@@ -154,6 +156,43 @@ async function fetchMetrika() {
   };
 }
 
+async function wmGet(path, wmToken) {
+  const res = await fetch(`${WM_API}${path}`, {
+    headers: { Authorization: `OAuth ${wmToken}`, Accept: 'application/json' },
+  });
+  const json = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    const msg = json.error_message || json.message || json.error_code || JSON.stringify(json).slice(0, 200);
+    throw new Error(`Webmaster ${res.status}: ${msg}`);
+  }
+  return json;
+}
+
+function pickHostId(hosts) {
+  const list = hosts.hosts || hosts || [];
+  const want = ['https:rem-phone.ru:443', 'http:rem-phone.ru:80', 'https:www.rem-phone.ru:443'];
+  for (const id of want) {
+    const hit = list.find((h) => (h.host_id || h.hostId) === id);
+    if (hit) return hit.host_id || hit.hostId;
+  }
+  const hit = list.find((h) => String(h.ascii_host_url || h.unicode_host_url || h.host_id || '').includes('rem-phone.ru'));
+  return hit ? (hit.host_id || hit.hostId) : null;
+}
+
+async function fetchWebmasterIndex() {
+  if (!webmasterToken) return null;
+  const user = await wmGet('/user', webmasterToken);
+  const userId = user.user_id || user.userId;
+  if (!userId) throw new Error('Webmaster: нет user_id');
+  const hosts = await wmGet(`/user/${userId}/hosts`, webmasterToken);
+  const hostId = pickHostId(hosts);
+  if (!hostId) throw new Error('Webmaster: хост rem-phone.ru не найден');
+  const summary = await wmGet(`/user/${userId}/hosts/${encodeURIComponent(hostId)}/summary`, webmasterToken);
+  const n = summary.searchable_pages_count;
+  if (n == null) throw new Error('Webmaster: нет searchable_pages_count');
+  return Number(n);
+}
+
 async function fetchLeads() {
   if (!leadUrl) return null;
   const headers = { Accept: 'application/json' };
@@ -183,7 +222,8 @@ const data = {
     sitemap_urls: sitemapCount(),
     yandex_indexed: prev.index?.yandex_indexed ?? null,
     google_indexed: prev.index?.google_indexed ?? null,
-    note: 'Индексация Вебмастера/GSC — позже, когда будет API-токен',
+    google_indexed_approx: prev.index?.google_indexed_approx ?? null,
+    note: prev.index?.note || 'Яндекс: searchable_pages_count. Google: точного API нет, оценка позже.',
   },
   series: prev.series || [],
   notes: [],
@@ -217,6 +257,18 @@ try {
   }
 } catch (e) {
   notes.push(`Заявки API: ${e.message}`);
+}
+
+try {
+  const yandexIndexed = await fetchWebmasterIndex();
+  if (yandexIndexed != null) {
+    data.index.yandex_indexed = yandexIndexed;
+    data.index.note = 'Яндекс — страницы в поиске (searchable_pages_count). Google: точного числа нет, оценка пока не подключена.';
+  } else {
+    notes.push('Нет токена Вебмастера — индекс Яндекса не обновлён (нужен webmaster:hostinfo)');
+  }
+} catch (e) {
+  notes.push(`Вебмастер: ${e.message}`);
 }
 
 data.conversion_visit_to_lead = pct(data.leads.week, data.visits.week);

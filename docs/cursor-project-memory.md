@@ -40,7 +40,7 @@
 | `data/` | `brands.json`, `problems.json`, `contacts.json` |
 | `docs/` | Память агента, MCP, SEO-автоматизация |
 | `docs/business-memory/` | Бизнес-память: продукт, цены, клиенты, маркетинг |
-| `dashboard/` | Внутренний контроль (noindex, не в sitemap). Сбор: `node dashboard/collect.mjs` |
+| `dashboard/` | Внутренний контроль (noindex, не в sitemap). Сбор: `node dashboard/collect.mjs`. Визиты — Метрика; `index.yandex_indexed` — Вебмастер `searchable_pages_count` |
 | `graphify-out/` | Knowledge graph — не удалять |
 | `yandex-biz-photos/` | Служебные фото Яндекс Бизнеса, не логика сайта |
 
@@ -66,6 +66,7 @@
 | Телефон / WhatsApp | `+79144111730` | Единый номер |
 | Email | `toolyrepair@gmail.com` | |
 | Яндекс.Метрика | `111453492` | Не плодить второй счётчик |
+| Яндекс.Вебмастер | хост `https:rem-phone.ru:443` | Дашборд: `YANDEX_WEBMASTER_TOKEN`, поле `searchable_pages_count` |
 | Google Analytics | `G-53F13EFHZQ` (свойство Rem-phone) | Не создавать второе GA-свойство |
 | Яндекс Бизнес | компания `114553486842` | Онлайн, без адреса на Картах |
 | Wordstat | `seo/wordstat_fetch.py` | См. `seo/WORDSTAT.md` |
