@@ -32,10 +32,13 @@ build/
 # Temporary files
 *.tmp
 *.temp
-.cursor/
+.cursor/*
 !.cursor/settings.json
 !.cursor/mcp.json.example
 !.cursor/rules/
+!.cursor/rules/**
+!.cursor/skills/
+!.cursor/skills/**
 
 # OmniRoute local install (not committed)
 .omniroute-src/

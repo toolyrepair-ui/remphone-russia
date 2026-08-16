@@ -1,0 +1,27 @@
+---
+description: Память REMPHONE — сначала memory и граф, потом исходники
+alwaysApply: true
+---
+
+# Порядок контекста
+
+1. Сначала `docs/cursor-project-memory.md` (как устроен код).
+2. Если задача про контент, цены, УТП или маркетинг — прочитать `docs/business-memory/` (что продаём и кому).
+3. Затем Graphify: `graphify query`, `path`, `explain` или `graphify-out/GRAPH_REPORT.md`.
+4. Только потом Read/Grep конкретных файлов. Не сканировать весь репозиторий.
+
+HTML-страницы в граф не входят — гео/услуги смотреть в памяти, `seo/SEMANTICS.md`, `seo/pages.json`.
+
+# Нельзя ломать
+
+- `config.js` → `relayUrl` = `https://rem-phone-relay.toolyrepair.workers.dev`
+- Живые города только: Хабаровск, Комсомольск-на-Амуре, Владивосток
+- Не создавать URL «модель × город»
+- Не выдумывать адреса партнёрских мастерских
+- Не плодить второй счётчик Метрики / второе свойство GA
+
+# После задачи
+
+- Архитектура изменилась → обновить `docs/cursor-project-memory.md`
+- Цены / УТП / портрет клиента изменились → обновить `docs/business-memory/`
+- Структура/JS изменились → `graphify update .`
