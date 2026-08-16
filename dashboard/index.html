@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Контроль REMPHONE — не для поиска</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --line: #334155;
+      --accent: #6c63ff;
+      --ok: #34d399;
+      --warn: #fbbf24;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Inter, system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 32px 20px 48px;
+    }
+    .wrap { max-width: 920px; margin: 0 auto; }
+    h1 { font-size: 22px; font-weight: 650; letter-spacing: -0.02em; }
+    .sub { color: var(--muted); font-size: 14px; margin-top: 6px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin-top: 28px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px 16px 14px;
+    }
+    .label { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; }
+    .value { font-size: 32px; font-weight: 700; margin-top: 8px; line-height: 1.1; }
+    .hint { color: var(--muted); font-size: 12px; margin-top: 6px; }
+    h2 { font-size: 15px; margin: 32px 0 12px; font-weight: 600; }
+    .bars { display: flex; align-items: flex-end; gap: 8px; height: 140px; }
+    .bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; }
+    .bar {
+      width: 100%;
+      max-width: 48px;
+      background: var(--accent);
+      border-radius: 6px 6px 2px 2px;
+      min-height: 2px;
+    }
+    .bar-lab { font-size: 11px; color: var(--muted); margin-top: 6px; }
+    .bar-n { font-size: 11px; color: var(--text); margin-bottom: 4px; }
+    .status {
+      margin-top: 28px;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .pill {
+      display: inline-block;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+    .pill.ok { color: var(--ok); border-color: #065f46; }
+    .pill.wait { color: var(--warn); border-color: #854d0e; }
+    ul.notes { margin-top: 8px; padding-left: 18px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Контроль REMPHONE <span id="pill" class="pill wait">загрузка</span></h1>
+    <p class="sub">Визиты, заявки, конверсия, страницы в sitemap. Страница закрыта от поиска.</p>
+
+    <div class="grid">
+      <div class="card">
+        <div class="label">Визиты за день</div>
+        <div class="value" id="v-day">—</div>
+        <div class="hint" id="v-day-h"></div>
+      </div>
+      <div class="card">
+        <div class="label">Визиты за 7 дней</div>
+        <div class="value" id="v-week">—</div>
+        <div class="hint" id="v-week-h"></div>
+      </div>
+      <div class="card">
+        <div class="label">Заявки за 7 дней</div>
+        <div class="value" id="l-week">—</div>
+        <div class="hint" id="l-week-h"></div>
+      </div>
+      <div class="card">
+        <div class="label">Конверсия визит → заявка</div>
+        <div class="value" id="conv">—</div>
+        <div class="hint">за последние 7 дней</div>
+      </div>
+      <div class="card">
+        <div class="label">URL в sitemap</div>
+        <div class="value" id="idx">—</div>
+        <div class="hint" id="idx-h">индексация Яндекс/Google — позже</div>
+      </div>
+    </div>
+
+    <h2>Визиты по дням</h2>
+    <div class="card">
+      <div class="bars" id="bars"><p class="hint">Нет ряда — нужен токен Метрики</p></div>
+    </div>
+
+    <div class="status">
+      Обновлено: <span id="updated">—</span><br>
+      Источник: <span id="source">—</span>
+      <ul class="notes" id="notes"></ul>
+    </div>
+  </div>
+  <script>
+    function fmt(v) {
+      if (v === null || v === undefined || v === '') return '—';
+      return String(v);
+    }
+    function conv(v) {
+      if (v === null || v === undefined) return '—';
+      return v + '%';
+    }
+    fetch('data.json', { cache: 'no-store' })
+      .then((r) => r.json())
+      .then((d) => {
+        document.getElementById('v-day').textContent = fmt(d.visits && d.visits.day);
+        document.getElementById('v-week').textContent = fmt(d.visits && d.visits.week);
+        document.getElementById('v-day-h').textContent = d.visits && d.visits.month != null ? 'месяц: ' + d.visits.month : '';
+        document.getElementById('v-week-h').textContent = d.pageviews && d.pageviews.week != null ? 'просмотры: ' + d.pageviews.week : '';
+        document.getElementById('l-week').textContent = fmt(d.leads && d.leads.week);
+        document.getElementById('l-week-h').textContent = (d.leads && d.leads.source) ? d.leads.source : 'цель Метрики request-form-submit';
+        document.getElementById('conv').textContent = conv(d.conversion_visit_to_lead);
+        document.getElementById('idx').textContent = fmt(d.index && d.index.sitemap_urls);
+        document.getElementById('idx-h').textContent = d.index && d.index.note ? d.index.note : '';
+        document.getElementById('updated').textContent = d.updated_at ? new Date(d.updated_at).toLocaleString('ru-RU') : '—';
+        document.getElementById('source').textContent = d.source || '—';
+        const pill = document.getElementById('pill');
+        const live = d.source === 'metrika' || d.source === 'metrika+lead_api' || d.source === 'metrika_browser';
+        pill.textContent = live ? 'Метрика' : 'без токена';
+        pill.className = 'pill ' + (live ? 'ok' : 'wait');
+        const notes = document.getElementById('notes');
+        (d.notes || []).forEach((n) => {
+          const li = document.createElement('li');
+          li.textContent = n;
+          notes.appendChild(li);
+        });
+        const series = d.series || [];
+        const bars = document.getElementById('bars');
+        if (series.length) {
+          bars.innerHTML = '';
+          const max = Math.max(1, ...series.map((s) => Number(s.visits) || 0));
+          series.forEach((s) => {
+            const col = document.createElement('div');
+            col.className = 'bar-col';
+            const n = document.createElement('div');
+            n.className = 'bar-n';
+            n.textContent = s.visits;
+            const bar = document.createElement('div');
+            bar.className = 'bar';
+            bar.style.height = Math.max(4, (Number(s.visits) / max) * 100) + '%';
+            const lab = document.createElement('div');
+            lab.className = 'bar-lab';
+            lab.textContent = String(s.date || '').slice(5);
+            col.appendChild(n);
+            col.appendChild(bar);
+            col.appendChild(lab);
+            bars.appendChild(col);
+          });
+        }
+      })
+      .catch(() => {
+        document.getElementById('pill').textContent = 'нет data.json';
+        document.getElementById('source').textContent = 'не удалось прочитать data.json';
+      });
+  </script>
+</body>
+</html>

@@ -19,7 +19,7 @@ const warnings = [];
 
 function walk(dir, out = []) {
   for (const name of readdirSync(dir)) {
-    if (name === 'node_modules' || name === '.git' || name === 'seo' || name === 'images' || name === 'assets') continue;
+    if (name === 'node_modules' || name === '.git' || name === 'seo' || name === 'images' || name === 'assets' || name === 'dashboard' || name === 'graphify-out') continue;
     const full = join(dir, name);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);

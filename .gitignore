@@ -23,6 +23,7 @@ npm-debug.log*
 .env.ai-gateway
 .env.mcp
 .env.wordstat
+.env.dashboard
 
 # Build output (если будет)
 dist/

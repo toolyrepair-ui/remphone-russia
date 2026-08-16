@@ -5,6 +5,7 @@ Disallow: /api/
 Disallow: /temp/
 Disallow: /backup/
 Disallow: /seo/
+Disallow: /dashboard/
 Disallow: /*.json$
 Disallow: /.github/
 
