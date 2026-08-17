@@ -1,0 +1,71 @@
+name: Deploy to reg.ru
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-reg-ru
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: FTP upload
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check FTP secrets
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_PATH: ${{ secrets.FTP_PATH }}
+        run: |
+          missing=""
+          [ -z "$FTP_SERVER" ] && missing="$missing FTP_SERVER"
+          [ -z "$FTP_USERNAME" ] && missing="$missing FTP_USERNAME"
+          [ -z "$FTP_PASSWORD" ] && missing="$missing FTP_PASSWORD"
+          [ -z "$FTP_PATH" ] && missing="$missing FTP_PATH"
+          if [ -n "$missing" ]; then
+            echo "::error::Нет секретов GitHub:$missing"
+            echo "Добавьте их сами: Settings → Secrets and variables → Actions."
+            echo "Пароли в репозиторий не писать."
+            echo "FTP_PATH — корневая папка сайта на хостинге, со слэшем в конце (например httpdocs/)."
+            exit 1
+          fi
+          echo "FTP secrets present."
+
+      - name: Upload to reg.ru FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_PATH }}
+          timeout: 60000
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.omniroute-src/**
+            **/.cursor/**
+            **/node_modules/**
+            **/__pycache__/**
+            **/docs/**
+            **/seo/**
+            **/scripts/**
+            **/graphify-out/**
+            **/yandex-biz-photos/**
+            **/.env*
+            **/*.py
+            **/*.md
+            **/.gitignore
+            **/.gitattributes
+            **/.cursorignore
+            **/.graphifyignore
+            **/CNAME
+            **/.nojekyll
+            **/_headers
+            **/_redirects

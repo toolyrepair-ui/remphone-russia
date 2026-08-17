@@ -7,6 +7,10 @@
 Репозиторий: `C:\Users\PC\Desktop\remphone-russia`  
 Бот (отдельный репо): `C:\Users\PC\Desktop\remphone-bot` → GitHub `toolyrepair-ui/remphone-bot`, Render https://remphone-bot.onrender.com
 
+Раздача: сейчас GitHub Pages (резерв). Целевой хостинг — виртуальный хостинг reg.ru (Apache, FTP). Выгрузка: `.github/workflows/deploy-reg-ru.yml` (секреты `FTP_SERVER` / `FTP_USERNAME` / `FTP_PASSWORD` / `FTP_PATH`). DNS и переключение домена — только руками владельца. GitHub Pages не отключать, пока владелец не скажет.
+
+Не публиковать на хостинг: `docs/`, `seo/` (внутренние данные), `.omniroute-src/`.
+
 ---
 
 ## Архитектура

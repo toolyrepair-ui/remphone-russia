@@ -51,3 +51,6 @@ tools/omniroute/server-app/
 # Graphify: keep report/map, skip cache
 graphify-out/cache/
 
+.ftp-deploy-sync-state.json
+
+

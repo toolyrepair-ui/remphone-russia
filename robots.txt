@@ -4,6 +4,7 @@ Allow: /
 Disallow: /api/
 Disallow: /temp/
 Disallow: /backup/
+Disallow: /docs/
 Disallow: /seo/
 Disallow: /dashboard/
 Disallow: /*.json$
