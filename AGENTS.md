@@ -23,6 +23,6 @@ CLI Graphify (Windows): бинарник `C:\Users\PC\.local\bin\graphify.exe`.
 
 SEO-страницы: скилл `.cursor/skills/content-writer/` («автор статей»). Не коммитить черновик без одобрения.
 
-Черновики ответов клиентам — **не скилл Cursor**, а бот + Worker `/draft` (`remphone-bot`). AI клиенту не пишет. Живой режим: `REPLY_DRAFT_ENABLED=1` на Render после теста.
+Черновики ответов клиентам — **не скилл Cursor**, а бот + Worker `/draft` (`remphone-bot`). AI клиенту не пишет. Живой режим: `REPLY_DRAFT_ENABLED=1` на Render и в Worker.
 
 Расписание: GitHub Action `Weekly content-writer` — воскресенье 10:00 Хабаровск, если вс не сработал — понедельник. Нужен секрет `CURSOR_API_KEY`. Черновик приходит pull request, не сразу на сайт.

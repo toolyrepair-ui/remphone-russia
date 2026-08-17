@@ -62,7 +62,7 @@
 
 | Система | Значение | Правило |
 |---------|----------|---------|
-| Cloudflare Worker | `https://rem-phone-relay.toolyrepair.workers.dev` | **Не менять** URL. `POST /draft` — черновик ответа владельцу (AI клиенту не пишет) |
+| Cloudflare Worker | `https://rem-phone-relay.toolyrepair.workers.dev` | **Не менять** URL. `POST /draft` — черновик владельцу. Живой режим: `REPLY_DRAFT_ENABLED=1` (AI клиенту не пишет) |
 | Telegram-бот | `@REMPHONE_RUSSIA_Bot` | Репо `remphone-bot` |
 | Телефон / WhatsApp | `+79144111730` | Единый номер |
 | Email | `toolyrepair@gmail.com` | |
