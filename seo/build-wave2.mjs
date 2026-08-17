@@ -11,15 +11,15 @@ const brands = [
     slug: 'iphone',
     title: 'Ремонт iPhone в Хабаровске — REMPHONE RUSSIA',
     h1: 'Ремонт iPhone в Хабаровске',
-    desc: 'Ремонт iPhone в Хабаровске: замена экрана и батареи, после воды, зарядка, камера. Модели 11–16. Гарантия 90 дней, выезд мастера. От 800₽.',
+    desc: 'Ремонт iPhone в Хабаровске: замена экрана и батареи, после воды, зарядка, камера. Модели 11–16. Гарантия 90 дней, выезд мастера. От 1400₽.',
     intro: 'Чиним все актуальные iPhone — от SE и 11 до 15/16 Pro. Ставим модули под модель, проверяем Face ID и сенсоры после сборки. Большинство работ — 30–60 минут.',
     models: 'iPhone SE, 11, 12, 13, 14, 15, 16 и Pro-версии',
     prices: [
-      ['Экран iPhone 13', 'от 4500₽'],
-      ['Экран iPhone 14', 'от 5500₽'],
-      ['Батарея iPhone 12–13', 'от 2500₽'],
-      ['Зарядка / разъём', 'от 1800₽'],
-      ['После воды (чистка)', 'от 500₽'],
+      ['Экран iPhone 13', 'от 3100₽'],
+      ['Экран iPhone 14', 'от 3700₽'],
+      ['Батарея iPhone 12–13', 'от 2700₽'],
+      ['Зарядка / разъём', 'от 1400₽'],
+      ['После воды (чистка)', 'от 1500₽'],
     ],
     faq: [
       ['Чините с Face ID?', 'Да. После замены экрана проверяем Face ID и датчики. Если модуль не поддерживает — предупредим заранее.'],
@@ -35,15 +35,15 @@ const brands = [
     slug: 'samsung',
     title: 'Ремонт Samsung в Хабаровске — REMPHONE RUSSIA',
     h1: 'Ремонт Samsung Galaxy в Хабаровске',
-    desc: 'Ремонт Samsung в Хабаровске: A-серия, S и Z Fold/Flip. Экран, батарея, зарядка, после воды. Гарантия 90 дней. От 800₽.',
+    desc: 'Ремонт Samsung в Хабаровске: A-серия, S и Z Fold/Flip. Экран, батарея, зарядка, после воды. Гарантия 90 дней. От 1700₽.',
     intro: 'Ремонтируем Galaxy A, S и складные модели. Частые обращения — разбитый AMOLED, севшая батарея и разъём зарядки. Диагностика бесплатно.',
     models: 'Galaxy A, S, Note, Z Fold / Z Flip',
     prices: [
-      ['Экран A-серия', 'от 2800₽'],
-      ['Экран S-серия', 'от 4500₽'],
-      ['Батарея', 'от 1800₽'],
-      ['Разъём зарядки', 'от 1200₽'],
-      ['После воды', 'от 500₽'],
+      ['Экран A-серия', 'от 2400₽'],
+      ['Экран S-серия', 'от 3200₽'],
+      ['Батарея', 'от 2000₽'],
+      ['Разъём зарядки', 'от 1700₽'],
+      ['После воды', 'от 1500₽'],
     ],
     faq: [
       ['Берёте складные Samsung?', 'Да, Z Fold/Flip — после диагностики. Срок зависит от наличия модуля.'],
@@ -59,15 +59,15 @@ const brands = [
     slug: 'xiaomi',
     title: 'Ремонт Xiaomi в Хабаровске — REMPHONE RUSSIA',
     h1: 'Ремонт Xiaomi, Redmi и POCO в Хабаровске',
-    desc: 'Ремонт Xiaomi, Redmi и POCO в Хабаровске: экран, батарея, зарядка, после воды. Гарантия 90 дней. От 500₽.',
+    desc: 'Ремонт Xiaomi, Redmi и POCO в Хабаровске: экран, батарея, зарядка, после воды. Гарантия 90 дней. От 1300₽.',
     intro: 'Чиним Xiaomi, Redmi и POCO. Запчасти на популярные модели обычно в наличии — поэтому ремонт часто в день обращения.',
     models: 'Xiaomi, Redmi, POCO, Black Shark',
     prices: [
-      ['Экран Redmi / POCO', 'от 2200₽'],
-      ['Батарея', 'от 1500₽'],
-      ['Разъём зарядки', 'от 1000₽'],
-      ['После воды', 'от 500₽'],
-      ['Камера', 'от 1000₽'],
+      ['Экран Redmi / POCO', 'от 2100₽'],
+      ['Батарея', 'от 2000₽'],
+      ['Разъём зарядки', 'от 1300₽'],
+      ['После воды', 'от 1500₽'],
+      ['Камера', 'от 1800₽'],
     ],
     faq: [
       ['Есть запчасти на Redmi?', 'На ходовые модели — да. Если деталь под заказ, скажем срок до старта.'],
@@ -180,12 +180,12 @@ ${JSON.stringify({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEnt
     <div class="container">
         <h2 class="section-title">Что чиним у ${b.name}</h2>
         <div class="services-grid" style="margin-top:24px">
-            <a href="../services/screen.html" class="service-card"><h4>Замена экрана</h4><span class="service-price">от 1000₽</span></a>
-            <a href="../services/battery.html" class="service-card"><h4>Замена батареи</h4><span class="service-price">от 800₽</span></a>
-            <a href="../services/water.html" class="service-card"><h4>После воды</h4><span class="service-price">от 500₽</span></a>
-            <a href="../services/charge.html" class="service-card"><h4>Не заряжается</h4><span class="service-price">от 800₽</span></a>
-            <a href="../services/camera.html" class="service-card"><h4>Камера</h4><span class="service-price">от 1000₽</span></a>
-            <a href="../services/not-on.html" class="service-card"><h4>Не включается</h4><span class="service-price">от 500₽</span></a>
+            <a href="../services/screen.html" class="service-card"><h4>Замена экрана</h4><span class="service-price">от 2000₽</span></a>
+            <a href="../services/battery.html" class="service-card"><h4>Замена батареи</h4><span class="service-price">от 2000₽</span></a>
+            <a href="../services/water.html" class="service-card"><h4>После воды</h4><span class="service-price">от 1500₽</span></a>
+            <a href="../services/charge.html" class="service-card"><h4>Не заряжается</h4><span class="service-price">от 1300₽</span></a>
+            <a href="../services/camera.html" class="service-card"><h4>Камера</h4><span class="service-price">от 1800₽</span></a>
+            <a href="../services/not-on.html" class="service-card"><h4>Не включается</h4><span class="service-price">от 1000₽</span></a>
         </div>
 
         <div style="max-width:900px;margin:40px auto 0">
@@ -229,12 +229,12 @@ const cityServices = [
     service: 'screen',
     title: 'Замена экрана в Хабаровске — REMPHONE RUSSIA',
     h1: 'Замена экрана телефона в Хабаровске',
-    desc: 'Замена экрана в Хабаровске для iPhone, Samsung, Xiaomi. 30–60 минут, гарантия 90 дней, выезд мастера. От 1000₽.',
+    desc: 'Замена экрана в Хабаровске для iPhone, Samsung, Xiaomi. 30–60 минут, гарантия 90 дней, выезд мастера. От 2000₽.',
     intro: 'Разбили дисплей в Хабаровске? Меняем модуль под модель, проверяем сенсор и собираем телефон при вас. Часто успеваем за час.',
     linkService: '../../services/screen.html',
-    price: 'от 1000₽',
+    price: 'от 2000₽',
     faq: [
-      ['Сколько стоит замена экрана в Хабаровске?', 'Ориентир от 1000₽, для iPhone — от 4500₽. Точную цену скажем по модели.'],
+      ['Сколько стоит замена экрана в Хабаровске?', 'Ориентир от 2000₽, для iPhone — от 2500₽. Точную цену скажем по модели.'],
       ['Можно с выездом?', 'Да, мастер может приехать по городу или вы передаёте устройство.'],
       ['Какая гарантия?', '90 дней на экран и работы.'],
     ],
@@ -244,12 +244,12 @@ const cityServices = [
     service: 'battery',
     title: 'Замена батареи в Хабаровске — REMPHONE RUSSIA',
     h1: 'Замена батареи телефона в Хабаровске',
-    desc: 'Замена аккумулятора в Хабаровске: iPhone, Samsung, Xiaomi. Телефон снова держит день. Гарантия 90 дней. От 800₽.',
+    desc: 'Замена аккумулятора в Хабаровске: iPhone, Samsung, Xiaomi. Телефон снова держит день. Гарантия 90 дней. От 2000₽.',
     intro: 'Если смартфон садится к обеду или выключается на морозе — меняем батарею. Работа занимает обычно 30–45 минут.',
     linkService: '../../services/battery.html',
-    price: 'от 800₽',
+    price: 'от 2000₽',
     faq: [
-      ['Сколько стоит батарея в Хабаровске?', 'От 800₽, для iPhone — от 2500₽ в зависимости от модели.'],
+      ['Сколько стоит батарея в Хабаровске?', 'От 2000₽, для iPhone — от 2400₽ в зависимости от модели.'],
       ['Долго ли ждать?', 'Часто в день обращения, если аккумулятор в наличии.'],
       ['Гарантия?', '90 дней.'],
     ],
@@ -259,14 +259,14 @@ const cityServices = [
     service: 'water',
     title: 'Телефон после воды в Хабаровске — REMPHONE RUSSIA',
     h1: 'Ремонт телефона после воды в Хабаровске',
-    desc: 'Телефон намок или утонул в Хабаровске? Срочная чистка и восстановление. Чем раньше — тем выше шанс. От 500₽.',
+    desc: 'Телефон намок или утонул в Хабаровске? Срочная чистка и восстановление. Чем раньше — тем выше шанс. От 1500₽.',
     intro: 'Не сушите рис и фен — привозите на чистку. Разбираем, убираем влагу и соли, сушим плату и меняем пострадавшие детали.',
     linkService: '../../services/water.html',
-    price: 'от 500₽',
+    price: 'от 1500₽',
     faq: [
       ['Что делать сразу после воды?', 'Выключить, не заряжать, не греть феном — и связаться с нами.'],
       ['Всегда ли получается спасти?', 'Не всегда. Чем раньше чистка, тем выше шанс. Скажем честно после осмотра.'],
-      ['Цена?', 'Чистка от 500₽, детали — отдельно до начала работ.'],
+      ['Цена?', 'Чистка от 1500₽, детали — отдельно до начала работ.'],
     ],
   },
 ];
@@ -408,7 +408,7 @@ const iphoneScreen = `<!DOCTYPE html>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Замена экрана iPhone в Хабаровске — REMPHONE RUSSIA</title>
-    <meta name="description" content="Замена экрана iPhone в Хабаровске: 11–16 и Pro. 30–60 минут, проверка Face ID, гарантия 90 дней. От 4500₽.">
+    <meta name="description" content="Замена экрана iPhone в Хабаровске: 11–16 и Pro. 30–60 минут, проверка Face ID, гарантия 90 дней. От 2500₽.">
     <link rel="canonical" href="https://rem-phone.ru/brands/iphone-screen.html">
     <link rel="stylesheet" href="../styles.css">
     <meta property="og:title" content="Замена экрана iPhone в Хабаровске — REMPHONE RUSSIA">
@@ -440,7 +440,7 @@ const iphoneScreen = `<!DOCTYPE html>
       "@context": "https://schema.org",
       "@type": "FAQPage",
       "mainEntity": [
-        { "@type": "Question", "name": "Сколько стоит замена экрана iPhone в Хабаровске?", "acceptedAnswer": { "@type": "Answer", "text": "Ориентир: iPhone 13 от 4500₽, iPhone 14 от 5500₽. Точную цену назовём по модели." } },
+        { "@type": "Question", "name": "Сколько стоит замена экрана iPhone в Хабаровске?", "acceptedAnswer": { "@type": "Answer", "text": "Ориентир: iPhone 13 от 3100₽, iPhone 14 от 3700₽. Точную цену назовём по модели." } },
         { "@type": "Question", "name": "Сохранится Face ID?", "acceptedAnswer": { "@type": "Answer", "text": "Проверяем Face ID после замены. Если модуль без поддержки — предупредим заранее." } },
         { "@type": "Question", "name": "Сколько по времени?", "acceptedAnswer": { "@type": "Answer", "text": "Обычно 30–60 минут при наличии дисплея." } }
       ]
@@ -479,15 +479,16 @@ const iphoneScreen = `<!DOCTYPE html>
         <table style="width:100%;margin:16px 0 28px;border-collapse:collapse">
             <thead><tr><th align="left">Модель</th><th align="left">Экран</th></tr></thead>
             <tbody>
-                <tr><td>iPhone 12 / 13</td><td>от 4500₽</td></tr>
-                <tr><td>iPhone 14</td><td>от 5500₽</td></tr>
-                <tr><td>iPhone 15</td><td>от 6500₽</td></tr>
+                <tr><td>iPhone 12</td><td>от 2800₽</td></tr>
+                <tr><td>iPhone 13</td><td>от 3100₽</td></tr>
+                <tr><td>iPhone 14</td><td>от 3700₽</td></tr>
+                <tr><td>iPhone 15</td><td>от 4100₽</td></tr>
             </tbody>
         </table>
         <p style="color:var(--text-light);margin-bottom:24px">Связанные страницы: <a href="iphone.html">ремонт iPhone</a>, <a href="../cities/khabarovsk/screen.html">замена экрана в Хабаровске</a>, <a href="../services/battery.html">батарея</a>.</p>
         <h2>FAQ</h2>
         <div class="faq-list">
-            <div class="faq-item active"><div class="faq-question">Сколько стоит экран iPhone?</div><div class="faq-answer">От 4500₽ в зависимости от модели. Точную цену назовём до работ.</div></div>
+            <div class="faq-item active"><div class="faq-question">Сколько стоит экран iPhone?</div><div class="faq-answer">От 2500₽ в зависимости от модели. Точную цену назовём до работ.</div></div>
             <div class="faq-item"><div class="faq-question">Сохранится Face ID?</div><div class="faq-answer">Проверяем после замены. Предупредим, если модуль без поддержки.</div></div>
             <div class="faq-item"><div class="faq-question">Сколько времени?</div><div class="faq-answer">Обычно 30–60 минут.</div></div>
         </div>

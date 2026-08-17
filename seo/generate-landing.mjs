@@ -5,7 +5,7 @@
  *
  * Usage:
  *   node seo/generate-landing.mjs --type city --slug komsomolsk --name "Комсомольск-на-Амуре"
- *   node seo/generate-landing.mjs --type service --slug speaker --name "Ремонт динамика" --price "от 800₽"
+ *   node seo/generate-landing.mjs --type service --slug speaker --name "Ремонт динамика" --price "от 1000₽"
  *   node seo/generate-landing.mjs --type brand --slug realme --name "Realme"
  */
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
@@ -23,7 +23,7 @@ function arg(name, fallback = '') {
 const type = arg('type');
 const slug = arg('slug');
 const name = arg('name');
-const price = arg('price', 'от 500₽');
+const price = arg('price', 'от 1000₽');
 
 if (!type || !slug || !name) {
   console.error('Required: --type city|service|brand --slug <slug> --name "<Title>"');
@@ -48,7 +48,7 @@ let crumbs;
 if (type === 'city') {
   outRel = `cities/${slug}.html`;
   title = `Ремонт телефонов в ${name} — REMPHONE RUSSIA`;
-  description = `Ремонт iPhone, Samsung, Xiaomi в ${name}. Выезд мастера, гарантия 90 дней, ремонт от 30 минут. Цены от 500₽.`;
+  description = `Ремонт iPhone, Samsung, Xiaomi в ${name}. Выезд мастера, гарантия 90 дней, ремонт от 30 минут. Цены от 1000₽.`;
   h1 = `Ремонт телефонов в ${name}`;
   intro = `Чиним смартфоны в ${name}: замена экрана, батареи, ремонт после воды. Выезд мастера, бесплатная диагностика, гарантия 90 дней.`;
   canonical = `https://rem-phone.ru/cities/${slug}.html`;
@@ -193,9 +193,9 @@ ${JSON.stringify(faqLd, null, 4)}
             <thead><tr><th align="left">Работы</th><th align="left">Ориентир</th></tr></thead>
             <tbody>
                 <tr><td>Диагностика</td><td>бесплатно</td></tr>
-                <tr><td>Замена экрана</td><td>от 1000₽</td></tr>
-                <tr><td>Замена батареи</td><td>от 800₽</td></tr>
-                <tr><td>После воды</td><td>от 500₽</td></tr>
+                <tr><td>Замена экрана</td><td>от 2000₽</td></tr>
+                <tr><td>Замена батареи</td><td>от 2000₽</td></tr>
+                <tr><td>После воды</td><td>от 1500₽</td></tr>
             </tbody>
         </table>
 

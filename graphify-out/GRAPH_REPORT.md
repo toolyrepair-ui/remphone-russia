@@ -1,16 +1,16 @@
-# Graph Report - remphone-russia  (2026-08-16)
+# Graph Report - remphone-russia  (2026-08-17)
 
 ## Corpus Check
-- 67 files · ~87,481 words
+- 67 files · ~87,762 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 552 nodes · 565 edges · 51 communities (46 shown, 5 thin omitted)
+- 554 nodes · 567 edges · 51 communities (46 shown, 5 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 5 edges (avg confidence: 0.5)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `15e1ff90`
+- Built from commit: `5cc8533d`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -216,8 +216,8 @@ Cohesion: 0.33
 Nodes (5): Каналы сейчас, Контент-ритм, Маркетинг — каналы и тон, Тон общения, Что уже настроено (не плодить вторые счётчики)
 
 ### Community 40 - "Прайс — ориентиры «от», как на сайте"
-Cohesion: 0.33
-Nodes (5): Оригинал vs аналог (калькулятор дисплеев), По брендам (таблицы на посадочных), По видам ремонта (минимум на карточках), Прайс — ориентиры «от», как на сайте, Условия, которые уже написаны на сайте
+Cohesion: 0.25
+Nodes (7): Дисплей: эконом / аналог / оригинал (сайтовые цифры), Камера, динамик, корпус (если нет модели в таблице), Оригинал vs аналог (калькулятор дисплеев), По брендам (экран эконом / батарея / зарядка), По видам ремонта (минимум на карточках), Прайс — ориентиры «от», как на сайте, Условия
 
 ### Community 41 - "Продукт — что продаём"
 Cohesion: 0.33
@@ -252,7 +252,7 @@ Cohesion: 0.20
 Nodes (9): Автор статей (content-writer), Выбор темы, Коммит, Перед стартом (каждый раз), Регулярный прогон, Тон и факты, Формат результата, Цены (+1 more)
 
 ## Knowledge Gaps
-- **327 isolated node(s):** `__dirname`, `root`, `outPath`, `token`, `webmasterToken` (+322 more)
+- **329 isolated node(s):** `__dirname`, `root`, `outPath`, `token`, `webmasterToken` (+324 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **5 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -260,11 +260,11 @@ Nodes (9): Автор статей (content-writer), Выбор темы, Ком
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `План SEO‑продвижения rem-phone.ru` connect `План SEO‑продвижения rem-phone.ru` to `Яндекс Бизнес — карточка REMPHONE RUSSIA (3 города)`?**
-  _High betweenness centrality (0.011) - this node is a cross-community bridge._
+  _High betweenness centrality (0.010) - this node is a cross-community bridge._
 - **Why does `Семантика — rem-phone.ru (3 города)` connect `Семантика — rem-phone.ru (3 города)` to `Яндекс Бизнес — карточка REMPHONE RUSSIA (3 города)`?**
   _High betweenness centrality (0.006) - this node is a cross-community bridge._
 - **What connects `__dirname`, `root`, `outPath` to the rest of the system?**
-  _327 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _329 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `script.js` be split into smaller, more focused modules?**
   _Cohesion score 0.0855614973262032 - nodes in this community are weakly interconnected._
 - **Should `Яндекс Бизнес — карточка REMPHONE RUSSIA (3 города)` be split into smaller, more focused modules?**
