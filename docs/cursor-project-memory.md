@@ -18,6 +18,7 @@
 ```
 форма #repair-flow (script.js) → POST JSON на Cloudflare Worker (config.js relayUrl)
   → Lead API Telegram-бота → /leads владельцу
+      ↳ опционально: черновик ответа (Workers AI), только владельцу
 ```
 
 Пока Worker недоступен — fallback в Telegram (без SQLite). Токен бота **не** хранится на сайте.
@@ -61,7 +62,7 @@
 
 | Система | Значение | Правило |
 |---------|----------|---------|
-| Cloudflare Worker | `https://rem-phone-relay.toolyrepair.workers.dev` | **Не менять** URL |
+| Cloudflare Worker | `https://rem-phone-relay.toolyrepair.workers.dev` | **Не менять** URL. `POST /draft` — черновик ответа владельцу (AI клиенту не пишет) |
 | Telegram-бот | `@REMPHONE_RUSSIA_Bot` | Репо `remphone-bot` |
 | Телефон / WhatsApp | `+79144111730` | Единый номер |
 | Email | `toolyrepair@gmail.com` | |
