@@ -33,7 +33,7 @@ jobs:
             echo "::error::Нет секретов GitHub:$missing"
             echo "Добавьте их сами: Settings → Secrets and variables → Actions."
             echo "Пароли в репозиторий не писать."
-            echo "FTP_PATH — корневая папка сайта на хостинге, со слэшем в конце (например httpdocs/)."
+            echo "FTP_PATH — корневая папка сайта на хостинге, со слэшем в конце (на ISPmanager: www/rem-phone.ru/)."
             exit 1
           fi
           echo "FTP secrets present."

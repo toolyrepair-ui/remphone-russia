@@ -7,9 +7,9 @@
 Репозиторий: `C:\Users\PC\Desktop\remphone-russia`  
 Бот (отдельный репо): `C:\Users\PC\Desktop\remphone-bot` → GitHub `toolyrepair-ui/remphone-bot`, Render https://remphone-bot.onrender.com
 
-Раздача: сейчас GitHub Pages (резерв). Целевой хостинг — виртуальный хостинг reg.ru (Apache, FTP). Выгрузка: `.github/workflows/deploy-reg-ru.yml` (секреты `FTP_SERVER` / `FTP_USERNAME` / `FTP_PASSWORD` / `FTP_PATH`). DNS и переключение домена — только руками владельца. GitHub Pages не отключать, пока владелец не скажет.
+Раздача: виртуальный хостинг REG.RU Host-0 (Apache за nginx, ISPmanager, IP `31.31.196.16`, корень `www/rem-phone.ru/`). DNS зона ns1/ns2.reg.ru: `A @` и `A www` → `31.31.196.16`. GitHub Pages не отключать (резерв). Выгрузка: `.github/workflows/deploy-reg-ru.yml` (`FTP_PATH`=`www/rem-phone.ru/`). HTTPS: Let’s Encrypt `rem-phone.ru_le1` (до 2026-11-15), имена `rem-phone.ru` и `www.rem-phone.ru`. HTTP→HTTPS в `.htaccess` только через `X-Forwarded-Proto =http` (не `%{HTTPS} off` — петля за nginx). www→apex на `https://`. Dotfiles (в т.ч. `.ftp-deploy-sync-state.json`) закрыты. Статика css/js/картинки/woff2 — кеш месяц; html/json без кеша. Не публиковать на хостинг: `docs/`, `seo/` (внутренние данные), `.omniroute-src/`.
 
-Не публиковать на хостинг: `docs/`, `seo/` (внутренние данные), `.omniroute-src/`.
+Дашборд: `dashboard.yml` коммитит `dashboard/data.json` встроенным `GITHUB_TOKEN` — такой push **не** запускает `deploy-reg-ru.yml`. Цепочка «крон → дашборд на хостинге» оборвана, пока владелец не даст PAT или не вызовет выгрузку вручную.
 
 ---
 

@@ -1,19 +1,18 @@
 RewriteEngine On
 
+# HTTP → HTTPS. Перед Apache стоит nginx: %{HTTPS} у бэкенда всегда off,
+# поэтому смотрим X-Forwarded-Proto. Правило — до /docs/ и /seo/.
+RewriteCond %{HTTP:X-Forwarded-Proto} =http
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# www → без www на HTTPS.
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^(.*)$ https://%1/$1 [L,R=301]
+
 # Внутренние папки: на GitHub Pages этот файл не работает,
 # на Apache (reg.ru) — 404, даже если файл случайно залили.
 RewriteRule ^docs(/.*)?$ - [R=404,L]
 RewriteRule ^seo(/.*)?$ - [R=404,L]
-
-# HTTP → HTTPS — ВКЛЮЧИТЬ ПОСЛЕ выпуска SSL на reg.ru.
-# Если включить раньше, получится петля: редирект на HTTPS, а сертификата ещё нет.
-# RewriteCond %{HTTPS} off
-# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
-# www → без www. Пока SSL нет — на http, иначе снова петля.
-# После сертификата заменить http:// на https://
-RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
-RewriteRule ^(.*)$ http://%1/$1 [L,R=301]
 
 # Старые хабы /cities/*.html → канонические городские URL.
 # Только точные файлы, не подпапки cities/khabarovsk/*.html
@@ -22,3 +21,32 @@ RewriteRule ^cities/komsomolsk\.html$ /komsomolsk-na-amure/ [L,R=301]
 RewriteRule ^cities/vladivostok\.html$ /vladivostok/ [L,R=301]
 
 ErrorDocument 404 /404.html
+
+# Служебные файлы (состояние FTP-выгрузки и прочие dotfiles) не отдавать.
+<FilesMatch "^\.">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
+# Кеш статики на месяц. HTML и JSON не трогать — цены должны обновляться сразу.
+<IfModule mod_headers.c>
+  <FilesMatch "\.(css|js|png|jpe?g|webp|svg|woff2)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+</IfModule>
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType text/javascript "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/webp "access plus 1 month"
+  ExpiresByType image/svg+xml "access plus 1 month"
+  ExpiresByType font/woff2 "access plus 1 month"
+</IfModule>
