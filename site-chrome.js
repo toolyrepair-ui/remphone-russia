@@ -75,6 +75,7 @@
     '<div class="sticky-mobile-bar floating-contact" id="stickyMobileBar">' +
     '<a class="sticky-fab sticky-call btn-pulse" href="tel:' + phoneTel + '" aria-label="Позвонить"><img src="' + asset('assets/messengers/phone.svg') + '" alt="" width="26" height="26"></a>' +
     '<a class="sticky-fab sticky-wa btn-pulse" href="' + wa + '" target="_blank" rel="noopener" aria-label="WhatsApp"><img src="' + asset('assets/messengers/whatsapp.svg') + '" alt="" width="26" height="26"></a>' +
+    '<a class="sticky-fab sticky-tg btn-pulse" href="' + tg + '" target="_blank" rel="noopener" aria-label="Telegram"><img src="' + asset('assets/messengers/telegram.svg') + '" alt="" width="26" height="26"></a>' +
     '<a class="sticky-fab sticky-flow" href="' + base + 'index.html#repair-flow">Заявка</a>' +
     '</div>';
 

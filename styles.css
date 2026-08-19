@@ -1201,7 +1201,8 @@ section {
 }
 
 .sticky-call,
-.sticky-wa {
+.sticky-wa,
+.sticky-tg {
     width: 54px;
     height: 54px;
     font-size: 24px;
@@ -1210,6 +1211,7 @@ section {
 
 .sticky-call { background: #16a34a; }
 .sticky-wa { background: #25d366; }
+.sticky-tg { background: #229ed9; }
 
 .sticky-flow {
     background: var(--primary);
@@ -1345,7 +1347,7 @@ section {
     }
 
     body {
-        padding-bottom: calc(90px + env(safe-area-inset-bottom, 0px));
+        padding-bottom: calc(150px + env(safe-area-inset-bottom, 0px));
     }
 
     .flow-form .form-row {
@@ -1972,7 +1974,8 @@ section {
 }
 
 .sticky-call,
-.sticky-wa {
+.sticky-wa,
+.sticky-tg {
     background: #fff !important;
 }
 
