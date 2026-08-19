@@ -104,10 +104,42 @@
 
     var burger = document.getElementById('burger');
     var nav = document.getElementById('nav');
-    if (burger && nav) {
-      burger.addEventListener('click', function () {
-        nav.classList.toggle('active');
+    if (burger && nav && burger.getAttribute('data-bound') !== '1') {
+      burger.setAttribute('data-bound', '1');
+      function isOpen() {
+        return nav.classList.contains('active') || nav.classList.contains('open');
+      }
+      function setOpen(open) {
+        nav.classList.toggle('active', open);
+        nav.classList.remove('open');
+        burger.classList.toggle('is-open', open);
+        burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+      burger.setAttribute('aria-expanded', 'false');
+      burger.setAttribute('aria-controls', 'nav');
+      burger.addEventListener('click', function (e) {
+        e.stopPropagation();
+        setOpen(!isOpen());
       });
+      nav.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () { setOpen(false); });
+      });
+      document.addEventListener('click', function (e) {
+        if (!isOpen()) return;
+        if (nav.contains(e.target) || burger.contains(e.target)) return;
+        setOpen(false);
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') setOpen(false);
+      });
+    }
+
+    var meta = document.querySelector('meta[name="viewport"]');
+    if (meta) {
+      var content = meta.getAttribute('content') || '';
+      if (content.indexOf('viewport-fit') === -1) {
+        meta.setAttribute('content', content.replace(/\s+$/, '') + ', viewport-fit=cover');
+      }
     }
   }
 

@@ -1,11 +1,47 @@
-// Mobile menu toggle
-const burger = document.getElementById('burger');
-const nav = document.getElementById('nav');
+function bindMobileNav() {
+    const burger = document.getElementById('burger');
+    const nav = document.getElementById('nav');
+    if (!burger || !nav || burger.dataset.bound === '1') return;
+    burger.dataset.bound = '1';
 
-if (burger && nav) {
-    burger.addEventListener('click', () => {
-        nav.classList.toggle('active');
+    function isOpen() {
+        return nav.classList.contains('active') || nav.classList.contains('open');
+    }
+
+    function setOpen(open) {
+        nav.classList.toggle('active', open);
+        nav.classList.remove('open');
+        burger.classList.toggle('is-open', open);
+        burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+
+    burger.setAttribute('aria-expanded', isOpen() ? 'true' : 'false');
+    burger.setAttribute('aria-controls', 'nav');
+
+    burger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setOpen(!isOpen());
     });
+
+    nav.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => setOpen(false));
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!isOpen()) return;
+        if (nav.contains(e.target) || burger.contains(e.target)) return;
+        setOpen(false);
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') setOpen(false);
+    });
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bindMobileNav);
+} else {
+    bindMobileNav();
 }
 
 // FAQ accordion
@@ -96,13 +132,11 @@ const header = document.getElementById('header');
 
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
-    
-    if (currentScroll > 100) {
-        header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.08)';
-    } else {
-        header.style.boxShadow = '0 1px 3px rgba(0,0,0,0.05)';
+    if (header) {
+        header.style.boxShadow = currentScroll > 100
+            ? '0 4px 20px rgba(0,0,0,0.08)'
+            : '0 1px 3px rgba(0,0,0,0.05)';
     }
-    
     lastScroll = currentScroll;
 });
 
@@ -748,18 +782,59 @@ if (quickForm) {
         });
     }
 
+    function ensureViewportFit() {
+        var meta = document.querySelector('meta[name="viewport"]');
+        if (!meta) return;
+        var content = meta.getAttribute('content') || '';
+        if (content.indexOf('viewport-fit') === -1) {
+            meta.setAttribute('content', content.replace(/\s+$/, '') + ', viewport-fit=cover');
+        }
+    }
+
+    function cityQueryFromPath() {
+        var path = (location.pathname || '').toLowerCase();
+        if (path.indexOf('/khabarovsk') !== -1) return 'khabarovsk';
+        if (path.indexOf('/komsomolsk') !== -1) return 'komsomolsk';
+        if (path.indexOf('/vladivostok') !== -1) return 'vladivostok';
+        return '';
+    }
+
+    function ensureStickyMobileBar() {
+        if (document.getElementById('stickyMobileBar')) return;
+        var cfg = window.REMPHONE_CONFIG || {};
+        var phoneTel = cfg.phoneTel || '+79144111730';
+        var wa = cfg.whatsapp || '79144111730';
+        var city = cityQueryFromPath();
+        var flowHref = city ? '/?city=' + encodeURIComponent(city) + '#repair-flow' : '/#repair-flow';
+        var bar = document.createElement('div');
+        bar.className = 'sticky-mobile-bar floating-contact';
+        bar.id = 'stickyMobileBar';
+        bar.innerHTML =
+            '<a class="sticky-fab sticky-call btn-pulse" href="tel:' + phoneTel + '" aria-label="Позвонить">' +
+            '<img src="/assets/messengers/phone.svg" alt="" width="26" height="26"></a>' +
+            '<a class="sticky-fab sticky-wa btn-pulse" href="https://wa.me/' + wa + '" target="_blank" rel="noopener" aria-label="WhatsApp">' +
+            '<img src="/assets/messengers/whatsapp.svg" alt="" width="26" height="26"></a>' +
+            '<a class="sticky-fab sticky-flow" href="' + flowHref + '">Заявка</a>';
+        document.body.appendChild(bar);
+    }
+
     injectFonts();
+    ensureViewportFit();
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', function () {
             bindMeshCursor();
             bindRepairsCounter();
             preferProblemWebp();
             lazyBelowFoldImages();
+            ensureStickyMobileBar();
+            bindMobileNav();
         });
     } else {
         bindMeshCursor();
         bindRepairsCounter();
         preferProblemWebp();
         lazyBelowFoldImages();
+        ensureStickyMobileBar();
+        bindMobileNav();
     }
 })();

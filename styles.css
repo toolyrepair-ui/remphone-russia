@@ -42,6 +42,7 @@
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 88px;
 }
 
 body {
@@ -102,6 +103,7 @@ h1, .flow-intro h1, .hero h1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 12px;
 }
 
 .logo {
@@ -111,6 +113,8 @@ h1, .flow-intro h1, .hero h1 {
     color: var(--dark);
     text-decoration: none;
     letter-spacing: -0.3px;
+    min-width: 0;
+    flex-shrink: 1;
 }
 
 .logo span {
@@ -214,11 +218,16 @@ h1, .flow-intro h1, .hero h1 {
 .burger {
     display: none;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 5px;
     background: none;
     border: none;
     cursor: pointer;
-    padding: 4px;
+    padding: 10px;
+    min-width: 44px;
+    min-height: 44px;
+    flex-shrink: 0;
 }
 
 .burger span {
@@ -227,6 +236,18 @@ h1, .flow-intro h1, .hero h1 {
     background: var(--text);
     border-radius: 2px;
     transition: transform var(--transition), opacity var(--transition);
+}
+
+.burger.is-open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.burger.is-open span:nth-child(2) {
+    opacity: 0;
+}
+
+.burger.is-open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
 }
 
 /* Hero — mesh-градиент + зерно */
@@ -484,7 +505,7 @@ h1, .flow-intro h1, .hero h1 {
     padding: 12px 14px;
     border: 1px solid var(--border);
     border-radius: 10px;
-    font-size: 15px;
+    font-size: 16px;
     font-family: inherit;
     background: #fff;
     color: var(--text);
@@ -1045,7 +1066,7 @@ section {
     padding: 12px 14px;
     border: 1px solid var(--border);
     border-radius: 10px;
-    font-size: 15px;
+    font-size: 16px;
     font-family: inherit;
     background: #fff;
     color: var(--text);
@@ -1161,8 +1182,8 @@ section {
 .sticky-mobile-bar {
     display: none;
     position: fixed;
-    right: 14px;
-    bottom: 14px;
+    right: max(14px, env(safe-area-inset-right, 0px));
+    bottom: calc(14px + env(safe-area-inset-bottom, 0px));
     z-index: 120;
     gap: 10px;
     flex-direction: column;
@@ -1297,6 +1318,7 @@ section {
     border-radius: 12px;
     padding: 12px 14px;
     font: inherit;
+    font-size: 16px;
     resize: vertical;
     min-height: 84px;
 }
@@ -1318,8 +1340,12 @@ section {
         display: flex;
     }
 
+    .header-btn {
+        display: none;
+    }
+
     body {
-        padding-bottom: 90px;
+        padding-bottom: calc(90px + env(safe-area-inset-bottom, 0px));
     }
 
     .flow-form .form-row {
@@ -1462,7 +1488,8 @@ section {
         border-bottom: 1px solid var(--border);
     }
 
-    .nav.active {
+    .nav.active,
+    .nav.open {
         display: flex;
     }
 
