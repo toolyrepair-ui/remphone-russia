@@ -1,8 +1,9 @@
 name: Dashboard stats
 
+# 08:30 и 16:30 Хабаровск (UTC+10) = 22:30 и 06:30 UTC
 on:
   schedule:
-    - cron: '30 6 * * *'
+    - cron: '30 22,6 * * *'
   workflow_dispatch:
 
 permissions:
@@ -16,6 +17,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
+
+      - name: Live site health
+        run: node seo/health-check.mjs --live
+        continue-on-error: true
+
       - name: Collect stats
         env:
           YANDEX_METRIKA_TOKEN: ${{ secrets.YANDEX_METRIKA_TOKEN }}
@@ -23,14 +29,41 @@ jobs:
           LEAD_STATS_URL: ${{ secrets.LEAD_STATS_URL }}
           LEAD_API_SECRET: ${{ secrets.LEAD_API_SECRET }}
         run: node dashboard/collect.mjs
-      - name: Commit dashboard/data.json
+
+      - name: Commit dashboard JSON
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add dashboard/data.json
+          git add dashboard/data.json dashboard/health.json
           if git diff --staged --quiet; then
-            echo "No data.json changes"
+            echo "No dashboard JSON changes"
           else
-            git commit -m "chore: update dashboard stats"
+            git commit -m "chore: update dashboard stats and health"
             git push
           fi
+
+      - name: Check FTP secrets
+        id: ftp
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_PATH: ${{ secrets.FTP_PATH }}
+        run: |
+          if [ -z "$FTP_SERVER" ] || [ -z "$FTP_USERNAME" ] || [ -z "$FTP_PASSWORD" ] || [ -z "$FTP_PATH" ]; then
+            echo "skip=1" >> "$GITHUB_OUTPUT"
+            echo "FTP secrets missing — JSON только в git, хостинг не обновлён"
+            exit 0
+          fi
+          echo "skip=0" >> "$GITHUB_OUTPUT"
+
+      - name: Upload dashboard to hosting
+        if: steps.ftp.outputs.skip == '0'
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./dashboard/
+          server-dir: ${{ secrets.FTP_PATH }}dashboard/
+          timeout: 60000

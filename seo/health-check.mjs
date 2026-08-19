@@ -5,7 +5,7 @@
  *   node seo/health-check.mjs
  *   node seo/health-check.mjs --live
  */
-import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
+import { readFileSync, readdirSync, statSync, existsSync, writeFileSync } from 'node:fs';
 import { dirname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -88,25 +88,43 @@ for (const file of pages) {
   }
 }
 
+const liveStats = { checked: 0, ok: 0, fail: 0 };
+
 async function checkLive() {
   const pagesJson = JSON.parse(readFileSync(join(__dirname, 'pages.json'), 'utf8'));
   for (const page of pagesJson) {
     const url = base + (page.path === '/' ? '/' : page.path);
+    liveStats.checked += 1;
     try {
       const res = await fetch(url, { redirect: 'follow' });
-      if (!res.ok) errors.push(`LIVE ${url}: HTTP ${res.status}`);
+      if (!res.ok) {
+        liveStats.fail += 1;
+        errors.push(`LIVE ${url}: HTTP ${res.status}`);
+      } else {
+        liveStats.ok += 1;
+      }
     } catch (e) {
+      liveStats.fail += 1;
       errors.push(`LIVE ${url}: ${e.message}`);
     }
   }
+  liveStats.checked += 1;
   try {
     const sm = await fetch(`${base}/sitemap.xml`);
-    if (!sm.ok) errors.push(`LIVE sitemap.xml: HTTP ${sm.status}`);
-    else {
+    if (!sm.ok) {
+      liveStats.fail += 1;
+      errors.push(`LIVE sitemap.xml: HTTP ${sm.status}`);
+    } else {
       const text = await sm.text();
-      if (!text.includes('<urlset')) errors.push('LIVE sitemap.xml: not a valid urlset');
+      if (!text.includes('<urlset')) {
+        liveStats.fail += 1;
+        errors.push('LIVE sitemap.xml: not a valid urlset');
+      } else {
+        liveStats.ok += 1;
+      }
     }
   } catch (e) {
+    liveStats.fail += 1;
     errors.push(`LIVE sitemap.xml: ${e.message}`);
   }
 }
@@ -114,6 +132,20 @@ async function checkLive() {
 if (live) {
   await checkLive();
 }
+
+const health = {
+  updated_at: new Date().toISOString(),
+  html_pages: pages.length,
+  errors: errors.length,
+  warnings: warnings.length,
+  live: live
+    ? { checked: liveStats.checked, ok: liveStats.ok, fail: liveStats.fail }
+    : null,
+  ok: errors.length === 0,
+  error_samples: errors.slice(0, 12),
+};
+
+writeFileSync(join(root, 'dashboard', 'health.json'), JSON.stringify(health, null, 2) + '\n', 'utf8');
 
 console.log(`Checked ${pages.length} HTML pages`);
 if (warnings.length) {

@@ -4,20 +4,23 @@
     <meta charset="UTF-8">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="alternate icon" type="image/png" sizes="120x120" href="/favicon-120.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Услуги ремонта телефонов в Хабаровске — REMPHONE RUSSIA</title>
+    <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0B1F3A">
+    <title>Услуги ремонта телефонов в Хабаровске — REMPHONE</title>
     <meta name="description" content="Услуги ремонта: экран, батарея, зарядка, вода, камера, планшеты, смарт-часы. Сроки 30–60 мин, гарантия 90 дней.">
-    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../styles.css?v=design1">
     <link rel="stylesheet" href="../animations.css">
     <link rel="canonical" href="https://rem-phone.ru/services/">
-    <meta property="og:title" content="Услуги ремонта телефонов в Хабаровске — REMPHONE RUSSIA">
+    <meta property="og:title" content="Услуги ремонта телефонов в Хабаровске — REMPHONE">
     <meta property="og:description" content="Услуги ремонта: экран, батарея, зарядка, вода, камера. Сроки 30–60 мин, гарантия 90 дней.">
     <meta property="og:url" content="https://rem-phone.ru/services/">
 </head>
 <body>
 <div id="site-header"></div>
+<main id="main-content">
 
-<section class="hero" id="hero">
+<section class="page-hero">
     <div class="container">
         <div class="catalog-header">
             <div>
@@ -25,21 +28,27 @@
                 <p class="section-subtitle">Срок, выгода и ориентир по цене — без воды</p>
             </div>
             <div class="catalog-filters">
-                <select id="brandFilter">
-                    <option value="">Все бренды</option>
-                    <option value="iPhone">iPhone</option>
-                    <option value="Samsung">Samsung</option>
-                    <option value="Xiaomi">Xiaomi</option>
-                    <option value="Honor">Honor</option>
-                    <option value="Huawei">Huawei</option>
-                    <option value="Other">Другие</option>
-                </select>
-                <select id="priceFilter">
-                    <option value="">Любая цена</option>
-                    <option value="0-1000">до 1000₽</option>
-                    <option value="1000-2000">1000–2000₽</option>
-                    <option value="2000-99999">от 2000₽</option>
-                </select>
+                <label>
+                    <span>Бренд</span>
+                    <select id="brandFilter">
+                        <option value="">Все бренды</option>
+                        <option value="iPhone">iPhone</option>
+                        <option value="Samsung">Samsung</option>
+                        <option value="Xiaomi">Xiaomi</option>
+                        <option value="Honor">Honor</option>
+                        <option value="Huawei">Huawei</option>
+                        <option value="Other">Другие</option>
+                    </select>
+                </label>
+                <label>
+                    <span>Цена</span>
+                    <select id="priceFilter">
+                        <option value="">Любая цена</option>
+                        <option value="0-1000">до 1000₽</option>
+                        <option value="1000-2000">1000–2000₽</option>
+                        <option value="2000-99999">от 2000₽</option>
+                    </select>
+                </label>
             </div>
         </div>
 
@@ -172,11 +181,13 @@
     </div>
 </section>
 
+
+</main>
 <div id="site-float"></div>
 <div id="site-footer"></div>
 <script src="../config.js"></script>
-<script src="../site-chrome.js" data-base="../"></script>
-<script src="../script.js"></script>
+<script src="../site-chrome.js?v=design1" data-base="../"></script>
+<script src="../script.js?v=design1"></script>
 <script>
 (function () {
   var brand = document.getElementById('brandFilter');

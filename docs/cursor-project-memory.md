@@ -9,7 +9,9 @@
 
 Раздача: виртуальный хостинг REG.RU Host-0 (Apache за nginx, ISPmanager, IP `31.31.196.16`, корень `www/rem-phone.ru/`). DNS зона ns1/ns2.reg.ru: `A @` и `A www` → `31.31.196.16`. GitHub Pages не отключать (резерв). Выгрузка: `.github/workflows/deploy-reg-ru.yml` (`FTP_PATH`=`www/rem-phone.ru/`). HTTPS: Let’s Encrypt `rem-phone.ru_le1` (до 2026-11-15), имена `rem-phone.ru` и `www.rem-phone.ru`. HTTP→HTTPS в `.htaccess` только через `X-Forwarded-Proto =http` (не `%{HTTPS} off` — петля за nginx). www→apex на `https://`. Dotfiles (в т.ч. `.ftp-deploy-sync-state.json`) закрыты. Статика css/js/картинки/woff2 — кеш месяц; html/json без кеша. Не публиковать на хостинг: `docs/`, `seo/` (внутренние данные), `.omniroute-src/`.
 
-Дашборд: `dashboard.yml` коммитит `dashboard/data.json` встроенным `GITHUB_TOKEN` — такой push **не** запускает `deploy-reg-ru.yml`. Цепочка «крон → дашборд на хостинге» оборвана, пока владелец не даст PAT или не вызовет выгрузку вручную.
+Дашборд: `/dashboard/` (noindex). Крон `dashboard.yml` — 08:30 и 16:30 Хабаровск: live `seo/health-check.mjs --live` → `dashboard/health.json`, сбор Метрики → `dashboard/data.json`, коммит, FTP только папки `dashboard/` на REG.RU. Push с `GITHUB_TOKEN` по-прежнему не запускает `deploy-reg-ru.yml`, поэтому FTP в том же джобе обязателен для живой страницы. Заявки = цель `request-form-submit`; клики звонка/WhatsApp/Telegram — отдельные цели, не конверсия. `seo-health.yml` — только CI на пуше HTML (локальный check, без коммита JSON).
+
+Скиллы агента: `.cursor/skills/` — свои `content-writer`, `direct-service-voice`, `yandex-local`; каталог: `find-skills`, `web-design-guidelines` (Vercel), `frontend-design` (Anthropic), `systematic-debugging` (obra), `workers-best-practices` (Cloudflare; **не менять** `config.js` `relayUrl`), `accessibility` (Addy Osmani). Поиск новых: `npx skills find "…"`. Next.js и programmatic-SEO не ставить. Бот — `remphone-bot` + Context7 (aiogram 3.x), ответы клиенту не из Cursor.
 
 ---
 
@@ -44,10 +46,11 @@
 | `seo/` | Генераторы, health-check, семантика, отчёты |
 | `data/` | `brands.json`, `problems.json`, `contacts.json` |
 | `docs/` | Память агента, MCP, SEO-автоматизация |
-| `docs/business-memory/` | Бизнес-память: продукт, цены, клиенты, маркетинг |
-| `dashboard/` | Внутренний контроль (noindex, не в sitemap). Сбор: `node dashboard/collect.mjs`. Визиты — Метрика; `index.yandex_indexed` — Вебмастер `searchable_pages_count` |
+| `docs/business-memory/` | Бизнес-память: продукт, цены, клиенты, маркетинг. Архив Perplexity: `docs/business-memory/perplexity-archive/` (ТЗ, сессии, Moba) — не на сайт |
+| `dashboard/` | Внутренний контроль (noindex, не в sitemap). Сбор: `node dashboard/collect.mjs`. Health: `dashboard/health.json`. Визиты — Метрика; клики контактов отдельно от заявок; `index.yandex_indexed` — Вебмастер `searchable_pages_count` |
 | `graphify-out/` | Knowledge graph — не удалять |
 | `yandex-biz-photos/` | Служебные фото Яндекс Бизнеса, не логика сайта |
+| `.cursor/skills/` | Свои: content-writer, direct-service-voice, yandex-local. Каталог: find-skills, web-design-guidelines, frontend-design, systematic-debugging, workers-best-practices, accessibility |
 
 ---
 
@@ -57,7 +60,7 @@
 2. **Заявка из бота** — `@REMPHONE_RUSSIA_Bot` → та же лента `/leads`.
 3. **Город** — `?city=` / `city_id` (`khabarovsk` \| `komsomolsk` \| `vladivostok`); алиас `komsomolsk-na-amure` → `komsomolsk`.
 4. **Аналитика** — `analytics.js`: Метрика `111453492`, GA `G-53F13EFHZQ`. Цели: `request-form-submit`, `request-form-open`, `make-call`, `whatsapp`, `telegram`.
-5. **SEO-контур** — `seo/pages.json` → `node seo/generate-sitemap.mjs` → `sitemap.xml`. Проверка: `node seo/health-check.mjs`.
+5. **SEO-контур** — `seo/pages.json` → `node seo/generate-sitemap.mjs` → `sitemap.xml`. Проверка: `node seo/health-check.mjs` (локально) и `--live` (прод, пишет `dashboard/health.json`).
 6. **Шапка/подвал** — `site-chrome.js` на внутренних страницах (`data-base="../"` в подпапках).
 
 ---
@@ -78,6 +81,9 @@
 
 Lead pipeline подробно: `seo/LEAD_PIPELINE.md`.
 
+Telegram **ADMIN_ID** (куда relay/бот шлёт заявки): `7553859784`. Cloudflare-аккаунт Worker: `toolyrepair@gmail.com`.  
+Проект Perplexity (глаза/проверка, не код): см. `docs/business-memory/perplexity-index.md`. Отчёт Perplexity от 10.08.2026 местами устарел: живая Метрика **111453492** (не 110956593); прод — REG.RU, не «только GitHub Pages».
+
 ---
 
 ## Naming
@@ -95,9 +101,9 @@ Lead pipeline подробно: `seo/LEAD_PIPELINE.md`.
 
 - Единая шапка/подвал через `site-chrome.js`, не копировать разметку в каждую HTML-страницу без нужды.
 - CTA: телефон, WhatsApp, Telegram, якорь `#repair-flow`.
-- Плавающая панель: `.sticky-mobile-bar`.
+- Плавающая панель: `.sticky-mobile-bar` — звонок, WhatsApp, Telegram, заявка. На главной в HTML; на остальных `script.js` / `site-chrome.js` дописывают, если блока нет. Бургер открывает `.nav.active`, закрывается по пункту меню и тапу снаружи. Длинная «Заявка в Telegram» в шапке на узком экране скрыта, чтобы не ломать вёрстку.
 - Сравнение дисплеев: `displays-compare.js` + `displays-config.json`.
-- 3D-просмотр: `3d-viewer-iphone15.html` (не ломать GLB-пути).
+- 3D-калькулятор iPhone: `3d-viewer-iphone15.html` (алиас `iphone-repair-calculator.html`). GLB-путь не ломать. Прайс: `data/iphone-repair-prices.json`, дерево проблем: `iphone-calculator-catalog.js`. ТЗ анимаций неисправностей: `docs/IPHONE_CALCULATOR_PROBLEM_ANIMATIONS_TZ.md`.
 - Стили: `styles.css` + `animations.css`. Не внедрять тяжёлый фреймворк.
 
 ---

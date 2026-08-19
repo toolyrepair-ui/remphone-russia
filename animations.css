@@ -25,12 +25,14 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
 }
-.card-hover:hover {
-  transform: translateY(-6px) scale(1.03);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+@media (hover: hover) and (pointer: fine) {
+  .card-hover:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+  }
 }
 .card-hover:active {
-  transform: translateY(-2px) scale(0.99);
+  transform: translateY(-1px);
 }
 
 /* --- 3. Логотип внутри карточки: лёгкое покачивание при наведении --- */
@@ -46,9 +48,9 @@
 
 /* --- 4. Выбранная карточка --- */
 .card-selected {
-  outline: 3px solid #2563eb;
+  outline: 3px solid rgba(216, 12, 50, 0.35);
   outline-offset: 2px;
-  transform: scale(1.02);
+  border-color: var(--brand-red);
 }
 
 /* --- 5. Пульсация кнопки WhatsApp / звонка (привлекает внимание) --- */
@@ -58,28 +60,10 @@
   100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
 }
 .btn-pulse {
-  animation: pulse 2s infinite;
+  animation: none;
 }
 
-/* --- 6. Плавающая кнопка связи внизу экрана (mobile) --- */
-.floating-contact {
-  position: fixed;
-  right: 16px;
-  bottom: 16px;
-  z-index: 999;
-  display: flex;
-  gap: 10px;
-}
-.floating-contact a {
-  width: 54px; height: 54px;
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.25);
-  transition: transform 0.2s ease;
-}
-.floating-contact a:hover { transform: scale(1.1); }
-
-/* --- 7. Плавный переход между шагами (Марка -> Поломка -> Заявка) --- */
+/* --- 6. Плавный переход между шагами (Марка -> Поломка -> Заявка) --- */
 @keyframes slideIn {
   from { opacity: 0; transform: translateX(30px); }
   to   { opacity: 1; transform: translateX(0); }
@@ -90,5 +74,11 @@
 
 /* Уважение к пользователям с отключённой анимацией */
 @media (prefers-reduced-motion: reduce) {
-  * { animation: none !important; transition: none !important; }
+  .animate-in,
+  .card-hover:hover .brand-logo,
+  .card-hover:hover .problem-icon,
+  .btn-pulse,
+  .step-enter {
+    animation: none !important;
+  }
 }

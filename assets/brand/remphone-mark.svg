@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 128" role="img" aria-labelledby="title">
+  <title id="title">REMPHONE</title>
+  <path d="M25 5h46c11 0 20 9 20 20v78c0 11-9 20-20 20H25c-11 0-20-9-20-20V25C5 14 14 5 25 5Z" fill="none" stroke="#0B1F3A" stroke-width="7"/>
+  <path d="M33 5h30l-4 9H37l-4-9Z" fill="#0B1F3A"/>
+  <path d="M41 32v26l8 6 8-6V32a23 23 0 0 1 7 37L55 87h13L36 118l8-27H29l8-23a23 23 0 0 1 4-36Z" fill="#D80C32"/>
+</svg>

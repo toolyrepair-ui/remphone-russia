@@ -16,6 +16,7 @@
       --accent: #6c63ff;
       --ok: #34d399;
       --warn: #fbbf24;
+      --err: #f87171;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -73,15 +74,24 @@
     }
     .pill.ok { color: var(--ok); border-color: #065f46; }
     .pill.wait { color: var(--warn); border-color: #854d0e; }
+    .pill.bad { color: var(--err); border-color: #7f1d1d; }
+    .health-list { margin-top: 8px; padding-left: 18px; font-size: 12px; color: var(--muted); }
+    .contacts { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
     ul.notes { margin-top: 8px; padding-left: 18px; }
   </style>
 </head>
 <body>
   <div class="wrap">
     <h1>Контроль REMPHONE <span id="pill" class="pill wait">загрузка</span></h1>
-    <p class="sub">Визиты, заявки, конверсия, страницы в sitemap и в поиске Яндекса. Страница закрыта от поиска.</p>
+    <p class="sub">Визиты, подтверждённые заявки с формы, клики контактов и живой health сайта. Страница закрыта от поиска.</p>
 
     <div class="grid">
+      <div class="card">
+        <div class="label">Health сайта</div>
+        <div class="value" id="h-status">—</div>
+        <div class="hint" id="h-hint">ещё не проверяли</div>
+        <ul class="health-list" id="h-errors"></ul>
+      </div>
       <div class="card">
         <div class="label">Визиты за день</div>
         <div class="value" id="v-day">—</div>
@@ -93,14 +103,14 @@
         <div class="hint" id="v-week-h"></div>
       </div>
       <div class="card">
-        <div class="label">Заявки за 7 дней</div>
+        <div class="label">Заявки с формы (7 дней)</div>
         <div class="value" id="l-week">—</div>
         <div class="hint" id="l-week-h"></div>
       </div>
       <div class="card">
         <div class="label">Конверсия визит → заявка</div>
         <div class="value" id="conv">—</div>
-        <div class="hint">за последние 7 дней</div>
+        <div class="hint">только подтверждённые заявки / визиты за 7 дней</div>
       </div>
       <div class="card">
         <div class="label">URL в sitemap</div>
@@ -114,6 +124,31 @@
       </div>
     </div>
 
+    <h2>Клики контактов за 7 дней</h2>
+    <p class="sub" style="margin-bottom:12px">Это не заявки. Нули не подставляем, если Метрика не ответила.</p>
+    <div class="contacts">
+      <div class="card">
+        <div class="label">Звонок</div>
+        <div class="value" id="c-call">—</div>
+        <div class="hint" id="c-call-h">цель make-call</div>
+      </div>
+      <div class="card">
+        <div class="label">WhatsApp</div>
+        <div class="value" id="c-wa">—</div>
+        <div class="hint">цель whatsapp</div>
+      </div>
+      <div class="card">
+        <div class="label">Telegram</div>
+        <div class="value" id="c-tg">—</div>
+        <div class="hint">цель telegram</div>
+      </div>
+      <div class="card">
+        <div class="label">Открытие формы</div>
+        <div class="value" id="c-open">—</div>
+        <div class="hint">цель request-form-open</div>
+      </div>
+    </div>
+
     <h2>Визиты по дням</h2>
     <div class="card">
       <div class="bars" id="bars"><p class="hint">Нет ряда — нужен токен Метрики</p></div>
@@ -121,6 +156,7 @@
 
     <div class="status">
       Обновлено: <span id="updated">—</span><br>
+      Health: <span id="h-time">—</span><br>
       Источник: <span id="source">—</span>
       <ul class="notes" id="notes"></ul>
     </div>
@@ -134,9 +170,12 @@
       if (v === null || v === undefined) return '—';
       return v + '%';
     }
-    fetch('data.json', { cache: 'no-store' })
-      .then((r) => r.json())
-      .then((d) => {
+    Promise.all([
+      fetch('data.json', { cache: 'no-store' }).then((r) => r.json()),
+      fetch('health.json', { cache: 'no-store' }).then((r) => r.ok ? r.json() : null).catch(() => null),
+    ])
+      .then(([d, healthFile]) => {
+        if (healthFile) d.health = healthFile;
         document.getElementById('v-day').textContent = fmt(d.visits && d.visits.day);
         document.getElementById('v-week').textContent = fmt(d.visits && d.visits.week);
         document.getElementById('v-day-h').textContent = d.visits && d.visits.month != null ? 'месяц: ' + d.visits.month : '';
@@ -147,12 +186,38 @@
         document.getElementById('idx').textContent = fmt(d.index && d.index.sitemap_urls);
         document.getElementById('idx-ya').textContent = fmt(d.index && d.index.yandex_indexed);
         document.getElementById('idx-h').textContent = d.index && d.index.note ? d.index.note : '';
+        const c = (d.contacts && d.contacts.week) || {};
+        document.getElementById('c-call').textContent = fmt(c.call);
+        document.getElementById('c-wa').textContent = fmt(c.whatsapp);
+        document.getElementById('c-tg').textContent = fmt(c.telegram);
+        document.getElementById('c-open').textContent = fmt(c.form_open);
+        document.getElementById('c-call-h').textContent = (d.contacts && d.contacts.note) ? d.contacts.note : 'цель make-call';
+        const h = d.health;
+        const hStatus = document.getElementById('h-status');
+        const hHint = document.getElementById('h-hint');
+        const hErr = document.getElementById('h-errors');
+        if (h) {
+          hStatus.textContent = h.ok ? 'OK' : (h.errors + ' err');
+          hStatus.style.color = h.ok ? 'var(--ok)' : 'var(--err)';
+          const liveH = h.live ? ('live ' + h.live.ok + '/' + h.live.checked) : 'только локально';
+          hHint.textContent = liveH + (h.warnings ? ', предупр.: ' + h.warnings : '');
+          (h.error_samples || []).forEach((n) => {
+            const li = document.createElement('li');
+            li.textContent = n;
+            hErr.appendChild(li);
+          });
+          document.getElementById('h-time').textContent = h.updated_at ? new Date(h.updated_at).toLocaleString('ru-RU') : '—';
+        } else {
+          hStatus.textContent = 'нет данных';
+          hHint.textContent = 'health.json ещё не записан';
+        }
         document.getElementById('updated').textContent = d.updated_at ? new Date(d.updated_at).toLocaleString('ru-RU') : '—';
         document.getElementById('source').textContent = d.source || '—';
         const pill = document.getElementById('pill');
         const live = d.source === 'metrika' || d.source === 'metrika+lead_api' || d.source === 'metrika_browser';
-        pill.textContent = live ? 'Метрика' : 'без токена';
-        pill.className = 'pill ' + (live ? 'ok' : 'wait');
+        const healthBad = h && h.ok === false;
+        pill.textContent = healthBad ? 'ошибки health' : (live ? 'Метрика' : 'без токена');
+        pill.className = 'pill ' + (healthBad ? 'bad' : (live ? 'ok' : 'wait'));
         const notes = document.getElementById('notes');
         (d.notes || []).forEach((n) => {
           const li = document.createElement('li');

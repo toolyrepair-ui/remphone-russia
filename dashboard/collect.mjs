@@ -13,8 +13,15 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, '..');
 const outPath = join(__dirname, 'data.json');
 const METRIKA_ID = 111453492;
-const GOAL_SUBMIT = 595078292; // request-form-submit
+const GOAL_SUBMIT = 595078292; // request-form-submit — подтверждённая заявка с формы
+const GOAL_CONTACTS = {
+  call: 595078285, // make-call
+  whatsapp: 595078294,
+  telegram: 595078295,
+  form_open: 595078291, // request-form-open
+};
 const API = 'https://api-metrika.yandex.net/stat/v1/data';
+const healthPath = join(__dirname, 'health.json');
 
 loadEnvFile(join(root, '.env.dashboard'));
 loadEnvFile(join(root, '.env'));
@@ -66,6 +73,26 @@ function sitemapCount() {
 function pct(leads, visits) {
   if (leads == null || visits == null || visits <= 0) return null;
   return Math.round((leads / visits) * 1000) / 10;
+}
+
+function emptyContacts() {
+  return {
+    day: { call: null, whatsapp: null, telegram: null, form_open: null },
+    week: { call: null, whatsapp: null, telegram: null, form_open: null },
+    source: null,
+    note: 'Клики контактов (цели Метрики). Не заявки. Цели email в Метрике нет.',
+  };
+}
+
+function readHealth(prevHealth) {
+  if (existsSync(healthPath)) {
+    try {
+      return JSON.parse(readFileSync(healthPath, 'utf8'));
+    } catch {
+      /* fall through */
+    }
+  }
+  return prevHealth || null;
 }
 
 async function metrika(params) {
@@ -156,6 +183,37 @@ async function fetchMetrika() {
   };
 }
 
+async function fetchContacts() {
+  const metrics = [
+    `ym:s:goal${GOAL_CONTACTS.call}reaches`,
+    `ym:s:goal${GOAL_CONTACTS.whatsapp}reaches`,
+    `ym:s:goal${GOAL_CONTACTS.telegram}reaches`,
+    `ym:s:goal${GOAL_CONTACTS.form_open}reaches`,
+  ].join(',');
+  const [day, week] = await Promise.all([
+    metrika({ metrics, date1: 'today', date2: 'today' }),
+    metrika({ metrics, date1: '6daysAgo', date2: 'today' }),
+  ]);
+  const d = totalsOf(day).map(Number);
+  const w = totalsOf(week).map(Number);
+  return {
+    day: {
+      call: d[0] ?? null,
+      whatsapp: d[1] ?? null,
+      telegram: d[2] ?? null,
+      form_open: d[3] ?? null,
+    },
+    week: {
+      call: w[0] ?? null,
+      whatsapp: w[1] ?? null,
+      telegram: w[2] ?? null,
+      form_open: w[3] ?? null,
+    },
+    source: 'metrika_goals',
+    note: 'Клики контактов, не заявки. Email в Метрике цели нет — не выдумывать нули.',
+  };
+}
+
 async function wmGet(path, wmToken) {
   const res = await fetch(`${WM_API}${path}`, {
     headers: { Authorization: `OAuth ${wmToken}`, Accept: 'application/json' },
@@ -225,9 +283,15 @@ const data = {
     google_indexed_approx: prev.index?.google_indexed_approx ?? null,
     note: prev.index?.note || 'Яндекс: searchable_pages_count. Google: точного API нет, оценка позже.',
   },
+  contacts: prev.contacts || emptyContacts(),
+  health: readHealth(prev.health),
   series: prev.series || [],
   notes: [],
 };
+
+if (!data.health) {
+  notes.push('health.json ещё нет — live-проверка не запускалась');
+}
 
 if (token) {
   try {
@@ -241,11 +305,20 @@ if (token) {
     notes.push(`Метрика: ${e.message}`);
     data.source = prev.source || 'error';
   }
+  try {
+    data.contacts = await fetchContacts();
+  } catch (e) {
+    notes.push(`Клики контактов: ${e.message}`);
+    if (!data.contacts || !data.contacts.source) data.contacts = emptyContacts();
+  }
 } else {
   notes.push('Нет YANDEX_METRIKA_TOKEN — визиты из последнего удачного сбора / отчёта SEO');
   if (!prev.visits) {
     data.visits = { day: null, week: null, month: 8 };
     notes.push('Месяц: 8 визитов (Метрика 15.07–14.08.2026, seo/reports/2026-08-16.md)');
+  }
+  if (!prev.contacts || prev.contacts.week?.call == null) {
+    notes.push('Клики звонка / WhatsApp / Telegram не подтянуты (нет токена). Нули не подставлять.');
   }
 }
 
@@ -275,5 +348,6 @@ data.conversion_visit_to_lead = pct(data.leads.week, data.visits.week);
 data.notes = notes;
 
 writeFileSync(outPath, JSON.stringify(data, null, 2) + '\n', 'utf8');
-console.log(`Wrote ${outPath} source=${data.source} visits.week=${data.visits.week} leads.week=${data.leads.week}`);
+const healthOk = data.health && data.health.ok ? 'ok' : (data.health ? `errors=${data.health.errors}` : 'no-health');
+console.log(`Wrote ${outPath} source=${data.source} visits.week=${data.visits.week} leads.week=${data.leads.week} health=${healthOk}`);
 if (notes.length) notes.forEach((n) => console.log('  !', n));

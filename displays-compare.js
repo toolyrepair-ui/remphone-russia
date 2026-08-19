@@ -1,6 +1,6 @@
 /**
- * Блок «Оригинал vs Аналог» — табы брендов + слайдер.
- * Данные: displays-config.json (без правки этого файла при смене цен).
+ * Блок «Оригинал vs Аналог» — табы брендов + слайдер преимуществ.
+ * Данные: displays-config.json. Цену не показываем.
  */
 (function () {
   var root = document.getElementById('displayCompare');
@@ -9,13 +9,14 @@
   var CONFIG_URL = root.getAttribute('data-config') || 'displays-config.json';
   var tabsEl = root.querySelector('[data-dc-tabs]');
   var sliderEl = root.querySelector('[data-dc-slider]');
-  var priceEl = root.querySelector('[data-dc-price]');
-  var lifeEl = root.querySelector('[data-dc-lifespan]');
+  var titleEl = root.querySelector('[data-dc-title]');
+  var leadEl = root.querySelector('[data-dc-lead]');
   var featuresEl = root.querySelector('[data-dc-features]');
   var sideOrig = root.querySelector('[data-dc-side-orig]');
   var sideAnalog = root.querySelector('[data-dc-side-analog]');
   var warrantyEl = root.querySelector('[data-dc-warranty]');
   var labelEl = root.querySelector('[data-dc-label]');
+  var captionEl = root.querySelector('[data-dc-side-caption]');
 
   var state = {
     brandKey: 'iphone',
@@ -27,20 +28,6 @@
     return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   }
 
-  function lerp(a, b, t) {
-    return a + (b - a) * t;
-  }
-
-  function formatPrice(n) {
-    var v = Math.round(n / 50) * 50;
-    return 'от ' + v.toLocaleString('ru-RU') + '₽';
-  }
-
-  function formatLife(n, unit) {
-    var v = Math.round(n);
-    return '~' + v + ' ' + (unit || 'мес.');
-  }
-
   function getPair() {
     var brands = (state.config && state.config.brands) || {};
     return brands[state.brandKey] || brands.iphone;
@@ -48,58 +35,47 @@
 
   function setPositionCss(pos) {
     root.style.setProperty('--slider-position', String(pos));
-    if (sideOrig) sideOrig.style.opacity = String(1 - pos / 100);
-    if (sideAnalog) sideAnalog.style.opacity = String(pos / 100);
+    if (sideAnalog) sideAnalog.style.opacity = String(1 - pos / 100);
+    if (sideOrig) sideOrig.style.opacity = String(pos / 100);
   }
 
-  function renderFeatures(pair, t) {
-    if (!featuresEl || !pair) return;
-    var side = t < 0.5 ? pair.original : pair.analog;
-    var list = (side && side.features) || [];
-    featuresEl.innerHTML = list
-      .map(function (f) {
-        return '<li>' + f + '</li>';
-      })
-      .join('');
-    if (labelEl) {
-      labelEl.textContent = t < 0.5 ? 'Ближе к оригиналу' : 'Ближе к аналогу';
-      labelEl.dataset.side = t < 0.5 ? 'original' : 'analog';
-    }
+  function currentSide(pair, t) {
+    return t < 0.5 ? pair.analog : pair.original;
   }
 
-  function renderNumbers(pair, t) {
+  function renderBenefits(pair, t) {
     if (!pair) return;
-    var o = pair.original || {};
-    var a = pair.analog || {};
-    var price = lerp(Number(o.price) || 0, Number(a.price) || 0, t);
-    var life = lerp(Number(o.lifespan) || 0, Number(a.lifespan) || 0, t);
-    var unit = a.lifespanUnit || o.lifespanUnit || 'мес.';
+    var analog = t < 0.5;
+    var side = currentSide(pair, t) || {};
+    var list = side.benefits || side.features || [];
 
-    var apply = function () {
-      if (priceEl) priceEl.textContent = formatPrice(price);
-      if (lifeEl) lifeEl.textContent = formatLife(life, unit);
-    };
-
-    if (reducedMotion() || !priceEl) {
-      apply();
-      return;
+    if (titleEl) titleEl.textContent = side.title || (analog ? 'Аналог' : 'Оригинал');
+    if (leadEl) {
+      leadEl.textContent =
+        side.lead ||
+        'Гарантия одинаковая. Точную сумму назовём после осмотра модели.';
     }
-
-    priceEl.classList.add('is-updating');
-    lifeEl && lifeEl.classList.add('is-updating');
-    window.setTimeout(function () {
-      apply();
-      priceEl.classList.remove('is-updating');
-      lifeEl && lifeEl.classList.remove('is-updating');
-    }, 40);
+    if (featuresEl) {
+      featuresEl.innerHTML = list
+        .map(function (f) {
+          return '<li>' + f + '</li>';
+        })
+        .join('');
+    }
+    if (captionEl) {
+      captionEl.textContent = analog ? 'Преимущества аналога' : 'Преимущества оригинала';
+    }
+    if (labelEl) {
+      labelEl.textContent = analog ? 'Ближе к аналогу' : 'Ближе к оригиналу';
+      labelEl.dataset.side = analog ? 'analog' : 'original';
+    }
   }
 
   function render() {
     var pair = getPair();
     var t = state.position / 100;
     setPositionCss(state.position);
-    renderNumbers(pair, t);
-    renderFeatures(pair, t);
+    renderBenefits(pair, t);
   }
 
   function setBrand(key) {

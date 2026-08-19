@@ -1,8 +1,6 @@
-/*
 name: SEO health-check
+
 on:
-  schedule:
-    - cron: '0 6 * * *'
   workflow_dispatch:
   push:
     paths:
@@ -10,6 +8,7 @@ on:
       - 'seo/**'
       - 'sitemap.xml'
       - 'robots.txt'
+
 jobs:
   seo:
     runs-on: ubuntu-latest
@@ -29,7 +28,6 @@ jobs:
           fi
       - name: Local health-check
         run: node seo/health-check.mjs
-      - name: Live health-check
-        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
-        run: node seo/health-check.mjs --live
-        continue-on-error: true
+
+# Live-проверка и запись dashboard/health.json — в dashboard.yml (два раза в сутки + ручной запуск).
+# Здесь только CI на пуше HTML/SEO, без коммита, чтобы не гоняться с дашбордом за один JSON.

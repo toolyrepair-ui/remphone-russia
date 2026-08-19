@@ -4,20 +4,23 @@
     <meta charset="UTF-8">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="alternate icon" type="image/png" sizes="120x120" href="/favicon-120.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Контакты — REMPHONE RUSSIA Хабаровск</title>
-    <meta name="description" content="Контакты REMPHONE RUSSIA: телефон +7 914 411-17-30, WhatsApp, Telegram, email. Ремонт телефонов в Хабаровске, выезд мастера.">
+    <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0B1F3A">
+    <title>Контакты — REMPHONE Хабаровск</title>
+    <meta name="description" content="Контакты REMPHONE: телефон +7 914 411-17-30, WhatsApp, Telegram, email. Ремонт телефонов в Хабаровске, выезд мастера.">
     <link rel="canonical" href="https://rem-phone.ru/contacts.html">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=design1">
     <link rel="stylesheet" href="animations.css">
-    <meta property="og:title" content="Контакты — REMPHONE RUSSIA Хабаровск">
+    <meta property="og:title" content="Контакты — REMPHONE Хабаровск">
     <meta property="og:description" content="Телефон +7 914 411-17-30, WhatsApp, Telegram. Ремонт телефонов в Хабаровске.">
     <meta property="og:url" content="https://rem-phone.ru/contacts.html">
 </head>
 <body>
 <div id="site-header"></div>
+<main id="main-content">
 
-<section class="hero" style="padding:48px 0 24px">
+<section class="page-hero">
     <div class="container">
         <h1 style="font-size:clamp(28px,5vw,42px);margin-bottom:12px">Контакты</h1>
         <p style="font-size:18px;color:var(--text-light);max-width:640px">Свяжитесь удобным способом — отвечаем быстро, работаем по Хабаровску и краю.</p>
@@ -95,52 +98,7 @@
                     <div id="formContent">
                         <h3>Заявка на ремонт</h3>
                         <p class="form-sub">Заполните — мы свяжемся с вами</p>
-                        <form id="repairForm" onsubmit="return submitForm(event)">
-                            <div class="form-group">
-                                <label for="name">Ваше имя *</label>
-                                <input type="text" id="name" placeholder="Алексей" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="phone">Номер телефона *</label>
-                                <input type="tel" id="phone" placeholder="+7 914 411-17-30" required>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="brand">Бренд *</label>
-                                    <select id="brand" required>
-                                        <option value="">Выберите</option>
-                                        <option value="iPhone">iPhone</option>
-                                        <option value="Samsung">Samsung</option>
-                                        <option value="Xiaomi">Xiaomi</option>
-                                        <option value="Honor">Honor</option>
-                                        <option value="Huawei">Huawei</option>
-                                        <option value="Другой">Другой</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="model">Модель</label>
-                                    <input type="text" id="model" placeholder="iPhone 13, A52...">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="problem">Проблема *</label>
-                                <select id="problem" required>
-                                    <option value="">Выберите</option>
-                                    <option value="Разбит экран">Разбит экран</option>
-                                    <option value="Не включается">Не включается</option>
-                                    <option value="Садится батарея">Садится батарея</option>
-                                    <option value="Не заряжается">Не заряжается</option>
-                                    <option value="Попала вода">Попала вода</option>
-                                    <option value="Не работает камера">Не работает камера</option>
-                                    <option value="Другое">Другое</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="city">Город *</label>
-                                <input type="text" id="city" placeholder="Хабаровск" value="Хабаровск" required>
-                            </div>
-                            <button type="submit" class="form-submit" id="submitBtn">Отправить заявку</button>
-                        </form>
+                        <div class="legacy-form-replacement"><h2>Оставьте заявку на ремонт</h2><p>Выберите город, марку и поломку — мы перезвоним за несколько минут.</p><a class="btn-primary" href="index.html#repair-flow">Оставить заявку</a></div>
                     </div>
                     <div class="form-success" id="formSuccess">
                         <div class="form-success-icon">✅</div>
@@ -153,11 +111,13 @@
     </div>
 </section>
 
+
+</main>
 <div id="site-float"></div>
 <div id="site-footer"></div>
 <script src="config.js"></script>
-<script src="site-chrome.js" data-base=""></script>
-<script src="script.js"></script>
+<script src="site-chrome.js?v=design1" data-base=""></script>
+<script src="script.js?v=design1"></script>
 <!-- Yandex.Metrika counter noscript -->
 <noscript><div><img src="https://mc.yandex.ru/watch/111453492" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 </body>

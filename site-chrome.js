@@ -1,152 +1,214 @@
 /**
- * Единая шапка/подвал + плавающие кнопки для всех страниц REM-PHONE.
- * Подключение: <script src="site-chrome.js" data-base=""></script>
- * В подпапках: data-base="../"
+ * Единая оболочка публичных страниц REMPHONE.
+ * Подключение в корне: data-base=""; в подпапке: data-base="../".
+ * Контакты берутся только из window.REMPHONE_CONFIG.
  */
 (function () {
+  'use strict';
+
   var script = document.currentScript;
   var base = (script && script.getAttribute('data-base')) || '';
-  var phoneTel = '+79144111730';
-  var phoneShow = '+7 914 411-17-30';
-  var wa = 'https://wa.me/79144111730';
-  var tg = 'https://t.me/REMPHONE_RUSSIA_Bot';
-  var mail = 'mailto:toolyrepair@gmail.com';
 
   function asset(path) {
     return base + path;
   }
 
-  var headerHtml =
-    '<header class="header" id="header">' +
-    '<div class="container">' +
-    '<a href="' + base + 'index.html" class="logo">REMPHONE <span>RUSSIA</span></a>' +
-    '<nav class="nav" id="nav">' +
-    '<a href="' + base + 'services/">Услуги</a>' +
-    '<a href="' + base + 'brands/">Бренды</a>' +
-    '<a href="' + base + 'reviews.html">Отзывы</a>' +
-    '<a href="' + base + 'about.html">О нас</a>' +
-    '<a href="' + base + 'faq.html">FAQ</a>' +
-    '<a href="' + base + 'contacts.html">Контакты</a>' +
-    '</nav>' +
-    '<div class="header-contacts">' +
-    '<a class="header-phone" href="tel:' + phoneTel + '">' + phoneShow + '</a>' +
-    '<div class="header-social">' +
-    '<a href="' + wa + '" target="_blank" rel="noopener" aria-label="WhatsApp"><img src="' + asset('assets/messengers/whatsapp.svg') + '" alt="" width="22" height="22" onerror="this.src=\'' + asset('assets/placeholders/placeholder.svg') + '\'"></a>' +
-    '<a href="' + tg + '" target="_blank" rel="noopener" aria-label="Telegram"><img src="' + asset('assets/messengers/telegram.svg') + '" alt="" width="22" height="22" onerror="this.src=\'' + asset('assets/placeholders/placeholder.svg') + '\'"></a>' +
-    '<a href="' + mail + '" aria-label="Email">✉️</a>' +
-    '</div></div>' +
-    '<button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>' +
-    '</div></header>';
-
-  var footerHtml =
-    '<footer class="footer">' +
-    '<div class="container">' +
-    '<div class="footer-grid">' +
-    '<div>' +
-    '<div class="logo" style="color:#fff;margin-bottom:8px">REMPHONE <span>RUSSIA</span></div>' +
-    '<p style="font-size:13px;color:rgba(255,255,255,0.4)">Ремонт телефонов в Хабаровске, Комсомольске-на-Амуре и Владивостоке.</p>' +
-    '<a class="footer-phone" href="tel:' + phoneTel + '">' + phoneShow + '</a>' +
-    '<div class="footer-social">' +
-    '<a href="' + wa + '" target="_blank" rel="noopener">WhatsApp</a>' +
-    '<a href="' + tg + '" target="_blank" rel="noopener">Telegram</a>' +
-    '<a href="' + mail + '">Email</a>' +
-    '</div></div>' +
-    '<div><h5>Услуги</h5>' +
-    '<a href="' + base + 'services/screen.html">Замена экрана</a>' +
-    '<a href="' + base + 'services/battery.html">Замена батареи</a>' +
-    '<a href="/khabarovsk/">Хабаровск</a>' +
-    '<a href="/komsomolsk-na-amure/">Комсомольск-на-Амуре</a>' +
-    '<a href="/vladivostok/">Владивосток</a></div>' +
-    '<div><h5>О проекте</h5>' +
-    '<a href="' + base + 'about.html">О нас</a>' +
-    '<a href="' + base + 'brands/">Бренды</a>' +
-    '<a href="' + base + 'reviews.html">Отзывы</a>' +
-    '<a href="' + base + 'faq.html">FAQ</a>' +
-    '<a href="' + base + 'contacts.html">Контакты</a></div>' +
-    '<div><h5>Заявка</h5>' +
-    '<a href="' + base + 'index.html#repair-flow">Оставить заявку</a>' +
-    '<a href="' + tg + '" target="_blank" rel="noopener">Telegram-бот</a>' +
-    '<a href="' + base + 'privacy.html">Политика</a></div>' +
-    '</div>' +
-    '<div class="footer-bottom"><p>© 2026 REMPHONE RUSSIA · <a href="' + mail + '" style="color:inherit">toolyrepair@gmail.com</a></p></div>' +
-    '</div></footer>';
-
-  var floatHtml =
-    '<div class="sticky-mobile-bar floating-contact" id="stickyMobileBar">' +
-    '<a class="sticky-fab sticky-call btn-pulse" href="tel:' + phoneTel + '" aria-label="Позвонить"><img src="' + asset('assets/messengers/phone.svg') + '" alt="" width="26" height="26"></a>' +
-    '<a class="sticky-fab sticky-wa btn-pulse" href="' + wa + '" target="_blank" rel="noopener" aria-label="WhatsApp"><img src="' + asset('assets/messengers/whatsapp.svg') + '" alt="" width="26" height="26"></a>' +
-    '<a class="sticky-fab sticky-tg btn-pulse" href="' + tg + '" target="_blank" rel="noopener" aria-label="Telegram"><img src="' + asset('assets/messengers/telegram.svg') + '" alt="" width="26" height="26"></a>' +
-    '<a class="sticky-fab sticky-flow" href="' + base + 'index.html#repair-flow">Заявка</a>' +
-    '</div>';
-
-  function mount() {
-    var h = document.getElementById('site-header');
-    var f = document.getElementById('site-footer');
-    var fl = document.getElementById('site-float');
-    if (h) h.outerHTML = headerHtml;
-    if (f) f.outerHTML = footerHtml;
-    if (fl) fl.outerHTML = floatHtml;
-
-    function loadAnalytics() {
-      if (document.querySelector('script[src*="analytics.js"]')) return;
-      var analytics = document.createElement('script');
-      analytics.src = asset('analytics.js');
-      document.body.appendChild(analytics);
+  function ensureConfig(done) {
+    if (window.REMPHONE_CONFIG) {
+      done();
+      return;
     }
-    if (!window.REMPHONE_CONFIG) {
-      var config = document.createElement('script');
-      config.src = asset('config.js');
-      config.onload = loadAnalytics;
-      config.onerror = loadAnalytics;
-      document.body.appendChild(config);
-    } else {
-      loadAnalytics();
-    }
+    var config = document.createElement('script');
+    config.src = asset('config.js');
+    config.onload = done;
+    config.onerror = function () {
+      console.error('REMPHONE: config.js не загрузился');
+      done();
+    };
+    document.head.appendChild(config);
+  }
 
+  function contactData() {
+    var cfg = window.REMPHONE_CONFIG || {};
+    return {
+      phoneTel: cfg.phoneTel || '',
+      phoneDisplay: cfg.phoneDisplay || '',
+      whatsapp: cfg.whatsapp ? 'https://wa.me/' + cfg.whatsapp : '',
+      telegram: cfg.telegramBot ? 'https://t.me/' + cfg.telegramBot : '',
+      email: cfg.email ? 'mailto:' + cfg.email : '',
+      emailText: cfg.email || ''
+    };
+  }
+
+  function link(href, className, text, extra) {
+    if (!href) return '';
+    return '<a href="' + href + '"' + (className ? ' class="' + className + '"' : '') +
+      (extra ? ' ' + extra : '') + '>' + text + '</a>';
+  }
+
+  function chromeMarkup() {
+    var contact = contactData();
+    var logo = '<img src="' + asset('assets/brand/remphone-wordmark.svg') +
+      '" width="178" height="44" alt="" decoding="async">';
+    var logoInverse = '<img src="' + asset('assets/brand/remphone-wordmark-inverse.svg') +
+      '" width="190" height="47" alt="" loading="lazy" decoding="async">';
+
+    var header =
+      '<a class="skip-link" href="#main-content">К основному содержимому</a>' +
+      '<header class="header" id="header">' +
+        '<div class="container header-inner">' +
+          '<a href="' + asset('index.html') + '" class="site-logo" aria-label="REMPHONE — на главную">' + logo + '</a>' +
+          '<nav class="nav" id="nav" aria-label="Основная навигация">' +
+            '<a href="' + asset('services/') + '">Услуги</a>' +
+            '<a href="' + asset('brands/') + '">Бренды</a>' +
+            '<a href="' + asset('cities/') + '">Города</a>' +
+            '<a href="' + asset('reviews.html') + '">Отзывы</a>' +
+            '<a href="' + asset('about.html') + '">О нас</a>' +
+            '<div class="nav-mobile-contacts">' +
+              link(contact.phoneTel ? 'tel:' + contact.phoneTel : '', '', contact.phoneDisplay) +
+              link(contact.telegram, '', 'Telegram', 'target="_blank" rel="noopener"') +
+              link(contact.whatsapp, '', 'WhatsApp', 'target="_blank" rel="noopener"') +
+            '</div>' +
+          '</nav>' +
+          '<div class="header-actions">' +
+            link(contact.phoneTel ? 'tel:' + contact.phoneTel : '', 'header-phone', contact.phoneDisplay) +
+            '<a class="header-cta" href="' + asset('index.html#repair-flow') + '">Оставить заявку</a>' +
+          '</div>' +
+          '<button class="burger" id="burger" type="button" aria-label="Открыть меню" aria-controls="nav" aria-expanded="false">' +
+            '<span></span><span></span><span></span>' +
+          '</button>' +
+        '</div>' +
+      '</header>';
+
+    var footer =
+      '<footer class="footer">' +
+        '<div class="container">' +
+          '<div class="footer-grid">' +
+            '<div class="footer-brand">' +
+              '<a href="' + asset('index.html') + '" class="footer-logo" aria-label="REMPHONE — на главную">' + logoInverse + '</a>' +
+              '<p>Ремонт телефонов в Хабаровске, Комсомольске-на-Амуре и Владивостоке.</p>' +
+              link(contact.phoneTel ? 'tel:' + contact.phoneTel : '', 'footer-phone', contact.phoneDisplay) +
+            '</div>' +
+            '<nav class="footer-nav" aria-label="Услуги">' +
+              '<h2>Услуги</h2>' +
+              '<a href="' + asset('services/screen.html') + '">Замена экрана</a>' +
+              '<a href="' + asset('services/battery.html') + '">Замена батареи</a>' +
+              '<a href="' + asset('services/not-on.html') + '">Телефон не включается</a>' +
+              '<a href="' + asset('services/') + '">Все услуги</a>' +
+            '</nav>' +
+            '<nav class="footer-nav" aria-label="Города">' +
+              '<h2>Города</h2>' +
+              '<a href="/khabarovsk/">Хабаровск</a>' +
+              '<a href="/komsomolsk-na-amure/">Комсомольск-на-Амуре</a>' +
+              '<a href="/vladivostok/">Владивосток</a>' +
+            '</nav>' +
+            '<nav class="footer-nav" aria-label="Контакты и документы">' +
+              '<h2>Связаться</h2>' +
+              link(contact.telegram, '', 'Telegram', 'target="_blank" rel="noopener"') +
+              link(contact.whatsapp, '', 'WhatsApp', 'target="_blank" rel="noopener"') +
+              link(contact.email, '', contact.emailText) +
+              '<a href="' + asset('privacy.html') + '">Политика конфиденциальности</a>' +
+            '</nav>' +
+          '</div>' +
+          '<div class="footer-bottom"><p>© 2026 REMPHONE</p></div>' +
+        '</div>' +
+      '</footer>';
+
+    var mobile =
+      '<nav class="mobile-contact-bar" id="stickyMobileBar" aria-label="Быстрая связь">' +
+        link(contact.phoneTel ? 'tel:' + contact.phoneTel : '', 'mobile-contact-link', '<span aria-hidden="true">☎</span><span>Позвонить</span>') +
+        link(contact.telegram, 'mobile-contact-link', '<span aria-hidden="true">✈</span><span>Telegram</span>', 'target="_blank" rel="noopener"') +
+        '<a class="mobile-contact-link mobile-contact-primary" href="' + asset('index.html#repair-flow') + '">' +
+          '<span aria-hidden="true">→</span><span>Заявка</span>' +
+        '</a>' +
+      '</nav>';
+
+    return { header: header, footer: footer, mobile: mobile };
+  }
+
+  function bindMenu() {
     var burger = document.getElementById('burger');
     var nav = document.getElementById('nav');
-    if (burger && nav && burger.getAttribute('data-bound') !== '1') {
-      burger.setAttribute('data-bound', '1');
-      function isOpen() {
-        return nav.classList.contains('active') || nav.classList.contains('open');
+    if (!burger || !nav) return;
+
+    var focusable = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled])';
+    var returnFocus = null;
+
+    function setOpen(open) {
+      nav.classList.toggle('active', open);
+      burger.classList.toggle('is-open', open);
+      burger.setAttribute('aria-expanded', String(open));
+      burger.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню');
+      document.body.classList.toggle('menu-open', open);
+      if (open) {
+        returnFocus = document.activeElement;
+        var first = nav.querySelector(focusable);
+        if (first) first.focus();
+      } else if (returnFocus === burger || returnFocus) {
+        burger.focus();
+        returnFocus = null;
       }
-      function setOpen(open) {
-        nav.classList.toggle('active', open);
-        nav.classList.remove('open');
-        burger.classList.toggle('is-open', open);
-        burger.setAttribute('aria-expanded', open ? 'true' : 'false');
-      }
-      burger.setAttribute('aria-expanded', 'false');
-      burger.setAttribute('aria-controls', 'nav');
-      burger.addEventListener('click', function (e) {
-        e.stopPropagation();
-        setOpen(!isOpen());
-      });
-      nav.querySelectorAll('a').forEach(function (link) {
-        link.addEventListener('click', function () { setOpen(false); });
-      });
-      document.addEventListener('click', function (e) {
-        if (!isOpen()) return;
-        if (nav.contains(e.target) || burger.contains(e.target)) return;
-        setOpen(false);
-      });
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') setOpen(false);
-      });
     }
 
-    var meta = document.querySelector('meta[name="viewport"]');
-    if (meta) {
-      var content = meta.getAttribute('content') || '';
-      if (content.indexOf('viewport-fit') === -1) {
-        meta.setAttribute('content', content.replace(/\s+$/, '') + ', viewport-fit=cover');
+    burger.addEventListener('click', function (event) {
+      event.stopPropagation();
+      setOpen(!nav.classList.contains('active'));
+    });
+    nav.addEventListener('click', function (event) {
+      if (event.target.closest('a')) setOpen(false);
+    });
+    document.addEventListener('click', function (event) {
+      if (!nav.classList.contains('active')) return;
+      if (!nav.contains(event.target) && !burger.contains(event.target)) setOpen(false);
+    });
+    document.addEventListener('keydown', function (event) {
+      if (!nav.classList.contains('active')) return;
+      if (event.key === 'Escape') {
+        setOpen(false);
+        return;
       }
-    }
+      if (event.key !== 'Tab') return;
+      var items = Array.prototype.slice.call(nav.querySelectorAll(focusable));
+      if (!items.length) return;
+      var first = items[0];
+      var last = items[items.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    });
+  }
+
+  function loadAnalytics() {
+    if (document.querySelector('script[src*="analytics.js"]')) return;
+    var analytics = document.createElement('script');
+    analytics.src = asset('analytics.js');
+    analytics.defer = true;
+    document.body.appendChild(analytics);
+  }
+
+  function mount() {
+    var markup = chromeMarkup();
+    var header = document.getElementById('site-header');
+    var footer = document.getElementById('site-footer');
+    var mobile = document.getElementById('site-float');
+    if (header) header.outerHTML = markup.header;
+    if (footer) footer.outerHTML = markup.footer;
+    if (mobile) mobile.outerHTML = markup.mobile;
+    bindMenu();
+    loadAnalytics();
+  }
+
+  function start() {
+    ensureConfig(mount);
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', mount);
+    document.addEventListener('DOMContentLoaded', start);
   } else {
-    mount();
+    start();
   }
 })();

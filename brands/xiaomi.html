@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="alternate icon" type="image/png" sizes="120x120" href="/favicon-120.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ремонт Xiaomi в Хабаровске — REMPHONE RUSSIA</title>
+    <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0B1F3A">
+    <title>Ремонт Xiaomi в Хабаровске — REMPHONE</title>
     <meta name="description" content="Ремонт Xiaomi, Redmi и POCO в Хабаровске: экран, батарея, зарядка, после воды. Гарантия 90 дней. От 1300₽.">
     <link rel="canonical" href="https://rem-phone.ru/brands/xiaomi.html">
-    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../styles.css?v=design1">
     <link rel="stylesheet" href="../animations.css">
-    <meta property="og:title" content="Ремонт Xiaomi в Хабаровске — REMPHONE RUSSIA">
+    <meta property="og:title" content="Ремонт Xiaomi в Хабаровске — REMPHONE">
     <meta property="og:description" content="Ремонт Xiaomi, Redmi и POCO в Хабаровске: экран, батарея, зарядка, после воды. Гарантия 90 дней. От 1300₽.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://rem-phone.ru/brands/xiaomi.html">
@@ -23,7 +25,7 @@
         "serviceType": "Ремонт Xiaomi",
         "provider": {
             "@type": "LocalBusiness",
-            "name": "REMPHONE RUSSIA",
+            "name": "REMPHONE",
             "telephone": "+79144111730",
             "url": "https://rem-phone.ru/",
             "address": { "@type": "PostalAddress", "addressLocality": "Хабаровск", "addressCountry": "RU" }
@@ -77,31 +79,19 @@
     </script>
 </head>
 <body>
-<header class="header" id="header">
-    <div class="container">
-        <a href="/" class="logo">REMPHONE <span>RUSSIA</span></a>
-        <nav class="nav" id="nav">
-            <a href="../services/">Услуги</a>
-            <a href="../cities/">Города</a>
-            <a href="./">Бренды</a>
-            <a href="../faq.html">FAQ</a>
-            <a href="../contacts.html">Контакты</a>
-        </nav>
-        <a class="header-phone" href="tel:+79144111730">+7 914 411-17-30</a>
-        <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
-    </div>
-</header>
+<div id="site-header"></div>
+<main id="main-content">
 
-<section class="hero" style="padding:60px 0 40px">
+<section class="page-hero">
     <div class="container">
-        <p style="font-size:14px;opacity:.7;margin-bottom:12px"><a href="/">Главная</a> / <a href="./">Бренды</a> / Xiaomi</p>
+        <nav class="breadcrumbs" aria-label="Хлебные крошки"><a href="/">Главная</a> / <a href="./">Бренды</a> / Xiaomi</nav>
         <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:12px">
             <span class="brand-icon" style="background:#FF6900;width:52px;height:52px;display:inline-flex;align-items:center;justify-content:center;border-radius:12px">
                 <img class="brand-logo" src="../assets/brands/xiaomi.svg" alt="Xiaomi" width="36" height="36" onerror="this.src='../assets/placeholders/placeholder.svg'">
             </span>
             <h1 style="margin:0;font-size:clamp(28px,5vw,42px)">Ремонт Xiaomi, Redmi и POCO в Хабаровске</h1>
         </div>
-        <p style="font-size:18px;max-width:760px">Чиним Xiaomi, Redmi и POCO. Запчасти на популярные модели обычно в наличии — поэтому ремонт часто в день обращения.</p>
+        <p class="page-hero-lead">Чиним Xiaomi, Redmi и POCO. Запчасти на популярные модели обычно в наличии — поэтому ремонт часто в день обращения.</p>
         <p style="margin-top:10px;opacity:.85">Модели: Xiaomi, Redmi, POCO, Black Shark</p>
         <p style="margin-top:10px">⚡ 30–60 минут · 🛡 гарантия 90 дней · 🔧 диагностика бесплатно</p>
         <div class="hero-actions" style="margin-top:24px;flex-wrap:wrap">
@@ -132,9 +122,9 @@
             </table>
             <p style="color:var(--text-light);margin-bottom:28px">Точную сумму подтверждаем до ремонта. Также смотрите <a href="../cities/khabarovsk.html">ремонт в Хабаровске</a> и <a href="../cities/khabarovsk/screen.html">замену экрана в Хабаровске</a>.</p>
             <h2>FAQ</h2>
-            <div class="faq-list"><div class="faq-item active"><div class="faq-question">Есть запчасти на Redmi?</div><div class="faq-answer">На ходовые модели — да. Если деталь под заказ, скажем срок до старта.</div></div>
-<div class="faq-item"><div class="faq-question">Сколько по времени?</div><div class="faq-answer">Обычно 30–60 минут.</div></div>
-<div class="faq-item"><div class="faq-question">Гарантия?</div><div class="faq-answer">90 дней на работы и запчасти.</div></div></div>
+            <div class="faq-list"><div class="faq-item active"><button type="button"  class="faq-question">Есть запчасти на Redmi?</button><div class="faq-answer">На ходовые модели — да. Если деталь под заказ, скажем срок до старта.</div></div>
+<div class="faq-item"><button type="button"  class="faq-question">Сколько по времени?</button><div class="faq-answer">Обычно 30–60 минут.</div></div>
+<div class="faq-item"><button type="button"  class="faq-question">Гарантия?</button><div class="faq-answer">90 дней на работы и запчасти.</div></div></div>
         </div>
     </div>
 </section>
@@ -152,10 +142,12 @@
     </div>
 </section>
 
-<footer class="footer"><div class="container"><div class="footer-bottom"><p>© 2026 REMPHONE RUSSIA · Xiaomi</p></div></div></footer>
+</main>
+<div id="site-float"></div>
+<div id="site-footer"></div>
 <script src="../config.js"></script>
-<script src="../script.js"></script>
-<script src="../analytics.js"></script>
+<script src="../site-chrome.js?v=design1" data-base="../"></script>
+<script src="../script.js?v=design1"></script>
 <!-- Yandex.Metrika counter noscript -->
 <noscript><div><img src="https://mc.yandex.ru/watch/111453492" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 </body>

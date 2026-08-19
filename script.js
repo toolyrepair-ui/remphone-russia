@@ -1,66 +1,62 @@
-function bindMobileNav() {
-    const burger = document.getElementById('burger');
-    const nav = document.getElementById('nav');
-    if (!burger || !nav || burger.dataset.bound === '1') return;
-    burger.dataset.bound = '1';
+// Шапка и мобильное меню управляются только site-chrome.js.
 
-    function isOpen() {
-        return nav.classList.contains('active') || nav.classList.contains('open');
-    }
+// Доступный FAQ accordion.
+function initFaqAccordions() {
+    document.querySelectorAll('.faq-item').forEach((item, index) => {
+        let question = item.querySelector('.faq-question');
+        const answer = item.querySelector('.faq-answer');
+        if (!question || !answer) return;
 
-    function setOpen(open) {
-        nav.classList.toggle('active', open);
-        nav.classList.remove('open');
-        burger.classList.toggle('is-open', open);
-        burger.setAttribute('aria-expanded', open ? 'true' : 'false');
-    }
+        if (question.tagName !== 'BUTTON') {
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.className = question.className;
+            button.innerHTML = question.innerHTML;
+            question.replaceWith(button);
+            question = button;
+        }
 
-    burger.setAttribute('aria-expanded', isOpen() ? 'true' : 'false');
-    burger.setAttribute('aria-controls', 'nav');
+        const answerId = answer.id || `faq-answer-${index + 1}`;
+        answer.id = answerId;
+        question.setAttribute('aria-controls', answerId);
+        question.setAttribute('aria-expanded', item.classList.contains('active') ? 'true' : 'false');
 
-    burger.addEventListener('click', (e) => {
-        e.stopPropagation();
-        setOpen(!isOpen());
-    });
-
-    nav.querySelectorAll('a').forEach((link) => {
-        link.addEventListener('click', () => setOpen(false));
-    });
-
-    document.addEventListener('click', (e) => {
-        if (!isOpen()) return;
-        if (nav.contains(e.target) || burger.contains(e.target)) return;
-        setOpen(false);
-    });
-
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') setOpen(false);
+        question.addEventListener('click', () => {
+            const willOpen = !item.classList.contains('active');
+            item.parentElement.querySelectorAll('.faq-item').forEach((faq) => {
+                faq.classList.remove('active');
+                const control = faq.querySelector('.faq-question');
+                if (control) control.setAttribute('aria-expanded', 'false');
+            });
+            item.classList.toggle('active', willOpen);
+            question.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+        });
     });
 }
 
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', bindMobileNav);
+    document.addEventListener('DOMContentLoaded', initFaqAccordions);
 } else {
-    bindMobileNav();
+    initFaqAccordions();
 }
 
-// FAQ accordion
-document.querySelectorAll('.faq-question').forEach(question => {
-    question.addEventListener('click', () => {
-        const item = question.parentElement;
-        const isActive = item.classList.contains('active');
-        
-        // Close all
-        document.querySelectorAll('.faq-item').forEach(faq => {
-            faq.classList.remove('active');
-        });
-        
-        // Open clicked if wasn't active
-        if (!isActive) {
-            item.classList.add('active');
-        }
+function initBrandToggle() {
+    const toggle = document.getElementById('toggleMoreBrands');
+    const grid = document.getElementById('brandsGrid');
+    if (!toggle || !grid) return;
+    toggle.addEventListener('click', () => {
+        const expanded = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        grid.classList.toggle('show-all-brands', !expanded);
+        toggle.textContent = expanded ? 'Показать другие бренды' : 'Скрыть дополнительные бренды';
     });
-});
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initBrandToggle);
+} else {
+    initBrandToggle();
+}
 
 // Reveal animations on scroll
 const revealElements = document.querySelectorAll('.reveal');
@@ -78,39 +74,6 @@ const revealOnScroll = () => {
 
 window.addEventListener('scroll', revealOnScroll);
 window.addEventListener('load', revealOnScroll);
-
-// Form submission
-function submitForm(event) {
-    event.preventDefault();
-    
-    const form = document.getElementById('repairForm');
-    const formContent = document.getElementById('formContent');
-    const formSuccess = document.getElementById('formSuccess');
-    
-    // Simple validation
-    const name = document.getElementById('name').value;
-    const phone = document.getElementById('phone').value;
-    const brand = document.getElementById('brand').value;
-    const problem = document.getElementById('problem').value;
-    const city = document.getElementById('city').value;
-    
-    if (!name || !phone || !brand || !problem || !city) {
-        alert('Пожалуйста, заполните все обязательные поля');
-        return false;
-    }
-    
-    // Simulate form submission
-    const submitBtn = document.getElementById('submitBtn');
-    submitBtn.textContent = 'Отправка...';
-    submitBtn.disabled = true;
-    
-    setTimeout(() => {
-        formContent.style.display = 'none';
-        formSuccess.classList.add('show');
-    }, 1000);
-    
-    return false;
-}
 
 // Smooth scroll for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -246,13 +209,15 @@ if (quickForm) {
         if (flowCity) flowCity.value = cityId;
         if (flowCityId) flowCityId.value = cityId;
         document.querySelectorAll('#cityPicker .city-chip').forEach((btn) => {
-            btn.classList.toggle('is-active', btn.dataset.cityId === cityId);
+            const selected = btn.dataset.cityId === cityId;
+            btn.classList.toggle('is-active', selected);
+            btn.setAttribute('aria-pressed', selected ? 'true' : 'false');
         });
         if (syncHero && heroTitle) {
             heroTitle.innerHTML = 'Ремонт телефонов <span>' + CITY_MAP[cityId].prep + '</span>';
         }
         if (syncHero && heroLead) {
-            heroLead.textContent = 'Отправьте заявку — подберём партнёрский сервис ' + CITY_MAP[cityId].prep + '.';
+            heroLead.textContent = 'Отправьте заявку — мы отремонтируем ' + CITY_MAP[cityId].prep + '.';
         }
     }
 
@@ -343,43 +308,29 @@ if (quickForm) {
 
     function validateForMessenger(data, requireContacts) {
         if (!data.brand || !data.problem) {
-            alert('Сначала выберите марку и поломку');
-            goTo(1);
+            const step = data.brand ? 2 : 1;
+            showError(data.brand ? 'Выберите поломку.' : 'Выберите марку телефона.');
+            goTo(step);
+            window.requestAnimationFrame(() => {
+                const target = document.querySelector(
+                    step === 1 ? '#stepBrand .flow-card' : '#stepProblem .flow-card'
+                );
+                if (target) target.focus();
+            });
             return false;
         }
         if (requireContacts && (!data.name || !data.phone)) {
-            alert('Укажите имя и телефон');
+            showError(!data.name ? 'Укажите имя.' : 'Укажите номер телефона.');
+            const target = document.getElementById(!data.name ? 'flowName' : 'flowPhone');
+            if (target) target.focus();
             return false;
         }
         return true;
     }
 
-    function renderNearbyPartners(partners) {
-        if (!nearbyBox || !nearbyList) return;
-        nearbyList.innerHTML = '';
-        if (!partners || !partners.length) {
-            nearbyBox.hidden = true;
-            return;
-        }
-        partners.slice(0, 3).forEach((p) => {
-            const card = document.createElement('div');
-            card.className = 'nearby-partner-card';
-            card.innerHTML =
-                '<div class="nearby-partner-badge">' +
-                (p.badge || 'Наш партнёр') +
-                '</div>' +
-                '<strong class="nearby-partner-name">' +
-                (p.name || 'Партнёрский сервис') +
-                '</strong>' +
-                '<p class="nearby-partner-spec">' +
-                (p.specialization || 'Ремонт телефонов, 3+ года опыта') +
-                '</p>' +
-                (p.district
-                    ? '<p class="nearby-partner-district">' + p.district + '</p>'
-                    : '');
-            nearbyList.appendChild(card);
-        });
-        nearbyBox.hidden = false;
+    function renderNearbyPartners() {
+        if (nearbyBox) nearbyBox.hidden = true;
+        if (nearbyList) nearbyList.innerHTML = '';
     }
 
     function showSuccess(partners) {
@@ -397,7 +348,7 @@ if (quickForm) {
 
     function showError(message) {
         if (!errorBox) {
-            alert(message);
+            console.error(message);
             return;
         }
         errorBox.hidden = false;
@@ -464,7 +415,7 @@ if (quickForm) {
 
         if (submitBtn) {
             submitBtn.disabled = true;
-            submitBtn.textContent = 'Отправка...';
+            submitBtn.textContent = 'Отправка…';
         }
 
         try {
@@ -479,7 +430,7 @@ if (quickForm) {
         } finally {
             if (submitBtn) {
                 submitBtn.disabled = false;
-                submitBtn.textContent = '🛠 Отправить заявку';
+                submitBtn.textContent = 'Отправить заявку';
             }
         }
     }
@@ -563,8 +514,7 @@ if (quickForm) {
             if (form) {
                 form.reset();
                 form.hidden = false;
-                const city = document.getElementById('flowCity');
-                if (city) city.value = 'Хабаровск';
+                setCity(state.cityId, true);
             }
             if (success) {
                 success.hidden = true;
@@ -617,167 +567,14 @@ if (quickForm) {
     };
 })();
 
-/* ——— Visual: fonts preconnect, mesh cursor, repairs counter ——— */
+/* ——— Lightweight visual helpers ——— */
 (function () {
     if (window.__REMPHONE_VISUAL__) return;
     window.__REMPHONE_VISUAL__ = true;
 
-    function injectFonts() {
-        if (document.querySelector('link[data-rp-fonts]')) return;
-        var head = document.head;
-        function link(rel, href, extra) {
-            var el = document.createElement('link');
-            el.rel = rel;
-            el.href = href;
-            el.setAttribute('data-rp-fonts', '1');
-            if (extra) {
-                Object.keys(extra).forEach(function (k) {
-                    el[k] = extra[k];
-                });
-            }
-            head.appendChild(el);
-        }
-        link('preconnect', 'https://fonts.googleapis.com');
-        link('preconnect', 'https://fonts.gstatic.com', { crossOrigin: 'anonymous' });
-        link(
-            'stylesheet',
-            'https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Space+Grotesk:wght@600;700&display=swap'
-        );
-    }
-
-    function reducedMotion() {
-        return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    }
-
-    function canHoverMesh() {
-        return (
-            window.matchMedia &&
-            window.matchMedia('(hover: hover) and (pointer: fine)').matches &&
-            !reducedMotion()
-        );
-    }
-
-    function bindMeshCursor() {
-        if (!canHoverMesh()) return;
-        var targets = document.querySelectorAll('.hero, .repair-flow');
-        if (!targets.length) return;
-
-        var pending = null;
-        var lastX = 50;
-        var lastY = 30;
-
-        function apply() {
-            pending = null;
-            for (var i = 0; i < targets.length; i++) {
-                targets[i].style.setProperty('--mesh-x', lastX.toFixed(2) + '%');
-                targets[i].style.setProperty('--mesh-y', lastY.toFixed(2) + '%');
-            }
-        }
-
-        document.addEventListener(
-            'mousemove',
-            function (e) {
-                lastX = (e.clientX / Math.max(window.innerWidth, 1)) * 100;
-                lastY = (e.clientY / Math.max(window.innerHeight, 1)) * 100;
-                if (pending != null) return;
-                pending = window.requestAnimationFrame(apply);
-            },
-            { passive: true }
-        );
-    }
-
-    function animateCount(el, target, suffix, duration) {
-        var start = performance.now();
-        function frame(now) {
-            var t = Math.min(1, (now - start) / duration);
-            var eased = 1 - Math.pow(1 - t, 3);
-            el.textContent = Math.round(target * eased) + suffix;
-            if (t < 1) requestAnimationFrame(frame);
-            else el.textContent = target + suffix;
-        }
-        requestAnimationFrame(frame);
-    }
-
-    function bindRepairsCounter() {
-        var target =
-            (window.REMPHONE_CONFIG && Number(window.REMPHONE_CONFIG.repairsCount)) || 500;
-        var nodes = document.querySelectorAll('.trust-bar-text p, .about-stat h3, .hero-stat h3');
-        var candidates = [];
-
-        nodes.forEach(function (node) {
-            var text = (node.textContent || '').trim();
-            var m = text.match(/^(\d+)\+(\s*.*)$/);
-            if (!m) return;
-            if (node.getAttribute('data-count-ready')) return;
-            node.setAttribute('data-count-ready', '1');
-            var rest = m[2] || '';
-            var span = document.createElement('span');
-            span.className = 'stat-count';
-            span.setAttribute('data-target', String(target));
-            span.textContent = reducedMotion() ? target + '+' : '0+';
-            node.textContent = '';
-            node.appendChild(span);
-            if (rest) node.appendChild(document.createTextNode(rest));
-            candidates.push(span);
-        });
-
-        if (!candidates.length) return;
-
-        if (reducedMotion()) {
-            candidates.forEach(function (span) {
-                span.textContent = target + '+';
-            });
-            return;
-        }
-
-        if (!('IntersectionObserver' in window)) {
-            candidates.forEach(function (span) {
-                animateCount(span, target, '+', 1200);
-            });
-            return;
-        }
-
-        var io = new IntersectionObserver(
-            function (entries) {
-                entries.forEach(function (entry) {
-                    if (!entry.isIntersecting) return;
-                    var span = entry.target;
-                    if (span.getAttribute('data-counted')) return;
-                    span.setAttribute('data-counted', '1');
-                    animateCount(span, target, '+', 1300);
-                    io.unobserve(span);
-                });
-            },
-            { threshold: 0.35 }
-        );
-
-        candidates.forEach(function (span) {
-            io.observe(span);
-        });
-    }
-
-    function preferProblemWebp() {
-        document.querySelectorAll('img[src*="assets/problems/"]').forEach(function (img) {
-            var src = img.getAttribute('src') || '';
-            if (!/\.png(\?|$)/i.test(src)) return;
-            var webp = src.replace(/\.png(\?|$)/i, '.webp$1');
-            var probe = new Image();
-            probe.onload = function () {
-                img.src = webp;
-            };
-            probe.src = webp;
-            if (!img.getAttribute('width')) img.setAttribute('width', '76');
-            if (!img.getAttribute('height')) img.setAttribute('height', '76');
-            img.decoding = 'async';
-            if (!img.loading) img.loading = 'lazy';
-        });
-    }
-
     function lazyBelowFoldImages() {
-        var imgs = document.querySelectorAll('img:not([loading])');
-        imgs.forEach(function (img, i) {
-            if (i < 2) return;
-            img.loading = 'lazy';
+        document.querySelectorAll('img:not([loading])').forEach(function (img, index) {
+            if (index > 1) img.loading = 'lazy';
             img.decoding = 'async';
         });
     }
@@ -791,53 +588,10 @@ if (quickForm) {
         }
     }
 
-    function cityQueryFromPath() {
-        var path = (location.pathname || '').toLowerCase();
-        if (path.indexOf('/khabarovsk') !== -1) return 'khabarovsk';
-        if (path.indexOf('/komsomolsk') !== -1) return 'komsomolsk';
-        if (path.indexOf('/vladivostok') !== -1) return 'vladivostok';
-        return '';
-    }
-
-    function ensureStickyMobileBar() {
-        if (document.getElementById('stickyMobileBar')) return;
-        var cfg = window.REMPHONE_CONFIG || {};
-        var phoneTel = cfg.phoneTel || '+79144111730';
-        var wa = cfg.whatsapp || '79144111730';
-        var telegramBot = cfg.telegramBot || 'REMPHONE_RUSSIA_Bot';
-        var city = cityQueryFromPath();
-        var flowHref = city ? '/?city=' + encodeURIComponent(city) + '#repair-flow' : '/#repair-flow';
-        var bar = document.createElement('div');
-        bar.className = 'sticky-mobile-bar floating-contact';
-        bar.id = 'stickyMobileBar';
-        bar.innerHTML =
-            '<a class="sticky-fab sticky-call btn-pulse" href="tel:' + phoneTel + '" aria-label="Позвонить">' +
-            '<img src="/assets/messengers/phone.svg" alt="" width="26" height="26"></a>' +
-            '<a class="sticky-fab sticky-wa btn-pulse" href="https://wa.me/' + wa + '" target="_blank" rel="noopener" aria-label="WhatsApp">' +
-            '<img src="/assets/messengers/whatsapp.svg" alt="" width="26" height="26"></a>' +
-            '<a class="sticky-fab sticky-tg btn-pulse" href="https://t.me/' + telegramBot + '" target="_blank" rel="noopener" aria-label="Telegram">' +
-            '<img src="/assets/messengers/telegram.svg" alt="" width="26" height="26"></a>' +
-            '<a class="sticky-fab sticky-flow" href="' + flowHref + '">Заявка</a>';
-        document.body.appendChild(bar);
-    }
-
-    injectFonts();
     ensureViewportFit();
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function () {
-            bindMeshCursor();
-            bindRepairsCounter();
-            preferProblemWebp();
-            lazyBelowFoldImages();
-            ensureStickyMobileBar();
-            bindMobileNav();
-        });
+        document.addEventListener('DOMContentLoaded', lazyBelowFoldImages);
     } else {
-        bindMeshCursor();
-        bindRepairsCounter();
-        preferProblemWebp();
         lazyBelowFoldImages();
-        ensureStickyMobileBar();
-        bindMobileNav();
     }
 })();
