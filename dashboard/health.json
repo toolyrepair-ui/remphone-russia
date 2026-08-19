@@ -1,0 +1,13 @@
+{
+  "updated_at": "2026-08-19T22:52:22.475Z",
+  "html_pages": 66,
+  "errors": 0,
+  "warnings": 67,
+  "live": {
+    "checked": 57,
+    "ok": 57,
+    "fail": 0
+  },
+  "ok": true,
+  "error_samples": []
+}
