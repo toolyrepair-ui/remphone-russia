@@ -804,6 +804,7 @@ if (quickForm) {
         var cfg = window.REMPHONE_CONFIG || {};
         var phoneTel = cfg.phoneTel || '+79144111730';
         var wa = cfg.whatsapp || '79144111730';
+        var telegramBot = cfg.telegramBot || 'REMPHONE_RUSSIA_Bot';
         var city = cityQueryFromPath();
         var flowHref = city ? '/?city=' + encodeURIComponent(city) + '#repair-flow' : '/#repair-flow';
         var bar = document.createElement('div');
@@ -814,6 +815,8 @@ if (quickForm) {
             '<img src="/assets/messengers/phone.svg" alt="" width="26" height="26"></a>' +
             '<a class="sticky-fab sticky-wa btn-pulse" href="https://wa.me/' + wa + '" target="_blank" rel="noopener" aria-label="WhatsApp">' +
             '<img src="/assets/messengers/whatsapp.svg" alt="" width="26" height="26"></a>' +
+            '<a class="sticky-fab sticky-tg btn-pulse" href="https://t.me/' + telegramBot + '" target="_blank" rel="noopener" aria-label="Telegram">' +
+            '<img src="/assets/messengers/telegram.svg" alt="" width="26" height="26"></a>' +
             '<a class="sticky-fab sticky-flow" href="' + flowHref + '">Заявка</a>';
         document.body.appendChild(bar);
     }
