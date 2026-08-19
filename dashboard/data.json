@@ -1,16 +1,16 @@
 {
-  "updated_at": "2026-08-18T07:14:37.210Z",
+  "updated_at": "2026-08-19T07:20:14.997Z",
   "metrika_id": 111453492,
   "source": "metrika",
   "visits": {
-    "day": 8,
-    "week": 42,
-    "month": 43
+    "day": 6,
+    "week": 53,
+    "month": 55
   },
   "pageviews": {
-    "day": 15,
-    "week": 80,
-    "month": 82
+    "day": 19,
+    "week": 104,
+    "month": 107
   },
   "leads": {
     "day": 0,
@@ -18,7 +18,7 @@
     "month": 2,
     "source": "metrika_goal_request-form-submit"
   },
-  "conversion_visit_to_lead": 4.8,
+  "conversion_visit_to_lead": 3.8,
   "index": {
     "sitemap_urls": 56,
     "yandex_indexed": 14,
@@ -27,12 +27,6 @@
     "note": "Яндекс — страницы в поиске (searchable_pages_count). Google: точного числа нет, оценка пока не подключена."
   },
   "series": [
-    {
-      "date": "2026-08-12",
-      "visits": 1,
-      "pageviews": 1,
-      "leads": 0
-    },
     {
       "date": "2026-08-13",
       "visits": 2,
@@ -65,8 +59,14 @@
     },
     {
       "date": "2026-08-18",
-      "visits": 8,
-      "pageviews": 15,
+      "visits": 14,
+      "pageviews": 21,
+      "leads": 0
+    },
+    {
+      "date": "2026-08-19",
+      "visits": 6,
+      "pageviews": 19,
       "leads": 0
     }
   ],
