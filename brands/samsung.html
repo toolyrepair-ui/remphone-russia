@@ -106,20 +106,46 @@
     <div class="container">
         <h2 class="section-title">Что чиним у Samsung</h2>
         <div class="services-grid" style="margin-top:24px">
-            <a href="samsung-screen.html" class="service-card"><h4>Замена экрана</h4><span class="service-price">от 2400₽</span></a>
-            <a href="samsung-battery.html" class="service-card"><h4>Замена батареи</h4><span class="service-price">от 2000₽</span></a>
-            <a href="../services/water.html" class="service-card"><h4>После воды</h4><span class="service-price">от 1500₽</span></a>
-            <a href="../services/charge.html" class="service-card"><h4>Не заряжается</h4><span class="service-price">от 1300₽</span></a>
-            <a href="../services/camera.html" class="service-card"><h4>Камера</h4><span class="service-price">от 1800₽</span></a>
-            <a href="../services/not-on.html" class="service-card"><h4>Не включается</h4><span class="service-price">от 1000₽</span></a>
+            <a href="samsung-screen.html" class="service-card">
+                <div class="service-icon"><img class="problem-icon-img" src="../assets/problems/screen_broken.webp" alt="" onerror="this.src='../assets/placeholders/placeholder.svg'"></div>
+                <h4>Замена экрана</h4>
+                <span class="service-price">от 2400₽</span>
+            </a>
+            <a href="samsung-battery.html" class="service-card">
+                <div class="service-icon"><img class="problem-icon-img" src="../assets/problems/battery.webp" alt="" onerror="this.src='../assets/placeholders/placeholder.svg'"></div>
+                <h4>Замена батареи</h4>
+                <span class="service-price">от 2000₽</span>
+            </a>
+            <a href="../services/water.html" class="service-card">
+                <div class="service-icon"><img class="problem-icon-img" src="../assets/problems/water_damage.webp" alt="" onerror="this.src='../assets/placeholders/placeholder.svg'"></div>
+                <h4>После воды</h4>
+                <span class="service-price">от 1500₽</span>
+            </a>
+            <a href="../services/charge.html" class="service-card">
+                <div class="service-icon"><img class="problem-icon-img" src="../assets/problems/not_charging.webp" alt="" onerror="this.src='../assets/placeholders/placeholder.svg'"></div>
+                <h4>Не заряжается</h4>
+                <span class="service-price">от 1300₽</span>
+            </a>
+            <a href="../services/camera.html" class="service-card">
+                <div class="service-icon"><img class="problem-icon-img" src="../assets/problems/camera.webp" alt="" onerror="this.src='../assets/placeholders/placeholder.svg'"></div>
+                <h4>Камера</h4>
+                <span class="service-price">от 1800₽</span>
+            </a>
+            <a href="../services/not-on.html" class="service-card">
+                <div class="service-icon"><img class="problem-icon-img" src="../assets/problems/wont_turn_on.webp" alt="" onerror="this.src='../assets/placeholders/placeholder.svg'"></div>
+                <h4>Не включается</h4>
+                <span class="service-price">от 1000₽</span>
+            </a>
         </div>
 
         <div style="max-width:900px;margin:40px auto 0">
             <h2>Ориентир цен — Samsung, Хабаровск</h2>
-            <table style="width:100%;margin:16px 0 28px;border-collapse:collapse">
-                <thead><tr><th align="left">Работы</th><th align="left">Цена</th></tr></thead>
-                <tbody><tr><td>Экран A-серия</td><td>от 2400₽</td></tr><tr><td>Экран S-серия</td><td>от 3200₽</td></tr><tr><td>Батарея</td><td>от 2000₽</td></tr><tr><td>Разъём зарядки</td><td>от 1700₽</td></tr><tr><td>После воды</td><td>от 1500₽</td></tr></tbody>
-            </table>
+            <div data-pricebook-brand="Samsung" data-pricebook-src="/data/site-pricebook.json">
+                <table style="width:100%;margin:16px 0 28px;border-collapse:collapse">
+                    <thead><tr><th align="left">Работы</th><th align="left">Цена</th></tr></thead>
+                    <tbody><tr><td>Экран A-серия</td><td>от 2400₽</td></tr><tr><td>Экран S-серия</td><td>от 3200₽</td></tr><tr><td>Батарея</td><td>от 2000₽</td></tr><tr><td>Разъём зарядки</td><td>от 1700₽</td></tr><tr><td>После воды</td><td>от 1500₽</td></tr></tbody>
+                </table>
+            </div>
             <p style="color:var(--text-light);margin-bottom:28px">Точную сумму подтверждаем до ремонта. Также смотрите <a href="samsung-battery.html">батарею Samsung</a>, <a href="../cities/khabarovsk.html">ремонт в Хабаровске</a> и <a href="../cities/khabarovsk/screen.html">экран в Хабаровске</a>.</p>
             <h2>FAQ</h2>
             <div class="faq-list"><div class="faq-item active"><button type="button"  class="faq-question">Берёте складные Samsung?</button><div class="faq-answer">Да, Z Fold/Flip — после диагностики. Срок зависит от наличия модуля.</div></div>
@@ -148,6 +174,7 @@
 <script src="../config.js"></script>
 <script src="../site-chrome.js?v=design1" data-base="../"></script>
 <script src="../script.js?v=design1"></script>
+<script src="../pricebook-table.js"></script>
 <!-- Yandex.Metrika counter noscript -->
 <noscript><div><img src="https://mc.yandex.ru/watch/111453492" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 </body>
