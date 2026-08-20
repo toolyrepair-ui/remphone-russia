@@ -1,24 +1,24 @@
 {
-  "updated_at": "2026-08-20T07:23:41.614Z",
+  "updated_at": "2026-08-20T22:56:44.449Z",
   "metrika_id": 111453492,
   "source": "metrika",
   "visits": {
-    "day": 3,
-    "week": 65,
-    "month": 69
+    "day": 0,
+    "week": 98,
+    "month": 107
   },
   "pageviews": {
-    "day": 3,
-    "week": 160,
-    "month": 165
+    "day": 0,
+    "week": 203,
+    "month": 217
   },
   "leads": {
     "day": 0,
-    "week": 2,
+    "week": 1,
     "month": 2,
     "source": "metrika_goal_request-form-submit"
   },
-  "conversion_visit_to_lead": 3.1,
+  "conversion_visit_to_lead": 1,
   "index": {
     "sitemap_urls": 56,
     "yandex_indexed": 14,
@@ -36,17 +36,17 @@
     "week": {
       "call": 1,
       "whatsapp": 1,
-      "telegram": 2,
-      "form_open": 30
+      "telegram": 3,
+      "form_open": 34
     },
     "source": "metrika_goals",
     "note": "Клики контактов, не заявки. Email в Метрике цели нет — не выдумывать нули."
   },
   "health": {
-    "updated_at": "2026-08-20T07:23:41.567Z",
-    "html_pages": 66,
+    "updated_at": "2026-08-20T22:56:44.399Z",
+    "html_pages": 68,
     "errors": 0,
-    "warnings": 67,
+    "warnings": 69,
     "live": {
       "checked": 57,
       "ok": 57,
@@ -56,12 +56,6 @@
     "error_samples": []
   },
   "series": [
-    {
-      "date": "2026-08-14",
-      "visits": 5,
-      "pageviews": 9,
-      "leads": 1
-    },
     {
       "date": "2026-08-15",
       "visits": 2,
@@ -94,8 +88,14 @@
     },
     {
       "date": "2026-08-20",
-      "visits": 3,
-      "pageviews": 3,
+      "visits": 41,
+      "pageviews": 55,
+      "leads": 0
+    },
+    {
+      "date": "2026-08-21",
+      "visits": 0,
+      "pageviews": 0,
       "leads": 0
     }
   ],
