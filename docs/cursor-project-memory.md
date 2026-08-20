@@ -44,7 +44,7 @@
 | `brands/` | Бренды + `*-screen.html` / `*-battery.html` |
 | `blog/` | Редкие посты; не плодить без индекса money-URL |
 | `seo/` | Генераторы, health-check, семантика, отчёты |
-| `data/` | `brands.json`, `problems.json`, `contacts.json` |
+| `data/` | `brands.json`, `problems.json`, `contacts.json`, публичный прайс `site-pricebook.json`, каталог моделей `repair-models.json` |
 | `docs/` | Память агента, MCP, SEO-автоматизация |
 | `docs/business-memory/` | Бизнес-память: продукт, цены, клиенты, маркетинг. Архив Perplexity: `docs/business-memory/perplexity-archive/` (ТЗ, сессии, Moba) — не на сайт |
 | `dashboard/` | Внутренний контроль (noindex, не в sitemap). Сбор: `node dashboard/collect.mjs`. Health: `dashboard/health.json`. Визиты — Метрика; клики контактов отдельно от заявок; `index.yandex_indexed` — Вебмастер `searchable_pages_count` |
@@ -62,6 +62,7 @@
 4. **Аналитика** — `analytics.js`: Метрика `111453492`, GA `G-53F13EFHZQ`. Цели: `request-form-submit`, `request-form-open`, `make-call`, `whatsapp`, `telegram`.
 5. **SEO-контур** — `seo/pages.json` → `node seo/generate-sitemap.mjs` → `sitemap.xml`. Проверка: `node seo/health-check.mjs` (локально) и `--live` (прод, пишет `dashboard/health.json`).
 6. **Шапка/подвал** — `site-chrome.js` на внутренних страницах (`data-base="../"` в подпапках).
+7. **Ориентир цен по моделям** — статические таблицы в HTML из мастер-прайса. Каталог моделей (имена, без цен) — `repair-models.js` + чипы на бренд-страницах, сборка `python scripts/apply_repair_models.py`. Полный внутренний прайс (`full-phone-pricebook.json`) на хостинг не выкладывать. Не подключать live-fetch `site-pricebook.json` в браузере.
 
 ---
 
@@ -103,7 +104,8 @@ Telegram **ADMIN_ID** (куда relay/бот шлёт заявки): `7553859784
 - CTA: телефон, WhatsApp, Telegram, якорь `#repair-flow`.
 - Плавающая панель: `.sticky-mobile-bar` — звонок, WhatsApp, Telegram, заявка. На главной в HTML; на остальных `script.js` / `site-chrome.js` дописывают, если блока нет. Бургер открывает `.nav.active`, закрывается по пункту меню и тапу снаружи. Длинная «Заявка в Telegram» в шапке на узком экране скрыта, чтобы не ломать вёрстку.
 - Сравнение дисплеев: `displays-compare.js` + `displays-config.json`.
-- 3D-калькулятор iPhone: `3d-viewer-iphone15.html` (алиас `iphone-repair-calculator.html`). GLB-путь не ломать. Прайс: `data/iphone-repair-prices.json`, дерево проблем: `iphone-calculator-catalog.js`. ТЗ анимаций неисправностей: `docs/IPHONE_CALCULATOR_PROBLEM_ANIMATIONS_TZ.md`.
+- Прайс на сайте — **статика** в HTML. Локальный master: `data/full-phone-pricebook.*`. Публичные «от» для брендов: `data/site-price-orientir.json` → `python scripts/apply_site_price_orientir.py`. Каталог моделей из `data/site-pricebook.json` → `python scripts/apply_repair_models.py` (чипы + `repair-models.js`, без live-fetch прайса). Android-расчёт из медианы iPhone на сайт не выносить без решения владельца.
+- Универсальный 3D-калькулятор телефона: `3d-viewer-iphone15.html` (алиас `iphone-repair-calculator.html`). В сайт интегрирован отдельным промоблоком на главной, ссылкой в общей навигации/подвале `site-chrome.js` и CTA на `brands/iphone-screen.html`; iframe не используется. Текущий `assets/models/iphone15-pro-max.glb` остаётся временной демонстрационной моделью, но бренд и модель в UI не называются. Подбор модели и загрузка клиентского прайса удалены: после заявки мастер уточняет модель и стоимость. Дерево проблем: `iphone-calculator-catalog.js`; правила: `docs/IPHONE_CALCULATOR_PROBLEM_ANIMATIONS_TZ.md`, `docs/IPHONE_CALCULATOR_ANIMATION_CARDS_TZ.md`, `docs/IPHONE_CALCULATOR_REALISM_V2_TZ.md`. Все дочерние FX работают в **локальных координатах масштабированного `phone`**; `glassOut` задаёт наружную сторону OLED, `backOut` — крышки. Видимые полные zone rings запрещены, `zoneLayout()` хранит только невидимые якоря. Щель OLED движется по `glassOut`; крышка использует depth-tested canvas-трещины и angle-dependent highlights; `body:bent` деформирует вершины составных mesh в общей phone-space системе. Камера: wall-clock переход не зависит от throttling вкладки; `REAR_YAW ≈ 0.48`.
 - Стили: `styles.css` + `animations.css`. Не внедрять тяжёлый фреймворк.
 
 ---

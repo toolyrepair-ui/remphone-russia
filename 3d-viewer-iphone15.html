@@ -1,0 +1,3528 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="alternate icon" type="image/png" sizes="120x120" href="/favicon-120.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>3D-калькулятор ремонта телефона — REMPHONE</title>
+  <meta name="description" content="Что случилось с телефоном: выберите проблему — покажем типичный дефект. Оставьте заявку, уточним модель и назовём стоимость ремонта.">
+  <link rel="canonical" href="https://rem-phone.ru/3d-viewer-iphone15.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap">
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.185.1/examples/jsm/"
+    }
+  }
+  </script>
+  <style>
+    :root {
+      --primary: #6c63ff;
+      --primary-dark: #5a52d5;
+      --primary-light: #eef2ff;
+      --dark: #0f172a;
+      --text: #1e293b;
+      --text-light: #64748b;
+      --bg: #ffffff;
+      --gray: #f8fafc;
+      --border: #e2e8f0;
+      --radius: 16px;
+      --radius-sm: 12px;
+      --shadow: 0 1px 3px rgba(0,0,0,0.05), 0 6px 20px rgba(0,0,0,0.04);
+      --font-display: "Space Grotesk", sans-serif;
+      --font-body: Inter, sans-serif;
+      --viewer-bg: #0b0d12;
+      --panel-w: 400px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%;
+      font-family: var(--font-body);
+      color: var(--text);
+      background: var(--viewer-bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, .logo, .price-value { font-family: var(--font-display); }
+    a { color: var(--primary); text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr var(--panel-w);
+      height: 100%;
+      min-height: 100dvh;
+    }
+
+    .viewer-wrap {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse 70% 55% at 50% 42%, #1a2233 0%, #0b0d12 62%);
+      touch-action: none;
+    }
+    #iphone3d {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .viewer-chrome {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo {
+      color: #fff;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+    .logo span { color: #a5b4fc; font-weight: 600; }
+    .back-link {
+      color: rgba(255,255,255,0.72);
+      font-size: 13px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(8px);
+    }
+    .back-link:hover { color: #fff; background: rgba(255,255,255,0.14); }
+
+    .viewer-hint, .load-status {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      color: rgba(255,255,255,0.72);
+      font-size: 13px;
+      letter-spacing: 0.01em;
+      pointer-events: none;
+      text-align: center;
+    }
+    .viewer-hint { bottom: 36px; }
+    .load-status { top: 50%; transform: translate(-50%, -50%); }
+    .load-status[hidden], .viewer-hint[hidden] { display: none; }
+    .model-credit {
+      position: absolute;
+      left: 16px;
+      bottom: 12px;
+      z-index: 3;
+      color: rgba(255,255,255,0.42);
+      font-size: 11px;
+    }
+    .model-credit a { color: rgba(165,180,252,0.8); }
+
+    .panel {
+      background: var(--bg);
+      border-left: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+    .panel-scroll {
+      overflow: auto;
+      padding: 22px 20px 28px;
+      flex: 1;
+    }
+    .eyebrow {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+    .panel h1 {
+      font-size: 22px;
+      letter-spacing: -0.03em;
+      line-height: 1.25;
+      margin-bottom: 6px;
+    }
+    .lead {
+      color: var(--text-light);
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+    .block-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin: 16px 0 10px;
+    }
+
+    .problems {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .problem-btn, .symptom-btn {
+      text-align: left;
+      border: 1px solid var(--border);
+      background: var(--gray);
+      border-radius: var(--radius-sm);
+      padding: 12px 12px 11px;
+      transition: 160ms ease;
+    }
+    .problem-btn:hover, .symptom-btn:hover {
+      border-color: #c7d2fe;
+      background: var(--primary-light);
+    }
+    .problem-btn.is-active, .symptom-btn.is-active {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      box-shadow: 0 0 0 3px rgba(108,99,255,0.12);
+    }
+    .problem-btn strong, .symptom-btn strong {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .problem-btn span, .symptom-btn span {
+      display: block;
+      margin-top: 3px;
+      font-size: 12px;
+      color: var(--text-light);
+    }
+
+    .symptoms { display: grid; gap: 8px; }
+    .symptoms-wrap[hidden], .price-box[hidden], .lead-form[hidden], .form-success[hidden] { display: none !important; }
+
+    .price-box {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, #f8fafc, #eef2ff);
+      border: 1px solid #e0e7ff;
+    }
+    .price-box p { font-size: 12px; color: var(--text-light); }
+    .price-value {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin: 4px 0 6px;
+      text-wrap: balance;
+    }
+    .service-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin: 10px 0 2px;
+    }
+    .service-meta span {
+      display: block;
+      border: 1px solid #dbe4f0;
+      border-radius: 10px;
+      padding: 9px 10px;
+      background: rgba(255,255,255,0.7);
+      color: var(--text-light);
+      font-size: 11px;
+      line-height: 1.35;
+    }
+    .service-meta strong {
+      display: block;
+      color: var(--text);
+      font-size: 12px;
+      margin-bottom: 2px;
+    }
+    .crumb-back {
+      display: inline-flex;
+      margin: 4px 0 8px;
+      padding: 0;
+      border: 0;
+      background: none;
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .safety {
+      margin: 10px 0;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: #fff7ed;
+      color: #9a3412;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+    .safety[hidden], .quote-note[hidden], .lead-summary[hidden] { display: none !important; }
+    .quote-note { font-size: 12px; color: var(--text-light); margin: 8px 0; line-height: 1.45; }
+    .lead-summary {
+      margin-bottom: 12px;
+      padding: 12px;
+      border-radius: 12px;
+      background: var(--gray);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .demo-note {
+      margin-top: 14px;
+      font-size: 11px;
+      color: var(--text-light);
+      line-height: 1.4;
+    }
+
+    .btn-primary, .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      border: 0;
+      border-radius: 12px;
+      padding: 13px 16px;
+      font-size: 15px;
+      font-weight: 600;
+    }
+    .btn-primary {
+      margin-top: 12px;
+      background: var(--primary);
+      color: #fff;
+    }
+    .btn-primary:hover { background: var(--primary-dark); }
+    .btn-primary:disabled { opacity: 0.6; cursor: wait; }
+    .btn-ghost {
+      margin-top: 8px;
+      background: transparent;
+      color: var(--text-light);
+      border: 1px solid var(--border);
+    }
+
+    .lead-form { margin-top: 16px; }
+    .form-group { margin-bottom: 12px; }
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font: inherit;
+      font-size: 14px;
+      background: #fff;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(108,99,255,0.12);
+    }
+    .form-error { color: #b91c1c; font-size: 13px; margin-top: 8px; }
+    .form-note { font-size: 12px; color: var(--text-light); margin-top: 10px; line-height: 1.45; }
+    .form-success {
+      margin-top: 16px;
+      padding: 16px;
+      border-radius: var(--radius);
+      background: #ecfdf5;
+      color: #065f46;
+    }
+    .form-success h3 { margin-bottom: 6px; }
+
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+        grid-template-rows: minmax(300px, 44dvh) auto;
+        height: auto;
+        min-height: 100dvh;
+      }
+      .panel { border-left: 0; border-top: 1px solid var(--border); }
+      .panel-scroll { overflow: visible; padding: 20px 20px calc(28px + env(safe-area-inset-bottom)); }
+      .viewer-chrome {
+        top: calc(10px + env(safe-area-inset-top));
+        left: 12px;
+        right: 12px;
+        gap: 8px;
+      }
+      .logo { font-size: 15px; }
+      .back-link { font-size: 11px; padding: 5px 8px; }
+      .viewer-hint {
+        bottom: 12px;
+        width: calc(100% - 32px);
+        font-size: 11px;
+      }
+      .model-credit { display: none; }
+      .panel h1 { font-size: 20px; }
+    }
+    @media (max-width: 340px) {
+      .problems { grid-template-columns: 1fr; }
+      .viewer-chrome { align-items: flex-start; flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <div class="viewer-wrap" id="viewerWrap">
+      <div class="viewer-chrome">
+        <a class="logo" href="index.html">REMPHONE <span>RUSSIA</span></a>
+        <a class="back-link" href="index.html">← На главную</a>
+      </div>
+      <canvas id="iphone3d" role="img" aria-label="Интерактивная 3D-модель телефона"></canvas>
+      <div class="load-status" id="loadStatus">Загружаем 3D-модель…</div>
+      <p class="viewer-hint" id="viewerHint">Перетащите, чтобы крутить · жесты / колёсико — зум</p>
+      <p class="model-credit">3D-модель для наглядности: <a href="https://sketchfab.com/3d-models/apple-iphone-15-pro-max-black-df17520841214c1792fb8a44c6783ee7" target="_blank" rel="noopener">polyman Studio</a>, CC BY 4.0</p>
+    </div>
+
+    <aside class="panel">
+      <div class="panel-scroll">
+        <p class="eyebrow">3D-калькулятор ремонта</p>
+        <h1>Что случилось с вашим телефоном?</h1>
+        <p class="lead">Выберите проблему — 3D-модель покажет типичный дефект. Оставьте заявку — уточним модель телефона и назовём стоимость.</p>
+
+        <div id="categoryWrap">
+          <p class="block-title">Что случилось?</p>
+          <div class="problems" id="problems"></div>
+        </div>
+
+        <div class="symptoms-wrap" id="symptomsWrap" hidden>
+          <button type="button" class="crumb-back" id="backToCategories">← Все проблемы</button>
+          <p class="block-title" id="branchTitle">Уточните симптом</p>
+          <div class="symptoms" id="symptoms"></div>
+        </div>
+
+        <p class="safety" id="safetyBox" hidden></p>
+
+        <div class="price-box" id="priceBox" aria-live="polite" hidden>
+          <p>Стоимость ремонта</p>
+          <div class="price-value" id="priceValue">Цена зависит от модели телефона</div>
+          <p>Оставьте заявку — уточним модель и назовём стоимость.</p>
+          <p class="quote-note" id="quoteNote"></p>
+          <div class="service-meta">
+            <span><strong id="durationValue">30–60 минут</strong>Ориентировочный срок</span>
+            <span><strong>Гарантия 90 дней</strong>На работу и деталь</span>
+          </div>
+          <button type="button" class="btn-primary" id="openLeadBtn">Узнать стоимость</button>
+          <button type="button" class="btn-ghost" id="resetViewBtn">Сбросить вид</button>
+        </div>
+        <p class="demo-note">3D-модель показана для наглядности; детали корпуса зависят от модели телефона.</p>
+
+        <form class="lead-form" id="flowRepairForm" hidden novalidate>
+          <div class="lead-summary" id="leadSummary"></div>
+          <input type="hidden" name="brand" id="flowBrand" value="Телефон">
+          <input type="hidden" name="model" id="flowModel" value="Не указана">
+          <input type="hidden" name="problem" id="flowProblem" value="">
+          <input type="hidden" name="modelId" id="fieldModelId" value="">
+          <input type="hidden" name="problemKey" id="fieldProblemKey" value="">
+          <input type="hidden" name="symptomId" id="fieldSymptomId" value="">
+          <input type="hidden" name="estimatedPrice" id="fieldEstimatedPrice" value="">
+          <input type="hidden" name="serviceCode" id="fieldServiceCode" value="">
+          <input type="hidden" name="qualityId" id="fieldQualityId" value="">
+          <input type="hidden" name="priceState" id="fieldPriceState" value="">
+          <div class="form-group">
+            <label for="flowName">Ваше имя *</label>
+            <input type="text" id="flowName" name="name" placeholder="Алексей" required autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label for="flowPhone">Телефон *</label>
+            <input type="tel" id="flowPhone" name="phone" placeholder="+7 914 411-17-30" required autocomplete="tel">
+          </div>
+          <div class="form-group">
+            <label for="flowCity">Город *</label>
+            <select id="flowCity" name="city" required>
+              <option value="khabarovsk" data-name="Хабаровск">Хабаровск</option>
+              <option value="komsomolsk" data-name="Комсомольск-на-Амуре">Комсомольск-на-Амуре</option>
+              <option value="vladivostok" data-name="Владивосток">Владивосток</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="flowComment">Комментарий</label>
+            <textarea id="flowComment" name="comment" rows="3" placeholder="Удобное время, детали поломки…"></textarea>
+          </div>
+          <button type="submit" class="btn-primary" id="flowSubmitBtn">Отправить заявку</button>
+          <p class="form-error" id="flowSubmitError" hidden></p>
+          <p class="form-note">Заявка уйдёт в Telegram мастеру. Резерв: <a href="tel:+79144111730">+7 914 411-17-30</a></p>
+        </form>
+        <div class="form-success" id="flowFormSuccess" hidden>
+          <h3>Заявка отправлена</h3>
+          <p>Мы свяжемся с вами. Можете также написать в <a href="https://t.me/REMPHONE_RUSSIA_Bot" target="_blank" rel="noopener">Telegram</a>.</p>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <script src="config.js"></script>
+  <script type="module">
+    import * as THREE from 'three';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+    import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+    import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+    import { PROBLEM_TREE } from './iphone-calculator-catalog.js';
+
+    const MODEL_URL = 'assets/models/iphone15-pro-max.glb';
+    const WARRANTY_DAYS = 90;
+    const modelAdapter = {
+      id: 'defaultPhone',
+      modelUrl: MODEL_URL,
+      anchors: null,
+      normals: null,
+      capabilities: { hasHome: false, hasAction: true, hasWireless: false }
+    };
+    const pageStartedAt = performance.now();
+
+    function track3D(eventName, params = {}) {
+      const detail = {
+        event: eventName,
+        device_type: isCompact() ? 'mobile' : 'desktop',
+        ...params
+      };
+      window.dispatchEvent(new CustomEvent('remphone:analytics', { detail }));
+      if (Array.isArray(window.dataLayer)) window.dataLayer.push(detail);
+    }
+
+    const wrap = document.getElementById('viewerWrap');
+    const canvas = document.getElementById('iphone3d');
+    const loadStatus = document.getElementById('loadStatus');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isCompact = () => window.matchMedia('(max-width: 900px)').matches;
+    const weakDevice = isCompact() && (
+      (navigator.hardwareConcurrency || 8) <= 4 ||
+      (navigator.deviceMemory || 8) <= 4
+    );
+
+    const calc = {
+      problemKey: '',
+      symptomId: '',
+      quote: null
+    };
+
+    function currentProblem() {
+      return PROBLEM_TREE.find((p) => p.key === calc.problemKey) || null;
+    }
+    function currentSymptom() {
+      const problem = currentProblem();
+      return (problem && problem.symptoms.find((s) => s.id === calc.symptomId)) || null;
+    }
+
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false, powerPreference: 'high-performance' });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isCompact() ? 1.5 : 2));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.18;
+    renderer.shadowMap.enabled = false;
+
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x101218);
+
+    const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
+    camera.position.set(0.8, 0.55, 2.45);
+
+    const controls = new OrbitControls(camera, canvas);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.08;
+    controls.enablePan = false;
+    controls.minDistance = 1.05;
+    controls.maxDistance = 4.2;
+    controls.minPolarAngle = 0.2;
+    controls.maxPolarAngle = Math.PI - 0.2;
+    controls.target.set(0, 0.05, 0);
+
+    scene.add(new THREE.AmbientLight(0xf4efe6, 0.38));
+    scene.add(new THREE.HemisphereLight(0xf3efe8, 0x3a332c, 0.42));
+    const keyLight = new THREE.DirectionalLight(0xfff6ea, 2.15);
+    keyLight.position.set(2.8, 4.2, 3.6);
+    scene.add(keyLight);
+    const fillLight = new THREE.DirectionalLight(0xd7e3ff, 0.7);
+    fillLight.position.set(-3.1, 1.8, 2.4);
+    scene.add(fillLight);
+    const rimLight = new THREE.DirectionalLight(0xffffff, 1.15);
+    rimLight.position.set(0.2, 2.8, -3.6);
+    scene.add(rimLight);
+    const bounceLight = new THREE.DirectionalLight(0xe8dcc8, 0.35);
+    bounceLight.position.set(0, -3.2, 1.4);
+    scene.add(bounceLight);
+
+    try {
+      const env = new RoomEnvironment();
+      const pmrem = new THREE.PMREMGenerator(renderer);
+      scene.environment = pmrem.fromScene(env, 0.02).texture;
+      scene.environmentIntensity = 1.1;
+      env.dispose();
+    } catch (err) {
+      console.warn('RoomEnvironment skipped', err);
+    }
+
+    const screenCanvas = document.createElement('canvas');
+    screenCanvas.width = 780;
+    screenCanvas.height = 1690;
+    const screenCtx = screenCanvas.getContext('2d');
+    const screenTexture = new THREE.CanvasTexture(screenCanvas);
+    screenTexture.colorSpace = THREE.SRGBColorSpace;
+    screenTexture.anisotropy = 8;
+    screenTexture.minFilter = THREE.LinearFilter;
+    screenTexture.magFilter = THREE.LinearFilter;
+
+    let phone = null;
+    let screenMesh = null;
+    let idleSpin = true;
+    let lastFx = 0;
+    let camAnim = null;
+    let rotAnim = null;
+    let screenFxDirty = true;
+    let idlePhase = 0;
+
+    let zoneLight = null;
+    // Невидимый локальный якорь зоны. Визуальные Torus-кольца запрещены:
+    // пользователь видит только физический эффект, свет или движение детали.
+    let zoneAnchor = null;
+    let zoneFocusState = null;
+    let zoneAnchorBasePos = null;
+    let zoneAnchorBaseScale = null;
+    let phoneAnchors = null;
+    let activeZoneKind = 'none';
+    let lastAnimKey = '';
+    let animStartedAt = 0;
+    let phoneBasePos = null;
+    let diagMotion = { shakeX: 0, shakeY: 0, tiltZ: 0 };
+
+    // Локальные 3D-эффекты (вода/искры/туман/волны/трещины) — отдельно от OLED canvas-эффектов.
+    let localFx = null;
+    let localFxReady = false;
+    let screenBaseLocal = null;
+    const bodyBendTargets = [];
+    let bodyBendAmount = 0;
+
+    const FACE_Y = Math.PI;
+    const THREE_QUARTER_Y = Math.PI + 0.48;
+    // ¾ крышки: на π от фронтального ¾ (≈ 0.48). Не −0.22: с DoubleSide OLED
+    // спинка выглядела как lock screen, а трещины уезжали в HUD.
+    const REAR_YAW = 0.48;
+
+    const PRESETS = {
+      defaultView: { position: new THREE.Vector3(0.78, 0.42, 2.38), target: new THREE.Vector3(0, 0.02, 0), yaw: THREE_QUARTER_Y },
+      defaultThreeQuarter: { position: new THREE.Vector3(0.78, 0.42, 2.38), target: new THREE.Vector3(0, 0.02, 0), yaw: THREE_QUARTER_Y },
+      frontDisplay: { position: new THREE.Vector3(0.1, 0.05, 2.78), target: new THREE.Vector3(0, 0.03, 0), yaw: FACE_Y },
+      screenView: { position: new THREE.Vector3(0.1, 0.05, 2.78), target: new THREE.Vector3(0, 0.03, 0), yaw: FACE_Y },
+      bottomPort: { position: new THREE.Vector3(0.12, -0.7, 2.05), target: new THREE.Vector3(0, -0.62, 0), yaw: FACE_Y, pitch: -0.92 },
+      leftButtons: { position: new THREE.Vector3(-0.85, 0.12, 2.35), target: new THREE.Vector3(-0.12, 0.1, 0), yaw: FACE_Y + 0.78 },
+      rightButton: { position: new THREE.Vector3(0.85, 0.14, 2.35), target: new THREE.Vector3(0.12, 0.12, 0), yaw: FACE_Y - 0.78 },
+      rearCamera: { position: new THREE.Vector3(-0.22, 0.28, 2.45), target: new THREE.Vector3(-0.08, 0.2, 0), yaw: REAR_YAW },
+      rearBody: { position: new THREE.Vector3(0.28, 0.06, 2.5), target: new THREE.Vector3(0, 0.02, 0), yaw: REAR_YAW }
+    };
+
+    function shortestYawDelta(fromYaw, toYaw) {
+      let d = toYaw - fromYaw;
+      while (d > Math.PI) d -= Math.PI * 2;
+      while (d < -Math.PI) d += Math.PI * 2;
+      return d;
+    }
+
+    function yawFromQuaternion(q) {
+      const e = new THREE.Euler().setFromQuaternion(q, 'YXZ');
+      return e.y;
+    }
+
+    function normalizeYaw(y) {
+      let v = y;
+      while (v > Math.PI) v -= Math.PI * 2;
+      while (v < -Math.PI) v += Math.PI * 2;
+      return v;
+    }
+
+    function resize() {
+      const w = wrap.clientWidth;
+      const h = wrap.clientHeight;
+      if (!w || !h) return;
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isCompact() ? 1.5 : 2));
+      renderer.setSize(w, h, false);
+      if (phone) computePresets();
+    }
+    resize();
+    window.addEventListener('resize', resize);
+    if (window.ResizeObserver) new ResizeObserver(resize).observe(wrap);
+
+    function drawWallpaper(ctx, w, h) {
+      const g = ctx.createLinearGradient(0, 0, w * 0.15, h);
+      g.addColorStop(0, '#3b1d6e');
+      g.addColorStop(0.28, '#c43b6e');
+      g.addColorStop(0.55, '#e8783a');
+      g.addColorStop(0.78, '#7a2f8a');
+      g.addColorStop(1, '#1a1040');
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, w, h);
+
+      function blob(x, y, rx, ry, color) {
+        const rg = ctx.createRadialGradient(x, y, 0, x, y, Math.max(rx, ry));
+        rg.addColorStop(0, color);
+        rg.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = rg;
+        ctx.beginPath();
+        ctx.ellipse(x, y, rx, ry, 0, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      blob(w * 0.78, h * 0.18, 280, 220, 'rgba(255,170,90,0.45)');
+      blob(w * 0.2, h * 0.42, 260, 300, 'rgba(90,40,180,0.4)');
+      blob(w * 0.7, h * 0.72, 240, 260, 'rgba(255,80,140,0.32)');
+      blob(w * 0.45, h * 0.3, 180, 140, 'rgba(255,255,255,0.1)');
+
+      ctx.fillStyle = 'rgba(255,255,255,0.92)';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'alphabetic';
+      ctx.font = '400 34px Inter, -apple-system, Segoe UI, sans-serif';
+      ctx.fillText('суббота, 15 августа', w / 2, 248);
+      ctx.font = '200 168px Inter, -apple-system, Segoe UI, sans-serif';
+      ctx.fillText('09:41', w / 2, 408);
+
+      ctx.fillStyle = '#050506';
+      roundRect(ctx, w / 2 - 78, 52, 156, 38, 19);
+      ctx.fill();
+
+      const btnY = h - 168;
+      const icons = [
+        [88, btnY, 'flash'],
+        [w - 88, btnY, 'cam']
+      ];
+      icons.forEach(([x, y, kind]) => {
+        ctx.fillStyle = 'rgba(0,0,0,0.34)';
+        ctx.beginPath();
+        ctx.arc(x, y, 40, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#fff';
+        if (kind === 'flash') {
+          ctx.beginPath();
+          ctx.moveTo(x - 7, y - 16);
+          ctx.lineTo(x + 4, y - 16);
+          ctx.lineTo(x - 2, y - 2);
+          ctx.lineTo(x + 10, y - 2);
+          ctx.lineTo(x - 6, y + 18);
+          ctx.lineTo(x + 1, y + 2);
+          ctx.lineTo(x - 10, y + 2);
+          ctx.closePath();
+          ctx.fill();
+        } else {
+          roundRect(ctx, x - 14, y - 10, 28, 20, 5);
+          ctx.fill();
+          ctx.fillStyle = 'rgba(0,0,0,0.34)';
+          ctx.beginPath();
+          ctx.arc(x, y, 6, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = '#fff';
+          ctx.beginPath();
+          ctx.arc(x + 10, y - 8, 2.2, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      });
+
+      ctx.fillStyle = 'rgba(255,255,255,0.55)';
+      roundRect(ctx, w / 2 - 58, h - 42, 116, 5, 2.5);
+      ctx.fill();
+    }
+
+    function roundRect(ctx, x, y, w, h, r) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.arcTo(x + w, y, x + w, y + h, r);
+      ctx.arcTo(x + w, y + h, x, y + h, r);
+      ctx.arcTo(x, y + h, x, y, r);
+      ctx.arcTo(x, y, x + w, y, r);
+      ctx.closePath();
+    }
+
+    function seededRand(seed) {
+      let s = (seed * 9301 + 49297) % 233280;
+      return () => {
+        s = (s * 9301 + 49297) % 233280;
+        return s / 233280;
+      };
+    }
+
+    function drawAppleLogo(ctx, x, y, scale, alpha) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.scale(scale, scale);
+      ctx.globalAlpha = alpha;
+      ctx.fillStyle = '#f5f5f7';
+      ctx.beginPath();
+      ctx.moveTo(16.2, -28);
+      ctx.bezierCurveTo(13.2, -28, 10.2, -26.4, 8.4, -24);
+      ctx.bezierCurveTo(6.4, -26.6, 3.2, -28.2, 0, -28.2);
+      ctx.bezierCurveTo(-7.2, -28.2, -14.8, -22.4, -14.8, -12.6);
+      ctx.bezierCurveTo(-14.8, -1.2, -5.4, 12.4, 1.2, 21.2);
+      ctx.bezierCurveTo(4.2, 25.2, 8.2, 28.4, 12.6, 28.4);
+      ctx.bezierCurveTo(16.4, 28.4, 18.4, 26.2, 22.6, 26.2);
+      ctx.bezierCurveTo(26.6, 26.2, 28.8, 28.4, 32.8, 28.2);
+      ctx.bezierCurveTo(36.8, 28, 40.4, 24.4, 43.2, 20.4);
+      ctx.bezierCurveTo(35.2, 16.6, 30.2, 7.4, 30.2, -2.2);
+      ctx.bezierCurveTo(30.2, -12.8, 37.4, -18.8, 38, -19.2);
+      ctx.bezierCurveTo(32.8, -26.8, 24.2, -28, 16.2, -28);
+      ctx.closePath();
+      ctx.fill();
+      ctx.beginPath();
+      ctx.moveTo(24.4, -32);
+      ctx.bezierCurveTo(27.2, -36.4, 28.4, -41.6, 27.8, -46.4);
+      ctx.bezierCurveTo(23.2, -46, 18.2, -43.4, 15.2, -39.2);
+      ctx.bezierCurveTo(12.4, -35.2, 11.2, -30, 12, -25.4);
+      ctx.bezierCurveTo(16.8, -25.6, 21.6, -28, 24.4, -32);
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+    }
+
+    function drawBatteryBadge(ctx, w, h, {
+      level = 0.2,
+      label = '',
+      tint = '#ffb15c',
+      bolt = false,
+      alpha = 1
+    } = {}) {
+      const clamped = Math.max(0.03, Math.min(1, level));
+      const badgeW = 240;
+      const badgeH = 82;
+      const x = (w - badgeW) / 2;
+      const y = h * 0.63;
+
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.fillStyle = 'rgba(3,5,8,0.72)';
+      roundRect(ctx, x - 28, y - 42, badgeW + 56, badgeH + 84, 36);
+      ctx.fill();
+
+      ctx.lineWidth = 6;
+      ctx.strokeStyle = 'rgba(255,255,255,0.9)';
+      roundRect(ctx, x, y, badgeW, badgeH, 22);
+      ctx.stroke();
+
+      ctx.fillStyle = tint;
+      roundRect(ctx, x + 12, y + 12, (badgeW - 24) * clamped, badgeH - 24, 14);
+      ctx.fill();
+
+      ctx.fillStyle = 'rgba(255,255,255,0.95)';
+      roundRect(ctx, x + badgeW + 6, y + 24, 18, badgeH - 48, 8);
+      ctx.fill();
+
+      if (bolt) {
+        ctx.fillStyle = 'rgba(255,255,255,0.95)';
+        ctx.beginPath();
+        ctx.moveTo(w / 2 - 10, y + 6);
+        ctx.lineTo(w / 2 + 8, y + 6);
+        ctx.lineTo(w / 2 - 2, y + 34);
+        ctx.lineTo(w / 2 + 16, y + 34);
+        ctx.lineTo(w / 2 - 14, y + 76);
+        ctx.lineTo(w / 2 - 2, y + 46);
+        ctx.lineTo(w / 2 - 18, y + 46);
+        ctx.closePath();
+        ctx.fill();
+      }
+
+      if (label) {
+        ctx.fillStyle = 'rgba(255,255,255,0.9)';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.font = '500 38px Inter, -apple-system, Segoe UI, sans-serif';
+        ctx.fillText(label, w / 2, y + badgeH + 56);
+      }
+      ctx.restore();
+    }
+
+    function drawCameraPreview(ctx, w, h, {
+      front = false,
+      failed = false,
+      blur = false,
+      shutter = false,
+      time = 0
+    } = {}) {
+      const frameW = w * 0.74;
+      const frameH = h * 0.42;
+      const x = (w - frameW) / 2;
+      const y = h * (front ? 0.21 : 0.24);
+      const t = time * 0.001;
+
+      ctx.save();
+      ctx.fillStyle = 'rgba(4,6,10,0.54)';
+      roundRect(ctx, x - 22, y - 34, frameW + 44, frameH + 96, 34);
+      ctx.fill();
+
+      roundRect(ctx, x, y, frameW, frameH, 30);
+      ctx.clip();
+      const sky = ctx.createLinearGradient(0, y, 0, y + frameH);
+      sky.addColorStop(0, front ? 'rgba(200,216,235,0.9)' : 'rgba(136,160,184,0.92)');
+      sky.addColorStop(1, front ? 'rgba(56,76,108,0.96)' : 'rgba(30,42,70,0.96)');
+      ctx.fillStyle = sky;
+      ctx.fillRect(x, y, frameW, frameH);
+
+      ctx.fillStyle = 'rgba(255,255,255,0.16)';
+      ctx.beginPath();
+      ctx.arc(x + frameW * 0.52, y + frameH * 0.4, frameH * 0.16, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillRect(x + frameW * 0.18, y + frameH * 0.62, frameW * 0.5, frameH * 0.05);
+
+      if (blur) {
+        const jx = Math.sin(t * 18) * 4;
+        const jy = Math.cos(t * 14) * 3;
+        ctx.fillStyle = `rgba(255,255,255,${0.08 + 0.08 * (0.5 + 0.5 * Math.sin(t * 7.5))})`;
+        ctx.fillRect(x + jx, y + jy, frameW, frameH);
+      }
+      if (failed) {
+        const cut = ctx.createLinearGradient(0, y, 0, y + frameH);
+        cut.addColorStop(0, 'rgba(2,3,5,0.04)');
+        cut.addColorStop(1, 'rgba(2,3,5,0.96)');
+        ctx.fillStyle = cut;
+        ctx.fillRect(x, y, frameW, frameH);
+      }
+      if (shutter) {
+        ctx.fillStyle = 'rgba(255,255,255,0.82)';
+        ctx.fillRect(x, y, frameW, frameH);
+      }
+      ctx.restore();
+
+      ctx.fillStyle = 'rgba(255,255,255,0.86)';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.font = '500 28px Inter, -apple-system, Segoe UI, sans-serif';
+      ctx.fillText(failed ? 'Нет изображения' : (front ? 'Превью селфи' : 'Превью камеры'), w / 2, y + frameH + 42);
+    }
+
+    function drawFaceIdDots(ctx, w, h, time) {
+      const t = time * 0.001;
+      const pulse = 0.18 + 0.42 * (0.5 + 0.5 * Math.sin(t * 3.4));
+      const cols = 6;
+      const rows = 5;
+      const spacingX = 24;
+      const spacingY = 20;
+      const cx = w / 2;
+      const cy = h * 0.25;
+
+      ctx.save();
+      for (let row = 0; row < rows; row += 1) {
+        for (let col = 0; col < cols; col += 1) {
+          const x = cx + (col - (cols - 1) / 2) * spacingX;
+          const y = cy + (row - (rows - 1) / 2) * spacingY;
+          const a = pulse * (0.78 + 0.22 * Math.sin(t * 5.2 + row * 0.6 + col * 0.4));
+          ctx.fillStyle = `rgba(196,220,255,${a})`;
+          ctx.beginPath();
+          ctx.arc(x, y, 3.1, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+      ctx.restore();
+    }
+
+    function drawCracks(ctx, w, h, intensity, symptomId) {
+      const rand = seededRand(29 + Math.round(intensity * 100));
+      ctx.save();
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+
+      function jagged(x, y, angle, len, width, depth, maxDepth) {
+        if (depth > maxDepth || len < 14) return;
+        let px = x;
+        let py = y;
+        ctx.beginPath();
+        ctx.moveTo(px, py);
+        const steps = 3 + Math.floor(rand() * 4);
+        for (let i = 0; i < steps; i += 1) {
+          const a = angle + (rand() - 0.5) * 0.55;
+          px += Math.cos(a) * (len / steps);
+          py += Math.sin(a) * (len / steps) * 1.08;
+          ctx.lineTo(px, py);
+        }
+        ctx.strokeStyle = `rgba(6,8,12,${0.2 + intensity * 0.24})`;
+        ctx.lineWidth = width + 1.8;
+        ctx.stroke();
+        ctx.strokeStyle = `rgba(236,244,255,${0.38 + intensity * 0.42})`;
+        ctx.lineWidth = width;
+        ctx.stroke();
+        if (rand() > 0.36) jagged(px, py, angle + (rand() - 0.5) * 0.9, len * (0.38 + rand() * 0.28), width * 0.6, depth + 1, maxDepth);
+        if (depth < 2 && rand() > 0.58) jagged(px, py, angle + (rand() - 0.5) * 1.25, len * (0.3 + rand() * 0.24), width * 0.48, depth + 1, maxDepth);
+      }
+
+      function impact(cx, cy, rays, reach, maxDepth) {
+        for (let i = 0; i < rays; i += 1) {
+          const angle = (i / rays) * Math.PI * 2 + (rand() - 0.5) * 0.45;
+          jagged(cx, cy, angle, reach * (0.48 + rand() * 0.62), i % 4 === 0 ? 2.1 : 1.05, 0, maxDepth);
+        }
+        const shards = Math.max(3, Math.round(rays * 0.7));
+        for (let i = 0; i < shards; i += 1) {
+          const a = rand() * Math.PI * 2;
+          const r = 12 + rand() * 44 * intensity;
+          ctx.fillStyle = `rgba(210,222,236,${0.05 + rand() * 0.13})`;
+          ctx.beginPath();
+          ctx.moveTo(cx, cy);
+          ctx.lineTo(cx + Math.cos(a) * r, cy + Math.sin(a) * r);
+          ctx.lineTo(cx + Math.cos(a + 0.24) * r * 0.48, cy + Math.sin(a + 0.24) * r * 0.48);
+          ctx.closePath();
+          ctx.fill();
+        }
+      }
+
+      if (symptomId === 'hairline') {
+        impact(w * 0.74, h * 0.44, 6, w * 0.28, 3);
+      } else if (symptomId === 'big-crack') {
+        impact(w * 0.42, h * 0.38, 12, w * 0.64, 5);
+        impact(w * 0.78, h * 0.7, 7, w * 0.3, 3);
+      } else {
+        impact(w * 0.43, h * 0.36, 15, w * 0.72, 5);
+        impact(w * 0.8, h * 0.72, 9, w * 0.42, 4);
+        const cx = w * 0.43;
+        const cy = h * 0.36;
+        const blot = ctx.createRadialGradient(cx, cy, 6, cx, cy, w * 0.24);
+        blot.addColorStop(0, 'rgba(0,0,0,0.88)');
+        blot.addColorStop(0.42, 'rgba(10,6,16,0.5)');
+        blot.addColorStop(0.72, 'rgba(82,20,104,0.22)');
+        blot.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = blot;
+        ctx.fillRect(0, 0, w, h);
+        ctx.fillStyle = 'rgba(0,0,0,0.72)';
+        ctx.beginPath();
+        ctx.moveTo(cx - 10, cy);
+        ctx.lineTo(cx - 170, cy - 105);
+        ctx.lineTo(cx - 35, cy - 190);
+        ctx.closePath();
+        ctx.fill();
+        ctx.fillStyle = 'rgba(40,255,120,0.28)';
+        ctx.fillRect(w * 0.61, 0, 5, h);
+        ctx.fillStyle = 'rgba(255,40,160,0.22)';
+        ctx.fillRect(w * 0.64, 0, 3, h);
+      }
+      ctx.restore();
+    }
+
+    function drawFlicker(ctx, w, h, intensity, time, symptomId) {
+      const t = time * 0.001;
+      const frameNoise = seededRand(Math.floor(t * 18) + 71)();
+      if (frameNoise > 0.9) {
+        ctx.fillStyle = 'rgba(0,0,0,0.88)';
+        ctx.fillRect(0, 0, w, h);
+        return;
+      }
+      const shift = (frameNoise - 0.5) * 16 * intensity;
+      ctx.save();
+      ctx.globalCompositeOperation = 'screen';
+      ctx.fillStyle = `rgba(255,45,80,${0.13 * intensity})`;
+      ctx.fillRect(shift, 0, w, h);
+      ctx.fillStyle = `rgba(30,255,140,${0.1 * intensity})`;
+      ctx.fillRect(-shift, 0, w, h);
+      ctx.restore();
+      if (symptomId === 'stripes' || symptomId === 'after-drop') {
+        const x1 = w * (0.24 + 0.015 * Math.sin(t * 5));
+        const x2 = w * (0.71 + 0.012 * Math.cos(t * 4.2));
+        ctx.fillStyle = 'rgba(0,220,100,0.32)';
+        ctx.fillRect(x1, 0, 5 + intensity * 7, h);
+        ctx.fillStyle = 'rgba(255,30,150,0.22)';
+        ctx.fillRect(x2, 0, 3 + intensity * 5, h);
+        ctx.fillStyle = 'rgba(255,255,255,0.14)';
+        ctx.fillRect(x1 + 20, 0, 2, h);
+      }
+      if (symptomId === 'partial') {
+        ctx.fillStyle = 'rgba(2,4,8,0.92)';
+        ctx.beginPath();
+        ctx.moveTo(w * 0.56, 0);
+        ctx.lineTo(w * 0.52 + Math.sin(t * 2.4) * 8, h);
+        ctx.lineTo(w, h);
+        ctx.lineTo(w, 0);
+        ctx.closePath();
+        ctx.fill();
+        ctx.fillStyle = 'rgba(50,230,90,0.22)';
+        ctx.fillRect(w * 0.53, 0, 5, h);
+      }
+      if (symptomId === 'after-drop') {
+        const x = w * 0.66;
+        const y = h * 0.37;
+        const spot = ctx.createRadialGradient(x, y, 4, x, y, w * 0.2);
+        spot.addColorStop(0, 'rgba(0,0,0,0.9)');
+        spot.addColorStop(0.5, 'rgba(14,4,20,0.55)');
+        spot.addColorStop(0.75, 'rgba(95,18,115,0.22)');
+        spot.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = spot;
+        ctx.fillRect(0, 0, w, h);
+      }
+    }
+
+    function drawSensorDamage(ctx, w, h, time, symptomId) {
+      const t = (time * 0.00038) % 1;
+      const eased = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+      const x1 = w * 0.22;
+      const y1 = h * 0.72;
+      const x2 = w * 0.78;
+      const y2 = h * 0.34;
+      const tx = x1 + (x2 - x1) * eased;
+      const ty = y1 + (y2 - y1) * eased;
+
+      ctx.save();
+      ctx.textAlign = 'center';
+      ctx.fillStyle = 'rgba(255,255,255,0.78)';
+      ctx.font = '500 26px Inter, sans-serif';
+      ctx.fillText(symptomId === 'ghost' ? 'Ложные касания' : 'Проверка касаний', w / 2, h * 0.58);
+
+      if (symptomId === 'dead-zone') {
+        ctx.strokeStyle = 'rgba(255,255,255,0.62)';
+        ctx.lineWidth = 7;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        const cutoff = 0.48;
+        const visibleT = Math.min(eased, cutoff);
+        ctx.lineTo(x1 + (x2 - x1) * visibleT, y1 + (y2 - y1) * visibleT);
+        ctx.stroke();
+        ctx.strokeStyle = 'rgba(255,180,120,0.25)';
+        ctx.lineWidth = 2;
+        roundRect(ctx, w * 0.49, h * 0.31, w * 0.3, h * 0.36, 24);
+        ctx.stroke();
+      } else if (symptomId === 'ghost') {
+        for (let i = 0; i < 3; i += 1) {
+          const pulse = (time * 0.00075 + i * 0.33) % 1;
+          const x = w * (0.3 + (i % 3) * 0.2);
+          const y = h * (0.34 + (i % 2) * 0.22);
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(255,255,255,${0.5 * (1 - pulse)})`;
+          ctx.lineWidth = 3;
+          ctx.arc(x, y, 6 + pulse * 36, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+      } else {
+        ctx.fillStyle = 'rgba(0,0,0,0.12)';
+        ctx.fillRect(0, 0, w, h);
+        ctx.fillStyle = 'rgba(255,255,255,0.65)';
+        ctx.font = '500 24px Inter, sans-serif';
+        ctx.fillText('Нет отклика', w / 2, h * 0.63);
+      }
+      ctx.beginPath();
+      ctx.fillStyle = symptomId === 'no-touch' ? 'rgba(255,255,255,0.24)' : 'rgba(255,255,255,0.72)';
+      ctx.arc(tx, ty, 13, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+
+    function drawWater(ctx, w, h, intensity) {
+      // Капли на стекле OLED — основной читаемый слой (3D-капли дополняют).
+      const a = 0.55 + intensity * 0.35;
+      ctx.save();
+      const drops = [
+        [0.18, 0.22, 0.028, 0.04],
+        [0.34, 0.16, 0.022, 0.032],
+        [0.52, 0.28, 0.034, 0.048],
+        [0.68, 0.2, 0.02, 0.03],
+        [0.78, 0.38, 0.026, 0.038],
+        [0.24, 0.48, 0.03, 0.044],
+        [0.44, 0.55, 0.018, 0.026],
+        [0.62, 0.62, 0.032, 0.046],
+        [0.16, 0.72, 0.024, 0.036],
+        [0.38, 0.78, 0.028, 0.042],
+        [0.72, 0.74, 0.022, 0.034],
+        [0.55, 0.88, 0.03, 0.04],
+        [0.82, 0.58, 0.016, 0.024]
+      ];
+      for (let i = 0; i < drops.length; i += 1) {
+        const [nx, ny, nrx, nry] = drops[i];
+        const x = nx * w;
+        const y = ny * h;
+        const rx = nrx * w;
+        const ry = nry * h;
+        // Контактная тень
+        ctx.fillStyle = `rgba(10,14,20,${0.12 * a})`;
+        ctx.beginPath();
+        ctx.ellipse(x, y + ry * 0.55, rx * 1.05, ry * 0.28, 0, 0, Math.PI * 2);
+        ctx.fill();
+        // Тело капли с тёмным ободком (читается на ярких обоях)
+        const rim = ctx.createRadialGradient(x, y, Math.min(rx, ry) * 0.55, x, y, Math.max(rx, ry));
+        rim.addColorStop(0, 'rgba(255,255,255,0)');
+        rim.addColorStop(0.72, `rgba(30,40,55,${0.1 * a})`);
+        rim.addColorStop(1, `rgba(15,20,30,${0.28 * a})`);
+        ctx.fillStyle = rim;
+        ctx.beginPath();
+        ctx.ellipse(x, y, rx, ry, 0, 0, Math.PI * 2);
+        ctx.fill();
+        const g = ctx.createRadialGradient(x - rx * 0.3, y - ry * 0.4, 0.5, x, y, ry);
+        g.addColorStop(0, `rgba(255,255,255,${0.8 * a})`);
+        g.addColorStop(0.3, `rgba(230,242,250,${0.35 * a})`);
+        g.addColorStop(0.65, `rgba(190,215,235,${0.12 * a})`);
+        g.addColorStop(1, 'rgba(160,190,220,0)');
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.ellipse(x, y, rx * 0.92, ry * 0.92, 0, 0, Math.PI * 2);
+        ctx.fill();
+        // Блик
+        ctx.fillStyle = `rgba(255,255,255,${0.92 * a})`;
+        ctx.beginPath();
+        ctx.ellipse(x - rx * 0.28, y - ry * 0.38, rx * 0.26, ry * 0.16, -0.35, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      // Лёгкий конденсат по кромке
+      ctx.globalCompositeOperation = 'screen';
+      const mistA = 0.04 + intensity * 0.05;
+      [[0.12, 0.06], [0.5, 0.04], [0.88, 0.08], [0.2, 0.94], [0.7, 0.96]].forEach(([nx, ny]) => {
+        const x = nx * w;
+        const y = ny * h;
+        const g = ctx.createRadialGradient(x, y, 1, x, y, w * 0.08);
+        g.addColorStop(0, `rgba(255,255,255,${mistA})`);
+        g.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(x, y, w * 0.08, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      ctx.restore();
+    }
+
+    function drawHeat(ctx, w, h, intensity) {
+      // Только едва тёплый намёк в нижней трети OLED — без оранжевого «пятна».
+      const a = 0.008 + intensity * 0.016;
+      ctx.save();
+      ctx.globalCompositeOperation = 'screen';
+      const spot = ctx.createRadialGradient(w * 0.5, h * 0.78, 4, w * 0.5, h * 0.78, w * 0.22);
+      spot.addColorStop(0, `rgba(255,200,150,${a * 0.55})`);
+      spot.addColorStop(0.55, `rgba(255,160,100,${a * 0.2})`);
+      spot.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = spot;
+      ctx.fillRect(0, h * 0.55, w, h * 0.45);
+      ctx.restore();
+    }
+
+    function drawScreenFx(time) {
+      const w = screenCanvas.width;
+      const h = screenCanvas.height;
+      const problem = currentProblem();
+      const symptom = currentSymptom();
+      const intensity = symptom ? symptom.intensity : 0.7;
+      const overlay = symptom ? symptom.overlay : 'none';
+      const overlayId = (symptom && symptom.overlayId) || (symptom && symptom.id) || '';
+      const hasCustomStory = !!(problem && symptom && (
+        (problem.key === 'charge' && ['no-charge', 'drops', 'slow', 'angle'].includes(symptom.id)) ||
+        (problem.key === 'camera-face' && ['rear', 'front', 'focus', 'face-id'].includes(symptom.id)) ||
+        (problem.key === 'water' && symptom.id === 'no-charge-water') ||
+        (problem.key === 'other' && ['lag', 'pc', 'network'].includes(symptom.id))
+      ));
+      drawWallpaper(screenCtx, w, h);
+
+      if (!symptom || (overlay === 'none' && !hasCustomStory)) {
+        screenTexture.needsUpdate = true;
+        screenFxDirty = false;
+        return;
+      }
+      if (overlay === 'broken') {
+        drawCracks(screenCtx, w, h, intensity, overlayId);
+      } else if (overlay === 'off') {
+        screenCtx.fillStyle = '#010203';
+        screenCtx.fillRect(0, 0, w, h);
+        if (problem && problem.key === 'not-on' && symptom) {
+          const cycleMs = symptom.id === 'reboot' ? 2800 : (symptom.id === 'after-drain' ? 2800 : 3600);
+          const phase = (time % cycleMs) / cycleMs;
+          if (symptom.id === 'logo-loop') {
+            // B3: fade-in → hold → fade-out → чёрная пауза
+            let alpha = 0;
+            if (phase < 0.12) alpha = phase / 0.12;
+            else if (phase < 0.48) alpha = 1;
+            else if (phase < 0.62) alpha = Math.max(0, 1 - (phase - 0.48) / 0.14);
+            else alpha = 0;
+            drawAppleLogo(screenCtx, w / 2 - 28, h / 2, 1.8, alpha);
+          } else if (symptom.id === 'reboot') {
+            // B4: рост до ~50% → обрыв
+            if (phase > 0.11 && phase < 0.48) {
+              const local = (phase - 0.11) / 0.37;
+              const cut = Math.min(0.55, local);
+              drawAppleLogo(screenCtx, w / 2 - 28, h / 2, 1.8, 0.2 + 0.8 * (cut / 0.55));
+              if (local > 0.55) {
+                screenCtx.fillStyle = `rgba(1,2,3,${Math.min(1, (local - 0.55) / 0.2)})`;
+                screenCtx.fillRect(0, 0, w, h);
+              }
+            }
+          } else if (symptom.id === 'after-drain') {
+            if (phase < 0.45) {
+              drawBatteryBadge(screenCtx, w, h, {
+                level: 0.05,
+                label: '3%',
+                tint: '#ff6b5e',
+                alpha: 0.96
+              });
+            }
+          } else if (symptom.id === 'after-drop') {
+            // После удара: мёртвый OLED и одна тонкая локальная трещина.
+            drawCracks(screenCtx, w, h, 0.28, 'hairline');
+          } else if (symptom.id === 'black-rings' || overlayId === 'black-vibrate') {
+            const pulse = Math.max(0, Math.sin(time * 0.012));
+            if (pulse > 0.85) {
+              screenCtx.fillStyle = `rgba(255,255,255,${0.04 + 0.03 * pulse})`;
+              screenCtx.fillRect(0, 0, w, h);
+            }
+          }
+        } else if (problem && problem.key === 'water' && symptom && symptom.id === 'dead-water') {
+          // Чёрный OLED; капли читаются 3D-бликом — лёгкий конденсат по краю
+          screenCtx.fillStyle = 'rgba(180,210,240,0.04)';
+          screenCtx.fillRect(0, 0, w, 18);
+          screenCtx.fillRect(0, h - 22, w, 22);
+        } else if (overlayId === 'logo-loop') {
+          const pulse = 0.18 + 0.82 * (0.5 + 0.5 * Math.sin(time * 0.0032));
+          drawAppleLogo(screenCtx, w / 2 - 28, h / 2, 1.8, pulse);
+        } else if (overlayId === 'black-vibrate') {
+          screenCtx.fillStyle = `rgba(255,255,255,${0.025 + 0.02 * Math.sin(time * 0.02)})`;
+          screenCtx.fillRect(0, 0, w, h);
+        }
+      } else if (overlay === 'flicker') {
+        drawFlicker(screenCtx, w, h, intensity, time, overlayId);
+      } else if (overlay === 'sensor') {
+        drawSensorDamage(screenCtx, w, h, time, overlayId);
+      } else if (overlay === 'water') {
+        drawWater(screenCtx, w, h, intensity);
+        if (problem && problem.key === 'water' && symptom && symptom.id === 'unstable') {
+          const cycle = (time % 2400) / 2400;
+          if (cycle > 0.82 && cycle < 0.9) {
+            const shift = 6;
+            screenCtx.save();
+            screenCtx.globalCompositeOperation = 'screen';
+            screenCtx.fillStyle = 'rgba(255,255,255,0.08)';
+            screenCtx.fillRect(shift, 0, w, h);
+            screenCtx.fillStyle = 'rgba(10,16,28,0.18)';
+            screenCtx.fillRect(-shift, 0, w, h);
+            screenCtx.restore();
+          }
+        }
+      } else if (overlay === 'heat') {
+        drawHeat(screenCtx, w, h, intensity);
+        if (problem && problem.key === 'battery-heat' && symptom) {
+          const cycleMs = symptom.id === 'drains' ? 5600 : 4000;
+          const phase = (time % cycleMs) / cycleMs;
+          if (symptom.id === 'drains') {
+            const value = Math.round(87 - 75 * phase);
+            drawBatteryBadge(screenCtx, w, h, {
+              level: 0.14 + 0.72 * (1 - phase),
+              label: `${value}%`,
+              tint: value > 40 ? '#f4c75a' : (value > 20 ? '#ff9a55' : '#ff7b68'),
+              alpha: 0.9
+            });
+          } else if (symptom.id === 'percent-off') {
+            // D2: lock ~30% → гаснет → снова тот же %
+            if (phase < 0.35 || phase > 0.6) {
+              drawBatteryBadge(screenCtx, w, h, {
+                level: 0.31,
+                label: '31%',
+                tint: '#ffb15c',
+                alpha: 0.92
+              });
+            } else {
+              screenCtx.fillStyle = 'rgba(1,2,3,0.94)';
+              screenCtx.fillRect(0, 0, w, h);
+            }
+          } else if (symptom.id === 'heat-charge') {
+            drawBatteryBadge(screenCtx, w, h, {
+              level: 0.42,
+              label: 'Зарядка',
+              tint: '#f2cd62',
+              bolt: true,
+              alpha: 0.82
+            });
+          } else if (symptom.id === 'heat-after') {
+            const unstable = (time % 3000) / 3000;
+            if (unstable > 0.82 && unstable < 0.88) {
+              screenCtx.fillStyle = 'rgba(255,245,230,0.08)';
+              screenCtx.fillRect(0, 0, w, h);
+              screenCtx.fillStyle = 'rgba(4,6,10,0.16)';
+              screenCtx.fillRect(2, 0, w, h);
+            }
+          }
+        }
+      } else if (overlay === 'none' && hasCustomStory) {
+        if (problem.key === 'charge') {
+          const cycle = (time % 2600) / 2600;
+          if (symptom.id === 'no-charge') {
+            drawBatteryBadge(screenCtx, w, h, {
+              level: 0.28,
+              label: cycle < 0.18 ? 'Попытка…' : 'Заряд не идёт',
+              tint: '#ff8c72',
+              bolt: cycle < 0.18,
+              alpha: 0.88
+            });
+          } else if (symptom.id === 'drops') {
+            drawBatteryBadge(screenCtx, w, h, {
+              level: 0.22,
+              label: cycle < 0.42 ? 'Зарядка…' : 'Сброс',
+              tint: cycle < 0.42 ? '#f2cd62' : '#ff8c72',
+              bolt: cycle < 0.42,
+              alpha: 0.9
+            });
+          } else if (symptom.id === 'slow') {
+            const pct = 12 + Math.floor((time % 30000) / 2800);
+            drawBatteryBadge(screenCtx, w, h, {
+              level: Math.min(0.45, 0.12 + pct * 0.01),
+              label: `${Math.min(28, pct)}%`,
+              tint: '#f2cd62',
+              bolt: true,
+              alpha: 0.88
+            });
+          } else if (symptom.id === 'angle') {
+            const leanCycle = (time % 4000) / 4000;
+            const connected = leanCycle > 0.36 && leanCycle < 0.84;
+            drawBatteryBadge(screenCtx, w, h, {
+              level: 0.26,
+              label: connected ? 'Контакт' : 'Нет контакта',
+              tint: connected ? '#f2cd62' : '#ff8c72',
+              bolt: connected,
+              alpha: 0.9
+            });
+          }
+        } else if (problem.key === 'water' && symptom.id === 'no-charge-water') {
+          const cycle = (time % 3600) / 3600;
+          if (cycle < 0.28) {
+            drawBatteryBadge(screenCtx, w, h, {
+              level: 0.2,
+              label: 'Нет зарядки',
+              tint: '#ff8c72',
+              bolt: false,
+              alpha: 0.88
+            });
+          }
+        } else if (problem.key === 'camera-face') {
+          if (symptom.id === 'rear') {
+            const cycle = (time % 2800) / 2800;
+            drawCameraPreview(screenCtx, w, h, {
+              failed: cycle > 0.22,
+              shutter: cycle > 0.18 && cycle < 0.24,
+              time
+            });
+          } else if (symptom.id === 'front') {
+            drawCameraPreview(screenCtx, w, h, {
+              front: true,
+              failed: true,
+              time
+            });
+          } else if (symptom.id === 'focus') {
+            drawCameraPreview(screenCtx, w, h, {
+              blur: true,
+              time
+            });
+          } else if (symptom.id === 'face-id') {
+            drawFaceIdDots(screenCtx, w, h, time);
+            screenCtx.fillStyle = 'rgba(255,255,255,0.84)';
+            screenCtx.textAlign = 'center';
+            screenCtx.font = '500 28px Inter, -apple-system, Segoe UI, sans-serif';
+            screenCtx.fillText('Лицо не распознано', w / 2, h * 0.34);
+          }
+        } else if (problem.key === 'other') {
+          if (symptom.id === 'lag') {
+            const cycle = (time % 3200) / 3200;
+            if (cycle > 0.58 && cycle < 0.84) {
+              screenCtx.fillStyle = 'rgba(4,6,10,0.22)';
+              screenCtx.fillRect(0, 0, w, h);
+              screenCtx.fillStyle = 'rgba(255,255,255,0.22)';
+              roundRect(screenCtx, w * 0.35, h * 0.76, w * 0.3, 10, 5);
+              screenCtx.fill();
+            }
+          } else if (symptom.id === 'pc') {
+            screenCtx.fillStyle = 'rgba(6,10,16,0.44)';
+            roundRect(screenCtx, w * 0.22, h * 0.68, w * 0.56, 130, 28);
+            screenCtx.fill();
+            screenCtx.fillStyle = 'rgba(255,255,255,0.88)';
+            screenCtx.textAlign = 'center';
+            screenCtx.font = '500 30px Inter, -apple-system, Segoe UI, sans-serif';
+            screenCtx.fillText('Нет соединения с ПК', w / 2, h * 0.725);
+            screenCtx.fillStyle = 'rgba(255,255,255,0.3)';
+            roundRect(screenCtx, w * 0.38, h * 0.765, w * 0.24, 8, 4);
+            screenCtx.fill();
+          } else if (symptom.id === 'network') {
+            screenCtx.fillStyle = 'rgba(6,10,16,0.36)';
+            roundRect(screenCtx, w * 0.24, h * 0.7, w * 0.52, 96, 24);
+            screenCtx.fill();
+            screenCtx.fillStyle = 'rgba(255,255,255,0.78)';
+            screenCtx.textAlign = 'center';
+            screenCtx.font = '500 26px Inter, -apple-system, Segoe UI, sans-serif';
+            screenCtx.fillText('Нет сети', w / 2, h * 0.745);
+          }
+        }
+      }
+      screenTexture.needsUpdate = true;
+      screenFxDirty = false;
+    }
+
+    function isAnimatedScreenState() {
+      if (reduceMotion) return false;
+      const symptom = currentSymptom();
+      const problem = currentProblem();
+      if (!symptom) return false;
+      if (symptom.overlay === 'flicker' || symptom.overlay === 'sensor') return true;
+      if (problem && problem.key === 'battery-heat' && ['drains', 'percent-off', 'heat-charge', 'heat-after'].includes(symptom.id)) return true;
+      if (problem && problem.key === 'water' && ['unstable', 'no-charge-water'].includes(symptom.id)) return true;
+      if (problem && problem.key === 'charge' && ['no-charge', 'drops', 'slow', 'angle'].includes(symptom.id)) return true;
+      if (problem && problem.key === 'camera-face' && ['rear', 'front', 'focus', 'face-id'].includes(symptom.id)) return true;
+      if (problem && problem.key === 'other' && ['lag', 'pc', 'network'].includes(symptom.id)) return true;
+      if (problem && problem.key === 'not-on' && ['logo-loop', 'reboot', 'after-drain', 'black-rings', 'no-response', 'after-drop'].includes(symptom.id)) return true;
+      return symptom.overlay === 'off' && ['logo-loop', 'black-vibrate', 'no-response', 'after-drop'].includes(symptom.overlayId || symptom.id);
+    }
+
+    function matteTitanium() {
+      return new THREE.MeshStandardMaterial({
+        color: 0x9a9388,
+        metalness: 0.84,
+        roughness: 0.36
+      });
+    }
+
+    function createProceduralIPhone() {
+      const group = new THREE.Group();
+      group.name = 'iPhone15ProMaxProcedural';
+      const W = 0.767;
+      const H = 1.599;
+      const D = 0.0825;
+      const titanium = matteTitanium();
+      const black = new THREE.MeshStandardMaterial({ color: 0x111214, metalness: 0.4, roughness: 0.35 });
+      const glassBack = new THREE.MeshStandardMaterial({ color: 0x8d877e, metalness: 0.72, roughness: 0.28 });
+      const lensGlass = new THREE.MeshStandardMaterial({
+        color: 0x111111,
+        metalness: 0.15,
+        roughness: 0.12
+      });
+
+      const body = new THREE.Mesh(new RoundedBoxGeometry(W, H, D, 8, 0.11), titanium);
+      body.name = 'body';
+      group.add(body);
+
+      const back = new THREE.Mesh(new RoundedBoxGeometry(W - 0.03, H - 0.03, 0.006, 6, 0.1), glassBack);
+      back.position.z = -D / 2 - 0.001;
+      group.add(back);
+
+      const bezel = new THREE.Mesh(new RoundedBoxGeometry(W - 0.018, H - 0.018, 0.004, 6, 0.1), black);
+      bezel.position.z = D / 2 + 0.001;
+      group.add(bezel);
+
+      const screenW = W - 0.07;
+      const screenH = H - 0.07;
+      const screen = new THREE.Mesh(
+        new THREE.PlaneGeometry(screenW, screenH),
+        new THREE.MeshStandardMaterial({
+          map: screenTexture,
+          emissive: 0xffffff,
+          emissiveMap: screenTexture,
+          emissiveIntensity: 0.55,
+          roughness: 0.18,
+          metalness: 0.05
+        })
+      );
+      screen.name = 'screen';
+      screen.position.z = D / 2 + 0.0045;
+      group.add(screen);
+
+      const island = new THREE.Mesh(new RoundedBoxGeometry(0.165, 0.046, 0.008, 4, 0.02), black);
+      island.position.set(0, screenH / 2 - 0.07, D / 2 + 0.008);
+      group.add(island);
+
+      const btnMat = titanium.clone();
+      const power = new THREE.Mesh(new RoundedBoxGeometry(0.01, 0.11, 0.028, 2, 0.004), btnMat);
+      power.position.set(W / 2 + 0.004, 0.18, 0);
+      group.add(power);
+      const volUp = new THREE.Mesh(new RoundedBoxGeometry(0.01, 0.07, 0.026, 2, 0.004), btnMat);
+      volUp.position.set(-W / 2 - 0.004, 0.22, 0);
+      group.add(volUp);
+      const volDn = volUp.clone();
+      volDn.position.y = 0.12;
+      group.add(volDn);
+      const action = new THREE.Mesh(new RoundedBoxGeometry(0.01, 0.042, 0.024, 2, 0.004), btnMat);
+      action.position.set(-W / 2 - 0.004, 0.38, 0);
+      group.add(action);
+
+      const bump = new THREE.Mesh(new RoundedBoxGeometry(0.34, 0.34, 0.028, 6, 0.08), titanium);
+      bump.position.set(-0.155, 0.48, -D / 2 - 0.016);
+      group.add(bump);
+
+      function lens(x, y, tint) {
+        const ring = new THREE.Mesh(new THREE.CylinderGeometry(0.055, 0.055, 0.012, 32), black);
+        ring.rotation.x = Math.PI / 2;
+        ring.position.set(x, y, -D / 2 - 0.028);
+        group.add(ring);
+        const glass = new THREE.Mesh(new THREE.CircleGeometry(0.042, 32), lensGlass.clone());
+        glass.material.color = new THREE.Color(tint);
+        glass.position.copy(ring.position);
+        glass.position.z -= 0.007;
+        glass.rotation.y = Math.PI;
+        group.add(glass);
+      }
+      lens(-0.23, 0.56, 0x1b1f28);
+      lens(-0.08, 0.56, 0x152033);
+      lens(-0.23, 0.40, 0x1a1820);
+      const flash = new THREE.Mesh(
+        new THREE.CircleGeometry(0.018, 20),
+        new THREE.MeshStandardMaterial({ color: 0xfff3c4, emissive: 0x665522, emissiveIntensity: 0.4 })
+      );
+      flash.position.set(-0.08, 0.40, -D / 2 - 0.031);
+      flash.rotation.y = Math.PI;
+      group.add(flash);
+
+      const logo = new THREE.Mesh(
+        new THREE.CircleGeometry(0.03, 20),
+        new THREE.MeshStandardMaterial({ color: 0xb7b0a6, metalness: 0.9, roughness: 0.25 })
+      );
+      logo.position.set(0, -0.12, -D / 2 - 0.005);
+      logo.rotation.y = Math.PI;
+      group.add(logo);
+
+      const port = new THREE.Mesh(new RoundedBoxGeometry(0.09, 0.012, 0.03, 2, 0.005), black);
+      port.position.set(0, -H / 2 - 0.001, 0);
+      group.add(port);
+
+      return { group, screen };
+    }
+
+    function centerAndScale(root, targetHeight) {
+      const box = new THREE.Box3().setFromObject(root);
+      const size = box.getSize(new THREE.Vector3());
+      const center = box.getCenter(new THREE.Vector3());
+      root.position.sub(center);
+      const maxDim = Math.max(size.x, size.y, size.z) || 1;
+      root.scale.multiplyScalar(targetHeight / maxDim);
+      const box2 = new THREE.Box3().setFromObject(root);
+      root.position.sub(box2.getCenter(new THREE.Vector3()));
+    }
+
+    function findScreenMesh(root) {
+      let found = null;
+      root.traverse((obj) => {
+        if (!obj.isMesh) return;
+        const mats = Array.isArray(obj.material) ? obj.material : [obj.material];
+        if (mats.some((m) => m && m.name === 'zFdeDaGNRwzccye')) found = obj;
+      });
+      if (found) return found;
+      root.traverse((obj) => {
+        if (!obj.isMesh || found) return;
+        const n = (obj.name || '').toLowerCase();
+        if (/screen|display|lcd|panel|glass/.test(n)) found = obj;
+      });
+      return found;
+    }
+
+    const KEEP_TINT = new Set([
+      'zFdeDaGNRwzccye',
+      'ujsvqBWRMnqdwPx',
+      'hUlRcbieVuIiOXG',
+      'jlzuBkUzuJqgiAK',
+      'xNrofRCqOXXHVZt'
+    ]);
+    const NATURAL = new THREE.Color('#b7b1a6');
+
+    function mapMaterials(obj, fn) {
+      const list = Array.isArray(obj.material) ? obj.material : [obj.material];
+      const next = list.map(fn);
+      obj.material = Array.isArray(obj.material) ? next : next[0];
+    }
+
+    function applyNaturalTitanium(root) {
+      root.traverse((obj) => {
+        if (!obj.isMesh) return;
+        mapMaterials(obj, (m) => {
+          if (!m || KEEP_TINT.has(m.name)) return m;
+          const mat = m.clone();
+          if (!mat.map) mat.color.set('#cfc8bc');
+          else mat.color.copy(NATURAL);
+          if (!mat.metalnessMap) mat.metalness = 0.9;
+          else mat.metalness = Math.max(mat.metalness || 0, 0.7);
+          if (!mat.roughnessMap) mat.roughness = 0.3;
+          else mat.roughness = Math.min(Math.max(mat.roughness || 1, 0.22), 0.5);
+          mat.envMapIntensity = 1.35;
+          mat.needsUpdate = true;
+          return mat;
+        });
+      });
+    }
+
+    function makeScreenGlass(screen) {
+      if (!screen) return;
+      screen.material = new THREE.MeshPhysicalMaterial({
+        color: 0x030405,
+        metalness: 0,
+        roughness: 0.16,
+        clearcoat: 1,
+        clearcoatRoughness: 0.08,
+        envMapIntensity: 0.65
+      });
+    }
+
+    function faceScreenForward(root, screen) {
+      if (!screen) return;
+      screen.updateWorldMatrix(true, false);
+      const dir = new THREE.Vector3();
+      screen.getWorldDirection(dir);
+      if (dir.z > 0) root.rotation.y += Math.PI;
+    }
+
+    function attachFallbackScreen(root) {
+      const box = new THREE.Box3().setFromObject(root);
+      const size = box.getSize(new THREE.Vector3());
+      const plane = new THREE.Mesh(
+        new THREE.PlaneGeometry(size.x * 0.82, size.y * 0.86),
+        new THREE.MeshStandardMaterial({
+          map: screenTexture,
+          emissive: 0xffffff,
+          emissiveMap: screenTexture,
+          emissiveIntensity: 0.45,
+          transparent: true,
+          opacity: 0.98
+        })
+      );
+      plane.name = 'screen';
+      plane.position.set(0, 0.02, box.max.z + 0.002);
+      root.add(plane);
+      return plane;
+    }
+
+    function easeInOutCubic(t) {
+      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    }
+
+    function goToPreset(name) {
+      const preset = PRESETS[name] || PRESETS.defaultThreeQuarter;
+      if (!preset) return;
+      idleSpin = false;
+      controls.enabled = false;
+      camAnim = null;
+      rotAnim = null;
+      const duration = reduceMotion ? 0.2 : 1.05;
+      const resumeIdle = name === 'defaultView';
+      const fromPos = camera.position.clone();
+      const toPos = preset.position.clone();
+      const fromTarget = controls.target.clone();
+      const toTarget = preset.target.clone();
+      camAnim = {
+        fromPos,
+        toPos,
+        fromTarget,
+        toTarget,
+        t: 0,
+        dur: duration,
+        resumeIdle,
+        arc: false
+      };
+      if (phone) {
+        const targetYaw = preset.yaw ?? THREE_QUARTER_Y;
+        const targetPitch = preset.pitch || 0;
+        const fromEuler = new THREE.Euler().setFromQuaternion(phone.quaternion, 'YXZ');
+        const fromYaw = fromEuler.y;
+        const fromPitch = fromEuler.x;
+        const toYaw = fromYaw + shortestYawDelta(fromYaw, targetYaw);
+        rotAnim = {
+          fromYaw,
+          toYaw,
+          fromPitch,
+          toPitch: targetPitch,
+          t: 0,
+          dur: duration
+        };
+        window.__camDbg = {
+          name,
+          fromYaw,
+          toYaw,
+          targetYaw,
+          targetPitch,
+          camZ: toPos.z,
+          phonePos: phone.position.toArray()
+        };
+      }
+    }
+
+    function ensurePhoneAnchors() {
+      if (phoneAnchors || !phone) return phoneAnchors;
+      const keptQuat = phone.quaternion.clone();
+      const keptPos = phone.position.clone();
+      phone.quaternion.identity();
+      phone.position.set(0, 0, 0);
+      phone.updateMatrixWorld(true);
+      const worldBox = new THREE.Box3().setFromObject(phone);
+      const sx = Math.abs(phone.scale.x) || 1;
+      const sy = Math.abs(phone.scale.y) || 1;
+      const sz = Math.abs(phone.scale.z) || 1;
+      const box = new THREE.Box3(
+        new THREE.Vector3(worldBox.min.x / sx, worldBox.min.y / sy, worldBox.min.z / sz),
+        new THREE.Vector3(worldBox.max.x / sx, worldBox.max.y / sy, worldBox.max.z / sz)
+      );
+      const sizeY = box.max.y - box.min.y;
+      if (box.isEmpty() || !Number.isFinite(sizeY) || sizeY < 0.15) {
+        box.set(new THREE.Vector3(-0.24, -0.5, -0.032), new THREE.Vector3(0.24, 0.5, 0.038));
+      }
+
+      // Сторона OLED — по screen mesh в локали телефона, не «max.z всегда стекло».
+      let glassSide = box.max.z;
+      if (screenMesh) {
+        const sp = new THREE.Vector3();
+        screenMesh.getWorldPosition(sp);
+        phone.worldToLocal(sp);
+        glassSide = Math.abs(sp.z - box.max.z) < Math.abs(sp.z - box.min.z) ? box.max.z : box.min.z;
+      }
+      const backSide = glassSide === box.max.z ? box.min.z : box.max.z;
+      const glassOut = glassSide >= box.max.z - 1e-5 ? 1 : -1;
+      const backOut = -glassOut;
+      const glassZ = glassSide + glassOut * 0.001;
+      const backZ = backSide + backOut * 0.0008;
+      const halfW = (box.max.x - box.min.x) * 0.5;
+      const halfH = (box.max.y - box.min.y) * 0.5;
+      const midZ = (glassZ + backZ) * 0.5;
+      const localMin = box.min.clone();
+      const localMax = box.max.clone();
+
+      const sampleBox = new THREE.Box3();
+      const sampleC = new THREE.Vector3();
+      const features = { camera: null, port: null, power: null, volume: null };
+      let camScore = -Infinity;
+      let portScore = -Infinity;
+      let powerScore = -Infinity;
+      let volScore = -Infinity;
+      phone.traverse((obj) => {
+        if (!obj.isMesh || !obj.geometry) return;
+        sampleBox.setFromObject(obj);
+        if (sampleBox.isEmpty()) return;
+        sampleBox.getCenter(sampleC);
+        phone.worldToLocal(sampleC);
+        const { x, y, z } = sampleC;
+        const size = sampleBox.getSize(new THREE.Vector3());
+        size.x /= sx;
+        size.y /= sy;
+        if (size.x > halfW * 1.4 && size.y > halfH * 1.4) return;
+        const onBack = backOut > 0 ? z > midZ + 0.001 : z < midZ - 0.001;
+        if (y > halfH * 0.12 && onBack) {
+          const s = -Math.abs(z - backSide) + y;
+          if (s > camScore) {
+            camScore = s;
+            features.camera = sampleC.clone();
+          }
+        }
+        if (y < localMin.y + halfH * 0.22 && Math.abs(x) < halfW * 0.5) {
+          const s = -y - Math.abs(x);
+          if (s > portScore) {
+            portScore = s;
+            features.port = sampleC.clone();
+          }
+        }
+        if (x > halfW * 0.62 && y > halfH * 0.08 && y < halfH * 0.55) {
+          const s = x + y * 0.35;
+          if (s > powerScore) {
+            powerScore = s;
+            features.power = sampleC.clone();
+          }
+        }
+        if (x < -halfW * 0.62 && y > halfH * 0.08 && y < halfH * 0.55) {
+          const s = -x + y * 0.35;
+          if (s > volScore) {
+            volScore = s;
+            features.volume = sampleC.clone();
+          }
+        }
+      });
+
+      phone.quaternion.copy(keptQuat);
+      phone.position.copy(keptPos);
+      phone.updateMatrixWorld(true);
+
+      const island = new THREE.Vector3(-halfW * 0.4, halfH * 0.55, backZ);
+      if (!features.camera || features.camera.y > halfH * 0.78 || Math.abs(features.camera.x) < halfW * 0.12) {
+        features.camera = island;
+      }
+      // У этого GLB боковые детали частично слиты с корпусом. Физическая power-кнопка
+      // находится на отрицательной X-грани и ниже локального центра.
+      if (!features.power) features.power = new THREE.Vector3(-halfW, -halfH * 0.26, midZ);
+      if (!features.volume) features.volume = new THREE.Vector3(halfW, -halfH * 0.18, midZ);
+
+      phoneAnchors = {
+        glassZ,
+        backZ,
+        midZ,
+        halfW,
+        halfH,
+        localMin,
+        localMax,
+        glassOut,
+        backOut,
+        camera: features.camera,
+        port: features.port,
+        power: features.power,
+        volume: features.volume,
+        scale: { x: sx, y: sy, z: sz }
+      };
+      modelAdapter.anchors = phoneAnchors;
+      modelAdapter.normals = { glassOut, backOut };
+      window.__fxAnchors = phoneAnchors;
+      return phoneAnchors;
+    }
+
+    function zoneLayout(kind) {
+      const a = ensurePhoneAnchors();
+      if (!a) {
+        return { pos: [0, 0, 0.06], rot: [0, 0, 0], r: 0.03, tube: 0.0012 };
+      }
+      const { glassZ, backZ, midZ, halfW, halfH, localMin, localMax, camera, port, power, volume, backOut, glassOut } = a;
+      const cam = camera || { x: -halfW * 0.38, y: halfH * 0.58, z: backZ };
+      const usb = port || { x: 0, y: localMin.y + 0.01, z: midZ };
+      const pwr = power || { x: halfW, y: halfH * 0.28, z: midZ };
+      const vol = volume || { x: -halfW, y: halfH * 0.32, z: midZ };
+      const frontRotY = glassOut < 0 ? Math.PI : 0;
+      const backRotY = backOut < 0 ? Math.PI : 0;
+      const map = {
+        port: { pos: [usb.x, usb.y, usb.z], rot: [Math.PI * 0.5, 0, 0], r: Math.max(0.0045, halfW * 0.12), tube: 0.00018 },
+        power: { pos: [pwr.x, pwr.y, pwr.z], rot: [0, Math.PI * 0.5, 0], r: Math.max(0.0025, halfH * 0.03), tube: 0.00015 },
+        volume: { pos: [vol.x, vol.y, vol.z], rot: [0, Math.PI * 0.5, 0], r: Math.max(0.003, halfH * 0.04), tube: 0.00015 },
+        camera: { pos: [cam.x, cam.y, backZ + backOut * 0.0012], rot: [0, backRotY, 0], r: Math.max(0.005, halfW * 0.18), tube: 0.00016 },
+        body: { pos: [0, halfH * 0.04, backZ + backOut * 0.0004], rot: [0, backRotY, 0], r: Math.max(0.01, halfW * 0.32), tube: 0.00015 },
+        gap: { pos: [0, localMin.y + halfH * 0.16, glassZ + glassOut * 0.0003], rot: [0, frontRotY, 0], r: Math.max(0.0045, halfW * 0.12), tube: 0.00015, scale: [1.4, 0.5, 1] },
+        face: { pos: [0, localMax.y - halfH * 0.08, glassZ + glassOut * 0.0003], rot: [0, frontRotY, 0], r: Math.max(0.004, halfW * 0.11), tube: 0.00016 },
+        ear: { pos: [0, localMax.y - halfH * 0.07, glassZ + glassOut * 0.0003], rot: [0, frontRotY, 0], r: Math.max(0.0028, halfW * 0.07), tube: 0.00015 },
+        speaker: { pos: [usb.x, usb.y + halfH * 0.04, glassZ + glassOut * 0.0003], rot: [0, frontRotY, 0], r: Math.max(0.0038, halfW * 0.1), tube: 0.00015 }
+      };
+      return map[kind] || { pos: [0, 0, glassZ], rot: [0, 0, 0], r: 0.03, tube: 0.0012 };
+    }
+
+    function applyZonePress(offset) {
+      if (!zoneAnchor || !zoneAnchorBasePos) return;
+      zoneAnchor.position.copy(zoneAnchorBasePos);
+      if (activeZoneKind === 'power' || activeZoneKind === 'volume') {
+        zoneAnchor.position.x += Math.sign(zoneAnchorBasePos.x || 1) * offset;
+      }
+      else if (activeZoneKind === 'port') zoneAnchor.position.y -= offset;
+      else zoneAnchor.position.z += offset;
+    }
+
+    function applyZoneHighlight(kind) {
+      activeZoneKind = kind || 'none';
+
+      if (zoneLight) {
+        if (phone) phone.remove(zoneLight);
+        zoneLight.dispose?.();
+        zoneLight = null;
+      }
+      if (zoneAnchor) {
+        if (phone) phone.remove(zoneAnchor);
+        zoneAnchor = null;
+        zoneFocusState = null;
+        zoneAnchorBasePos = null;
+        zoneAnchorBaseScale = null;
+      }
+
+      if (!phone || !kind || kind === 'none') return;
+
+      const layout = zoneLayout(kind);
+
+      const baseColor = (kind === 'body' || kind === 'gap') ? 0xf4efe6 : 0xcdd6ff;
+      zoneFocusState = { color: new THREE.Color(baseColor), opacity: 0 };
+      zoneAnchor = new THREE.Object3D();
+      zoneAnchor.name = 'diagnostic-zone-anchor';
+      zoneAnchor.position.set(layout.pos[0], layout.pos[1], layout.pos[2]);
+      zoneAnchor.rotation.set(layout.rot[0], layout.rot[1], layout.rot[2]);
+      if (layout.scale) zoneAnchor.scale.set(layout.scale[0], layout.scale[1], layout.scale[2]);
+
+      phone.add(zoneAnchor);
+      zoneAnchorBasePos = zoneAnchor.position.clone();
+      zoneAnchorBaseScale = zoneAnchor.scale.clone();
+
+      const buttonKind = kind === 'power' || kind === 'volume';
+      const light = new THREE.PointLight(baseColor, buttonKind ? 0.012 : (kind === 'body' ? 0.04 : 0.055), 0.32);
+      light.position.copy(zoneAnchorBasePos);
+      phone.add(light);
+      zoneLight = light;
+    }
+
+    function paintGlassCrackTexture(ctx, w, h, impactX, impactY, seed, opts = {}) {
+      const clear = opts.clear !== false;
+      const strength = opts.strength == null ? 1 : opts.strength;
+      const rand = seededRand(seed);
+      if (clear) ctx.clearRect(0, 0, w, h);
+      const ix = impactX * w;
+      const iy = impactY * h;
+      const size = Math.min(w, h);
+
+      ctx.save();
+      ctx.globalAlpha = strength;
+
+      // Тёмные сколы у удара
+      const chip = ctx.createRadialGradient(ix, iy, 1, ix, iy, size * 0.1);
+      chip.addColorStop(0, 'rgba(18,22,28,0.72)');
+      chip.addColorStop(0.4, 'rgba(60,70,85,0.28)');
+      chip.addColorStop(0.75, 'rgba(200,210,225,0.12)');
+      chip.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = chip;
+      ctx.beginPath();
+      ctx.arc(ix, iy, size * 0.11, 0, Math.PI * 2);
+      ctx.fill();
+
+      const rays = 10 + Math.floor(rand() * 5);
+      for (let r = 0; r < rays; r += 1) {
+        const ang = (r / rays) * Math.PI * 2 + (rand() - 0.5) * 0.4;
+        const len = size * (0.1 + rand() * 0.18);
+        let x = ix;
+        let y = iy;
+        const segs = 4 + Math.floor(rand() * 3);
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        for (let s = 0; s < segs; s += 1) {
+          const t = (s + 1) / segs;
+          const jitter = (rand() - 0.5) * size * 0.035;
+          x = ix + Math.cos(ang) * len * t + Math.cos(ang + Math.PI * 0.5) * jitter;
+          y = iy + Math.sin(ang) * len * t + Math.sin(ang + Math.PI * 0.5) * jitter;
+          ctx.lineTo(x, y);
+        }
+        ctx.strokeStyle = 'rgba(8,10,14,0.84)';
+        ctx.lineWidth = 1.25 + rand() * 0.95;
+        ctx.lineCap = 'round';
+        ctx.stroke();
+        ctx.strokeStyle = 'rgba(255,255,255,0.72)';
+        ctx.lineWidth = 0.55 + rand() * 0.4;
+        ctx.stroke();
+
+        if (rand() > 0.4) {
+          const bx = ix + Math.cos(ang) * len * (0.3 + rand() * 0.35);
+          const by = iy + Math.sin(ang) * len * (0.3 + rand() * 0.35);
+          const bang = ang + (rand() > 0.5 ? 1 : -1) * (0.55 + rand() * 0.85);
+          const blen = size * (0.04 + rand() * 0.09);
+          ctx.beginPath();
+          ctx.moveTo(bx, by);
+          ctx.lineTo(bx + Math.cos(bang) * blen, by + Math.sin(bang) * blen);
+          ctx.strokeStyle = 'rgba(12,16,22,0.45)';
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
+          ctx.strokeStyle = 'rgba(240,245,255,0.4)';
+          ctx.lineWidth = 0.4;
+          ctx.stroke();
+        }
+      }
+
+      for (let i = 0; i < 5; i += 1) {
+        const a0 = rand() * Math.PI * 2;
+        const a1 = a0 + 0.4 + rand() * 0.9;
+        const rr = size * (0.04 + rand() * 0.07);
+        ctx.beginPath();
+        ctx.arc(ix, iy, rr, a0, a1);
+        ctx.strokeStyle = 'rgba(230,238,255,0.35)';
+        ctx.lineWidth = 0.6;
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
+
+    function paintBackCoverCracks(ctx, w, h) {
+      ctx.clearRect(0, 0, w, h);
+      const rand = seededRand(7);
+      const ix = w * 0.30;
+      const iy = h * 0.16;
+      const ix2 = w * 0.68;
+      const iy2 = h * 0.73;
+
+      function shard(x, y, r, a0) {
+        ctx.beginPath();
+        const n = 5 + Math.floor(rand() * 3);
+        for (let i = 0; i <= n; i += 1) {
+          const ang = a0 + (i / n) * Math.PI * 1.35 + (rand() - 0.5) * 0.2;
+          const rr = r * (0.45 + rand() * 0.7);
+          const px = x + Math.cos(ang) * rr;
+          const py = y + Math.sin(ang) * rr;
+          if (i === 0) ctx.moveTo(px, py);
+          else ctx.lineTo(px, py);
+        }
+        ctx.closePath();
+        ctx.fillStyle = 'rgba(12,16,22,0.55)';
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(236,242,255,0.7)';
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+      }
+
+      function spider(x, y, scale, rays) {
+        const crater = ctx.createRadialGradient(x, y, 2, x, y, scale * 0.12);
+        crater.addColorStop(0, 'rgba(8,10,14,0.72)');
+        crater.addColorStop(0.35, 'rgba(40,48,58,0.3)');
+        crater.addColorStop(0.7, 'rgba(220,230,245,0.16)');
+        crater.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = crater;
+        ctx.beginPath();
+        ctx.arc(x, y, scale * 0.38, 0, Math.PI * 2);
+        ctx.fill();
+
+        for (let r = 0; r < rays; r += 1) {
+          const ang = (r / rays) * Math.PI * 2 + (rand() - 0.5) * 0.28;
+          const len = scale * (0.3 + rand() * 0.42);
+          let px = x;
+          let py = y;
+          const segs = 5 + Math.floor(rand() * 3);
+          ctx.beginPath();
+          ctx.moveTo(px, py);
+          for (let s = 0; s < segs; s += 1) {
+            const t = (s + 1) / segs;
+            const jitter = (rand() - 0.5) * scale * 0.04;
+            px = x + Math.cos(ang) * len * t + Math.cos(ang + Math.PI * 0.5) * jitter;
+            py = y + Math.sin(ang) * len * t + Math.sin(ang + Math.PI * 0.5) * jitter;
+            ctx.lineTo(px, py);
+          }
+          ctx.strokeStyle = 'rgba(6,8,12,0.72)';
+          ctx.lineWidth = 1.2 + rand() * 1.1;
+          ctx.lineCap = 'round';
+          ctx.stroke();
+          ctx.strokeStyle = 'rgba(255,255,255,0.52)';
+          ctx.lineWidth = 0.5 + rand() * 0.35;
+          ctx.stroke();
+
+          if (rand() > 0.35) {
+            const bx = x + Math.cos(ang) * len * (0.35 + rand() * 0.4);
+            const by = y + Math.sin(ang) * len * (0.35 + rand() * 0.4);
+            const bang = ang + (rand() > 0.5 ? 1 : -1) * (0.5 + rand() * 0.9);
+            const blen = scale * (0.08 + rand() * 0.14);
+            ctx.beginPath();
+            ctx.moveTo(bx, by);
+            ctx.lineTo(bx + Math.cos(bang) * blen, by + Math.sin(bang) * blen);
+            ctx.strokeStyle = 'rgba(8,10,14,0.75)';
+            ctx.lineWidth = 1.6;
+            ctx.stroke();
+            ctx.strokeStyle = 'rgba(245,248,255,0.55)';
+            ctx.lineWidth = 0.7;
+            ctx.stroke();
+          }
+        }
+        shard(x + scale * 0.04, y + scale * 0.02, scale * 0.11, rand() * Math.PI);
+      }
+
+      spider(ix, iy, Math.min(w, h) * 0.86, 11);
+      spider(ix2, iy2, Math.min(w, h) * 0.54, 7);
+
+      ctx.globalCompositeOperation = 'destination-in';
+      const maskR = 52;
+      const mx = 18;
+      const my = 22;
+      const mw = w - mx * 2;
+      const mh = h - my * 2;
+      ctx.beginPath();
+      ctx.moveTo(mx + maskR, my);
+      ctx.arcTo(mx + mw, my, mx + mw, my + mh, maskR);
+      ctx.arcTo(mx + mw, my + mh, mx, my + mh, maskR);
+      ctx.arcTo(mx, my + mh, mx, my, maskR);
+      ctx.arcTo(mx, my, mx + mw, my, maskR);
+      ctx.closePath();
+      ctx.fillStyle = '#fff';
+      ctx.fill();
+      ctx.globalCompositeOperation = 'source-over';
+    }
+
+    function paintBackCoverScratches(ctx, w, h) {
+      ctx.clearRect(0, 0, w, h);
+      const rand = seededRand(41);
+      for (let i = 0; i < 12; i += 1) {
+        const x0 = w * (0.12 + rand() * 0.62);
+        const y0 = h * (0.1 + rand() * 0.72);
+        const len = w * (0.18 + rand() * 0.38);
+        const ang = 0.38 + rand() * 0.55;
+        const mx = x0 + Math.cos(ang) * len * 0.52 + (rand() - 0.5) * 8;
+        const my = y0 + Math.sin(ang) * len * 0.52 + (rand() - 0.5) * 8;
+        const x1 = x0 + Math.cos(ang) * len;
+        const y1 = y0 + Math.sin(ang) * len;
+        ctx.beginPath();
+        ctx.moveTo(x0, y0);
+        ctx.quadraticCurveTo(mx, my, x1, y1);
+        ctx.strokeStyle = 'rgba(10,12,16,0.42)';
+        ctx.lineWidth = 1.2 + rand() * 0.8;
+        ctx.lineCap = 'round';
+        ctx.stroke();
+        ctx.strokeStyle = 'rgba(255,255,255,0.45)';
+        ctx.lineWidth = 0.45 + rand() * 0.3;
+        ctx.stroke();
+      }
+      ctx.globalCompositeOperation = 'destination-in';
+      const maskR = 52;
+      const mx = 18;
+      const my = 22;
+      ctx.beginPath();
+      ctx.moveTo(mx + maskR, my);
+      ctx.arcTo(w - mx, my, w - mx, h - my, maskR);
+      ctx.arcTo(w - mx, h - my, mx, h - my, maskR);
+      ctx.arcTo(mx, h - my, mx, my, maskR);
+      ctx.arcTo(mx, my, w - mx, my, maskR);
+      ctx.closePath();
+      ctx.fillStyle = '#fff';
+      ctx.fill();
+      ctx.globalCompositeOperation = 'source-over';
+    }
+
+    function prepareBodyBend() {
+      if (!phone || bodyBendTargets.length) return;
+      const a = ensurePhoneAnchors();
+      if (!a) return;
+      phone.updateMatrixWorld(true);
+      const phoneWorldInverse = phone.matrixWorld.clone().invert();
+      phone.traverse((obj) => {
+        if (!obj.isMesh || obj.isSkinnedMesh || !obj.geometry?.attributes?.position) return;
+        const geometry = obj.geometry.clone();
+        obj.geometry = geometry;
+        obj.updateMatrixWorld(true);
+        const meshToPhone = phoneWorldInverse.clone().multiply(obj.matrixWorld);
+        const phoneToMesh = meshToPhone.clone().invert();
+        const source = geometry.attributes.position.array;
+        const phonePositions = new Float32Array(source.length);
+        const point = new THREE.Vector3();
+        for (let i = 0; i < source.length; i += 3) {
+          point.set(source[i], source[i + 1], source[i + 2]).applyMatrix4(meshToPhone);
+          phonePositions[i] = point.x;
+          phonePositions[i + 1] = point.y;
+          phonePositions[i + 2] = point.z;
+        }
+        bodyBendTargets.push({ geometry, phonePositions, phoneToMesh });
+      });
+    }
+
+    function setBodyBend(amount) {
+      const next = Math.max(0, Math.min(1, amount));
+      if (!bodyBendTargets.length || Math.abs(next - bodyBendAmount) < 0.001) return;
+      bodyBendAmount = next;
+      const a = ensurePhoneAnchors();
+      if (!a) return;
+      const centerY = (a.localMin.y + a.localMax.y) * 0.5;
+      const amplitude = 0.0019 * next;
+      const outward = a.backOut || 1;
+      const point = new THREE.Vector3();
+      for (const target of bodyBendTargets) {
+        const attr = target.geometry.attributes.position;
+        const source = target.phonePositions;
+        for (let i = 0; i < source.length; i += 3) {
+          const yNorm = THREE.MathUtils.clamp((source[i + 1] - centerY) / a.halfH, -1, 1);
+          const bow = (yNorm * yNorm - 0.32) * amplitude * outward;
+          point.set(source[i], source[i + 1], source[i + 2] + bow).applyMatrix4(target.phoneToMesh);
+          attr.array[i] = point.x;
+          attr.array[i + 1] = point.y;
+          attr.array[i + 2] = point.z;
+        }
+        attr.needsUpdate = true;
+        target.geometry.computeVertexNormals();
+        target.geometry.computeBoundingBox();
+        target.geometry.computeBoundingSphere();
+      }
+    }
+
+    function currentBodyRoll() {
+      const problem = currentProblem();
+      const symptom = currentSymptom();
+      if (!reduceMotion && problem && problem.key === 'charge' && symptom && symptom.id === 'angle') {
+        const cycle = (performance.now() * 0.001 % 4) / 4;
+        const lean = cycle < 0.3 ? 0
+          : cycle < 0.48 ? (cycle - 0.3) / 0.18
+            : cycle < 0.82 ? 1
+              : Math.max(0, 1 - (cycle - 0.82) / 0.18);
+        return 0.14 * lean;
+      }
+      return 0;
+    }
+
+    function initLocalFx() {
+      if (localFxReady || !phone) return;
+      localFxReady = true;
+
+      localFx = {
+        waterDroplets: [],
+        waterGroup: new THREE.Group(),
+        spark: { mesh: null, t0: 0, duration: 0.1, active: false },
+        fog: { mesh: null, opacity: 0 },
+        lensCrack: { mesh: null },
+        soundGroup: new THREE.Group(),
+        soundRings: [],
+        bodyCrackGroup: new THREE.Group(),
+        scratchGroup: new THREE.Group(),
+        gapGroup: new THREE.Group(),
+        gapEdges: []
+      };
+
+      phone.add(localFx.waterGroup);
+      phone.add(localFx.soundGroup);
+      phone.add(localFx.bodyCrackGroup);
+      phone.add(localFx.scratchGroup);
+      phone.add(localFx.gapGroup);
+
+      const a = ensurePhoneAnchors();
+      const glassZ = a.glassZ;
+      const backZ = a.backZ;
+      const midZ = a.midZ;
+      const halfW = a.halfW;
+      const halfH = a.halfH;
+      const localMin = a.localMin;
+      const localMax = a.localMax;
+      const backOut = a.backOut || -1;
+      const glassOut = a.glassOut || 1;
+      localFx.anchors = a;
+
+      function makeDropletTexture(seed) {
+        const c = document.createElement('canvas');
+        c.width = 64;
+        c.height = 96;
+        const ctx = c.getContext('2d');
+        const rand = seededRand(seed);
+        ctx.clearRect(0, 0, 64, 96);
+        const cx = 32;
+        const cy = 40 + rand() * 8;
+        const rx = 10 + rand() * 8;
+        const ry = 16 + rand() * 14;
+        // Тень/контакт со стеклом
+        const contact = ctx.createRadialGradient(cx, cy + ry * 0.55, 1, cx, cy + ry * 0.55, rx * 1.1);
+        contact.addColorStop(0, 'rgba(20,30,40,0.22)');
+        contact.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = contact;
+        ctx.beginPath();
+        ctx.ellipse(cx, cy + ry * 0.62, rx * 1.05, ry * 0.28, 0, 0, Math.PI * 2);
+        ctx.fill();
+        // Тело капли
+        const body = ctx.createRadialGradient(cx - rx * 0.25, cy - ry * 0.35, 1, cx, cy, ry);
+        body.addColorStop(0, 'rgba(255,255,255,0.78)');
+        body.addColorStop(0.22, 'rgba(210,230,245,0.42)');
+        body.addColorStop(0.55, 'rgba(170,205,230,0.22)');
+        body.addColorStop(1, 'rgba(140,180,210,0.04)');
+        ctx.fillStyle = body;
+        ctx.beginPath();
+        ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
+        ctx.fill();
+        // Спекулярный блик
+        ctx.fillStyle = 'rgba(255,255,255,0.9)';
+        ctx.beginPath();
+        ctx.ellipse(cx - rx * 0.28, cy - ry * 0.42, rx * 0.22, ry * 0.16, -0.4, 0, Math.PI * 2);
+        ctx.fill();
+        const tex = new THREE.CanvasTexture(c);
+        tex.colorSpace = THREE.SRGBColorSpace;
+        tex.minFilter = THREE.LinearFilter;
+        tex.magFilter = THREE.LinearFilter;
+        return tex;
+      }
+
+      // Капли 3D — только мелкие блики на рамке/краю; основной объём на OLED.
+      const dropRand = seededRand(53);
+      const dropletCount = weakDevice ? 6 : 8;
+      for (let i = 0; i < dropletCount; i += 1) {
+        const isPort = i < 3;
+        const tex = makeDropletTexture(100 + i * 17);
+        const mat = new THREE.MeshBasicMaterial({
+          map: tex,
+          transparent: true,
+          opacity: 0,
+          depthWrite: false,
+          depthTest: true,
+          alphaTest: 0.025,
+          polygonOffset: true,
+          polygonOffsetFactor: -2,
+          polygonOffsetUnits: -2,
+          side: THREE.DoubleSide
+        });
+        const w = isPort ? 0.0012 + dropRand() * 0.0008 : 0.0015 + dropRand() * 0.0012;
+        const h = w * (1.25 + dropRand() * 0.45);
+        const mesh = new THREE.Mesh(new THREE.PlaneGeometry(w, h), mat);
+        const x = isPort
+          ? (dropRand() - 0.5) * halfW * 0.28
+          : (dropRand() - 0.5) * halfW * 0.7;
+        const y = isPort
+          ? localMin.y + halfH * 0.1 + dropRand() * halfH * 0.08
+          : localMin.y + halfH * 0.25 + dropRand() * halfH * 1.2;
+        const z = glassZ + glassOut * 0.00035;
+        const startY = y + (isPort ? halfH * 0.018 : halfH * 0.035);
+        const endY = startY - (isPort ? halfH * 0.08 : halfH * 0.18);
+        mesh.position.set(x, startY, z);
+        mesh.renderOrder = 20;
+        localFx.waterGroup.add(mesh);
+        localFx.waterDroplets.push({
+          mesh,
+          anchor: new THREE.Vector3(x, startY, z),
+          startY,
+          endY,
+          phase: dropRand(),
+          baseX: x,
+          baseW: w,
+          baseH: h,
+          isPort
+        });
+      }
+
+      // Искра/контакт в зоне порта.
+      const sparkMat = new THREE.MeshBasicMaterial({
+        color: 0xfffbf0,
+        transparent: true,
+        opacity: 0,
+        depthWrite: false
+      });
+      const portLayout = zoneLayout('port');
+      localFx.spark.mesh = new THREE.Mesh(
+        new THREE.SphereGeometry(0.00045, 12, 12),
+        sparkMat
+      );
+      localFx.spark.mesh.position.set(portLayout.pos[0], portLayout.pos[1], portLayout.pos[2]);
+      localFx.spark.mesh.renderOrder = 6;
+      phone.add(localFx.spark.mesh);
+
+      // Туман по объективу камеры (и/или камера после воды).
+      const fogCanvas = document.createElement('canvas');
+      fogCanvas.width = 128;
+      fogCanvas.height = 128;
+      const fctx = fogCanvas.getContext('2d');
+      fctx.clearRect(0, 0, fogCanvas.width, fogCanvas.height);
+      const g = fctx.createRadialGradient(64, 64, 8, 64, 64, 62);
+      g.addColorStop(0, 'rgba(220,235,255,0.95)');
+      g.addColorStop(0.35, 'rgba(190,215,255,0.35)');
+      g.addColorStop(1, 'rgba(190,215,255,0)');
+      fctx.fillStyle = g;
+      fctx.beginPath();
+      fctx.arc(64, 64, 62, 0, Math.PI * 2);
+      fctx.fill();
+      const fogTex = new THREE.CanvasTexture(fogCanvas);
+      fogTex.colorSpace = THREE.SRGBColorSpace;
+      fogTex.minFilter = THREE.LinearFilter;
+      fogTex.magFilter = THREE.LinearFilter;
+
+      const fogMat = new THREE.MeshBasicMaterial({
+        map: fogTex,
+        transparent: true,
+        opacity: 0,
+        depthWrite: false,
+        side: THREE.DoubleSide
+      });
+      localFx.fog.mesh = new THREE.Mesh(new THREE.PlaneGeometry(halfW * 0.22, halfW * 0.22), fogMat);
+      const camLayout = zoneLayout('camera');
+      localFx.fog.mesh.position.set(camLayout.pos[0], camLayout.pos[1], camLayout.pos[2] + backOut * 0.0004);
+      localFx.fog.mesh.rotation.y = backOut < 0 ? Math.PI : 0;
+      localFx.fog.mesh.renderOrder = 6;
+      phone.add(localFx.fog.mesh);
+
+      const crackCanvas = document.createElement('canvas');
+      crackCanvas.width = 256;
+      crackCanvas.height = 256;
+      const cctx = crackCanvas.getContext('2d');
+      paintGlassCrackTexture(cctx, 256, 256, 0.5, 0.48, 11, { strength: 1.4 });
+      paintGlassCrackTexture(cctx, 256, 256, 0.38, 0.32, 19, { clear: false, strength: 1.1 });
+      const crackTex = new THREE.CanvasTexture(crackCanvas);
+      crackTex.colorSpace = THREE.SRGBColorSpace;
+      crackTex.minFilter = THREE.LinearFilter;
+      crackTex.magFilter = THREE.LinearFilter;
+      localFx.lensCrack.mesh = new THREE.Mesh(
+        new THREE.PlaneGeometry(halfW * 0.26, halfW * 0.26),
+        new THREE.MeshBasicMaterial({
+          map: crackTex,
+          transparent: true,
+          opacity: 0,
+          depthWrite: false,
+          depthTest: true,
+          polygonOffset: true,
+          polygonOffsetFactor: -2,
+          polygonOffsetUnits: -2,
+          side: THREE.DoubleSide
+        })
+      );
+      localFx.lensCrack.mesh.position.set(camLayout.pos[0], camLayout.pos[1], backZ + backOut * 0.0025);
+      localFx.lensCrack.mesh.rotation.y = backOut < 0 ? Math.PI : 0;
+      localFx.lensCrack.mesh.renderOrder = 7;
+      phone.add(localFx.lensCrack.mesh);
+
+      // Щель вздутого OLED: тёмная тень + очень слабый тёплый внутренний блик.
+      const gapY = (localMin.y + localMax.y) * 0.5;
+      const gapZ = glassZ + glassOut * 0.00015;
+      const gapSpecs = [
+        { x: -halfW * 0.9, y: gapY, w: 0.00055, h: halfH * 1.65, color: 0x17130f, opacity: 0.58 },
+        { x: -halfW * 0.86, y: gapY, w: 0.00022, h: halfH * 1.56, color: 0xc18a55, opacity: 0.16 },
+        { x: 0, y: localMin.y + halfH * 0.08, w: halfW * 1.6, h: 0.0005, color: 0x17130f, opacity: 0.5 }
+      ];
+      for (const spec of gapSpecs) {
+        const material = new THREE.MeshBasicMaterial({
+          color: spec.color,
+          transparent: true,
+          opacity: 0,
+          depthWrite: false,
+          depthTest: true,
+          side: THREE.DoubleSide
+        });
+        const edge = new THREE.Mesh(new THREE.PlaneGeometry(spec.w, spec.h), material);
+        edge.position.set(spec.x, spec.y, gapZ);
+        edge.rotation.y = glassOut < 0 ? Math.PI : 0;
+        edge.renderOrder = 5;
+        edge.userData.targetOpacity = spec.opacity;
+        localFx.gapGroup.add(edge);
+        localFx.gapEdges.push(edge);
+      }
+
+      // Аудио: открытые дуги, не замкнутые диагностические кольца.
+      const waveRadius = Math.max(0.0028, halfW * 0.07);
+      const waveCurve = new THREE.ArcCurve(0, 0, waveRadius, -Math.PI * 0.68, Math.PI * 0.68, false);
+      const waveRingGeo = new THREE.BufferGeometry().setFromPoints(
+        waveCurve.getPoints(24).map((p) => new THREE.Vector3(p.x, p.y, 0))
+      );
+      const waveBaseMat = new THREE.LineBasicMaterial({
+        color: 0x9dbdff,
+        transparent: true,
+        opacity: 0,
+        depthWrite: false
+      });
+      for (let i = 0; i < 3; i += 1) {
+        const ringMat = waveBaseMat.clone();
+        const mesh = new THREE.Line(waveRingGeo, ringMat);
+        mesh.rotation.z = Math.PI * 0.5;
+        mesh.renderOrder = 6;
+        localFx.soundGroup.add(mesh);
+        localFx.soundRings.push({ mesh, phase: i / 3 });
+      }
+
+      // Корпус: трещины и риски на заднем стекле, чуть снаружи крышки.
+      const coverW = halfW * 1.72;
+      const coverH = halfH * 1.74;
+      const coverY = (localMin.y + localMax.y) * 0.5;
+      const coverZ = backZ + backOut * 0.0004;
+      const coverRotY = backOut < 0 ? Math.PI : 0;
+      const coverMatOpts = {
+        transparent: true,
+        opacity: 0,
+        depthWrite: false,
+        depthTest: true,
+        alphaTest: 0.08,
+        polygonOffset: true,
+        polygonOffsetFactor: -8,
+        polygonOffsetUnits: -8,
+        side: THREE.FrontSide
+      };
+
+      const bodyCrackCanvas = document.createElement('canvas');
+      bodyCrackCanvas.width = 512;
+      bodyCrackCanvas.height = 1024;
+      paintBackCoverCracks(bodyCrackCanvas.getContext('2d'), 512, 1024);
+      const bodyCrackTex = new THREE.CanvasTexture(bodyCrackCanvas);
+      bodyCrackTex.colorSpace = THREE.SRGBColorSpace;
+      bodyCrackTex.minFilter = THREE.LinearMipmapLinearFilter;
+      bodyCrackTex.magFilter = THREE.LinearFilter;
+      bodyCrackTex.anisotropy = 4;
+      const cracks = new THREE.Mesh(
+        new THREE.PlaneGeometry(coverW, coverH),
+        new THREE.MeshBasicMaterial(Object.assign({ map: bodyCrackTex }, coverMatOpts))
+      );
+      cracks.position.set(0, coverY, coverZ);
+      cracks.rotation.y = coverRotY;
+      cracks.renderOrder = 4;
+      localFx.bodyCrackGroup.add(cracks);
+      localFx.bodyCrackGroup.userData.cracks = cracks;
+      const crackHighlights = new THREE.Mesh(
+        new THREE.PlaneGeometry(coverW, coverH),
+        new THREE.MeshBasicMaterial(Object.assign({
+          map: bodyCrackTex,
+          color: 0xc7dcff,
+          blending: THREE.AdditiveBlending
+        }, coverMatOpts))
+      );
+      crackHighlights.position.set(0, coverY, coverZ + backOut * 0.00008);
+      crackHighlights.rotation.y = coverRotY;
+      crackHighlights.renderOrder = 5;
+      localFx.bodyCrackGroup.add(crackHighlights);
+      localFx.bodyCrackGroup.userData.highlights = crackHighlights;
+
+      const scratchCanvas = document.createElement('canvas');
+      scratchCanvas.width = 512;
+      scratchCanvas.height = 1024;
+      paintBackCoverScratches(scratchCanvas.getContext('2d'), 512, 1024);
+      const scratchTex = new THREE.CanvasTexture(scratchCanvas);
+      scratchTex.colorSpace = THREE.SRGBColorSpace;
+      scratchTex.minFilter = THREE.LinearMipmapLinearFilter;
+      scratchTex.magFilter = THREE.LinearFilter;
+      const scratches = new THREE.Mesh(
+        new THREE.PlaneGeometry(coverW, coverH),
+        new THREE.MeshBasicMaterial(Object.assign({ map: scratchTex }, coverMatOpts))
+      );
+      scratches.position.set(0, coverY, coverZ);
+      scratches.rotation.y = coverRotY;
+      scratches.renderOrder = 4;
+      localFx.scratchGroup.add(scratches);
+      localFx.scratchGroup.userData.lines = scratches;
+    }
+
+    function playSpark(now, intensity = 1) {
+      if (!localFx || !localFx.spark || !localFx.spark.mesh) return;
+      const { mesh } = localFx.spark;
+      localFx.spark.t0 = now;
+      localFx.spark.active = true;
+      mesh.material.opacity = 0.9 * intensity;
+      mesh.scale.setScalar(1.0);
+    }
+
+    function updateLocalFx(now, dt) {
+      if (!localFxReady || !localFx || !phone) return;
+
+      const problem = currentProblem();
+      const symptom = currentSymptom();
+      const animKey = `${problem ? problem.key : 'none'}:${symptom ? symptom.id : 'none'}`;
+
+      if (animKey !== lastAnimKey) {
+        lastAnimKey = animKey;
+        animStartedAt = now;
+        setBodyBend(problem && problem.key === 'body' && symptom && symptom.id === 'bent' ? 1 : 0);
+
+        // Сбросим локальные "геометрические" состояния при смене симптома.
+        if (zoneAnchor && zoneAnchorBasePos) {
+          zoneAnchor.position.copy(zoneAnchorBasePos);
+          zoneAnchor.rotation.z = 0;
+          if (zoneAnchorBaseScale) zoneAnchor.scale.copy(zoneAnchorBaseScale);
+          else zoneAnchor.scale.setScalar(1);
+        }
+        if (localFx.spark && localFx.spark.mesh) {
+          localFx.spark.active = false;
+          localFx.spark.mesh.material.opacity = 0;
+        }
+        if (localFx.fog && localFx.fog.mesh) {
+          localFx.fog.mesh.material.opacity = 0;
+          localFx.fog.opacity = 0;
+        }
+        diagMotion.shakeX = 0;
+        diagMotion.shakeY = 0;
+        diagMotion.tiltZ = 0;
+      }
+
+      const reduce = reduceMotion;
+      const elapsed = Math.max(0, (now - animStartedAt) / 1000);
+
+      // 1) Пульсация/цвет зоны (унифицирует внешний вид).
+      if (zoneAnchor && zoneFocusState) {
+        const t = now * 0.001;
+        let targetColor = 0x8b9cff;
+        let baseOpacity = 0.0;
+        let pulseAmp = 0.35;
+        let keepXY = false;
+
+        if (problem && problem.key === 'water') {
+          targetColor = 0xcdd6ff;
+          baseOpacity = 0.14;
+          pulseAmp = 0.1;
+        } else if (problem && problem.key === 'battery-heat') {
+          targetColor = 0xf4efe6;
+          baseOpacity = 0.22;
+          pulseAmp = 0.16;
+        } else if (problem && problem.key === 'charge') {
+          targetColor = 0xcdd6ff;
+          baseOpacity = 0.28;
+          pulseAmp = 0.14;
+        } else if (problem && problem.key === 'buttons') {
+          targetColor = 0xcdd6ff;
+          baseOpacity = 0.32;
+          pulseAmp = 0.16;
+        } else if (problem && problem.key === 'camera-face' && symptom && symptom.id === 'face-id') {
+          targetColor = 0xcdd6ff;
+          baseOpacity = 0.26;
+        } else if (problem && problem.key === 'audio') {
+          targetColor = 0xcdd6ff;
+          baseOpacity = 0.22;
+          pulseAmp = 0.14;
+        } else if (problem && problem.key === 'body') {
+          if (symptom && symptom.id === 'screen-gap') {
+            targetColor = 0xf4efe6;
+            baseOpacity = 0.24;
+            pulseAmp = 0.14;
+          } else if (symptom && symptom.id === 'back-glass') {
+            // Трещины сами читаются — zone focus выключен.
+            targetColor = 0xf4efe6;
+            baseOpacity = 0;
+            pulseAmp = 0;
+          } else {
+            targetColor = 0xf4efe6;
+            baseOpacity = 0.14;
+            pulseAmp = 0.1;
+          }
+        } else if (problem && problem.key === 'not-on') {
+          targetColor = 0xf4efe6;
+          baseOpacity = 0.26;
+          pulseAmp = 0.14;
+        } else {
+          baseOpacity = 0.14;
+        }
+
+        const pulse = reduce ? 0 : (0.5 + 0.5 * Math.sin(t * 2.2 + 1.3));
+        const op = reduce ? baseOpacity : (baseOpacity * (0.75 + pulseAmp * (pulse - 0.5) * 2));
+        zoneFocusState.color.setHex(targetColor);
+        zoneFocusState.opacity = Math.max(0, Math.min(1, op));
+
+        // B1 / F: ход кнопки. not-on/no-response — два press за цикл 4.2 с.
+        const canPress = zoneAnchorBasePos && (activeZoneKind === 'power' || activeZoneKind === 'volume');
+        const isButtonsBranch = problem && problem.key === 'buttons' && symptom && !['mute', 'volume'].includes(symptom.id);
+        const isNotOnPress = problem && problem.key === 'not-on' && symptom && ['no-response', 'after-drain', 'after-drop'].includes(symptom.id);
+        if (!reduce && canPress && zoneAnchorBasePos && (isButtonsBranch || isNotOnPress)) {
+          let press = 0;
+          if (isNotOnPress) {
+            const cycle = 4.2;
+            const localT = (elapsed % cycle);
+            const inPress = (localT >= 0.7 && localT < 1.06) || (localT >= 2.2 && localT < 2.56);
+            const local = inPress ? ((localT >= 2.2 ? localT - 2.2 : localT - 0.7) / 0.36) : -1;
+            if (local >= 0) {
+              const k = local < 0.5 ? local / 0.5 : 1 - (local - 0.5) / 0.5;
+              press = -0.00075 * (k * k * (3 - 2 * k));
+            }
+          } else {
+            const cycle = 1.85;
+            const localT = (t % cycle) / cycle;
+            let k = 0;
+            if (localT < 0.18) k = localT / 0.18;
+            else if (localT < 0.28) k = 1 - (localT - 0.18) / 0.10;
+            press = -0.0008 * (k > 0 ? (k * k * (3 - 2 * k)) : 0);
+            zoneAnchor.scale.setScalar(1 + 0.12 * (1 - k));
+          }
+          applyZonePress(press);
+          if (isNotOnPress) zoneAnchor.scale.setScalar(1 + Math.abs(press) * 90);
+        } else if (zoneAnchorBasePos && !(problem && problem.key === 'buttons' && symptom && ['volume', 'mute'].includes(symptom.id))) {
+          if (!(problem && problem.key === 'charge' && symptom && symptom.id === 'angle')) {
+            zoneAnchor.position.copy(zoneAnchorBasePos);
+            if (zoneAnchorBaseScale && activeZoneKind === 'gap') zoneAnchor.scale.copy(zoneAnchorBaseScale);
+            else if (activeZoneKind !== 'gap') zoneAnchor.scale.setScalar(1);
+          }
+        }
+
+        if (problem && problem.key === 'buttons' && symptom && (symptom.id === 'volume' || symptom.id === 'mute') && zoneAnchorBasePos) {
+          keepXY = true;
+          const a = phoneAnchors;
+          const dyTop = a ? a.halfH * 0.07 : 0.06;
+          const dyBot = a ? a.halfH * 0.055 : 0.035;
+          const cycle = reduce ? 0 : ((t % 2.4) / 2.4);
+          const top = cycle < 0.5;
+          const local = top ? cycle / 0.5 : (cycle - 0.5) / 0.5;
+          const pressK = reduce ? 0 : Math.sin(Math.min(1, local) * Math.PI);
+          zoneAnchor.position.copy(zoneAnchorBasePos);
+          zoneAnchor.position.y = zoneAnchorBasePos.y + (top ? dyTop : -dyBot);
+          zoneAnchor.position.x = zoneAnchorBasePos.x - Math.sign(zoneAnchorBasePos.x || 1) * 0.0007 * pressK;
+          zoneAnchor.scale.setScalar(1 + 0.08 * (1 - pressK));
+          if (symptom.id === 'mute') {
+            zoneAnchor.rotation.x = reduce ? 0.18 : 0.12 + 0.1 * Math.sin(t * 2.6);
+          }
+        }
+
+        // Микросмещение zone только для not-on (не сбрасывать volume XY).
+        if (!reduce && problem && problem.key === 'not-on' && symptom && ['black-rings', 'after-drop'].includes(symptom.id) && zoneAnchorBasePos) {
+          keepXY = true;
+          const micro = 0.00015 * Math.max(0, Math.sin(t * 28));
+          zoneAnchor.position.x = zoneAnchorBasePos.x + Math.sin(t * 17.5) * micro;
+          zoneAnchor.position.y = zoneAnchorBasePos.y + Math.cos(t * 13.2) * micro * 0.7;
+        } else if (zoneAnchorBasePos && !keepXY && !(problem && problem.key === 'charge' && symptom && symptom.id === 'angle')) {
+          if (activeZoneKind !== 'power' && activeZoneKind !== 'volume') {
+            zoneAnchor.position.x = zoneAnchorBasePos.x;
+            zoneAnchor.position.y = zoneAnchorBasePos.y;
+          }
+        }
+      }
+
+      // Диагностический shake/tilt корпуса (позиция, без конфликта с quaternion).
+      diagMotion.shakeX = 0;
+      diagMotion.shakeY = 0;
+      if (!reduce && phone && phoneBasePos) {
+        if (problem && symptom) {
+          if (
+            (problem.key === 'not-on' && symptom.id === 'black-rings') ||
+            (problem.key === 'display' && symptom.id === 'black-sound')
+          ) {
+            const burst = ((elapsed % 2.8) > 0.5 && (elapsed % 2.8) < 0.72);
+            if (burst) {
+              diagMotion.shakeX = Math.sin(now * 0.11) * 0.0045;
+              diagMotion.shakeY = Math.cos(now * 0.13) * 0.0035;
+            }
+          } else if (problem.key === 'not-on' && symptom.id === 'after-drop') {
+            // B5: короткий tilt 4–6° через смещение, затем возврат
+            if (elapsed < 0.34) {
+              const k = Math.sin((elapsed / 0.34) * Math.PI);
+              diagMotion.shakeX = 0.012 * k;
+              diagMotion.shakeY = -0.006 * k;
+            }
+          }
+        }
+        phone.position.x = phoneBasePos.x + diagMotion.shakeX;
+        phone.position.y = phoneBasePos.y + diagMotion.shakeY;
+      } else if (phone && phoneBasePos) {
+        phone.position.x = phoneBasePos.x;
+        phone.position.y = phoneBasePos.y;
+      }
+
+      // 2) Вода: стеклянные капли сползают, сплющиваются у низа.
+      const isWaterLike = problem && (problem.key === 'water' || (problem.key === 'battery-heat' && symptom && symptom.id === 'heat-after'));
+      if (isWaterLike) {
+        const intensity = symptom ? (symptom.intensity || 0.6) : 0.6;
+        if (!reduce) {
+          for (let i = 0; i < localFx.waterDroplets.length; i += 1) {
+            const d = localFx.waterDroplets[i];
+            // 10–14 с на цикл сползания (ease-out у низа)
+            const tt = (now * 0.000078 + d.phase) % 1;
+            const eased = 1 - Math.pow(1 - tt, 2.35);
+            const y = d.startY + (d.endY - d.startY) * eased;
+            const wobble = Math.sin((now * 0.00105) + i * 1.7) * (d.isPort ? 0.00012 : 0.00026);
+            d.mesh.position.set(d.baseX + wobble, y, d.anchor.z);
+            // Блик на чёрном OLED: чуть выше opacity у крупных капель
+            const op = (0.2 + 0.25 * (1 - eased * 0.5)) * intensity * (d.isPort ? 0.55 : 0.7);
+            d.mesh.material.opacity = Math.max(0.08, Math.min(0.45, op));
+            // Слеза → лужа у низа
+            const flat = 1 + eased * 0.55;
+            const tall = 1 - eased * 0.35;
+            d.mesh.scale.set(flat, tall, 1);
+          }
+        } else {
+          for (let i = 0; i < localFx.waterDroplets.length; i += 1) {
+            const d = localFx.waterDroplets[i];
+            d.mesh.material.opacity = 0.42;
+            d.mesh.scale.set(1.05, 1, 1);
+          }
+        }
+
+        if (symptom && symptom.id === 'fog-camera') {
+          const t = now * 0.001;
+          const op = reduce ? 0.32 : 0.22 + 0.14 * (0.5 + 0.5 * Math.sin(t * 2.1));
+          localFx.fog.mesh.material.opacity = op;
+        }
+      } else {
+        for (let i = 0; localFx.waterDroplets && i < localFx.waterDroplets.length; i += 1) {
+          localFx.waterDroplets[i].mesh.material.opacity = 0;
+        }
+        if (localFx.fog && localFx.fog.mesh) localFx.fog.mesh.material.opacity = 0;
+      }
+
+      // 3) Нагрев/вздутие: тёплое смещение дисплея и "тёплый" контур.
+      if (problem && problem.key === 'battery-heat') {
+        let targetSwell = 0;
+        // D3: около 1 мм в мировом масштабе телефона; направление — наружу от OLED.
+        if (symptom && symptom.id === 'swollen') targetSwell = (phoneAnchors?.glassOut || 1) * 0.0011;
+        if (symptom && symptom.id === 'percent-off') targetSwell = (phoneAnchors?.glassOut || 1) * 0.00012;
+
+        if (screenBaseLocal && screenMesh) {
+          const desiredZ = screenBaseLocal.pos.z + targetSwell;
+          screenMesh.position.z = screenMesh.position.z + (desiredZ - screenMesh.position.z) * (1 - Math.pow(0.0001, dt));
+        }
+      } else if (problem && problem.key === 'body' && symptom && symptom.id === 'screen-gap' && screenBaseLocal && screenMesh) {
+        const desiredZ = screenBaseLocal.pos.z + (phoneAnchors?.glassOut || 1) * 0.001;
+        screenMesh.position.z = screenMesh.position.z + (desiredZ - screenMesh.position.z) * (1 - Math.pow(0.0001, dt));
+      } else if (screenBaseLocal && screenMesh) {
+        const desiredZ = screenBaseLocal.pos.z;
+        screenMesh.position.z = screenMesh.position.z + (desiredZ - screenMesh.position.z) * (1 - Math.pow(0.0001, dt));
+      }
+      if (localFx.gapEdges && localFx.gapEdges.length) {
+        const showGap = !!(problem && symptom && (
+          (problem.key === 'battery-heat' && symptom.id === 'swollen') ||
+          (problem.key === 'body' && symptom.id === 'screen-gap')
+        ));
+        for (const edge of localFx.gapEdges) {
+          edge.material.opacity = showGap ? edge.userData.targetOpacity : 0;
+        }
+      }
+
+      // 4) Зарядка: пульс зоны и искра/контакт.
+      if (problem && problem.key === 'charge') {
+        const t = now * 0.001;
+        const id = symptom ? symptom.id : '';
+        if (!reduce) {
+          const shouldSpark = id === 'no-charge' || id === 'drops' || id === 'angle';
+          const sparkGate = (t % 2.2);
+          if (shouldSpark && sparkGate < 0.03 && (!localFx.spark.active)) {
+            playSpark(now, 0.85 + Math.abs(Math.sin(t * 0.9)) * 0.25);
+          }
+        }
+        if (zoneAnchor && zoneAnchorBasePos && id === 'angle' && !reduce) {
+          const cycle = (t % 4.0) / 4.0;
+          const lean = cycle < 0.36 ? 0 : (cycle < 0.48 ? (cycle - 0.36) / 0.12 : (cycle < 0.84 ? 1 : Math.max(0, 1 - (cycle - 0.84) / 0.16)));
+          zoneAnchor.position.x = zoneAnchorBasePos.x - 0.0014 * lean;
+          zoneAnchor.position.z = zoneAnchorBasePos.z + 0.0007 * lean;
+          zoneAnchor.scale.set(1 + 0.32 * lean, 1 - 0.18 * lean, 1);
+          zoneFocusState.opacity = Math.max(zoneFocusState.opacity, 0.28 + 0.3 * lean);
+          if (lean > 0.85 && !localFx.spark.active) playSpark(now, 0.7);
+        }
+        if (localFx.spark && localFx.spark.mesh && localFx.spark.active) {
+          const el = (now - localFx.spark.t0) / 1000;
+          const k = Math.min(1, el / localFx.spark.duration);
+          localFx.spark.mesh.material.opacity = (1 - k) * 0.95;
+          const sc = 1 + (1 - k) * 1.4;
+          localFx.spark.mesh.scale.setScalar(sc);
+          if (k >= 1) {
+            localFx.spark.active = false;
+            localFx.spark.mesh.material.opacity = 0;
+          }
+        }
+
+      } else {
+        if (localFx.spark && localFx.spark.mesh) {
+          localFx.spark.mesh.material.opacity = 0;
+          localFx.spark.active = false;
+        }
+      }
+
+      // 5) Камера/Face ID: туман объектива и микро-джиттер зоны.
+      if (problem && problem.key === 'camera-face') {
+        if (!reduce && zoneAnchor && zoneAnchorBasePos) {
+          const id = symptom ? symptom.id : '';
+          const t = now * 0.001;
+          if ((id === 'focus' && !weakDevice) || id === 'lens-glass') {
+            const amp = id === 'lens-glass' ? 0.00035 : 0.00025;
+            zoneAnchor.position.x = zoneAnchorBasePos.x + Math.sin(t * 6.5) * amp;
+            zoneAnchor.position.y = zoneAnchorBasePos.y + Math.cos(t * 5.1) * amp * 0.7;
+            if (id === 'lens-glass' && Math.sin(t * 7.2) > 0.6) zoneFocusState.opacity = Math.min(1, zoneFocusState.opacity + 0.2);
+          }
+
+          if (id === 'face-id') {
+            // "Не распознано": спокойные вспышки попыток с паузами.
+            const cycle = 2.3;
+            const localT = (t % cycle) / cycle;
+            const attempt = localT < 0.28 ? (localT / 0.28) : 0;
+            const pulse = attempt > 0 ? (0.65 + 0.35 * Math.sin(attempt * Math.PI)) : 0;
+            zoneAnchor.scale.setScalar(1 + 0.10 * pulse);
+            zoneFocusState.opacity = Math.min(1, zoneFocusState.opacity + 0.35 * pulse);
+          }
+        }
+
+      }
+
+      // 6) Аудио: "волны" из кольцевых мешей.
+      if (problem && problem.key === 'audio') {
+        if (localFx.soundGroup) {
+          const id = symptom ? symptom.id : '';
+          const layoutKind = id === 'speaker' ? 'speaker' : 'ear';
+          const sl = zoneLayout(layoutKind);
+          localFx.soundGroup.position.set(sl.pos[0], sl.pos[1], sl.pos[2]);
+          localFx.soundGroup.rotation.set(sl.rot[0], sl.rot[1], sl.rot[2]);
+
+          if (!reduce) {
+            const t = now * 0.001;
+            const ampScale = id === 'speaker' ? 0.25 : 1;
+            for (let i = 0; i < localFx.soundRings.length; i += 1) {
+              const ring = localFx.soundRings[i];
+              const phaseT = (t * 1.1 + ring.phase) % 1;
+              const alive = phaseT < 0.55;
+              if (!alive) {
+                ring.mesh.material.opacity = 0;
+                ring.mesh.scale.setScalar(0.8);
+                continue;
+              }
+              const k = phaseT / 0.55;
+              ring.mesh.material.opacity = 0.14 * ampScale * (1 - k);
+              ring.mesh.scale.setScalar(0.75 + 1.2 * k * (id === 'speaker' ? 0.7 : 1));
+            }
+          } else {
+            for (let i = 0; i < localFx.soundRings.length; i += 1) {
+              localFx.soundRings[i].mesh.material.opacity = 0.08 * (id === 'speaker' ? 0.25 : 1);
+            }
+          }
+        }
+      } else if (localFx.soundRings) {
+        for (let i = 0; i < localFx.soundRings.length; i += 1) {
+          localFx.soundRings[i].mesh.material.opacity = 0;
+        }
+      }
+
+      // 7) Корпус: трещины на заднем стекле.
+      const showLensFromCamera = problem && problem.key === 'camera-face' && symptom && symptom.id === 'lens-glass';
+      const showLensFromBody = problem && problem.key === 'body' && symptom && symptom.id === 'camera-glass-body';
+      if (problem && problem.key === 'body') {
+        const id = symptom ? symptom.id : '';
+        if (localFx.bodyCrackGroup && localFx.bodyCrackGroup.userData.cracks) {
+          const cracks = localFx.bodyCrackGroup.userData.cracks;
+          cracks.material.opacity = id === 'back-glass' ? 1 : 0;
+          const highlights = localFx.bodyCrackGroup.userData.highlights;
+          if (highlights) {
+            const cameraLocal = phone.worldToLocal(camera.position.clone());
+            const view = cameraLocal.sub(highlights.position).normalize();
+            const glancing = 1 - Math.min(1, Math.abs(view.z));
+            highlights.material.opacity = id === 'back-glass' ? 0.12 + glancing * 0.3 : 0;
+          }
+        }
+        if (localFx.scratchGroup && localFx.scratchGroup.userData.lines) {
+          const scratches = localFx.scratchGroup.userData.lines;
+          const cameraLocal = phone.worldToLocal(camera.position.clone());
+          const view = cameraLocal.sub(scratches.position).normalize();
+          const glancing = 1 - Math.min(1, Math.abs(view.z));
+          scratches.material.opacity = id === 'scratched' ? 0.3 + glancing * 0.58 : 0;
+        }
+      } else {
+        if (localFx.bodyCrackGroup && localFx.bodyCrackGroup.userData.cracks) {
+          localFx.bodyCrackGroup.userData.cracks.material.opacity = 0;
+          if (localFx.bodyCrackGroup.userData.highlights) {
+            localFx.bodyCrackGroup.userData.highlights.material.opacity = 0;
+          }
+        }
+        if (localFx.scratchGroup && localFx.scratchGroup.userData.lines) {
+          localFx.scratchGroup.userData.lines.material.opacity = 0;
+        }
+      }
+
+      if (localFx.lensCrack && localFx.lensCrack.mesh) {
+        if (showLensFromCamera || showLensFromBody) {
+          localFx.lensCrack.mesh.material.opacity = reduce ? 1 : 0.92;
+        } else {
+          localFx.lensCrack.mesh.material.opacity = 0;
+        }
+      }
+    }
+
+    function setOverlay() {
+      screenFxDirty = true;
+    }
+
+    function getLeadPayload() {
+      const quote = calc.quote || {};
+      return {
+        deviceModelId: '',
+        deviceModelLabel: 'Не указана',
+        problemKey: calc.problemKey || '',
+        symptomId: calc.symptomId || '',
+        serviceCode: '',
+        estimatedPrice: quote.text || '',
+        priceState: quote.state || '',
+        estimatedDuration: quote.duration || '',
+        warrantyDays: WARRANTY_DAYS
+      };
+    }
+
+    function syncHiddenFields() {
+      const payload = getLeadPayload();
+      document.getElementById('fieldModelId').value = payload.deviceModelId;
+      document.getElementById('fieldProblemKey').value = payload.problemKey;
+      document.getElementById('fieldSymptomId').value = payload.symptomId;
+      document.getElementById('fieldEstimatedPrice').value = payload.estimatedPrice;
+      document.getElementById('fieldServiceCode').value = payload.serviceCode;
+      document.getElementById('fieldQualityId').value = '';
+      document.getElementById('fieldPriceState').value = payload.priceState;
+      const problem = currentProblem();
+      const symptom = currentSymptom();
+      const label = [problem && problem.title, symptom && symptom.label].filter(Boolean).join(' — ');
+      document.getElementById('flowProblem').value = label;
+      document.getElementById('flowModel').value = payload.deviceModelLabel;
+      const summary = [
+        label,
+        payload.estimatedPrice,
+        payload.estimatedDuration
+      ].filter(Boolean).join(' · ');
+      const summaryEl = document.getElementById('leadSummary');
+      summaryEl.hidden = !summary;
+      summaryEl.textContent = summary;
+      window.REMPHONE_3D_LEAD = payload;
+    }
+
+    function updateQuote() {
+      const quote = {
+        state: 'model-follow-up',
+        text: 'Цена зависит от модели телефона',
+        duration: 'уточним при обратной связи',
+        reason: ''
+      };
+      calc.quote = quote;
+      const priceBox = document.getElementById('priceBox');
+      const quoteNote = document.getElementById('quoteNote');
+      const safetyBox = document.getElementById('safetyBox');
+      const problem = currentProblem();
+      const symptom = currentSymptom();
+      if (!problem) {
+        priceBox.hidden = true;
+        safetyBox.hidden = true;
+        return;
+      }
+      priceBox.hidden = false;
+      document.getElementById('priceValue').textContent = quote.displayFrom || quote.text;
+      document.getElementById('durationValue').textContent = quote.duration || 'после осмотра';
+      quoteNote.hidden = !(quote.reason || (symptom && symptom.note));
+      quoteNote.textContent = [quote.reason, symptom && symptom.note].filter(Boolean).join(' ');
+      track3D('3d_price_shown', {
+        problem_key: calc.problemKey,
+        symptom_id: calc.symptomId,
+        estimated_price: quote.text,
+        price_state: quote.state
+      });
+      const safety = (symptom && symptom.safety) || (problem && problem.safety) || '';
+      safetyBox.hidden = !safety;
+      safetyBox.textContent = safety;
+      syncHiddenFields();
+    }
+
+    function resolveZoneKind(problem, symptom) {
+      // Специальные переопределения якорей по TZ.
+      if (problem && problem.key === 'water' && symptom) {
+        if (symptom.id === 'fog-camera') return 'camera';
+        if (symptom.id === 'no-sound-water') return 'speaker';
+        if (symptom.id === 'no-charge-water') return 'port';
+        // recent / unstable / dead-water — капли на OLED, без torus у порта
+        return 'none';
+      }
+      if (problem && problem.key === 'battery-heat' && symptom) {
+        if (symptom.id === 'heat-charge') return 'port';
+        if (symptom.id === 'swollen') return 'gap';
+        if (symptom.id === 'heat-idle') return 'body';
+        return 'body';
+      }
+      if (problem && problem.key === 'body') {
+        if (!symptom) return 'none';
+        if (symptom.id === 'screen-gap') return 'gap';
+        if (symptom.id === 'back-glass' || symptom.id === 'bent' || symptom.id === 'scratched') return 'none';
+        if (symptom.id === 'camera-glass-body') return 'camera';
+        return 'none';
+      }
+      if (problem && problem.key === 'not-on') return 'power';
+      if (problem && problem.key === 'audio') {
+        if (!symptom) return 'ear';
+        if (symptom.id === 'speaker') return 'speaker';
+        return 'ear';
+      }
+      if (problem && problem.key === 'camera-face') {
+        if (symptom && symptom.id === 'face-id') return 'face';
+        if (symptom && symptom.id === 'front') return 'face';
+        return 'camera';
+      }
+      if (problem && problem.key === 'other') return 'none';
+      if (symptom && symptom.highlight) return symptom.highlight;
+      if (problem && problem.highlight) return problem.highlight;
+      if (problem && problem.key === 'water') return 'port';
+      if (problem && problem.key === 'battery-heat') return 'body';
+
+      return 'none';
+    }
+
+    function applyVisuals() {
+      const problem = currentProblem();
+      const symptom = currentSymptom();
+      setOverlay();
+      const preset = (symptom && symptom.camera) || (problem && problem.camera) || 'defaultThreeQuarter';
+      if (calc.activePreset !== preset) {
+        calc.activePreset = preset;
+        goToPreset(preset);
+      }
+      applyZoneHighlight(resolveZoneKind(problem, symptom));
+      const title = problem ? problem.title : 'ремонт телефона';
+      const extra = symptom ? symptom.label : 'выберите проблему';
+      canvas.setAttribute('aria-label', `Телефон: ${title}, ${extra}`);
+    }
+
+    function selectProblem(key) {
+      calc.problemKey = key;
+      const problem = currentProblem();
+      calc.symptomId = problem.symptoms[0].id;
+      document.getElementById('categoryWrap').hidden = true;
+      document.getElementById('symptomsWrap').hidden = false;
+      document.getElementById('branchTitle').textContent = problem.title;
+      renderSymptoms(problem);
+      updateQuote();
+      applyVisuals();
+      track3D('3d_problem_selected', {
+        problem_key: key,
+        symptom_id: calc.symptomId,
+        estimated_price: calc.quote && calc.quote.text
+      });
+      if (isCompact()) document.getElementById('symptomsWrap').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'nearest' });
+    }
+
+    function selectSymptom(id) {
+      const problem = currentProblem();
+      if (!problem) return;
+      const symptom = problem.symptoms.find((s) => s.id === id);
+      if (!symptom) return;
+      calc.symptomId = symptom.id;
+      document.querySelectorAll('.symptom-btn').forEach((btn) => {
+        const active = btn.dataset.id === id;
+        btn.classList.toggle('is-active', active);
+        btn.setAttribute('aria-pressed', String(active));
+      });
+      updateQuote();
+      applyVisuals();
+      track3D('3d_symptom_selected', {
+        problem_key: calc.problemKey,
+        symptom_id: id,
+        estimated_price: calc.quote && calc.quote.text
+      });
+    }
+
+    function renderProblems() {
+      const root = document.getElementById('problems');
+      root.innerHTML = PROBLEM_TREE.map((p) => (
+        `<button type="button" class="problem-btn" data-key="${p.key}" aria-pressed="false">
+          <strong>${p.title}</strong><span>${p.hint}</span>
+        </button>`
+      )).join('');
+      root.onclick = (e) => {
+        const btn = e.target.closest('.problem-btn');
+        if (btn) selectProblem(btn.dataset.key);
+      };
+    }
+
+    function renderSymptoms(problem) {
+      const root = document.getElementById('symptoms');
+      root.innerHTML = problem.symptoms.map((s) => (
+        `<button type="button" class="symptom-btn${s.id === calc.symptomId ? ' is-active' : ''}" data-id="${s.id}" aria-pressed="${s.id === calc.symptomId}">
+          <strong>${s.label}</strong>
+        </button>`
+      )).join('');
+      root.onclick = (e) => {
+        const btn = e.target.closest('.symptom-btn');
+        if (btn) selectSymptom(btn.dataset.id);
+      };
+    }
+
+    renderProblems();
+
+    document.getElementById('backToCategories').addEventListener('click', () => {
+      calc.problemKey = '';
+      calc.symptomId = '';
+      calc.quote = null;
+      calc.activePreset = '';
+      document.getElementById('categoryWrap').hidden = false;
+      document.getElementById('symptomsWrap').hidden = true;
+      document.getElementById('priceBox').hidden = true;
+      document.getElementById('flowRepairForm').hidden = true;
+      document.getElementById('safetyBox').hidden = true;
+      applyZoneHighlight('none');
+      setOverlay();
+      canvas.setAttribute('aria-label', 'Интерактивная 3D-модель телефона');
+      goToPreset('defaultView');
+    });
+
+    document.getElementById('openLeadBtn').addEventListener('click', () => {
+      const problem = currentProblem();
+      if (problem && problem.commentRequired) {
+        const comment = document.getElementById('flowComment');
+        comment.required = true;
+        comment.placeholder = 'Опишите проблему своими словами';
+      }
+      syncHiddenFields();
+      track3D('3d_lead_form_open', getLeadPayload());
+      const form = document.getElementById('flowRepairForm');
+      form.hidden = false;
+      form.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+
+    document.getElementById('resetViewBtn').addEventListener('click', () => {
+      document.getElementById('backToCategories').click();
+    });
+
+    controls.addEventListener('start', () => {
+      idleSpin = false;
+    });
+
+    function computePresets() {
+      if (!phone) return;
+      const box = new THREE.Box3().setFromObject(phone);
+      const size = box.getSize(new THREE.Vector3());
+      const center = box.getCenter(new THREE.Vector3());
+      const halfFov = THREE.MathUtils.degToRad(camera.fov * 0.5);
+      const compact = isCompact();
+      // Держим корпус в кадре: не подходить ближе ~0.58 fill на mobile / 0.66 desktop
+      const defaultFill = compact ? 0.56 : 0.64;
+      const screenFill = compact ? 0.6 : 0.68;
+      const fitDistance = (fill) => (size.y * 0.5) / (Math.tan(halfFov) * fill);
+      const dist = fitDistance(defaultFill);
+      const distClose = fitDistance(screenFill);
+      PRESETS.defaultView.position.set(compact ? 0.22 : 0.42, center.y + size.y * 0.03, dist);
+      PRESETS.defaultView.target.set(center.x, center.y, center.z);
+      PRESETS.defaultThreeQuarter.position.copy(PRESETS.defaultView.position);
+      PRESETS.defaultThreeQuarter.target.copy(PRESETS.defaultView.target);
+      PRESETS.frontDisplay.position.set(compact ? 0 : 0.06, center.y + size.y * 0.01, distClose);
+      PRESETS.frontDisplay.target.set(center.x, center.y, center.z);
+      PRESETS.screenView.position.copy(PRESETS.frontDisplay.position);
+      PRESETS.screenView.target.copy(PRESETS.frontDisplay.target);
+      PRESETS.bottomPort.position.set(compact ? 0.05 : 0.1, center.y - size.y * 0.1, dist * 1.06);
+      PRESETS.bottomPort.target.set(center.x, center.y - size.y * 0.13, center.z);
+      PRESETS.bottomPort.pitch = 0.42;
+      PRESETS.leftButtons.position.set(-(compact ? 0.55 : 0.82), center.y + size.y * 0.06, dist * 0.92);
+      PRESETS.leftButtons.target.set(center.x - size.x * 0.18, center.y + size.y * 0.08, center.z);
+      PRESETS.rightButton.position.set(compact ? 0.55 : 0.82, center.y + size.y * 0.06, dist * 0.92);
+      PRESETS.rightButton.target.set(center.x + size.x * 0.18, center.y + size.y * 0.08, center.z);
+      PRESETS.rearCamera.position.set(compact ? -0.08 : -0.16, center.y + size.y * 0.18, dist);
+      PRESETS.rearCamera.target.set(center.x - size.x * 0.08, center.y + size.y * 0.22, center.z);
+      PRESETS.rearBody.position.set(compact ? 0.06 : 0.1, center.y, dist);
+      PRESETS.rearBody.target.set(center.x, center.y, center.z);
+      ['defaultView', 'defaultThreeQuarter', 'frontDisplay', 'screenView', 'leftButtons', 'rightButton', 'rearCamera', 'rearBody'].forEach((k) => {
+        if (PRESETS[k] && PRESETS[k].pitch == null) PRESETS[k].pitch = 0;
+      });
+    }
+
+    function mountPhone(root, screen) {
+      phone = root;
+      screenMesh = screen || findScreenMesh(root) || attachFallbackScreen(root);
+      scene.add(phone);
+      phoneAnchors = null;
+      ensurePhoneAnchors();
+      prepareBodyBend();
+      computePresets();
+      phoneBasePos = phone.position.clone();
+      diagMotion = { shakeX: 0, shakeY: 0, tiltZ: 0 };
+
+      // Базовая локальная геометрия дисплея для "вздутия" без изменения GLB.
+      if (screenMesh) {
+        screenBaseLocal = {
+          pos: screenMesh.position.clone(),
+          quat: screenMesh.quaternion.clone()
+        };
+      }
+      if (!localFxReady) initLocalFx();
+
+      camera.position.copy(PRESETS.defaultView.position);
+      controls.target.copy(PRESETS.defaultView.target);
+      screenFxDirty = true;
+      drawScreenFx(0);
+      loadStatus.hidden = true;
+      track3D('3d_calculator_open', {
+        load_time_ms: Math.round(performance.now() - pageStartedAt)
+      });
+    }
+
+    function roundedScreenGeometry(w, h, radius) {
+      const hw = w / 2;
+      const hh = h / 2;
+      const r = Math.min(radius, hw, hh);
+      const shape = new THREE.Shape();
+      shape.moveTo(-hw + r, -hh);
+      shape.lineTo(hw - r, -hh);
+      shape.quadraticCurveTo(hw, -hh, hw, -hh + r);
+      shape.lineTo(hw, hh - r);
+      shape.quadraticCurveTo(hw, hh, hw - r, hh);
+      shape.lineTo(-hw + r, hh);
+      shape.quadraticCurveTo(-hw, hh, -hw, hh - r);
+      shape.lineTo(-hw, -hh + r);
+      shape.quadraticCurveTo(-hw, -hh, -hw + r, -hh);
+
+      const geom = new THREE.ShapeGeometry(shape, 24);
+      const pos = geom.getAttribute('position');
+      const uv = geom.getAttribute('uv');
+      for (let i = 0; i < pos.count; i += 1) {
+        uv.setXY(i, (pos.getX(i) + hw) / w, (pos.getY(i) + hh) / h);
+      }
+      uv.needsUpdate = true;
+      geom.computeVertexNormals();
+      return geom;
+    }
+
+    function attachScreenPlane(screen) {
+      screen.geometry.computeBoundingBox();
+      const bb = screen.geometry.boundingBox;
+      const w = Math.abs(bb.max.x - bb.min.x) || 0.7;
+      const h = Math.abs(bb.max.y - bb.min.y) || 1.5;
+      const cx = (bb.min.x + bb.max.x) * 0.5;
+      const cy = (bb.min.y + bb.max.y) * 0.5;
+      screen.updateWorldMatrix(true, false);
+      const worldMin = new THREE.Vector3(cx, cy, bb.min.z).applyMatrix4(screen.matrixWorld);
+      const worldMax = new THREE.Vector3(cx, cy, bb.max.z).applyMatrix4(screen.matrixWorld);
+      const useMax = worldMax.z >= worldMin.z;
+      const bezelW = w * 0.992;
+      const bezelH = h * 0.994;
+      const bezel = new THREE.Mesh(
+        roundedScreenGeometry(bezelW, bezelH, Math.min(bezelW, bezelH) * 0.104),
+        new THREE.MeshPhysicalMaterial({
+          color: 0x010203,
+          metalness: 0,
+          roughness: 0.18,
+          clearcoat: 1,
+          clearcoatRoughness: 0.06,
+          envMapIntensity: 0.55,
+          side: THREE.FrontSide
+        })
+      );
+      bezel.name = 'display-bezel';
+      bezel.renderOrder = 1;
+      bezel.position.set(cx, cy, useMax ? bb.max.z + 0.00022 : bb.min.z - 0.00022);
+      if (!useMax) bezel.rotation.y = Math.PI;
+      screen.add(bezel);
+
+      const pw = w * 0.957;
+      const ph = h * 0.973;
+      const plane = new THREE.Mesh(
+        roundedScreenGeometry(pw, ph, Math.min(pw, ph) * 0.112),
+        new THREE.MeshBasicMaterial({
+          map: screenTexture,
+          color: 0xffffff,
+          toneMapped: false,
+          side: THREE.FrontSide
+        })
+      );
+      plane.name = 'screen';
+      plane.renderOrder = 2;
+      plane.position.set(cx, cy, useMax ? bb.max.z + 0.00048 : bb.min.z - 0.00048);
+      if (!useMax) plane.rotation.y = Math.PI;
+      makeScreenGlass(screen);
+      screen.add(plane);
+      return plane;
+    }
+
+    function onModelReady(gltfScene) {
+      const root = new THREE.Group();
+      root.name = 'iPhone15ProMaxGLB';
+      applyNaturalTitanium(gltfScene);
+      root.add(gltfScene);
+      const found = findScreenMesh(root);
+      faceScreenForward(root, found);
+      centerAndScale(root, 1.62);
+      root.rotation.y = THREE_QUARTER_Y;
+      root.updateMatrixWorld(true);
+      const display = found ? attachScreenPlane(found) : found;
+      mountPhone(root, display || found);
+    }
+
+    function useProceduralPhone() {
+      loadStatus.textContent = 'Показываем демонстрационную модель телефона';
+      const built = createProceduralIPhone();
+      mountPhone(built.group, built.screen);
+      setTimeout(() => { loadStatus.hidden = true; }, 900);
+    }
+
+    const loader = new GLTFLoader();
+    const dracoLoader = new DRACOLoader();
+    dracoLoader.setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.185.1/examples/jsm/libs/draco/gltf/');
+    loader.setDRACOLoader(dracoLoader);
+    loader.load(
+      modelAdapter.modelUrl,
+      (gltf) => onModelReady(gltf.scene),
+      (ev) => {
+        if (ev.total) {
+          loadStatus.hidden = false;
+          loadStatus.textContent = 'Загружаем 3D-модель… ' + Math.round((ev.loaded / ev.total) * 100) + '%';
+        }
+      },
+      (err) => {
+        console.error('GLB load failed', err);
+        track3D('3d_model_load_error', { error: String(err && err.message || err) });
+        useProceduralPhone();
+      }
+    );
+
+    let lastTick = performance.now();
+    function tick(now) {
+      try {
+      const rawDt = Math.max(0, (now - lastTick) / 1000);
+      const dt = Math.min(rawDt, 0.05);
+      lastTick = now;
+      if (document.hidden) {
+        lastTick = now;
+        if (!(rotAnim || camAnim)) return;
+      }
+      if (phone && idleSpin && !reduceMotion) {
+        idlePhase += dt * 0.42;
+        const yaw = THREE_QUARTER_Y + Math.sin(idlePhase) * 0.085;
+        phone.quaternion.setFromEuler(new THREE.Euler(0, yaw, 0));
+      }
+      if (rotAnim && phone) {
+        rotAnim.t += rawDt / rotAnim.dur;
+        const k = easeInOutCubic(Math.min(1, rotAnim.t));
+        const fromYaw = Number.isFinite(rotAnim.fromYaw) ? rotAnim.fromYaw : THREE_QUARTER_Y;
+        const toYaw = Number.isFinite(rotAnim.toYaw) ? rotAnim.toYaw : fromYaw;
+        const fromPitch = Number.isFinite(rotAnim.fromPitch) ? rotAnim.fromPitch : 0;
+        const toPitch = Number.isFinite(rotAnim.toPitch) ? rotAnim.toPitch : 0;
+        const yaw = fromYaw + (toYaw - fromYaw) * k;
+        const pitch = fromPitch + (toPitch - fromPitch) * k;
+        phone.quaternion.setFromEuler(new THREE.Euler(pitch, yaw, currentBodyRoll(), 'YXZ'));
+        window.__phoneYaw = yaw;
+        if (rotAnim.t >= 1) {
+          phone.quaternion.setFromEuler(new THREE.Euler(toPitch, toYaw, currentBodyRoll(), 'YXZ'));
+          rotAnim = null;
+        }
+      } else if (phone && !idleSpin) {
+        const e = new THREE.Euler().setFromQuaternion(phone.quaternion, 'YXZ');
+        const wantZ = currentBodyRoll();
+        if (Math.abs(e.z - wantZ) > 0.0008) {
+          e.z += (wantZ - e.z) * Math.min(1, dt * 7);
+          phone.quaternion.setFromEuler(e);
+        }
+      }
+      if (camAnim) {
+        camAnim.t += rawDt / camAnim.dur;
+        const k = easeInOutCubic(Math.min(1, camAnim.t));
+        camera.position.lerpVectors(camAnim.fromPos, camAnim.toPos, k);
+        controls.target.lerpVectors(camAnim.fromTarget, camAnim.toTarget, k);
+        camera.lookAt(controls.target);
+        if (camAnim.t >= 1) {
+          camera.position.copy(camAnim.toPos);
+          controls.target.copy(camAnim.toTarget);
+          camera.lookAt(controls.target);
+          controls.enabled = true;
+          if (camAnim.resumeIdle) idleSpin = true;
+          camAnim = null;
+        }
+      } else {
+        controls.update();
+      }
+
+      updateLocalFx(now, dt);
+
+      if (screenFxDirty || (isAnimatedScreenState() && now - lastFx > 40)) {
+        drawScreenFx(now);
+        lastFx = now;
+      }
+      renderer.render(scene, camera);
+      } catch (err) {
+        console.error('tick failed', err);
+        rotAnim = null;
+        camAnim = null;
+        controls.enabled = true;
+      }
+    }
+    renderer.setAnimationLoop(tick);
+
+    const cfg = window.REMPHONE_CONFIG || {};
+    const relayUrl = (cfg.relayUrl || '').trim();
+    const phoneDisplay = cfg.phoneDisplay || '+7 914 411-17-30';
+    const form = document.getElementById('flowRepairForm');
+    const success = document.getElementById('flowFormSuccess');
+    const submitBtn = document.getElementById('flowSubmitBtn');
+    const errorBox = document.getElementById('flowSubmitError');
+
+    function isRelayConfigured() {
+      if (!relayUrl) return false;
+      if (/ВСТАВИТЬ|YOUR_|example\.com|localhost/i.test(relayUrl)) return false;
+      return /^https?:\/\//i.test(relayUrl);
+    }
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      syncHiddenFields();
+      const payload = getLeadPayload();
+      const name = document.getElementById('flowName').value.trim();
+      const phoneVal = document.getElementById('flowPhone').value.trim();
+      const cityEl = document.getElementById('flowCity');
+      const cityId = cityEl.value;
+      const cityName = cityEl.options[cityEl.selectedIndex].dataset.name || cityEl.value;
+      const comment = document.getElementById('flowComment').value.trim();
+      const problem = document.getElementById('flowProblem').value;
+      if (!name || !phoneVal) return;
+      if (currentProblem() && currentProblem().commentRequired && comment.length < 8) {
+        errorBox.hidden = false;
+        errorBox.textContent = 'Опишите проблему своими словами — так мастер точнее поймёт запрос.';
+        document.getElementById('flowComment').focus();
+        return;
+      }
+      if (phoneVal.replace(/\D/g, '').length < 10) {
+        errorBox.hidden = false;
+        errorBox.textContent = 'Проверьте номер телефона: должно быть не менее 10 цифр.';
+        document.getElementById('flowPhone').focus();
+        return;
+      }
+      errorBox.hidden = true;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Отправка…';
+      const body = {
+        name,
+        phone: phoneVal,
+        brand: 'Телефон',
+        model: payload.deviceModelLabel || 'Не указана',
+        problem,
+        part_preference: '',
+        city: cityName,
+        city_id: cityId,
+        comment: [comment, JSON.stringify(payload)].filter(Boolean).join('\n'),
+        source: 'iphone-calculator',
+        client_request_id: '3d-' + String(phoneVal).replace(/\D/g, '') + '-' + Date.now(),
+        page: location.pathname
+      };
+      try {
+        track3D('3d_lead_submit', payload);
+        if (!isRelayConfigured()) throw new Error('relay_not_configured');
+        const res = await fetch(relayUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(body)
+        });
+        let json = {};
+        try { json = await res.json(); } catch (e) { json = {}; }
+        if (!res.ok || json.success === false) throw new Error(json.message || json.error || ('HTTP ' + res.status));
+        form.hidden = true;
+        success.hidden = false;
+        track3D('3d_lead_success', payload);
+      } catch (err) {
+        console.error(err);
+        track3D('3d_lead_error', { ...payload, error: String(err && err.message || err) });
+        errorBox.hidden = false;
+        errorBox.textContent = 'Не удалось отправить автоматически. Напишите в Telegram или позвоните: ' + phoneDisplay;
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Отправить заявку';
+      }
+    });
+  </script>
+</body>
+</html>

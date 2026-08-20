@@ -60,6 +60,7 @@
           '<a href="' + asset('index.html') + '" class="site-logo" aria-label="REMPHONE — на главную">' + logo + '</a>' +
           '<nav class="nav" id="nav" aria-label="Основная навигация">' +
             '<a href="' + asset('services/') + '">Услуги</a>' +
+            '<a href="' + asset('3d-viewer-iphone15.html') + '">3D-калькулятор</a>' +
             '<a href="' + asset('brands/') + '">Бренды</a>' +
             '<a href="' + asset('cities/') + '">Города</a>' +
             '<a href="' + asset('reviews.html') + '">Отзывы</a>' +
@@ -94,6 +95,7 @@
               '<a href="' + asset('services/screen.html') + '">Замена экрана</a>' +
               '<a href="' + asset('services/battery.html') + '">Замена батареи</a>' +
               '<a href="' + asset('services/not-on.html') + '">Телефон не включается</a>' +
+              '<a href="' + asset('3d-viewer-iphone15.html') + '">3D-калькулятор</a>' +
               '<a href="' + asset('services/') + '">Все услуги</a>' +
             '</nav>' +
             '<nav class="footer-nav" aria-label="Города">' +

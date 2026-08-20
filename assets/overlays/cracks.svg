@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 860" preserveAspectRatio="none">
+  <g fill="none" stroke="rgba(255,255,255,0.72)" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke-width="1.6" d="M198 312 L92 118 M198 312 L318 86 M198 312 L40 390 M198 312 L360 348 M198 312 L120 720 M198 312 L280 780 M198 312 L210 40"/>
+    <path stroke-width="1.15" d="M92 118 L48 70 M92 118 L130 42 M318 86 L360 36 M318 86 L290 20 M40 390 L12 430 M40 390 L18 340 M360 348 L388 300 M360 348 L392 410 M120 720 L70 800 M120 720 L160 830 M280 780 L320 840 M280 780 L250 850"/>
+    <path stroke-width="0.8" d="M48 70 L22 48 M130 42 L150 8 M360 36 L380 8 M12 430 L4 470 M388 300 L398 268 M70 800 L40 840 M160 830 L175 858"/>
+    <path stroke-width="0.7" opacity="0.85" d="M198 312 L168 260 L142 248 M198 312 L230 268 L258 250 M198 312 L170 360 L150 372 M198 312 L236 358 L260 380"/>
+  </g>
+  <g fill="rgba(180,200,220,0.12)">
+    <polygon points="198,312 168,260 142,248 120,290"/>
+    <polygon points="198,312 230,268 258,250 280,300"/>
+    <polygon points="198,312 92,118 70,180"/>
+  </g>
+</svg>

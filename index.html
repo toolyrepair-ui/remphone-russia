@@ -14,7 +14,7 @@
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Space+Grotesk:wght@600;700&display=swap"></noscript>
     <meta name="theme-color" content="#0B1F3A">
     <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
-    <link rel="stylesheet" href="styles.css?v=design2">
+    <link rel="stylesheet" href="styles.css?v=models1">
     <link rel="stylesheet" href="animations.css">
 
     <!-- Open Graph -->
@@ -141,35 +141,35 @@
                         <img class="brand-logo" src="assets/brands/apple.svg" alt="iPhone" width="36" height="36" onerror="this.src='assets/placeholders/placeholder.svg'">
                     </span>
                     <span class="flow-card-title">iPhone</span>
-                    <span class="flow-card-sub">Все модели</span>
+                    <span class="flow-card-sub">6–17, SE, X</span>
                 </button>
                 <button type="button" class="flow-card card-hover animate-in" data-brand="Samsung">
                     <span class="flow-card-icon brand-logo-wrap">
                         <img class="brand-logo" src="assets/brands/samsung.svg" alt="Samsung" width="36" height="36" onerror="this.src='assets/placeholders/placeholder.svg'">
                     </span>
                     <span class="flow-card-title">Samsung</span>
-                    <span class="flow-card-sub">Galaxy</span>
+                    <span class="flow-card-sub">A51–A54, S21–S22</span>
                 </button>
                 <button type="button" class="flow-card card-hover animate-in" data-brand="Xiaomi">
                     <span class="flow-card-icon brand-logo-wrap">
                         <img class="brand-logo" src="assets/brands/xiaomi.svg" alt="Xiaomi" width="36" height="36" onerror="this.src='assets/placeholders/placeholder.svg'">
                     </span>
                     <span class="flow-card-title">Xiaomi</span>
-                    <span class="flow-card-sub">Redmi, POCO</span>
+                    <span class="flow-card-sub">Redmi 10, Note, POCO X5</span>
                 </button>
                 <button type="button" class="flow-card card-hover animate-in" data-brand="Honor">
                     <span class="flow-card-icon brand-logo-wrap">
                         <img class="brand-logo" src="assets/brands/honor.svg" alt="Honor" width="36" height="36" onerror="this.src='assets/placeholders/placeholder.svg'">
                     </span>
                     <span class="flow-card-title">Honor</span>
-                    <span class="flow-card-sub">Все модели</span>
+                    <span class="flow-card-sub">50, 90, X8</span>
                 </button>
                 <button type="button" class="flow-card card-hover animate-in" data-brand="Huawei">
                     <span class="flow-card-icon brand-logo-wrap">
                         <img class="brand-logo" src="assets/brands/huawei.svg" alt="Huawei" width="36" height="36" onerror="this.src='assets/placeholders/placeholder.svg'">
                     </span>
                     <span class="flow-card-title">Huawei</span>
-                    <span class="flow-card-sub">P, Mate</span>
+                    <span class="flow-card-sub">Nova 9, P40 Lite</span>
                 </button>
                 <button type="button" class="flow-card card-hover animate-in" data-brand="OPPO">
                     <span class="flow-card-icon brand-logo-wrap">
@@ -316,7 +316,8 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label for="flowModel">Модель</label>
-                        <input type="text" id="flowModel" name="model" placeholder="iPhone 13, A52..." autocomplete="off">
+                        <input type="text" id="flowModel" name="model" placeholder="iPhone 13, Galaxy A54..." autocomplete="off" list="repair-model-list">
+                        <!-- repair-models-datalist:start --><datalist id="repair-model-list"><option value="iPhone 17 Pro Max"><option value="iPhone 17 Pro"><option value="iPhone 17"><option value="iPhone 17e"><option value="iPhone 16 Pro Max"><option value="iPhone 16 Pro"><option value="iPhone 16 Plus"><option value="iPhone 16"><option value="iPhone 15 Pro Max"><option value="iPhone 15 Pro"><option value="iPhone 15 Plus"><option value="iPhone 15"><option value="iPhone 14 Pro Max"><option value="iPhone 14 Pro"><option value="iPhone 14 Plus"><option value="iPhone 14"><option value="iPhone 13 Pro Max"><option value="iPhone 13 Pro"><option value="iPhone 13 mini"><option value="iPhone 13"><option value="iPhone 12 Pro Max"><option value="iPhone 12 Pro"><option value="iPhone 12"><option value="iPhone 11 Pro Max"><option value="iPhone 11 Pro"><option value="iPhone 11"><option value="iPhone XS Max"><option value="iPhone XS"><option value="iPhone XR"><option value="iPhone X"><option value="iPhone SE 2022"><option value="iPhone 8 Plus"><option value="iPhone 8"><option value="iPhone 7 Plus"><option value="iPhone 7"><option value="iPhone 6s Plus"><option value="iPhone 6s"><option value="iPhone 6 Plus"><option value="iPhone 6"><option value="Honor 50"><option value="Honor 90"><option value="Honor X8"><option value="Nova 9"><option value="P40 Lite"><option value="Galaxy A51"><option value="Galaxy A52"><option value="Galaxy A54"><option value="Galaxy S21"><option value="Galaxy S22"><option value="POCO X5"><option value="Redmi 10"><option value="Redmi Note 10"><option value="Redmi Note 12"></datalist><!-- repair-models-datalist:end -->
                     </div>
                     <div class="form-group">
                         <label for="flowCity">Город *</label>
@@ -390,6 +391,39 @@
             <div class="trust-bar-item">
                 <div class="trust-bar-icon trust-ico"><img src="assets/brand/remphone-mark.svg" alt="" width="28" height="28"></div>
                 <div class="trust-bar-text"><h3>Диагностика</h3><p>Бесплатно до ремонта</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="calculator-entry reveal" aria-labelledby="calculatorEntryTitle">
+    <div class="container">
+        <div class="calculator-entry-card">
+            <div class="calculator-entry-visual" aria-hidden="true">
+                <div class="calculator-phone">
+                    <span class="calculator-phone-camera"></span>
+                    <span class="calculator-phone-scan"></span>
+                    <span class="calculator-phone-mark calculator-phone-mark-one"></span>
+                    <span class="calculator-phone-mark calculator-phone-mark-two"></span>
+                    <span class="calculator-phone-mark calculator-phone-mark-three"></span>
+                </div>
+                <span class="calculator-visual-label">Интерактивная 3D-модель</span>
+            </div>
+            <div class="calculator-entry-copy">
+                <p class="calculator-entry-eyebrow">Наглядная диагностика</p>
+                <h2 id="calculatorEntryTitle">Не знаете, как описать поломку?</h2>
+                <p>Выберите симптом на 3D-модели телефона. Покажем типичный дефект и передадим мастеру понятное описание проблемы.</p>
+                <div class="calculator-entry-points" aria-label="Возможности калькулятора">
+                    <span>Экран</span>
+                    <span>Вода</span>
+                    <span>Зарядка</span>
+                    <span>Корпус</span>
+                </div>
+                <div class="calculator-entry-actions">
+                    <a href="3d-viewer-iphone15.html" class="btn-primary">Открыть 3D-калькулятор</a>
+                    <a href="#repair-flow" class="calculator-entry-link">Сразу оставить заявку</a>
+                </div>
+                <p class="calculator-entry-note">Модель телефона и стоимость уточним при обратной связи.</p>
             </div>
         </div>
     </div>
@@ -604,7 +638,8 @@
 <div id="site-footer"></div>
 <script src="config.js"></script>
 <script src="site-chrome.js?v=design1" data-base=""></script>
-<script src="script.js?v=design1"></script>
+<script src="repair-models.js"></script>
+<script src="script.js?v=models1"></script>
 <script src="displays-compare.js?v=benefits2"></script>
 <!-- Yandex.Metrika counter noscript -->
 <noscript><div><img src="https://mc.yandex.ru/watch/111453492" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
