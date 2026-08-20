@@ -2935,6 +2935,7 @@ textarea:focus-visible,
     flex: 0 0 auto;
 }
 
+.site-logo picture,
 .site-logo img {
     display: block;
     width: 178px;
@@ -3670,6 +3671,7 @@ textarea:focus-visible,
         padding: 8px 0;
     }
 
+    .site-logo picture,
     .site-logo img {
         width: 150px;
         height: 37px;

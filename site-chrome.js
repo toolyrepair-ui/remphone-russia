@@ -48,9 +48,15 @@
 
   function chromeMarkup() {
     var contact = contactData();
-    var logo = '<img src="' + asset('assets/brand/remphone-wordmark.svg') +
-      '" width="178" height="44" alt="" decoding="async">';
-    var logoInverse = '<img src="' + asset('assets/brand/remphone-wordmark-inverse.svg') +
+    var logoLight = asset('assets/brand/remphone-wordmark.svg');
+    var logoDark = asset('assets/brand/remphone-wordmark-inverse.svg');
+    // Светлый wordmark: PHONE = navy. В тёмной теме ОС/браузера он тонет в шапке —
+    // подставляем inverse через prefers-color-scheme.
+    var logo = '<picture>' +
+      '<source media="(prefers-color-scheme: dark)" srcset="' + logoDark + '">' +
+      '<img src="' + logoLight + '" width="178" height="44" alt="" decoding="async">' +
+      '</picture>';
+    var logoInverse = '<img src="' + logoDark +
       '" width="190" height="47" alt="" loading="lazy" decoding="async">';
 
     var header =
