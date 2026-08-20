@@ -154,8 +154,15 @@
 
   function startMetrika(id) {
     if (started || !id) return;
-    started = true;
     id = Number(id);
+    // Already inited by static snippet on index (Direct crawler needs ym(ID) in HTML)
+    if (window.__REMPHONE_YM_INITED === id) {
+      started = true;
+      ensureNoscript(id);
+      bindGoals(id);
+      return;
+    }
+    started = true;
 
     ensureNoscript(id);
 
