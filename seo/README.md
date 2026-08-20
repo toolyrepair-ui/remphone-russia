@@ -14,7 +14,7 @@ node seo/health-check.mjs --live
 
 # Черновик посадочной (не публикует автоматически)
 node seo/generate-landing.mjs --type city --slug bikin --name "Бикин"
-node seo/generate-landing.mjs --type service --slug speaker --name "Ремонт динамика" --price "от 800₽"
+node seo/generate-landing.mjs --type service --slug speaker --name "Ремонт динамика" --price "от 1000₽"
 node seo/generate-landing.mjs --type brand --slug realme --name "Realme"
 ```
 

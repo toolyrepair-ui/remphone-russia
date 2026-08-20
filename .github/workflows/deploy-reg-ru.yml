@@ -58,6 +58,12 @@ jobs:
             **/scripts/**
             **/graphify-out/**
             **/yandex-biz-photos/**
+            **/data/full-phone-pricebook.*
+            **/data/public-phone-pricebook.*
+            **/data/iphone-price-comparison*
+            **/data/partner-*
+            **/data/moba-iphone/**
+            **/data/android-price*
             **/.env*
             **/*.py
             **/*.md

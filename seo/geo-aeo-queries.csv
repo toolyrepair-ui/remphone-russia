@@ -1,11 +1,11 @@
 query,city,intent,presence,competitors,gap,target_url,priority,notes,checked_at
-ремонт телефонов хабаровск,Хабаровск,geo+service,unknown,,,/khabarovsk/,P1,Wordstat Хаб край ~1080,2026-08-16
-ремонт телефонов владивосток,Владивосток,geo+service,unknown,,,/vladivostok/,P1,Wordstat Приморье ~1029,2026-08-16
-ремонт телефонов комсомольск,Комсомольск-на-Амуре,geo+service,unknown,,,/komsomolsk-na-amure/,P1,Wordstat ~391 (шум «комсомольский»),2026-08-16
-замена экрана хабаровск,Хабаровск,screen,unknown,,,/cities/khabarovsk/screen.html,P1,,2026-08-16
-замена батареи хабаровск,Хабаровск,battery,unknown,,,/cities/khabarovsk/battery.html,P1,,2026-08-16
-телефон не включается,—,not-on,unknown,,,/services/not-on.html,P2,регион без города — city URL сильнее,2026-08-16
-телефон не заряжается,—,charge,unknown,,,/services/charge.html,P2,,2026-08-16
-замена задней крышки,—,body,unknown,,,/services/body.html,P2,Wordstat > «корпус»,2026-08-16
-замена экрана iphone,—,brand-screen,unknown,,,/brands/iphone-screen.html,P3,,2026-08-16
-замена батареи xiaomi,—,brand-battery,unknown,,,/brands/xiaomi-battery.html,P3,,2026-08-16
+ремонт телефонов хабаровск,Хабаровск,geo+service,insufficient_data,,,/khabarovsk/,P1,"Webmaster Alisa AI 16.08: Пока недостаточно данных (мало показов)",2026-08-16
+ремонт телефонов владивосток,Владивосток,geo+service,insufficient_data,,,/vladivostok/,P1,SoV unavailable until search impressions grow,2026-08-16
+ремонт телефонов комсомольск,Комсомольск-на-Амуре,geo+service,insufficient_data,,,/komsomolsk-na-amure/,P1,,2026-08-16
+замена экрана хабаровск,Хабаровск,screen,insufficient_data,,,/cities/khabarovsk/screen.html,P1,,2026-08-16
+замена батареи хабаровск,Хабаровск,battery,insufficient_data,,,/cities/khabarovsk/battery.html,P1,,2026-08-16
+телефон не включается,—,not-on,insufficient_data,,,/services/not-on.html,P2,,2026-08-16
+телефон не заряжается,—,charge,insufficient_data,,,/services/charge.html,P2,,2026-08-16
+замена задней крышки,—,body,insufficient_data,,,/services/body.html,P2,,2026-08-16
+замена экрана iphone,—,brand-screen,insufficient_data,,,/brands/iphone-screen.html,P3,,2026-08-16
+замена батареи xiaomi,—,brand-battery,insufficient_data,,,/brands/xiaomi-battery.html,P3,,2026-08-16

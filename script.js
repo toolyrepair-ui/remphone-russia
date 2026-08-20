@@ -232,6 +232,60 @@ if (quickForm) {
         setCity(cityId, { syncHero: true });
     }
 
+    function modelsForBrand(brand) {
+        const catalog = window.REMPHONE_REPAIR_MODELS || {};
+        if (brand && catalog[brand] && catalog[brand].length) {
+            return catalog[brand];
+        }
+        const all = [];
+        Object.keys(catalog).forEach((key) => {
+            (catalog[key] || []).forEach((label) => all.push(label));
+        });
+        return all;
+    }
+
+    function syncModelDatalist(brand) {
+        const list = document.getElementById('repair-model-list');
+        if (!list) return;
+        const models = modelsForBrand(brand);
+        list.innerHTML = models
+            .map((label) => '<option value="' + String(label).replace(/"/g, '&quot;') + '">')
+            .join('');
+        const input = document.getElementById('flowModel');
+        if (input && !input.getAttribute('list')) {
+            input.setAttribute('list', 'repair-model-list');
+        }
+    }
+
+    function applyBrandModelQuery() {
+        const params = new URLSearchParams(window.location.search || '');
+        const brand = (params.get('brand') || '').trim();
+        const model = (params.get('model') || '').trim();
+        const flowModel = document.getElementById('flowModel');
+        if (model && flowModel) flowModel.value = model;
+
+        if (brand) {
+            const card = document.querySelector(
+                '#stepBrand .flow-card[data-brand="' + brand.replace(/"/g, '') + '"]'
+            );
+            if (card) {
+                document.querySelectorAll('#stepBrand .flow-card').forEach((el) => {
+                    el.classList.remove('is-selected', 'card-selected');
+                });
+                card.classList.add('is-selected', 'card-selected');
+                state.brand = brand;
+                if (brandLabel) brandLabel.textContent = brand;
+                if (flowBrand) flowBrand.value = brand;
+                if (summaryBrand) summaryBrand.textContent = brand;
+            }
+        }
+
+        syncModelDatalist(state.brand);
+        if (brand && (window.location.hash || '') === '#repair-flow') {
+            goTo(2);
+        }
+    }
+
     initCityFromQuery();
 
     document.querySelectorAll('#cityPicker .city-chip').forEach((btn) => {
@@ -260,6 +314,8 @@ if (quickForm) {
         });
         root.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+
+    applyBrandModelQuery();
 
     function readFields() {
         const params = new URLSearchParams(window.location.search || '');
@@ -445,6 +501,7 @@ if (quickForm) {
             if (brandLabel) brandLabel.textContent = state.brand;
             if (flowBrand) flowBrand.value = state.brand;
             if (summaryBrand) summaryBrand.textContent = state.brand;
+            syncModelDatalist(state.brand);
             setTimeout(() => goTo(2), 180);
         });
     });

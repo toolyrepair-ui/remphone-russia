@@ -1,0 +1,2837 @@
+{
+  "generatedAt": "2026-08-19T08:39:47.179901+00:00",
+  "summary": {
+    "brandCount": 5,
+    "modelCount": 53,
+    "rowCount": 414
+  },
+  "brands": [
+    {
+      "brand": "Apple",
+      "models": [
+        {
+          "id": "iphone-11",
+          "label": "iPhone 11",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 2500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-budget",
+              "label": "Дисплей Copy / эконом",
+              "priceFrom": 3900,
+              "qualityTier": "budget"
+            },
+            {
+              "code": "display-original",
+              "label": "Дисплей Original",
+              "priceFrom": 5000,
+              "qualityTier": "original"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 4900,
+              "qualityTier": "single"
+            },
+            {
+              "code": "body",
+              "label": "Корпус",
+              "priceFrom": 4500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "earpiece",
+              "label": "Слуховой динамик",
+              "priceFrom": 2000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "camera-glass",
+              "label": "Стекло камеры",
+              "priceFrom": 2000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 3000,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "iphone-11-pro",
+          "label": "iPhone 11 Pro",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 3500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-budget",
+              "label": "Дисплей Copy",
+              "priceFrom": 5000,
+              "qualityTier": "budget"
+            },
+            {
+              "code": "display-original",
+              "label": "Дисплей Original",
+              "priceFrom": 7900,
+              "qualityTier": "original"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 6000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "body",
+              "label": "Корпус",
+              "priceFrom": 5500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "screen-glass",
+              "label": "Сенсорное стекло",
+              "priceFrom": 8000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "earpiece",
+              "label": "Слуховой динамик",
+              "priceFrom": 2000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "camera-glass",
+              "label": "Стекло камеры",
+              "priceFrom": 2000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 5000,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "iphone-11-pro-max",
+          "label": "iPhone 11 Pro Max",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 3500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-analog",
+              "label": "Дисплей OLED",
+              "priceFrom": 5900,
+              "qualityTier": "analog"
+            },
+            {
+              "code": "display-original",
+              "label": "Дисплей Original",
+              "priceFrom": 8900,
+              "qualityTier": "original"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 7000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "body",
+              "label": "Корпус",
+              "priceFrom": 5000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "screen-glass",
+              "label": "Сенсорное стекло",
+              "priceFrom": 8900,
+              "qualityTier": "single"
+            },
+            {
+              "code": "earpiece",
+              "label": "Слуховой динамик",
+              "priceFrom": 2000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "camera-glass",
+              "label": "Стекло камеры",
+              "priceFrom": 2000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 5000,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "iphone-12",
+          "label": "iPhone 12",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 3600,
+              "qualityTier": "single"
+            },
+            {
+              "code": "дисплей oled / аналог",
+              "label": "Дисплей OLED / аналог",
+              "priceFrom": 6500,
+              "qualityTier": "analog"
+            },
+            {
+              "code": "display-original",
+              "label": "Дисплей Original",
+              "priceFrom": 8500,
+              "qualityTier": "original"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 5500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "body",
+              "label": "Корпус",
+              "priceFrom": 5500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "earpiece",
+              "label": "Слуховой динамик",
+              "priceFrom": 2500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "camera-glass",
+              "label": "Стекло камеры",
+              "priceFrom": 2000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "screen-glass",
+              "label": "Стекло экрана",
+              "priceFrom": 8000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 3900,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "iphone-12-pro",
+          "label": "iPhone 12 Pro",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 3600,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-analog",
+              "label": "Дисплей OLED",
+              "priceFrom": 6900,
+              "qualityTier": "analog"
+            },
+            {
+              "code": "display-original",
+              "label": "Дисплей Original",
+              "priceFrom": 8900,
+              "qualityTier": "original"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 5500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "body",
+              "label": "Корпус",
+              "priceFrom": 5500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "earpiece",
+              "label": "Слуховой динамик",
+              "priceFrom": 2500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "camera-glass",
+              "label": "Стекло камеры",
+              "priceFrom": 2000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "screen-glass",
+              "label": "Стекло экрана",
+              "priceFrom": 10000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 4000,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "iphone-12-pro-max",
+          "label": "iPhone 12 Pro Max",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 4500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-analog",
+              "label": "Дисплей OLED",
+              "priceFrom": 7500,
+              "qualityTier": "analog"
+            },
+            {
+              "code": "display-original",
+              "label": "Дисплей Original",
+              "priceFrom": 13900,
+              "qualityTier": "original"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 5000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "body",
+              "label": "Корпус",
+              "priceFrom": 6000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "earpiece",
+              "label": "Слуховой динамик",
+              "priceFrom": 2900,
+              "qualityTier": "single"
+            },
+            {
+              "code": "camera-glass",
+              "label": "Стекло камеры",
+              "priceFrom": 2000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "screen-glass",
+              "label": "Стекло экрана",
+              "priceFrom": 14000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 4500,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "iphone-13",
+          "label": "iPhone 13",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 3500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-original",
+              "label": "Дисплей Original",
+              "priceFrom": 9500,
+              "qualityTier": "original"
+            },
+            {
+              "code": "display-analog",
+              "label": "Дисплей аналог",
+              "priceFrom": 6000,
+              "qualityTier": "analog"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 5500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "body",
+              "label": "Корпус",
+              "priceFrom": 5000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "camera-glass",
+              "label": "Стекло камеры",
+              "priceFrom": 2000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "screen-glass",
+              "label": "Стекло экрана",
+              "priceFrom": 9000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 4000,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "iphone-13-pro",
+          "label": "iPhone 13 Pro",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 4500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-original",
+              "label": "Дисплей Original",
+              "priceFrom": 14500,
+              "qualityTier": "original"
+            },
+            {
+              "code": "display-analog",
+              "label": "Дисплей аналог",
+              "priceFrom": 6500,
+              "qualityTier": "analog"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 6500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "body",
+              "label": "Корпус",
+              "priceFrom": 6000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "camera-glass",
+              "label": "Стекло камеры",
+              "priceFrom": 2500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "screen-glass",
+              "label": "Стекло экрана",
+              "priceFrom": 16000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 5500,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "iphone-13-pro-max",
+          "label": "iPhone 13 Pro Max",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 4500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-original",
+              "label": "Дисплей Original",
+              "priceFrom": 16500,
+              "qualityTier": "original"
+            },
+            {
+              "code": "display-analog",
+              "label": "Дисплей аналог",
+              "priceFrom": 9000,
+              "qualityTier": "analog"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 6500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "body",
+              "label": "Корпус",
+              "priceFrom": 7000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "camera-glass",
+              "label": "Стекло камеры",
+              "priceFrom": 2500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "screen-glass",
+              "label": "Стекло экрана",
+              "priceFrom": 12000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 5500,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "iphone-13-mini",
+          "label": "iPhone 13 mini",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 3500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-original",
+              "label": "Дисплей Original",
+              "priceFrom": 9500,
+              "qualityTier": "original"
+            },
+            {
+              "code": "display-analog",
+              "label": "Дисплей аналог",
+              "priceFrom": 6000,
+              "qualityTier": "analog"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 5500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "body",
+              "label": "Корпус",
+              "priceFrom": 5000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "camera-glass",
+              "label": "Стекло камеры",
+              "priceFrom": 2000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "screen-glass",
+              "label": "Стекло экрана",
+              "priceFrom": 9000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 4000,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "iphone-14",
+          "label": "iPhone 14",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 4000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-original",
+              "label": "Дисплей Original",
+              "priceFrom": 10500,
+              "qualityTier": "original"
+            },
+            {
+              "code": "display-analog",
+              "label": "Дисплей аналог",
+              "priceFrom": 7000,
+              "qualityTier": "analog"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 5500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "back-glass",
+              "label": "Задняя крышка",
+              "priceFrom": 4500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "body",
+              "label": "Корпус",
+              "priceFrom": 5000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "camera-glass",
+              "label": "Стекло камеры",
+              "priceFrom": 2500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "screen-glass",
+              "label": "Стекло экрана",
+              "priceFrom": 7000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 4000,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "iphone-14-plus",
+          "label": "iPhone 14 Plus",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 4000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-original",
+              "label": "Дисплей Original",
+              "priceFrom": 10500,
+              "qualityTier": "original"
+            },
+            {
+              "code": "display-analog",
+              "label": "Дисплей аналог",
+              "priceFrom": 7000,
+              "qualityTier": "analog"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 5500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "back-glass",
+              "label": "Задняя крышка",
+              "priceFrom": 4500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "body",
+              "label": "Корпус",
+              "priceFrom": 5000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "camera-glass",
+              "label": "Стекло камеры",
+              "priceFrom": 2500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "screen-glass",
+              "label": "Стекло экрана",
+              "priceFrom": 7000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 4000,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "iphone-14-pro",
+          "label": "iPhone 14 Pro",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 5000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-original",
+              "label": "Дисплей Original",
+              "priceFrom": 18500,
+              "qualityTier": "original"
+            },
+            {
+              "code": "display-analog",
+              "label": "Дисплей аналог",
+              "priceFrom": 9500,
+              "qualityTier": "analog"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 5000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "body",
+              "label": "Корпус",
+              "priceFrom": 6000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "camera-glass",
+              "label": "Стекло камеры",
+              "priceFrom": 2500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "screen-glass",
+              "label": "Стекло экрана",
+              "priceFrom": 11500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 5000,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "iphone-14-pro-max",
+          "label": "iPhone 14 Pro Max",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 5500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-original",
+              "label": "Дисплей Original",
+              "priceFrom": 18500,
+              "qualityTier": "original"
+            },
+            {
+              "code": "display-analog",
+              "label": "Дисплей аналог",
+              "priceFrom": 10500,
+              "qualityTier": "analog"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 5500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "body",
+              "label": "Корпус",
+              "priceFrom": 6500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "camera-glass",
+              "label": "Стекло камеры",
+              "priceFrom": 2500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "screen-glass",
+              "label": "Стекло экрана",
+              "priceFrom": 12500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 5500,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "iphone-15",
+          "label": "iPhone 15",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 5000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-original",
+              "label": "Дисплей Original",
+              "priceFrom": 12300,
+              "qualityTier": "original"
+            },
+            {
+              "code": "display-analog",
+              "label": "Дисплей аналог",
+              "priceFrom": 7400,
+              "qualityTier": "analog"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 7000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "back-glass",
+              "label": "Задняя крышка",
+              "priceFrom": 5000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "body",
+              "label": "Корпус",
+              "priceFrom": 6000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "camera-glass",
+              "label": "Стекло камеры",
+              "priceFrom": 3000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "screen-glass",
+              "label": "Стекло экрана",
+              "priceFrom": 17000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 6000,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "iphone-15-plus",
+          "label": "iPhone 15 Plus",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 5000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-original",
+              "label": "Дисплей Original",
+              "priceFrom": 12300,
+              "qualityTier": "original"
+            },
+            {
+              "code": "display-analog",
+              "label": "Дисплей аналог",
+              "priceFrom": 7400,
+              "qualityTier": "analog"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 7000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "back-glass",
+              "label": "Задняя крышка",
+              "priceFrom": 5000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "body",
+              "label": "Корпус",
+              "priceFrom": 6000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "camera-glass",
+              "label": "Стекло камеры",
+              "priceFrom": 3000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "screen-glass",
+              "label": "Стекло экрана",
+              "priceFrom": 17000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 6000,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "iphone-15-pro",
+          "label": "iPhone 15 Pro",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 6000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-original",
+              "label": "Дисплей Original",
+              "priceFrom": 22900,
+              "qualityTier": "original"
+            },
+            {
+              "code": "display-analog",
+              "label": "Дисплей аналог",
+              "priceFrom": 9500,
+              "qualityTier": "analog"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 7000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "back-glass",
+              "label": "Задняя крышка",
+              "priceFrom": 5000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "body",
+              "label": "Корпус",
+              "priceFrom": 7000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "camera-glass",
+              "label": "Стекло камеры",
+              "priceFrom": 3000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "screen-glass",
+              "label": "Стекло экрана",
+              "priceFrom": 17000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 6000,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "iphone-15-pro-max",
+          "label": "iPhone 15 Pro Max",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 7000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-original",
+              "label": "Дисплей Original",
+              "priceFrom": 23000,
+              "qualityTier": "original"
+            },
+            {
+              "code": "display-analog",
+              "label": "Дисплей аналог",
+              "priceFrom": 10500,
+              "qualityTier": "analog"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 8000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "back-glass",
+              "label": "Задняя крышка",
+              "priceFrom": 5000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "body",
+              "label": "Корпус",
+              "priceFrom": 8000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "camera-glass",
+              "label": "Стекло камеры",
+              "priceFrom": 3000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "screen-glass",
+              "label": "Стекло экрана",
+              "priceFrom": 17000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 6000,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "iphone-16",
+          "label": "iPhone 16",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 5500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-original",
+              "label": "Дисплей Original",
+              "priceFrom": 17000,
+              "qualityTier": "original"
+            },
+            {
+              "code": "display-analog",
+              "label": "Дисплей аналог",
+              "priceFrom": 8500,
+              "qualityTier": "analog"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 6000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "back-glass",
+              "label": "Задняя крышка",
+              "priceFrom": 4500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "body",
+              "label": "Корпус",
+              "priceFrom": 6000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "camera-glass",
+              "label": "Стекло камеры",
+              "priceFrom": 3000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "screen-glass",
+              "label": "Стекло экрана",
+              "priceFrom": 14000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 6000,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "iphone-16-plus",
+          "label": "iPhone 16 Plus",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 5500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-original",
+              "label": "Дисплей Original",
+              "priceFrom": 17000,
+              "qualityTier": "original"
+            },
+            {
+              "code": "display-analog",
+              "label": "Дисплей аналог",
+              "priceFrom": 8500,
+              "qualityTier": "analog"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 6000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "back-glass",
+              "label": "Задняя крышка",
+              "priceFrom": 4500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "body",
+              "label": "Корпус",
+              "priceFrom": 6000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "camera-glass",
+              "label": "Стекло камеры",
+              "priceFrom": 3000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "screen-glass",
+              "label": "Стекло экрана",
+              "priceFrom": 14000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 6000,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "iphone-16-pro",
+          "label": "iPhone 16 Pro",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 7000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-original",
+              "label": "Дисплей Original",
+              "priceFrom": 27000,
+              "qualityTier": "original"
+            },
+            {
+              "code": "display-analog",
+              "label": "Дисплей аналог",
+              "priceFrom": 12500,
+              "qualityTier": "analog"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 6000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "back-glass",
+              "label": "Задняя крышка",
+              "priceFrom": 6000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "body",
+              "label": "Корпус",
+              "priceFrom": 8000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "camera-glass",
+              "label": "Стекло камеры",
+              "priceFrom": 4000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "screen-glass",
+              "label": "Стекло экрана",
+              "priceFrom": 19000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 7000,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "iphone-16-pro-max",
+          "label": "iPhone 16 Pro Max",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 9000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-original",
+              "label": "Дисплей Original",
+              "priceFrom": 35000,
+              "qualityTier": "original"
+            },
+            {
+              "code": "display-analog",
+              "label": "Дисплей аналог",
+              "priceFrom": 16500,
+              "qualityTier": "analog"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 7000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "back-glass",
+              "label": "Задняя крышка",
+              "priceFrom": 6500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "body",
+              "label": "Корпус",
+              "priceFrom": 13000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "camera-glass",
+              "label": "Стекло камеры",
+              "priceFrom": 4000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "screen-glass",
+              "label": "Стекло экрана",
+              "priceFrom": 21000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 7000,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "iphone-17",
+          "label": "iPhone 17",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 9000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-original",
+              "label": "Дисплей Original",
+              "priceFrom": 29000,
+              "qualityTier": "original"
+            },
+            {
+              "code": "display-analog",
+              "label": "Дисплей аналог",
+              "priceFrom": 14000,
+              "qualityTier": "analog"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 8000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "back-glass",
+              "label": "Задняя крышка",
+              "priceFrom": 6000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "body",
+              "label": "Корпус",
+              "priceFrom": 15000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "camera-glass",
+              "label": "Стекло камеры",
+              "priceFrom": 5500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "screen-glass",
+              "label": "Стекло экрана",
+              "priceFrom": 22000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 8000,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "iphone-17-pro",
+          "label": "iPhone 17 Pro",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 10000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-original",
+              "label": "Дисплей Original",
+              "priceFrom": 35000,
+              "qualityTier": "original"
+            },
+            {
+              "code": "display-analog",
+              "label": "Дисплей аналог",
+              "priceFrom": 17000,
+              "qualityTier": "analog"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 10000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "back-glass",
+              "label": "Задняя крышка",
+              "priceFrom": 8000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "body",
+              "label": "Корпус",
+              "priceFrom": 20000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "camera-glass",
+              "label": "Стекло камеры",
+              "priceFrom": 6500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "screen-glass",
+              "label": "Стекло экрана",
+              "priceFrom": 30000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 10000,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "iphone-17-pro-max",
+          "label": "iPhone 17 Pro Max",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 12000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-original",
+              "label": "Дисплей Original",
+              "priceFrom": 39000,
+              "qualityTier": "original"
+            },
+            {
+              "code": "display-analog",
+              "label": "Дисплей аналог",
+              "priceFrom": 18000,
+              "qualityTier": "analog"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 10000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "back-glass",
+              "label": "Задняя крышка",
+              "priceFrom": 8000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "body",
+              "label": "Корпус",
+              "priceFrom": 20000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "camera-glass",
+              "label": "Стекло камеры",
+              "priceFrom": 6500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "screen-glass",
+              "label": "Стекло экрана",
+              "priceFrom": 33000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 15000,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "iphone-17e",
+          "label": "iPhone 17e",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 9000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-original",
+              "label": "Дисплей Original",
+              "priceFrom": 29000,
+              "qualityTier": "original"
+            },
+            {
+              "code": "display-analog",
+              "label": "Дисплей аналог",
+              "priceFrom": 14000,
+              "qualityTier": "analog"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 8000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "back-glass",
+              "label": "Задняя крышка",
+              "priceFrom": 6000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "body",
+              "label": "Корпус",
+              "priceFrom": 15000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "camera-glass",
+              "label": "Стекло камеры",
+              "priceFrom": 5500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "screen-glass",
+              "label": "Стекло экрана",
+              "priceFrom": 22000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 8000,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "iphone-6",
+          "label": "iPhone 6",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 1000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "дисплей",
+              "label": "Дисплей",
+              "priceFrom": 1500,
+              "qualityTier": "budget"
+            },
+            {
+              "code": "display-original",
+              "label": "Дисплей Original",
+              "priceFrom": 2000,
+              "qualityTier": "original"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 1200,
+              "qualityTier": "single"
+            },
+            {
+              "code": "home-button",
+              "label": "Кнопка Home",
+              "priceFrom": 900,
+              "qualityTier": "single"
+            },
+            {
+              "code": "power-button",
+              "label": "Кнопка блокировки",
+              "priceFrom": 1000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "body",
+              "label": "Корпус",
+              "priceFrom": 2400,
+              "qualityTier": "single"
+            },
+            {
+              "code": "front-camera",
+              "label": "Передняя камера",
+              "priceFrom": 1300,
+              "qualityTier": "single"
+            },
+            {
+              "code": "camera-glass",
+              "label": "Стекло камеры",
+              "priceFrom": 400,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 1000,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "iphone-6-plus",
+          "label": "iPhone 6 Plus",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 1000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-budget",
+              "label": "Дисплей Copy",
+              "priceFrom": 1500,
+              "qualityTier": "budget"
+            },
+            {
+              "code": "display-original",
+              "label": "Дисплей Original",
+              "priceFrom": 2200,
+              "qualityTier": "original"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 1500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "home-button",
+              "label": "Кнопка Home",
+              "priceFrom": 1000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "power-button",
+              "label": "Кнопка блокировки",
+              "priceFrom": 1200,
+              "qualityTier": "single"
+            },
+            {
+              "code": "body",
+              "label": "Корпус",
+              "priceFrom": 2500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "front-camera",
+              "label": "Передняя камера",
+              "priceFrom": 1200,
+              "qualityTier": "single"
+            },
+            {
+              "code": "camera-glass",
+              "label": "Стекло камеры",
+              "priceFrom": 500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 1300,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "iphone-6s",
+          "label": "iPhone 6s",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 1000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-budget",
+              "label": "Дисплей Copy",
+              "priceFrom": 1700,
+              "qualityTier": "budget"
+            },
+            {
+              "code": "display-original",
+              "label": "Дисплей Original",
+              "priceFrom": 2500,
+              "qualityTier": "original"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 1800,
+              "qualityTier": "single"
+            },
+            {
+              "code": "home-button",
+              "label": "Кнопка Home",
+              "priceFrom": 1000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "body",
+              "label": "Корпус",
+              "priceFrom": 2800,
+              "qualityTier": "single"
+            },
+            {
+              "code": "front-camera",
+              "label": "Передняя камера",
+              "priceFrom": 1600,
+              "qualityTier": "single"
+            },
+            {
+              "code": "earpiece",
+              "label": "Слуховой динамик",
+              "priceFrom": 1000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "camera-glass",
+              "label": "Стекло камеры",
+              "priceFrom": 800,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 1200,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "iphone-6s-plus",
+          "label": "iPhone 6s Plus",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 1200,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-budget",
+              "label": "Дисплей Copy",
+              "priceFrom": 1700,
+              "qualityTier": "budget"
+            },
+            {
+              "code": "display-original",
+              "label": "Дисплей Original",
+              "priceFrom": 2400,
+              "qualityTier": "original"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 2200,
+              "qualityTier": "single"
+            },
+            {
+              "code": "home-button",
+              "label": "Кнопка Home",
+              "priceFrom": 1200,
+              "qualityTier": "single"
+            },
+            {
+              "code": "body",
+              "label": "Корпус",
+              "priceFrom": 3000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "front-camera",
+              "label": "Передняя камера",
+              "priceFrom": 2000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "earpiece",
+              "label": "Слуховой динамик",
+              "priceFrom": 1000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "camera-glass",
+              "label": "Стекло камеры",
+              "priceFrom": 800,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 1500,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "iphone-7",
+          "label": "iPhone 7",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 1500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-budget",
+              "label": "Дисплей Copy",
+              "priceFrom": 1800,
+              "qualityTier": "budget"
+            },
+            {
+              "code": "display-original",
+              "label": "Дисплей Original",
+              "priceFrom": 2500,
+              "qualityTier": "original"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 3000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "home-button",
+              "label": "Кнопка Home",
+              "priceFrom": 1500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "body",
+              "label": "Корпус",
+              "priceFrom": 3100,
+              "qualityTier": "single"
+            },
+            {
+              "code": "front-camera",
+              "label": "Передняя камера",
+              "priceFrom": 2200,
+              "qualityTier": "single"
+            },
+            {
+              "code": "earpiece",
+              "label": "Слуховой динамик",
+              "priceFrom": 1500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "camera-glass",
+              "label": "Стекло камеры",
+              "priceFrom": 800,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 2600,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "iphone-7-plus",
+          "label": "iPhone 7 Plus",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 1600,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-budget",
+              "label": "Дисплей Copy",
+              "priceFrom": 1900,
+              "qualityTier": "budget"
+            },
+            {
+              "code": "display-original",
+              "label": "Дисплей Original",
+              "priceFrom": 3500,
+              "qualityTier": "original"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 4500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "home-button",
+              "label": "Кнопка Home",
+              "priceFrom": 1500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "body",
+              "label": "Корпус",
+              "priceFrom": 3500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "front-camera",
+              "label": "Передняя камера",
+              "priceFrom": 3400,
+              "qualityTier": "single"
+            },
+            {
+              "code": "earpiece",
+              "label": "Слуховой динамик",
+              "priceFrom": 1500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "camera-glass",
+              "label": "Стекло камеры",
+              "priceFrom": 800,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 2600,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "iphone-8",
+          "label": "iPhone 8",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 1500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-budget",
+              "label": "Дисплей Copy",
+              "priceFrom": 1900,
+              "qualityTier": "budget"
+            },
+            {
+              "code": "display-original",
+              "label": "Дисплей Original",
+              "priceFrom": 2800,
+              "qualityTier": "original"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 3000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "home-button",
+              "label": "Кнопка Home",
+              "priceFrom": 1500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "body",
+              "label": "Корпус",
+              "priceFrom": 3200,
+              "qualityTier": "single"
+            },
+            {
+              "code": "front-camera",
+              "label": "Передняя камера",
+              "priceFrom": 3000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "earpiece",
+              "label": "Слуховой динамик",
+              "priceFrom": 1500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "camera-glass",
+              "label": "Стекло камеры",
+              "priceFrom": 800,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 2600,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "iphone-8-plus",
+          "label": "iPhone 8 Plus",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 1700,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-budget",
+              "label": "Дисплей Copy",
+              "priceFrom": 1900,
+              "qualityTier": "budget"
+            },
+            {
+              "code": "display-original",
+              "label": "Дисплей Original",
+              "priceFrom": 3500,
+              "qualityTier": "original"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 4500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "home-button",
+              "label": "Кнопка Home",
+              "priceFrom": 1500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "body",
+              "label": "Корпус",
+              "priceFrom": 4000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "front-camera",
+              "label": "Передняя камера",
+              "priceFrom": 3400,
+              "qualityTier": "single"
+            },
+            {
+              "code": "screen-glass",
+              "label": "Сенсорное стекло",
+              "priceFrom": 3500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "earpiece",
+              "label": "Слуховой динамик",
+              "priceFrom": 1500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "camera-glass",
+              "label": "Стекло камеры",
+              "priceFrom": 800,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 2600,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "iphone-se-2022",
+          "label": "iPhone SE 2022",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 1500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-budget",
+              "label": "Дисплей Copy",
+              "priceFrom": 1900,
+              "qualityTier": "budget"
+            },
+            {
+              "code": "display-original",
+              "label": "Дисплей Original",
+              "priceFrom": 2800,
+              "qualityTier": "original"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 3000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "home-button",
+              "label": "Кнопка Home",
+              "priceFrom": 1500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "body",
+              "label": "Корпус",
+              "priceFrom": 3200,
+              "qualityTier": "single"
+            },
+            {
+              "code": "front-camera",
+              "label": "Передняя камера",
+              "priceFrom": 3000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "earpiece",
+              "label": "Слуховой динамик",
+              "priceFrom": 1500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "camera-glass",
+              "label": "Стекло камеры",
+              "priceFrom": 800,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 2600,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "iphone-x",
+          "label": "iPhone X",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 2400,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-analog",
+              "label": "Дисплей OLED Copy",
+              "priceFrom": 3500,
+              "qualityTier": "analog"
+            },
+            {
+              "code": "display-original",
+              "label": "Дисплей Original",
+              "priceFrom": 5500,
+              "qualityTier": "original"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 4500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "body",
+              "label": "Корпус",
+              "priceFrom": 3900,
+              "qualityTier": "single"
+            },
+            {
+              "code": "screen-glass",
+              "label": "Сенсорное стекло",
+              "priceFrom": 5900,
+              "qualityTier": "single"
+            },
+            {
+              "code": "earpiece",
+              "label": "Слуховой динамик",
+              "priceFrom": 1500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "camera-glass",
+              "label": "Стекло камеры",
+              "priceFrom": 1500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 2900,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "iphone-xr",
+          "label": "iPhone XR",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 2400,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-budget",
+              "label": "Дисплей Copy",
+              "priceFrom": 3500,
+              "qualityTier": "budget"
+            },
+            {
+              "code": "display-original",
+              "label": "Дисплей Original",
+              "priceFrom": 4500,
+              "qualityTier": "original"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 4900,
+              "qualityTier": "single"
+            },
+            {
+              "code": "body",
+              "label": "Корпус",
+              "priceFrom": 4000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "earpiece",
+              "label": "Слуховой динамик",
+              "priceFrom": 1500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "camera-glass",
+              "label": "Стекло камеры",
+              "priceFrom": 1500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 2700,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "iphone-xs",
+          "label": "iPhone XS",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 2800,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-analog",
+              "label": "Дисплей OLED Copy",
+              "priceFrom": 4000,
+              "qualityTier": "analog"
+            },
+            {
+              "code": "display-original",
+              "label": "Дисплей Original",
+              "priceFrom": 5900,
+              "qualityTier": "original"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 4500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "body",
+              "label": "Корпус",
+              "priceFrom": 3900,
+              "qualityTier": "single"
+            },
+            {
+              "code": "screen-glass",
+              "label": "Сенсорное стекло",
+              "priceFrom": 5900,
+              "qualityTier": "single"
+            },
+            {
+              "code": "earpiece",
+              "label": "Слуховой динамик",
+              "priceFrom": 1500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "camera-glass",
+              "label": "Стекло камеры",
+              "priceFrom": 1500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 2800,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "iphone-xs-max",
+          "label": "iPhone XS Max",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 2800,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-analog",
+              "label": "Дисплей OLED Copy",
+              "priceFrom": 5500,
+              "qualityTier": "analog"
+            },
+            {
+              "code": "display-original",
+              "label": "Дисплей Original",
+              "priceFrom": 8500,
+              "qualityTier": "original"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 4500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "body",
+              "label": "Корпус",
+              "priceFrom": 5000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "screen-glass",
+              "label": "Сенсорное стекло",
+              "priceFrom": 7900,
+              "qualityTier": "single"
+            },
+            {
+              "code": "earpiece",
+              "label": "Слуховой динамик",
+              "priceFrom": 1500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "camera-glass",
+              "label": "Стекло камеры",
+              "priceFrom": 1500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 2800,
+              "qualityTier": "single"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Honor",
+      "models": [
+        {
+          "id": "honor-50",
+          "label": "Honor 50",
+          "services": [
+            {
+              "code": "display-budget",
+              "label": "Дисплей эконом / Copy",
+              "priceFrom": 2300,
+              "qualityTier": "budget"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 1900,
+              "qualityTier": "single"
+            },
+            {
+              "code": "back-glass",
+              "label": "Задняя крышка",
+              "priceFrom": 1000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 1800,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "honor-90",
+          "label": "Honor 90",
+          "services": [
+            {
+              "code": "back-glass",
+              "label": "Задняя крышка",
+              "priceFrom": 4000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 3300,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "honor-x8",
+          "label": "Honor X8",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 2400,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-analog",
+              "label": "Дисплей аналог",
+              "priceFrom": 3500,
+              "qualityTier": "analog"
+            },
+            {
+              "code": "display-budget",
+              "label": "Дисплей эконом / Copy",
+              "priceFrom": 2100,
+              "qualityTier": "budget"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 1600,
+              "qualityTier": "single"
+            },
+            {
+              "code": "back-glass",
+              "label": "Задняя крышка",
+              "priceFrom": 1500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 1500,
+              "qualityTier": "single"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Huawei",
+      "models": [
+        {
+          "id": "nova-9",
+          "label": "Nova 9",
+          "services": [
+            {
+              "code": "back-glass",
+              "label": "Задняя крышка",
+              "priceFrom": 1000,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "p40-lite",
+          "label": "P40 Lite",
+          "services": [
+            {
+              "code": "display-analog",
+              "label": "Дисплей аналог",
+              "priceFrom": 1800,
+              "qualityTier": "analog"
+            },
+            {
+              "code": "display-budget",
+              "label": "Дисплей эконом / Copy",
+              "priceFrom": 1900,
+              "qualityTier": "budget"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 1000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 1000,
+              "qualityTier": "single"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Samsung",
+      "models": [
+        {
+          "id": "galaxy-a51",
+          "label": "Galaxy A51",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 2000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-analog",
+              "label": "Дисплей аналог",
+              "priceFrom": 5200,
+              "qualityTier": "analog"
+            },
+            {
+              "code": "display-budget",
+              "label": "Дисплей эконом / Copy",
+              "priceFrom": 2300,
+              "qualityTier": "budget"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 2300,
+              "qualityTier": "single"
+            },
+            {
+              "code": "back-glass",
+              "label": "Задняя крышка",
+              "priceFrom": 1300,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 2700,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "galaxy-a52",
+          "label": "Galaxy A52",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 2000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-budget",
+              "label": "Дисплей эконом / Copy",
+              "priceFrom": 2900,
+              "qualityTier": "budget"
+            },
+            {
+              "code": "back-glass",
+              "label": "Задняя крышка",
+              "priceFrom": 1800,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 3100,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "galaxy-a54",
+          "label": "Galaxy A54",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 2200,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-analog",
+              "label": "Дисплей аналог",
+              "priceFrom": 5800,
+              "qualityTier": "analog"
+            },
+            {
+              "code": "display-budget",
+              "label": "Дисплей эконом / Copy",
+              "priceFrom": 3700,
+              "qualityTier": "budget"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 3000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "back-glass",
+              "label": "Задняя крышка",
+              "priceFrom": 1600,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 3400,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "galaxy-s21",
+          "label": "Galaxy S21",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 1900,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-analog",
+              "label": "Дисплей аналог",
+              "priceFrom": 7500,
+              "qualityTier": "analog"
+            },
+            {
+              "code": "back-glass",
+              "label": "Задняя крышка",
+              "priceFrom": 4000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 3400,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "galaxy-s22",
+          "label": "Galaxy S22",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 1900,
+              "qualityTier": "single"
+            },
+            {
+              "code": "back-glass",
+              "label": "Задняя крышка",
+              "priceFrom": 5000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 3700,
+              "qualityTier": "single"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Xiaomi",
+      "models": [
+        {
+          "id": "poco-x5",
+          "label": "POCO X5",
+          "services": [
+            {
+              "code": "display-analog",
+              "label": "Дисплей аналог",
+              "priceFrom": 4600,
+              "qualityTier": "analog"
+            },
+            {
+              "code": "display-budget",
+              "label": "Дисплей эконом / Copy",
+              "priceFrom": 2200,
+              "qualityTier": "budget"
+            },
+            {
+              "code": "back-glass",
+              "label": "Задняя крышка",
+              "priceFrom": 1400,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 1000,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "redmi-10",
+          "label": "Redmi 10",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 2200,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-analog",
+              "label": "Дисплей аналог",
+              "priceFrom": 1900,
+              "qualityTier": "analog"
+            },
+            {
+              "code": "display-budget",
+              "label": "Дисплей эконом / Copy",
+              "priceFrom": 2000,
+              "qualityTier": "budget"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 1200,
+              "qualityTier": "single"
+            },
+            {
+              "code": "back-glass",
+              "label": "Задняя крышка",
+              "priceFrom": 1500,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 1000,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "redmi-note-10",
+          "label": "Redmi Note 10",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 2300,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-analog",
+              "label": "Дисплей аналог",
+              "priceFrom": 4600,
+              "qualityTier": "analog"
+            },
+            {
+              "code": "display-budget",
+              "label": "Дисплей эконом / Copy",
+              "priceFrom": 2300,
+              "qualityTier": "budget"
+            },
+            {
+              "code": "back-glass",
+              "label": "Задняя крышка",
+              "priceFrom": 1100,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 2800,
+              "qualityTier": "single"
+            }
+          ]
+        },
+        {
+          "id": "redmi-note-12",
+          "label": "Redmi Note 12",
+          "services": [
+            {
+              "code": "battery",
+              "label": "АКБ",
+              "priceFrom": 2400,
+              "qualityTier": "single"
+            },
+            {
+              "code": "display-analog",
+              "label": "Дисплей аналог",
+              "priceFrom": 4600,
+              "qualityTier": "analog"
+            },
+            {
+              "code": "display-budget",
+              "label": "Дисплей эконом / Copy",
+              "priceFrom": 2200,
+              "qualityTier": "budget"
+            },
+            {
+              "code": "rear-camera",
+              "label": "Задняя камера",
+              "priceFrom": 1000,
+              "qualityTier": "single"
+            },
+            {
+              "code": "back-glass",
+              "label": "Задняя крышка",
+              "priceFrom": 1400,
+              "qualityTier": "single"
+            },
+            {
+              "code": "charge-flex",
+              "label": "Шлейф зарядки",
+              "priceFrom": 2300,
+              "qualityTier": "single"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
