@@ -1,16 +1,16 @@
 {
-  "updated_at": "2026-08-20T22:56:44.449Z",
+  "updated_at": "2026-08-21T07:24:43.428Z",
   "metrika_id": 111453492,
   "source": "metrika",
   "visits": {
-    "day": 0,
-    "week": 98,
-    "month": 107
+    "day": 11,
+    "week": 109,
+    "month": 118
   },
   "pageviews": {
-    "day": 0,
-    "week": 203,
-    "month": 217
+    "day": 12,
+    "week": 215,
+    "month": 229
   },
   "leads": {
     "day": 0,
@@ -18,10 +18,10 @@
     "month": 2,
     "source": "metrika_goal_request-form-submit"
   },
-  "conversion_visit_to_lead": 1,
+  "conversion_visit_to_lead": 0.9,
   "index": {
     "sitemap_urls": 56,
-    "yandex_indexed": 14,
+    "yandex_indexed": 8,
     "google_indexed": null,
     "google_indexed_approx": null,
     "note": "Яндекс — страницы в поиске (searchable_pages_count). Google: точного числа нет, оценка пока не подключена."
@@ -43,7 +43,7 @@
     "note": "Клики контактов, не заявки. Email в Метрике цели нет — не выдумывать нули."
   },
   "health": {
-    "updated_at": "2026-08-20T22:56:44.399Z",
+    "updated_at": "2026-08-21T07:24:43.381Z",
     "html_pages": 68,
     "errors": 0,
     "warnings": 69,
@@ -94,8 +94,8 @@
     },
     {
       "date": "2026-08-21",
-      "visits": 0,
-      "pageviews": 0,
+      "visits": 11,
+      "pageviews": 12,
       "leads": 0
     }
   ],
