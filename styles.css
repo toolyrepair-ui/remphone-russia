@@ -3080,7 +3080,15 @@ textarea:focus-visible,
 }
 
 .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
     min-height: 52px;
+}
+
+.header-cta {
+    white-space: nowrap;
 }
 
 .site-logo,
@@ -3098,29 +3106,39 @@ textarea:focus-visible,
 }
 
 .header .nav {
+    flex: 1 1 auto;
+    justify-content: center;
+    min-width: 0;
     align-items: center;
-    gap: 24px;
+    gap: clamp(10px, 1.2vw, 18px);
 }
 
 .nav-main-links {
     display: flex;
+    flex-wrap: nowrap;
     align-items: center;
-    gap: 24px;
+    justify-content: center;
+    min-width: 0;
+    gap: clamp(10px, 1.2vw, 18px);
 }
 
-.nav-drawer-section,
-.nav-drawer-label,
-.nav-drawer-cta,
-.nav-drawer-feature {
+.nav-label-short {
+    display: none;
+}
+
+.nav-link-drawer-only {
     display: none;
 }
 
 .header .nav .nav-main-links > a {
     position: relative;
-    padding: 12px 0;
+    flex: 0 0 auto;
+    padding: 10px 0;
     color: var(--brand-navy);
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
+    line-height: 1.2;
+    white-space: nowrap;
     text-decoration: none;
 }
 
@@ -3142,10 +3160,28 @@ textarea:focus-visible,
     transform: scaleX(1);
 }
 
+.nav-drawer-section,
+.nav-drawer-label,
+.nav-drawer-cta,
+.nav-drawer-feature {
+    display: none;
+}
+
+@media (max-width: 1280px) {
+    .header .nav .nav-link-3d .nav-label-full {
+        display: none;
+    }
+
+    .header .nav .nav-link-3d .nav-label-short {
+        display: inline;
+    }
+}
+
 .header-actions {
     display: flex;
+    flex: 0 0 auto;
     align-items: center;
-    gap: 14px;
+    gap: 12px;
 }
 
 .header-phone {
@@ -3161,13 +3197,14 @@ textarea:focus-visible,
     min-height: 48px;
     align-items: center;
     justify-content: center;
-    padding: 12px 20px;
+    padding: 10px 16px;
     border: 1px solid var(--brand-red);
     border-radius: var(--radius-sm);
     color: #fff;
     background: var(--brand-red);
     box-shadow: 0 8px 20px rgba(216, 12, 50, 0.18);
     font-weight: 700;
+    font-size: 14px;
     line-height: 1.2;
     text-decoration: none;
     cursor: pointer;
@@ -3846,6 +3883,18 @@ textarea:focus-visible,
     }
 
     .header-actions {
+        display: none;
+    }
+
+    .nav-link-drawer-only {
+        display: block;
+    }
+
+    .header .nav .nav-link-3d .nav-label-full {
+        display: inline;
+    }
+
+    .header .nav .nav-link-3d .nav-label-short {
         display: none;
     }
 
