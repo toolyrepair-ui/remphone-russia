@@ -71,7 +71,6 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps-legacy
           local-dir: ./dashboard/
           server-dir: ${{ secrets.FTP_PATH }}dashboard/
           timeout: 60000
