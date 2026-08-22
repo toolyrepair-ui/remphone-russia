@@ -1,24 +1,56 @@
 {
-  "updated_at": "2026-08-21T22:52:38.686Z",
+  "updated_at": "2026-08-22T04:59:18.402Z",
   "metrika_id": 111453492,
-  "source": "metrika",
+  "source": "metrika+lead_api",
   "visits": {
-    "day": 9,
-    "week": 167,
-    "month": 178
+    "day": 59,
+    "week": 217,
+    "month": 228
   },
   "pageviews": {
-    "day": 11,
-    "week": 284,
-    "month": 305
+    "day": 189,
+    "week": 462,
+    "month": 483
   },
   "leads": {
-    "day": 0,
-    "week": 1,
-    "month": 2,
+    "day": 8,
+    "week": 9,
+    "month": 10,
     "source": "metrika_goal_request-form-submit"
   },
-  "conversion_visit_to_lead": 0.6,
+  "metrika_accepted": {
+    "day": 8,
+    "week": 9,
+    "month": 10,
+    "source": "metrika_goal_request-form-submit"
+  },
+  "pipeline": {
+    "accepted": 2,
+    "delivered": 2,
+    "pending": 0,
+    "failed": 0,
+    "oldest_pending_at": null,
+    "day": {
+      "accepted": 2,
+      "delivered": 2,
+      "pending": 0,
+      "failed": 0
+    },
+    "week": {
+      "accepted": 2,
+      "delivered": 2,
+      "pending": 0,
+      "failed": 0
+    },
+    "month": {
+      "accepted": 2,
+      "delivered": 2,
+      "pending": 0,
+      "failed": 0
+    },
+    "source": "lead_stats_api"
+  },
+  "conversion_visit_to_lead": 4.1,
   "index": {
     "sitemap_urls": 56,
     "yandex_indexed": 8,
@@ -28,22 +60,22 @@
   },
   "contacts": {
     "day": {
-      "call": 0,
+      "call": 1,
       "whatsapp": 0,
       "telegram": 0,
-      "form_open": 2
+      "form_open": 51
     },
     "week": {
-      "call": 0,
+      "call": 1,
       "whatsapp": 0,
       "telegram": 2,
-      "form_open": 54
+      "form_open": 103
     },
     "source": "metrika_goals",
     "note": "Клики контактов, не заявки. Email в Метрике цели нет — не выдумывать нули."
   },
   "health": {
-    "updated_at": "2026-08-21T22:52:38.646Z",
+    "updated_at": "2026-08-22T04:59:18.350Z",
     "html_pages": 68,
     "errors": 0,
     "warnings": 69,
@@ -94,9 +126,9 @@
     },
     {
       "date": "2026-08-22",
-      "visits": 9,
-      "pageviews": 11,
-      "leads": 0
+      "visits": 59,
+      "pageviews": 189,
+      "leads": 8
     }
   ],
   "notes": []
