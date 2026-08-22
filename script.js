@@ -65,7 +65,7 @@ const revealOnScroll = () => {
     revealElements.forEach(el => {
         const elementTop = el.getBoundingClientRect().top;
         const windowHeight = window.innerHeight;
-        
+
         if (elementTop < windowHeight - 100) {
             el.classList.add('active');
         }
@@ -75,18 +75,35 @@ const revealOnScroll = () => {
 window.addEventListener('scroll', revealOnScroll);
 window.addEventListener('load', revealOnScroll);
 
-// Smooth scroll for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
+// Smooth scroll for local anchors, including CTA links mounted later by site-chrome.js.
+document.addEventListener('click', (event) => {
+    const anchor = event.target.closest('a[href*="#"]');
+    if (!anchor) return;
+
+    let url;
+    try {
+        url = new URL(anchor.href, window.location.href);
+    } catch (error) {
+        return;
+    }
+    if (url.origin !== window.location.origin || !url.hash) return;
+
+    const target = document.querySelector(url.hash);
+    if (!target) return;
+
+    event.preventDefault();
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    window.history.replaceState(null, '', url.hash);
+
+    if (url.hash === '#repair-flow') {
+        target.classList.remove('cta-target-active');
+        window.requestAnimationFrame(() => target.classList.add('cta-target-active'));
+        window.setTimeout(() => target.classList.remove('cta-target-active'), 1200);
+        window.setTimeout(() => {
+            const firstChoice = target.querySelector('.flow-panel:not([hidden]) .flow-card');
+            if (firstChoice) firstChoice.focus({ preventScroll: true });
+        }, 350);
+    }
 });
 
 // Header scroll effect
@@ -108,17 +125,17 @@ function filterReviews() {
     const cityFilter = document.getElementById('reviewCityFilter');
     const serviceFilter = document.getElementById('reviewServiceFilter');
     const cards = document.querySelectorAll('.review-card');
-    
+
     const cityValue = cityFilter ? cityFilter.value.toLowerCase() : '';
     const serviceValue = serviceFilter ? serviceFilter.value.toLowerCase() : '';
-    
+
     cards.forEach(card => {
         const city = (card.dataset.city || '').toLowerCase();
         const service = (card.dataset.service || '').toLowerCase();
-        
+
         const cityMatch = !cityValue || city.includes(cityValue);
         const serviceMatch = !serviceValue || service.includes(serviceValue);
-        
+
         card.style.display = cityMatch && serviceMatch ? '' : 'none';
     });
 }
@@ -136,17 +153,17 @@ function quickSearch(event) {
     const problem = document.getElementById('quickProblem');
     const brand = document.getElementById('quickBrand');
     const city = document.getElementById('quickCity');
-    
+
     const p = problem ? problem.value : '';
     const b = brand ? brand.value : '';
     const c = city ? city.value : '';
-    
+
     // Build query string
     const params = new URLSearchParams();
     if (p) params.set('problem', p);
     if (b) params.set('brand', b);
     if (c) params.set('city', c);
-    
+
     // For now open services page with query
     const url = params.toString() ? `services/?${params.toString()}` : 'services/';
     window.location.href = url;
@@ -227,6 +244,20 @@ if (quickForm) {
         if (cityId === 'komsomolsk-na-amure') cityId = 'komsomolsk';
         if (!CITY_MAP[cityId]) {
             try { cityId = sessionStorage.getItem('remphone_city_id') || ''; } catch (e) { cityId = ''; }
+        }
+        if (!CITY_MAP[cityId] && document.referrer) {
+            try {
+                const referrerPath = new URL(document.referrer).pathname.toLowerCase();
+                if (/\/vladivostok(?:\/|\.html$)/.test(referrerPath)) cityId = 'vladivostok';
+                else if (
+                    /\/komsomolsk-na-amure(?:\/|\.html$)/.test(referrerPath) ||
+                    /\/cities\/komsomolsk\.html$/.test(referrerPath)
+                ) {
+                    cityId = 'komsomolsk';
+                } else if (/\/khabarovsk(?:\/|\.html$)/.test(referrerPath)) {
+                    cityId = 'khabarovsk';
+                }
+            } catch (e) {}
         }
         if (!CITY_MAP[cityId]) cityId = 'khabarovsk';
         setCity(cityId, { syncHero: true });
@@ -429,25 +460,35 @@ if (quickForm) {
             throw new Error('relay_not_configured');
         }
 
-        const res = await fetch(relayUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-            body: JSON.stringify({
-                name: data.name,
-                phone: data.phone,
-                brand: data.brand,
-                model: data.model || '',
-                problem: data.problem,
-                part_preference: data.part_preference || '',
-                city: data.city || 'Хабаровск',
-                city_id: data.city_id || 'khabarovsk',
-                comment: data.comment || '',
-                source: 'site',
-                client_request_id: 'site-' + String(data.phone || '').replace(/\D/g, '') + '-' + Date.now(),
-                utm: data.utm || {},
-                page: typeof location !== 'undefined' ? location.pathname : '',
-            }),
-        });
+        const controller = typeof AbortController === 'function' ? new AbortController() : null;
+        const timeoutId = controller
+            ? window.setTimeout(() => controller.abort(), 15000)
+            : null;
+        let res;
+        try {
+            res = await fetch(relayUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+                body: JSON.stringify({
+                    name: data.name,
+                    phone: data.phone,
+                    brand: data.brand,
+                    model: data.model || '',
+                    problem: data.problem,
+                    part_preference: data.part_preference || '',
+                    city: data.city || 'Хабаровск',
+                    city_id: data.city_id || 'khabarovsk',
+                    comment: data.comment || '',
+                    source: 'site',
+                    client_request_id: 'site-' + String(data.phone || '').replace(/\D/g, '') + '-' + Date.now(),
+                    utm: data.utm || {},
+                    page: typeof location !== 'undefined' ? location.pathname : '',
+                }),
+                signal: controller ? controller.signal : undefined,
+            });
+        } finally {
+            if (timeoutId !== null) window.clearTimeout(timeoutId);
+        }
 
         let json = {};
         try {

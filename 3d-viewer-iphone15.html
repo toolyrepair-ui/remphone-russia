@@ -3469,7 +3469,18 @@
       const cityName = cityEl.options[cityEl.selectedIndex].dataset.name || cityEl.value;
       const comment = document.getElementById('flowComment').value.trim();
       const problem = document.getElementById('flowProblem').value;
-      if (!name || !phoneVal) return;
+      if (!name) {
+        errorBox.hidden = false;
+        errorBox.textContent = 'Укажите имя, чтобы мастер знал, как к вам обратиться.';
+        document.getElementById('flowName').focus();
+        return;
+      }
+      if (!phoneVal) {
+        errorBox.hidden = false;
+        errorBox.textContent = 'Укажите номер телефона для обратной связи.';
+        document.getElementById('flowPhone').focus();
+        return;
+      }
       if (currentProblem() && currentProblem().commentRequired && comment.length < 8) {
         errorBox.hidden = false;
         errorBox.textContent = 'Опишите проблему своими словами — так мастер точнее поймёт запрос.';
@@ -3488,7 +3499,7 @@
       const body = {
         name,
         phone: phoneVal,
-        brand: 'Телефон',
+        brand: 'iPhone',
         model: payload.deviceModelLabel || 'Не указана',
         problem,
         part_preference: '',
@@ -3502,11 +3513,19 @@
       try {
         track3D('3d_lead_submit', payload);
         if (!isRelayConfigured()) throw new Error('relay_not_configured');
-        const res = await fetch(relayUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify(body)
-        });
+        const controller = typeof AbortController === 'function' ? new AbortController() : null;
+        const timeoutId = controller ? window.setTimeout(() => controller.abort(), 15000) : null;
+        let res;
+        try {
+          res = await fetch(relayUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify(body),
+            signal: controller ? controller.signal : undefined
+          });
+        } finally {
+          if (timeoutId !== null) window.clearTimeout(timeoutId);
+        }
         let json = {};
         try { json = await res.json(); } catch (e) { json = {}; }
         if (!res.ok || json.success === false) throw new Error(json.message || json.error || ('HTTP ' + res.status));
