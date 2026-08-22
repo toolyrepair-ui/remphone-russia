@@ -83,12 +83,31 @@
         '<div class="container header-inner">' +
           '<a href="' + asset('index.html') + '" class="site-logo" aria-label="REMPHONE — на главную">' + logo + '</a>' +
           '<nav class="nav" id="nav" aria-label="Основная навигация">' +
-            '<a href="' + asset('services/') + '">Услуги</a>' +
-            '<a href="' + asset('3d-viewer-iphone15.html') + '">3D-калькулятор</a>' +
-            '<a href="' + asset('brands/') + '">Бренды</a>' +
-            '<a href="' + asset('cities/') + '">Города</a>' +
-            '<a href="' + asset('reviews.html') + '">Отзывы</a>' +
-            '<a href="' + asset('about.html') + '">О нас</a>' +
+            '<div class="nav-main-links">' +
+              '<a href="' + asset('services/') + '">Услуги</a>' +
+              '<a href="' + asset('3d-viewer-iphone15.html') + '">3D-калькулятор</a>' +
+              '<a href="' + asset('brands/') + '">Бренды</a>' +
+              '<a href="' + asset('cities/') + '">Города</a>' +
+              '<a href="' + asset('reviews.html') + '">Отзывы</a>' +
+              '<a href="' + asset('faq.html') + '">FAQ</a>' +
+              '<a href="' + asset('about.html') + '">О нас</a>' +
+              '<a href="' + asset('contacts.html') + '">Контакты</a>' +
+            '</div>' +
+            '<div class="nav-drawer-section" aria-label="Популярные услуги">' +
+              '<p class="nav-drawer-label">Популярное</p>' +
+              '<a href="' + asset('services/screen.html') + '">Замена экрана</a>' +
+              '<a href="' + asset('services/battery.html') + '">Замена батареи</a>' +
+              '<a href="' + asset('services/not-on.html') + '">Не включается</a>' +
+              '<a href="' + asset('services/water.html') + '">После воды</a>' +
+              '<a href="' + asset('services/charge.html') + '">Не заряжается</a>' +
+            '</div>' +
+            '<div class="nav-drawer-section" aria-label="Города">' +
+              '<p class="nav-drawer-label">Города</p>' +
+              '<a href="/khabarovsk/">Хабаровск</a>' +
+              '<a href="/komsomolsk-na-amure/">Комсомольск-на-Амуре</a>' +
+              '<a href="/vladivostok/">Владивосток</a>' +
+            '</div>' +
+            '<a class="nav-drawer-cta" href="' + repairHref + '">Оставить заявку</a>' +
             '<div class="nav-mobile-contacts">' +
               link(contact.phoneTel ? 'tel:' + contact.phoneTel : '', '', contact.phoneDisplay) +
               link(contact.telegram, '', 'Telegram', 'target="_blank" rel="noopener"') +
