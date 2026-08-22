@@ -83,6 +83,10 @@
         '<div class="container header-inner">' +
           '<a href="' + asset('index.html') + '" class="site-logo" aria-label="REMPHONE — на главную">' + logo + '</a>' +
           '<nav class="nav" id="nav" aria-label="Основная навигация">' +
+            '<a class="nav-drawer-feature" href="' + asset('3d-viewer-iphone15.html') + '">' +
+              '<span class="nav-drawer-feature-title">3D-калькулятор</span>' +
+              '<span class="nav-drawer-feature-note">Выберите симптом на модели телефона</span>' +
+            '</a>' +
             '<div class="nav-main-links">' +
               '<a href="' + asset('services/') + '">Услуги</a>' +
               '<a href="' + asset('3d-viewer-iphone15.html') + '">3D-калькулятор</a>' +
@@ -95,6 +99,7 @@
             '</div>' +
             '<div class="nav-drawer-section" aria-label="Популярные услуги">' +
               '<p class="nav-drawer-label">Популярное</p>' +
+              '<a href="' + asset('3d-viewer-iphone15.html') + '">3D-калькулятор</a>' +
               '<a href="' + asset('services/screen.html') + '">Замена экрана</a>' +
               '<a href="' + asset('services/battery.html') + '">Замена батареи</a>' +
               '<a href="' + asset('services/not-on.html') + '">Не включается</a>' +
@@ -162,6 +167,9 @@
     var mobile =
       '<nav class="mobile-contact-bar" id="stickyMobileBar" aria-label="Быстрая связь" aria-hidden="true">' +
         link(contact.phoneTel ? 'tel:' + contact.phoneTel : '', 'mobile-contact-link', '<span aria-hidden="true">☎</span><span>Позвонить</span>') +
+        '<a class="mobile-contact-link mobile-contact-3d" href="' + asset('3d-viewer-iphone15.html') + '">' +
+          '<span aria-hidden="true">3D</span><span>Калькулятор</span>' +
+        '</a>' +
         '<a class="mobile-contact-link mobile-contact-primary" href="' + mobileRepairHref + '">' +
           '<span aria-hidden="true">→</span><span>Описать поломку</span>' +
         '</a>' +
