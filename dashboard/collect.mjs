@@ -289,9 +289,11 @@ async function fetchWebmasterIndex() {
 }
 
 async function fetchPipeline() {
-  if (!leadUrl) return null;
-  const headers = { Accept: 'application/json' };
-  if (leadSecret) headers.Authorization = `Bearer ${leadSecret}`;
+  if (!leadUrl || !leadSecret) return null;
+  const headers = {
+    Accept: 'application/json',
+    Authorization: `Bearer ${leadSecret}`,
+  };
   const res = await fetch(leadUrl, { headers });
   if (!res.ok) throw new Error(`Lead stats ${res.status}`);
   const json = await res.json();

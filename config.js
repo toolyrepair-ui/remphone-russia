@@ -8,7 +8,6 @@ window.REMPHONE_CONFIG = {
     whatsapp: '79144111730',
     telegramBot: 'REMPHONE_RUSSIA_Bot',
     email: 'toolyrepair@gmail.com',
-    ownerTelegramId: '7553859784',
     relayUrl: 'https://rem-phone-relay.toolyrepair.workers.dev',
     metrikaId: 111453492,
     gaId: 'G-53F13EFHZQ',

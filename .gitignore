@@ -52,5 +52,7 @@ tools/omniroute/server-app/
 graphify-out/cache/
 
 .ftp-deploy-sync-state.json
+dashboard/auth-config.php
+.dashboard-auth.local
 
 

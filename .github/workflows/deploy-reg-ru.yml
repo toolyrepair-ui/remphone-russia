@@ -38,12 +38,13 @@ jobs:
           fi
           echo "FTP secrets present."
 
-      - name: Upload to reg.ru FTP
+      - name: Upload to reg.ru FTPS
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps-legacy
           server-dir: ${{ secrets.FTP_PATH }}
           timeout: 60000
           exclude: |
@@ -75,3 +76,4 @@ jobs:
             **/.nojekyll
             **/_headers
             **/_redirects
+            **/dashboard/auth-config.php

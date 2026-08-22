@@ -25,12 +25,11 @@ Telegram или сбой Queue больше не удерживает кнопк
 
 ## Контроль
 
-- `GET https://rem-phone-relay.toolyrepair.workers.dev/health` — минимальный
-  публичный статус без контактов.
+- `GET https://rem-phone-relay.toolyrepair.workers.dev/health` — публичный статус без счётчиков очереди и без контактов.
 - `GET /stats` с `Authorization: Bearer <LEAD_STATS_SECRET>` — только агрегаты
   `accepted/delivered/pending/failed`, периоды и oldest pending.
-- Внутренний `/dashboard/` хранит `metrika_accepted` отдельно от фактического
-  Worker pipeline. Второй счётчик и новые цели Метрики не создаются.
+- POST заявок: Origin только rem-phone.ru (localhost для проверки), не больше 10 с одного IP в минуту на локацию Cloudflare, тело не больше 8 КБ.
+- Внутренний `/dashboard/` на хостинге закрыт HTTP Basic (секреты `DASHBOARD_USER` / `DASHBOARD_PASSWORD`). Хранит `metrika_accepted` отдельно от фактического Worker pipeline. Второй счётчик и новые цели Метрики не создаются.
 - Payload с PII очищается в D1 через 90 дней; строки и агрегаты остаются.
 
 ## Если сломано

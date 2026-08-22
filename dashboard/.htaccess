@@ -1,0 +1,13 @@
+RewriteEngine On
+RewriteBase /dashboard/
+
+<IfModule mod_authz_core.c>
+  <Files "auth-config.php">
+    Require all denied
+  </Files>
+</IfModule>
+
+RewriteRule ^auth-config\.php$ - [F,L]
+RewriteRule ^$ auth.php [L]
+RewriteRule ^index\.html$ auth.php [L]
+RewriteRule ^(data|health)\.json$ auth.php [L]

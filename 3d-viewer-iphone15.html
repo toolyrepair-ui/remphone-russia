@@ -547,11 +547,11 @@
           <input type="hidden" name="priceState" id="fieldPriceState" value="">
           <div class="form-group">
             <label for="flowName">Ваше имя *</label>
-            <input type="text" id="flowName" name="name" placeholder="Алексей" required autocomplete="name">
+            <input type="text" id="flowName" name="name" class="ym-disable-keys ym-hide-content" placeholder="Алексей" required autocomplete="name">
           </div>
           <div class="form-group">
             <label for="flowPhone">Телефон *</label>
-            <input type="tel" id="flowPhone" name="phone" placeholder="+7 914 411-17-30" required autocomplete="tel">
+            <input type="tel" id="flowPhone" name="phone" class="ym-disable-keys ym-hide-content" placeholder="+7 914 411-17-30" required autocomplete="tel">
           </div>
           <div class="form-group">
             <label for="flowCity">Город *</label>
@@ -563,7 +563,7 @@
           </div>
           <div class="form-group">
             <label for="flowComment">Комментарий</label>
-            <textarea id="flowComment" name="comment" rows="3" placeholder="Удобное время, детали поломки…"></textarea>
+            <textarea id="flowComment" name="comment" class="ym-disable-keys ym-hide-content" rows="3" placeholder="Удобное время, детали поломки…"></textarea>
           </div>
           <button type="submit" class="btn-primary" id="flowSubmitBtn">Отправить заявку</button>
           <p class="form-error" id="flowSubmitError" hidden></p>

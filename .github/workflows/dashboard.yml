@@ -57,6 +57,13 @@ jobs:
           fi
           echo "skip=0" >> "$GITHUB_OUTPUT"
 
+      - name: Write dashboard HTTP auth config
+        if: steps.ftp.outputs.skip == '0'
+        env:
+          DASHBOARD_USER: ${{ secrets.DASHBOARD_USER }}
+          DASHBOARD_PASSWORD: ${{ secrets.DASHBOARD_PASSWORD }}
+        run: node scripts/write-dashboard-auth.mjs
+
       - name: Upload dashboard to hosting
         if: steps.ftp.outputs.skip == '0'
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
@@ -64,6 +71,7 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps-legacy
           local-dir: ./dashboard/
           server-dir: ${{ secrets.FTP_PATH }}dashboard/
           timeout: 60000

@@ -1,6 +1,6 @@
 # Dashboard — внутренний контроль
 
-Страница `/dashboard/` закрыта от поиска (`noindex`, `robots.txt` Disallow). Не пароль на JS.
+Страница `/dashboard/` закрыта от поиска (`noindex`, `robots.txt` Disallow) и на хостинге — HTTP Basic через `dashboard/auth.php`. Пароль не в git: секреты GitHub `DASHBOARD_USER` и `DASHBOARD_PASSWORD` (минимум 8 символов). После добавления секретов запустите workflow Dashboard stats. Локально без `auth-config.php` страница открывается.
 
 Собирает `dashboard/collect.mjs` → `dashboard/data.json`. Live-проверка сайта пишет `dashboard/health.json`.
 
@@ -41,7 +41,8 @@ CI на пуше HTML — `.github/workflows/seo-health.yml` (локальный
 
 - `YANDEX_METRIKA_TOKEN` — визиты и цели (`metrika:read`)
 - `YANDEX_WEBMASTER_TOKEN` — индекс (`webmaster:hostinfo` + `webmaster:verify`)
-- `FTP_SERVER` / `FTP_USERNAME` / `FTP_PASSWORD` / `FTP_PATH` — те же, что для выгрузки сайта (`FTP_PATH` со слэшем, на ISPmanager: `www/rem-phone.ru/`)
+- `FTP_SERVER` / `FTP_USERNAME` / `FTP_PASSWORD` / `FTP_PATH` — те же, что для выгрузки сайта (`FTP_PATH` со слэшем, на ISPmanager: `www/rem-phone.ru/`). Выгрузка по **FTPS** (`ftps-legacy`, порт 21).
+- `DASHBOARD_USER` / `DASHBOARD_PASSWORD` — вход на `/dashboard/` на хостинге
 - `LEAD_STATS_SECRET` — Bearer-секрет защищённого Worker endpoint; URL уже задан в workflow, ответ без телефонов, имён, комментариев и других PII
 
 OAuth: https://oauth.yandex.ru/client/new — приложение для API, затем
