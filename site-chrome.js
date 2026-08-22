@@ -89,13 +89,15 @@
             '</a>' +
             '<div class="nav-main-links">' +
               '<a href="' + asset('services/') + '">Услуги</a>' +
-              '<a href="' + asset('3d-viewer-iphone15.html') + '">3D-калькулятор</a>' +
-              '<a href="' + asset('brands/') + '">Бренды</a>' +
+              '<a href="' + asset('3d-viewer-iphone15.html') + '" class="nav-link-3d" aria-label="3D-калькулятор">' +
+                '<span class="nav-label-full">3D-калькулятор</span>' +
+                '<span class="nav-label-short" aria-hidden="true">3D</span>' +
+              '</a>' +
               '<a href="' + asset('cities/') + '">Города</a>' +
               '<a href="' + asset('reviews.html') + '">Отзывы</a>' +
-              '<a href="' + asset('faq.html') + '">FAQ</a>' +
+              '<a href="' + asset('faq.html') + '" class="nav-link-drawer-only">FAQ</a>' +
               '<a href="' + asset('about.html') + '">О нас</a>' +
-              '<a href="' + asset('contacts.html') + '">Контакты</a>' +
+              '<a href="' + asset('contacts.html') + '" class="nav-link-drawer-only">Контакты</a>' +
             '</div>' +
             '<div class="nav-drawer-section" aria-label="Популярные услуги">' +
               '<p class="nav-drawer-label">Популярное</p>' +
