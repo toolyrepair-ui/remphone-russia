@@ -9,7 +9,7 @@
 
 Раздача: виртуальный хостинг REG.RU Host-0 (Apache за nginx, ISPmanager, IP `31.31.196.16`, корень `www/rem-phone.ru/`). DNS зона ns1/ns2.reg.ru: `A @` и `A www` → `31.31.196.16`. GitHub Pages не отключать (резерв). Выгрузка: `.github/workflows/deploy-reg-ru.yml` (`FTP_PATH`=`www/rem-phone.ru/`). HTTPS: Let’s Encrypt `rem-phone.ru_le1` (до 2026-11-15), имена `rem-phone.ru` и `www.rem-phone.ru`. HTTP→HTTPS в `.htaccess` только через `X-Forwarded-Proto =http` (не `%{HTTPS} off` — петля за nginx). www→apex на `https://`. Dotfiles (в т.ч. `.ftp-deploy-sync-state.json`) закрыты. Статика css/js/картинки/woff2 — кеш месяц; html/json без кеша. Не публиковать на хостинг: `docs/`, `seo/` (внутренние данные), `.omniroute-src/`.
 
-Дашборд: `/dashboard/` (noindex). Крон `dashboard.yml` — 08:30 и 16:30 Хабаровск: live `seo/health-check.mjs --live` → `dashboard/health.json`, сбор Метрики → `dashboard/data.json`, коммит, FTP только папки `dashboard/` на REG.RU. Push с `GITHUB_TOKEN` по-прежнему не запускает `deploy-reg-ru.yml`, поэтому FTP в том же джобе обязателен для живой страницы. Заявки = цель `request-form-submit`; клики звонка/WhatsApp/Telegram — отдельные цели, не конверсия. `seo-health.yml` — только CI на пуше HTML (локальный check, без коммита JSON).
+Дашборд: `/dashboard/` (noindex). Крон `dashboard.yml` — 08:30 и 16:30 Хабаровск: live `seo/health-check.mjs --live` → `dashboard/health.json`, сбор Метрики → `dashboard/data.json`, коммит, FTP только папки `dashboard/` на REG.RU. Push с `GITHUB_TOKEN` по-прежнему не запускает `deploy-reg-ru.yml`, поэтому FTP в том же джобе обязателен для живой страницы. Accepted Метрики хранится отдельно в `metrika_accepted`; защищённый `LEAD_STATS_URL` добавляет агрегаты доставки в `pipeline` (accepted/delivered/pending/failed, без PII), не подменяя Метрику. Клики звонка/WhatsApp/Telegram — отдельные цели, не конверсия. `seo-health.yml` — только CI на пуше HTML (локальный check, без коммита JSON).
 
 Скиллы агента: `.cursor/skills/` — свои `content-writer`, `direct-service-voice`, `yandex-local`; каталог: `find-skills`, `web-design-guidelines` (Vercel), `frontend-design` (Anthropic), `systematic-debugging` (obra), `workers-best-practices` (Cloudflare; **не менять** `config.js` `relayUrl`), `accessibility` (Addy Osmani). Поиск новых: `npx skills find "…"`. Next.js и programmatic-SEO не ставить. Бот — `remphone-bot` + Context7 (aiogram 3.x), ответы клиенту не из Cursor.
 
@@ -22,12 +22,18 @@
 Поток заявки:
 
 ```
-форма #repair-flow (script.js) → POST JSON на Cloudflare Worker (config.js relayUrl)
-  → Lead API Telegram-бота → /leads владельцу
+форма #repair-flow / 3D → POST JSON на Cloudflare Worker (config.js relayUrl)
+  → D1 durable inbox (`accepted`) → Queue
+      → Lead API Telegram-бота → SQLite / `/leads` владельцу
+      ↳ Telegram fallback, если API не доставил уведомление
+      ↳ retries → DLQ; cron раз в 5 минут возвращает зависшие D1-записи
       ↳ опционально: черновик ответа (Workers AI), только владельцу
 ```
 
-Пока Worker недоступен — fallback в Telegram (без SQLite). Токен бота **не** хранится на сайте.
+`accepted` означает, что контакт уже сохранён в D1; Render/Telegram больше не
+держат ответ формы. `client_request_id` opaque и хешируется на edge. PII в D1
+очищается через 90 дней. `/health` публичный и минимальный, `/stats` защищён
+отдельным `LEAD_STATS_SECRET` и возвращает только агрегаты. Токен бота **не** хранится на сайте.
 
 Контакты и счётчики — единый источник: `config.js` (`window.REMPHONE_CONFIG`). Дубли в `site-chrome.js` и `data/contacts.json` должны совпадать.
 
@@ -58,8 +64,8 @@
 
 1. **Заявка с сайта** — `#flowRepairForm` / `#repair-flow` → `script.js` `sendToRelay()` → `relayUrl`.
 2. **Заявка из бота** — `@REMPHONE_RUSSIA_Bot` → та же лента `/leads`.
-3. **Город** — `?city=` / `city_id` (`khabarovsk` \| `komsomolsk` \| `vladivostok`); алиас `komsomolsk-na-amure` → `komsomolsk`.
-4. **Аналитика** — `analytics.js`: Метрика `111453492`, GA `G-53F13EFHZQ`. Цели: `request-form-submit`, `request-form-open`, `make-call`, `whatsapp`, `telegram`.
+3. **Город** — приоритет: `?city=` / `city_id` → выбор текущей сессии → referrer city-страницы → IP-геолокация `ipwho.is` → Хабаровск. Автоопределение выбирает только один из трёх живых городов: точное совпадение имени или ближайший в радиусе 80 км; результат кэшируется в браузере на 24 часа. Ручной выбор и URL всегда сильнее ответа геосервиса. Алиас `komsomolsk-na-amure` → `komsomolsk`.
+4. **Аналитика** — `analytics.js`: Метрика `111453492`, GA `G-53F13EFHZQ`. Цели: `request-form-submit`, `request-form-open`, `make-call`, `whatsapp`, `telegram`. `request-form-open` срабатывает при переходе на шаг 3, а не на любой клик внутри квиза.
 5. **SEO-контур** — `seo/pages.json` → `node seo/generate-sitemap.mjs` → `sitemap.xml`. Проверка: `node seo/health-check.mjs` (локально) и `--live` (прод, пишет `dashboard/health.json`).
 6. **Шапка/подвал** — `site-chrome.js` на внутренних страницах (`data-base="../"` в подпапках).
 7. **Ориентир цен по моделям** — статические таблицы в HTML из мастер-прайса. Каталог моделей (имена, без цен) — `repair-models.js` + чипы на бренд-страницах, сборка `python scripts/apply_repair_models.py`. Полный внутренний прайс (`full-phone-pricebook.json`) на хостинг не выкладывать. Не подключать live-fetch `site-pricebook.json` в браузере.
@@ -70,7 +76,7 @@
 
 | Система | Значение | Правило |
 |---------|----------|---------|
-| Cloudflare Worker | `https://rem-phone-relay.toolyrepair.workers.dev` | **Не менять** URL. `POST /draft` — черновик владельцу. Живой режим: `REPLY_DRAFT_ENABLED=1` (AI клиенту не пишет) |
+| Cloudflare Worker | `https://rem-phone-relay.toolyrepair.workers.dev` | **Не менять** URL. D1 `remphone-leads` + Queue/DLQ + cron; `GET /health`, защищённый `GET /stats`; `POST /draft` — черновик владельцу. Живой режим: `REPLY_DRAFT_ENABLED=1` (AI клиенту не пишет) |
 | Telegram-бот | `@REMPHONE_RUSSIA_Bot` | Репо `remphone-bot` |
 | Телефон / WhatsApp | `+79144111730` | Единый номер |
 | Email | `toolyrepair@gmail.com` | |
@@ -102,10 +108,10 @@ Telegram **ADMIN_ID** (куда relay/бот шлёт заявки): `7553859784
 
 - Единая шапка/подвал через `site-chrome.js`, не копировать разметку в каждую HTML-страницу без нужды.
 - CTA: телефон, WhatsApp, Telegram, якорь `#repair-flow`.
-- Плавающая панель: `.sticky-mobile-bar` — звонок, WhatsApp, Telegram, заявка. На главной в HTML; на остальных `script.js` / `site-chrome.js` дописывают, если блока нет. Бургер открывает `.nav.active`, закрывается по пункту меню и тапу снаружи. Длинная «Заявка в Telegram» в шапке на узком экране скрыта, чтобы не ломать вёрстку.
+- Плавающая панель: `.mobile-contact-bar` из `site-chrome.js` — два действия: «Позвонить» и «Описать поломку». На главной скрыта, пока виден первый экран; на внутренних страницах появляется после прокрутки. Telegram и WhatsApp остаются в меню, футере и экране успеха. Бургер открывает `.nav.active`, закрывается по пункту меню и тапу снаружи.
 - Сравнение дисплеев: `displays-compare.js` + `displays-config.json`.
 - Прайс на сайте — **статика** в HTML. Локальный master: `data/full-phone-pricebook.*`. Публичные «от» для брендов: `data/site-price-orientir.json` → `python scripts/apply_site_price_orientir.py`. Каталог моделей из `data/site-pricebook.json` → `python scripts/apply_repair_models.py` (чипы + `repair-models.js`, без live-fetch прайса). Android-расчёт из медианы iPhone на сайт не выносить без решения владельца.
-- Универсальный 3D-калькулятор телефона: `3d-viewer-iphone15.html` (алиас `iphone-repair-calculator.html`). В сайт интегрирован отдельным промоблоком на главной, ссылкой в общей навигации/подвале `site-chrome.js` и CTA на `brands/iphone-screen.html`; iframe не используется. Текущий `assets/models/iphone15-pro-max.glb` остаётся временной демонстрационной моделью, но бренд и модель в UI не называются. Подбор модели и загрузка клиентского прайса удалены: после заявки мастер уточняет модель и стоимость. Дерево проблем: `iphone-calculator-catalog.js`; правила: `docs/IPHONE_CALCULATOR_PROBLEM_ANIMATIONS_TZ.md`, `docs/IPHONE_CALCULATOR_ANIMATION_CARDS_TZ.md`, `docs/IPHONE_CALCULATOR_REALISM_V2_TZ.md`. Все дочерние FX работают в **локальных координатах масштабированного `phone`**; `glassOut` задаёт наружную сторону OLED, `backOut` — крышки. Видимые полные zone rings запрещены, `zoneLayout()` хранит только невидимые якоря. Щель OLED движется по `glassOut`; крышка использует depth-tested canvas-трещины и angle-dependent highlights; `body:bent` деформирует вершины составных mesh в общей phone-space системе. Камера: wall-clock переход не зависит от throttling вкладки; `REAR_YAW ≈ 0.48`.
+- Универсальный 3D-калькулятор телефона: `3d-viewer-iphone15.html` (алиас `iphone-repair-calculator.html`). В сайт интегрирован отдельным промоблоком на главной, ссылкой в общей навигации/подвале `site-chrome.js` и CTA на `brands/iphone-screen.html`; iframe не используется. Текущий `assets/models/iphone15-pro-max.glb` остаётся временной демонстрационной моделью, но бренд и модель в UI не называются. Подбор модели и загрузка клиентского прайса удалены: после заявки мастер уточняет модель и стоимость. Дерево проблем: `iphone-calculator-catalog.js`; правила: `docs/IPHONE_CALCULATOR_PROBLEM_ANIMATIONS_TZ.md`, `docs/IPHONE_CALCULATOR_ANIMATION_CARDS_TZ.md`, `docs/IPHONE_CALCULATOR_REALISM_V2_TZ.md`. Все дочерние FX работают в **локальных координатах масштабированного `phone`**; `glassOut` задаёт наружную сторону OLED, `backOut` — крышки. Видимые полные zone rings запрещены, `zoneLayout()` хранит только невидимые якоря. Щель OLED движется по `glassOut`; крышка использует depth-tested canvas-трещины и angle-dependent highlights; `body:bent` деформирует вершины составных mesh в общей phone-space системе. Камера: wall-clock переход не зависит от throttling вкладки; `REAR_YAW ≈ 0.48`. На мобильном viewer остаётся sticky над списком симптомов; выбранный дефект дублируется подписью на сцене и пояснением рядом с кнопками. Для `battery-heat:swollen` и `body:screen-gap` используется боковой preset `edgeGap`, чтобы приподнятый экран и щель были видны.
 - Стили: `styles.css` + `animations.css`. Не внедрять тяжёлый фреймворк.
 
 ---

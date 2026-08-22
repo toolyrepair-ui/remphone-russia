@@ -7,6 +7,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>3D-калькулятор ремонта телефона — REMPHONE</title>
   <meta name="description" content="Что случилось с телефоном: выберите проблему — покажем типичный дефект. Оставьте заявку, уточним модель и назовём стоимость ремонта.">
+  <meta property="og:title" content="3D-калькулятор ремонта телефона — REMPHONE">
+  <meta property="og:description" content="Выберите проблему — интерактивная модель покажет типичный дефект телефона.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://rem-phone.ru/3d-viewer-iphone15.html">
   <link rel="canonical" href="https://rem-phone.ru/3d-viewer-iphone15.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -121,6 +125,36 @@
     .viewer-hint { bottom: 36px; }
     .load-status { top: 50%; transform: translate(-50%, -50%); }
     .load-status[hidden], .viewer-hint[hidden] { display: none; }
+    .viewer-selection {
+      position: absolute;
+      left: 50%;
+      bottom: 18px;
+      z-index: 4;
+      width: min(520px, calc(100% - 32px));
+      transform: translateX(-50%);
+      padding: 10px 14px;
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 12px;
+      background: rgba(11,13,18,0.82);
+      color: #fff;
+      text-align: center;
+      pointer-events: none;
+    }
+    .viewer-selection[hidden] { display: none; }
+    .viewer-selection span {
+      display: block;
+      color: rgba(255,255,255,0.58);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .viewer-selection strong {
+      display: block;
+      margin-top: 2px;
+      font-size: 13px;
+      line-height: 1.3;
+    }
     .model-credit {
       position: absolute;
       left: 16px;
@@ -176,6 +210,7 @@
     }
     .problem-btn, .symptom-btn {
       text-align: left;
+      min-height: 44px;
       border: 1px solid var(--border);
       background: var(--gray);
       border-radius: var(--radius-sm);
@@ -205,6 +240,48 @@
 
     .symptoms { display: grid; gap: 8px; }
     .symptoms-wrap[hidden], .price-box[hidden], .lead-form[hidden], .form-success[hidden] { display: none !important; }
+    .selection-feedback {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--gray);
+    }
+    .selection-feedback[hidden] { display: none; }
+    .selection-feedback span {
+      display: block;
+      color: var(--text-light);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .selection-feedback strong {
+      display: block;
+      margin-top: 4px;
+      font-size: 14px;
+      line-height: 1.35;
+    }
+    .selection-feedback p {
+      margin-top: 5px;
+      color: var(--text-light);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+    .show-viewer-btn {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 44px;
+      margin-top: 10px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fff;
+      color: var(--primary-dark);
+      font-size: 13px;
+      font-weight: 700;
+    }
 
     .price-box {
       margin-top: 16px;
@@ -344,7 +421,21 @@
         height: auto;
         min-height: 100dvh;
       }
-      .panel { border-left: 0; border-top: 1px solid var(--border); }
+      .viewer-wrap {
+        position: sticky;
+        top: 0;
+        z-index: 6;
+        align-self: start;
+        width: 100%;
+        height: 44dvh;
+        min-height: 300px;
+      }
+      .panel {
+        position: relative;
+        z-index: 5;
+        border-left: 0;
+        border-top: 1px solid var(--border);
+      }
       .panel-scroll { overflow: visible; padding: 20px 20px calc(28px + env(safe-area-inset-bottom)); }
       .viewer-chrome {
         top: calc(10px + env(safe-area-inset-top));
@@ -359,6 +450,16 @@
         width: calc(100% - 32px);
         font-size: 11px;
       }
+      .viewer-selection {
+        bottom: 12px;
+        padding: 8px 12px;
+      }
+      .symptoms-wrap,
+      .symptom-btn,
+      .selection-feedback {
+        scroll-margin-top: calc(44dvh + 12px);
+      }
+      .show-viewer-btn { display: inline-flex; }
       .model-credit { display: none; }
       .panel h1 { font-size: 20px; }
     }
@@ -386,6 +487,10 @@
       <canvas id="iphone3d" role="img" aria-label="Интерактивная 3D-модель телефона"></canvas>
       <div class="load-status" id="loadStatus">Загружаем 3D-модель…</div>
       <p class="viewer-hint" id="viewerHint">Перетащите, чтобы крутить · жесты / колёсико — зум</p>
+      <div class="viewer-selection" id="viewerSelection" aria-hidden="true" hidden>
+        <span>Показано на модели</span>
+        <strong id="viewerSelectionTitle"></strong>
+      </div>
       <p class="model-credit">3D-модель для наглядности: <a href="https://sketchfab.com/3d-models/apple-iphone-15-pro-max-black-df17520841214c1792fb8a44c6783ee7" target="_blank" rel="noopener">polyman Studio</a>, CC BY 4.0</p>
     </div>
 
@@ -404,6 +509,12 @@
           <button type="button" class="crumb-back" id="backToCategories">← Все проблемы</button>
           <p class="block-title" id="branchTitle">Уточните симптом</p>
           <div class="symptoms" id="symptoms"></div>
+          <div class="selection-feedback" id="selectionFeedback" role="status" aria-live="polite" hidden>
+            <span>Вы выбрали</span>
+            <strong id="selectionFeedbackTitle"></strong>
+            <p id="selectionFeedbackText"></p>
+            <button type="button" class="show-viewer-btn" id="showViewerBtn">Посмотреть на модели</button>
+          </div>
         </div>
 
         <p class="safety" id="safetyBox" hidden></p>
@@ -467,6 +578,7 @@
   </div>
 
   <script src="config.js"></script>
+  <script src="analytics.js?v=pipeline1"></script>
   <script type="module">
     import * as THREE from 'three';
     import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
@@ -487,15 +599,43 @@
       capabilities: { hasHome: false, hasAction: true, hasWireless: false }
     };
     const pageStartedAt = performance.now();
+    let clientRequestId = '';
+    let clientRequestSelection = '';
+
+    function opaqueRequestId(prefix) {
+      if (window.crypto && typeof window.crypto.randomUUID === 'function') {
+        return prefix + '-' + window.crypto.randomUUID();
+      }
+      const bytes = new Uint8Array(16);
+      if (window.crypto && typeof window.crypto.getRandomValues === 'function') {
+        window.crypto.getRandomValues(bytes);
+        return prefix + '-' + Array.from(bytes, (value) => value.toString(16).padStart(2, '0')).join('');
+      }
+      return prefix + '-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2);
+    }
+
+    function requestIdFor(selection) {
+      const key = JSON.stringify(selection);
+      if (!clientRequestId || clientRequestSelection !== key) {
+        clientRequestId = opaqueRequestId('3d');
+        clientRequestSelection = key;
+      }
+      return clientRequestId;
+    }
+
+    function resetRequestId() {
+      clientRequestId = '';
+      clientRequestSelection = '';
+    }
 
     function track3D(eventName, params = {}) {
       const detail = {
-        event: eventName,
         device_type: isCompact() ? 'mobile' : 'desktop',
         ...params
       };
-      window.dispatchEvent(new CustomEvent('remphone:analytics', { detail }));
-      if (Array.isArray(window.dataLayer)) window.dataLayer.push(detail);
+      if (typeof window.REMPHONE_GA_EVENT === 'function') {
+        window.REMPHONE_GA_EVENT(eventName, detail);
+      }
     }
 
     const wrap = document.getElementById('viewerWrap');
@@ -624,6 +764,7 @@
       bottomPort: { position: new THREE.Vector3(0.12, -0.7, 2.05), target: new THREE.Vector3(0, -0.62, 0), yaw: FACE_Y, pitch: -0.92 },
       leftButtons: { position: new THREE.Vector3(-0.85, 0.12, 2.35), target: new THREE.Vector3(-0.12, 0.1, 0), yaw: FACE_Y + 0.78 },
       rightButton: { position: new THREE.Vector3(0.85, 0.14, 2.35), target: new THREE.Vector3(0.12, 0.12, 0), yaw: FACE_Y - 0.78 },
+      edgeGap: { position: new THREE.Vector3(-0.72, 0.08, 2.35), target: new THREE.Vector3(-0.08, 0.02, 0), yaw: FACE_Y + 0.58 },
       rearCamera: { position: new THREE.Vector3(-0.22, 0.28, 2.45), target: new THREE.Vector3(-0.08, 0.2, 0), yaw: REAR_YAW },
       rearBody: { position: new THREE.Vector3(0.28, 0.06, 2.5), target: new THREE.Vector3(0, 0.02, 0), yaw: REAR_YAW }
     };
@@ -1691,7 +1832,7 @@
       controls.enabled = false;
       camAnim = null;
       rotAnim = null;
-      const duration = reduceMotion ? 0.2 : 1.05;
+      const duration = reduceMotion ? 0.2 : 0.95;
       const resumeIdle = name === 'defaultView';
       const fromPos = camera.position.clone();
       const toPos = preset.position.clone();
@@ -2421,10 +2562,12 @@
       // Щель вздутого OLED: тёмная тень + очень слабый тёплый внутренний блик.
       const gapY = (localMin.y + localMax.y) * 0.5;
       const gapZ = glassZ + glassOut * 0.00015;
+      const gapShadowW = Math.max(0.0035, halfW * 0.018);
+      const gapHighlightW = Math.max(0.0015, halfW * 0.007);
       const gapSpecs = [
-        { x: -halfW * 0.9, y: gapY, w: 0.00055, h: halfH * 1.65, color: 0x17130f, opacity: 0.58 },
-        { x: -halfW * 0.86, y: gapY, w: 0.00022, h: halfH * 1.56, color: 0xc18a55, opacity: 0.16 },
-        { x: 0, y: localMin.y + halfH * 0.08, w: halfW * 1.6, h: 0.0005, color: 0x17130f, opacity: 0.5 }
+        { x: -halfW * 0.9, y: gapY, w: gapShadowW, h: halfH * 1.65, color: 0x17130f, opacity: 0.72 },
+        { x: -halfW * 0.86, y: gapY, w: gapHighlightW, h: halfH * 1.56, color: 0xc18a55, opacity: 0.24 },
+        { x: 0, y: localMin.y + halfH * 0.08, w: halfW * 1.6, h: gapShadowW, color: 0x17130f, opacity: 0.62 }
       ];
       for (const spec of gapSpecs) {
         const material = new THREE.MeshBasicMaterial({
@@ -2777,8 +2920,11 @@
       // 3) Нагрев/вздутие: тёплое смещение дисплея и "тёплый" контур.
       if (problem && problem.key === 'battery-heat') {
         let targetSwell = 0;
-        // D3: около 1 мм в мировом масштабе телефона; направление — наружу от OLED.
-        if (symptom && symptom.id === 'swollen') targetSwell = (phoneAnchors?.glassOut || 1) * 0.0011;
+        // Примерно 1 мм относительно высоты корпуса; тёмная грань сохраняет читаемость на mobile.
+        if (symptom && symptom.id === 'swollen') {
+          const oneMillimeter = Math.max(0.0008, (phoneAnchors?.halfH || 0.8) * 0.0125);
+          targetSwell = (phoneAnchors?.glassOut || 1) * oneMillimeter;
+        }
         if (symptom && symptom.id === 'percent-off') targetSwell = (phoneAnchors?.glassOut || 1) * 0.00012;
 
         if (screenBaseLocal && screenMesh) {
@@ -2786,7 +2932,8 @@
           screenMesh.position.z = screenMesh.position.z + (desiredZ - screenMesh.position.z) * (1 - Math.pow(0.0001, dt));
         }
       } else if (problem && problem.key === 'body' && symptom && symptom.id === 'screen-gap' && screenBaseLocal && screenMesh) {
-        const desiredZ = screenBaseLocal.pos.z + (phoneAnchors?.glassOut || 1) * 0.001;
+        const oneMillimeter = Math.max(0.0008, (phoneAnchors?.halfH || 0.8) * 0.0125);
+        const desiredZ = screenBaseLocal.pos.z + (phoneAnchors?.glassOut || 1) * oneMillimeter;
         screenMesh.position.z = screenMesh.position.z + (desiredZ - screenMesh.position.z) * (1 - Math.pow(0.0001, dt));
       } else if (screenBaseLocal && screenMesh) {
         const desiredZ = screenBaseLocal.pos.z;
@@ -3068,11 +3215,72 @@
       return 'none';
     }
 
+    function resolveCameraPreset(problem, symptom) {
+      if (problem && symptom) {
+        if (problem.key === 'battery-heat' && symptom.id === 'swollen') return 'edgeGap';
+        if (problem.key === 'body' && symptom.id === 'screen-gap') return 'edgeGap';
+      }
+      return (symptom && symptom.camera) || (problem && problem.camera) || 'defaultThreeQuarter';
+    }
+
+    function visualFeedbackText(problem, symptom) {
+      if (!problem || !symptom) return '';
+      const exact = {
+        'battery-heat:swollen': 'Экран приподнят над рамкой, по краю показана щель.',
+        'battery-heat:heat-charge': 'Камера показывает разъём и локальную зону нагрева при зарядке.',
+        'battery-heat:heat-idle': 'Телефон развёрнут задней частью, зона нагрева отмечена мягким светом.',
+        'battery-heat:heat-after': 'Показаны следы влаги и локальный нагрев корпуса.',
+        'body:back-glass': 'Телефон развёрнут к задней крышке, на стекле показаны трещины.',
+        'body:bent': 'Корпус показан сбоку с деформацией по длинной оси.',
+        'body:scratched': 'Телефон развёрнут к крышке; риски заметнее под скользящим углом.',
+        'body:camera-glass-body': 'Камера приближена к повреждённому стеклу одной линзы.',
+        'body:screen-gap': 'Экран смещён наружу, по краю показана тёмная щель.',
+        'other:after-update': 'Физический дефект не имитируем: проблема после обновления требует диагностики.',
+        'other:data': 'Физический дефект не имитируем: зафиксировали запрос на восстановление данных.',
+        'other:custom': 'Физический эффект не выдумываем: симптом будет передан мастеру вашим текстом.',
+      };
+      const key = `${problem.key}:${symptom.id}`;
+      if (exact[key]) return exact[key];
+      if (symptom.overlay === 'broken') return 'На дисплее показаны трещины и повреждение матрицы выбранной интенсивности.';
+      if (symptom.overlay === 'flicker') return 'На дисплее показаны полосы, пятна или нестабильное изображение.';
+      if (symptom.overlay === 'sensor') return 'На дисплее запущена демонстрация реакции сенсора на касание.';
+      if (symptom.overlay === 'off') return 'Дисплей показывает сценарий выключения или попытки запуска.';
+      if (symptom.overlay === 'water') return 'Показана зона попадания влаги, соответствующая выбранному симптому.';
+      if (symptom.overlay === 'heat') return 'Показана зона нагрева или изменение положения экрана.';
+      const zoneLabels = {
+        port: 'Камера показывает разъём зарядки и попытку контакта.',
+        power: 'Камера показывает кнопку питания и её короткий ход.',
+        volume: 'Камера показывает боковые кнопки громкости.',
+        camera: 'Камера показывает модуль камеры и выбранный дефект.',
+        face: 'На дисплее показана проверка фронтальной камеры или Face ID.',
+        ear: 'Показана зона разговорного динамика.',
+        speaker: 'Камера показывает нижнюю сетку динамика.',
+        gap: 'Показана щель между экраном и рамкой.',
+      };
+      const zone = resolveZoneKind(problem, symptom);
+      if (zoneLabels[zone]) return zoneLabels[zone];
+      return symptom.note || 'Симптом зафиксирован для мастера; недостоверный физический эффект не имитируем.';
+    }
+
+    function updateSelectionFeedback(problem, symptom) {
+      const viewerSelection = document.getElementById('viewerSelection');
+      const selectionFeedback = document.getElementById('selectionFeedback');
+      const viewerHint = document.getElementById('viewerHint');
+      const hasSelection = Boolean(problem && symptom);
+      viewerSelection.hidden = !hasSelection;
+      selectionFeedback.hidden = !hasSelection;
+      viewerHint.hidden = hasSelection;
+      if (!hasSelection) return;
+      document.getElementById('viewerSelectionTitle').textContent = symptom.label;
+      document.getElementById('selectionFeedbackTitle').textContent = symptom.label;
+      document.getElementById('selectionFeedbackText').textContent = visualFeedbackText(problem, symptom);
+    }
+
     function applyVisuals() {
       const problem = currentProblem();
       const symptom = currentSymptom();
       setOverlay();
-      const preset = (symptom && symptom.camera) || (problem && problem.camera) || 'defaultThreeQuarter';
+      const preset = resolveCameraPreset(problem, symptom);
       if (calc.activePreset !== preset) {
         calc.activePreset = preset;
         goToPreset(preset);
@@ -3081,10 +3289,17 @@
       const title = problem ? problem.title : 'ремонт телефона';
       const extra = symptom ? symptom.label : 'выберите проблему';
       canvas.setAttribute('aria-label', `Телефон: ${title}, ${extra}`);
+      updateSelectionFeedback(problem, symptom);
     }
 
     function selectProblem(key) {
+      if (calc.problemKey !== key) resetRequestId();
       calc.problemKey = key;
+      document.querySelectorAll('.problem-btn').forEach((btn) => {
+        const active = btn.dataset.key === key;
+        btn.classList.toggle('is-active', active);
+        btn.setAttribute('aria-pressed', String(active));
+      });
       const problem = currentProblem();
       calc.symptomId = problem.symptoms[0].id;
       document.getElementById('categoryWrap').hidden = true;
@@ -3098,7 +3313,17 @@
         symptom_id: calc.symptomId,
         estimated_price: calc.quote && calc.quote.text
       });
-      if (isCompact()) document.getElementById('symptomsWrap').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'nearest' });
+      if (isCompact()) {
+        requestAnimationFrame(() => {
+          const symptomsWrap = document.getElementById('symptomsWrap');
+          symptomsWrap.scrollIntoView({
+            behavior: reduceMotion ? 'auto' : 'smooth',
+            block: 'start'
+          });
+          const selected = symptomsWrap.querySelector('.symptom-btn.is-active');
+          if (selected) selected.focus({ preventScroll: true });
+        });
+      }
     }
 
     function selectSymptom(id) {
@@ -3106,6 +3331,7 @@
       if (!problem) return;
       const symptom = problem.symptoms.find((s) => s.id === id);
       if (!symptom) return;
+      if (calc.symptomId !== symptom.id) resetRequestId();
       calc.symptomId = symptom.id;
       document.querySelectorAll('.symptom-btn').forEach((btn) => {
         const active = btn.dataset.id === id;
@@ -3119,6 +3345,12 @@
         symptom_id: id,
         estimated_price: calc.quote && calc.quote.text
       });
+      if (isCompact()) {
+        document.getElementById('selectionFeedback').scrollIntoView({
+          behavior: reduceMotion ? 'auto' : 'smooth',
+          block: 'nearest'
+        });
+      }
     }
 
     function renderProblems() {
@@ -3150,10 +3382,15 @@
     renderProblems();
 
     document.getElementById('backToCategories').addEventListener('click', () => {
+      resetRequestId();
       calc.problemKey = '';
       calc.symptomId = '';
       calc.quote = null;
       calc.activePreset = '';
+      document.querySelectorAll('.problem-btn').forEach((btn) => {
+        btn.classList.remove('is-active');
+        btn.setAttribute('aria-pressed', 'false');
+      });
       document.getElementById('categoryWrap').hidden = false;
       document.getElementById('symptomsWrap').hidden = true;
       document.getElementById('priceBox').hidden = true;
@@ -3161,8 +3398,16 @@
       document.getElementById('safetyBox').hidden = true;
       applyZoneHighlight('none');
       setOverlay();
+      updateSelectionFeedback(null, null);
       canvas.setAttribute('aria-label', 'Интерактивная 3D-модель телефона');
       goToPreset('defaultView');
+    });
+
+    document.getElementById('showViewerBtn').addEventListener('click', () => {
+      document.getElementById('viewerWrap').scrollIntoView({
+        behavior: reduceMotion ? 'auto' : 'smooth',
+        block: 'start'
+      });
     });
 
     document.getElementById('openLeadBtn').addEventListener('click', () => {
@@ -3215,11 +3460,13 @@
       PRESETS.leftButtons.target.set(center.x - size.x * 0.18, center.y + size.y * 0.08, center.z);
       PRESETS.rightButton.position.set(compact ? 0.55 : 0.82, center.y + size.y * 0.06, dist * 0.92);
       PRESETS.rightButton.target.set(center.x + size.x * 0.18, center.y + size.y * 0.08, center.z);
+      PRESETS.edgeGap.position.set(-(compact ? 0.48 : 0.7), center.y + size.y * 0.02, dist * 0.94);
+      PRESETS.edgeGap.target.set(center.x - size.x * 0.1, center.y, center.z);
       PRESETS.rearCamera.position.set(compact ? -0.08 : -0.16, center.y + size.y * 0.18, dist);
       PRESETS.rearCamera.target.set(center.x - size.x * 0.08, center.y + size.y * 0.22, center.z);
       PRESETS.rearBody.position.set(compact ? 0.06 : 0.1, center.y, dist);
       PRESETS.rearBody.target.set(center.x, center.y, center.z);
-      ['defaultView', 'defaultThreeQuarter', 'frontDisplay', 'screenView', 'leftButtons', 'rightButton', 'rearCamera', 'rearBody'].forEach((k) => {
+      ['defaultView', 'defaultThreeQuarter', 'frontDisplay', 'screenView', 'leftButtons', 'rightButton', 'edgeGap', 'rearCamera', 'rearBody'].forEach((k) => {
         if (PRESETS[k] && PRESETS[k].pitch == null) PRESETS[k].pitch = 0;
       });
     }
@@ -3451,6 +3698,7 @@
     const success = document.getElementById('flowFormSuccess');
     const submitBtn = document.getElementById('flowSubmitBtn');
     const errorBox = document.getElementById('flowSubmitError');
+    document.getElementById('flowCity').addEventListener('change', resetRequestId);
 
     function isRelayConfigured() {
       if (!relayUrl) return false;
@@ -3499,7 +3747,7 @@
       const body = {
         name,
         phone: phoneVal,
-        brand: 'iPhone',
+        brand: 'Телефон',
         model: payload.deviceModelLabel || 'Не указана',
         problem,
         part_preference: '',
@@ -3507,7 +3755,11 @@
         city_id: cityId,
         comment: [comment, JSON.stringify(payload)].filter(Boolean).join('\n'),
         source: 'iphone-calculator',
-        client_request_id: '3d-' + String(phoneVal).replace(/\D/g, '') + '-' + Date.now(),
+        client_request_id: requestIdFor({
+          problem_key: payload.problemKey,
+          symptom_id: payload.symptomId,
+          city_id: cityId
+        }),
         page: location.pathname
       };
       try {
@@ -3528,13 +3780,19 @@
         }
         let json = {};
         try { json = await res.json(); } catch (e) { json = {}; }
-        if (!res.ok || json.success === false) throw new Error(json.message || json.error || ('HTTP ' + res.status));
+        if (!res.ok || json.success === false || json.accepted === false) {
+          throw new Error(json.message || json.error || ('HTTP ' + res.status));
+        }
         form.hidden = true;
         success.hidden = false;
         track3D('3d_lead_success', payload);
+        if (typeof window.REMPHONE_REACH === 'function') {
+          window.REMPHONE_REACH('request-form-submit');
+        }
+        resetRequestId();
       } catch (err) {
         console.error(err);
-        track3D('3d_lead_error', { ...payload, error: String(err && err.message || err) });
+        track3D('3d_lead_error', { source: 'iphone-calculator' });
         errorBox.hidden = false;
         errorBox.textContent = 'Не удалось отправить автоматически. Напишите в Telegram или позвоните: ' + phoneDisplay;
       } finally {

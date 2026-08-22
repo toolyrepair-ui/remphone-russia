@@ -7,6 +7,45 @@
   var TAG = 'https://mc.yandex.ru/metrika/tag.js';
   var started = false;
   var gaStarted = false;
+  var pendingGaEvents = [];
+  var GA_PARAM_KEYS = {
+    device_type: true,
+    problem_key: true,
+    symptom_id: true,
+    price_state: true,
+    load_time_ms: true,
+    source: true,
+  };
+
+  window.dataLayer = window.dataLayer || [];
+  window.gtag =
+    window.gtag ||
+    function () {
+      window.dataLayer.push(arguments);
+    };
+
+  function gaEvent(eventName, params) {
+    if (!eventName) return;
+    var safe = { event_category: 'engagement' };
+    params = params || {};
+    Object.keys(params).forEach(function (key) {
+      if (!GA_PARAM_KEYS[key]) return;
+      var value = params[key];
+      if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
+        safe[key] = value;
+      }
+    });
+    if (!gaStarted) {
+      pendingGaEvents.push([String(eventName), safe]);
+      return;
+    }
+    try {
+      window.gtag('event', String(eventName), safe);
+    } catch (e) {}
+  }
+
+  // GA-only custom events. Never forwards these events to Yandex Metrika.
+  window.REMPHONE_GA_EVENT = gaEvent;
 
   function scriptDir() {
     var scripts = document.getElementsByTagName('script');
@@ -46,13 +85,15 @@
     gaStarted = true;
     measurementId = String(measurementId);
 
-    window.dataLayer = window.dataLayer || [];
     function gtag() {
       window.dataLayer.push(arguments);
     }
     window.gtag = gtag;
     gtag('js', new Date());
     gtag('config', measurementId);
+    pendingGaEvents.splice(0).forEach(function (item) {
+      gtag('event', item[0], item[1]);
+    });
 
     var s = document.createElement('script');
     s.async = true;
@@ -66,9 +107,7 @@
         if (id && typeof ym === 'function') ym(id, 'reachGoal', goal);
       } catch (e) {}
       try {
-        if (typeof window.gtag === 'function') {
-          window.gtag('event', goal, { event_category: 'engagement' });
-        }
+        gaEvent(goal);
       } catch (e2) {}
     }
 
@@ -127,25 +166,17 @@
       reachOnce('request-form-open', key || 'form');
     }
 
+    document.addEventListener('remphone:form-open', function () {
+      openFormOnce('step-3');
+    });
+
     document.addEventListener(
       'focusin',
       function (e) {
         var t = e.target;
         if (!t) return;
-        if (t.closest && (t.closest('#flowRepairForm') || t.closest('#repairForm') || t.closest('form.flow-form'))) {
+        if (t.closest && t.closest('#repairForm')) {
           openFormOnce('focus');
-        }
-      },
-      true
-    );
-
-    document.addEventListener(
-      'click',
-      function (e) {
-        var t = e.target;
-        if (!t || !t.closest) return;
-        if (t.closest('#repair-flow') || t.closest('#flowRepairForm') || t.closest('a[href*="repair-flow"]') || t.closest('a[href="#form"]')) {
-          openFormOnce('click');
         }
       },
       true

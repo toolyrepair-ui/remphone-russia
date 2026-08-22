@@ -187,11 +187,57 @@ if (quickForm) {
     const relayUrl = (cfg.relayUrl || '').trim();
 
     const state = { brand: '', problem: '', cityId: 'khabarovsk', cityName: 'Хабаровск' };
+    let clientRequestId = '';
+    let clientRequestSelection = '';
+
+    function opaqueRequestId(prefix) {
+        if (window.crypto && typeof window.crypto.randomUUID === 'function') {
+            return prefix + '-' + window.crypto.randomUUID();
+        }
+        const bytes = new Uint8Array(16);
+        if (window.crypto && typeof window.crypto.getRandomValues === 'function') {
+            window.crypto.getRandomValues(bytes);
+            return prefix + '-' + Array.from(bytes, (value) => value.toString(16).padStart(2, '0')).join('');
+        }
+        return prefix + '-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2);
+    }
+
+    function logicalSelection(data) {
+        return JSON.stringify([
+            data.brand || '',
+            data.problem || '',
+            data.part_preference || '',
+            data.model || '',
+            data.city_id || '',
+        ]);
+    }
+
+    function requestIdFor(data) {
+        const selection = logicalSelection(data);
+        if (!clientRequestId || clientRequestSelection !== selection) {
+            clientRequestId = opaqueRequestId('site');
+            clientRequestSelection = selection;
+        }
+        return clientRequestId;
+    }
+
+    function resetRequestId() {
+        clientRequestId = '';
+        clientRequestSelection = '';
+    }
     const CITY_MAP = {
         khabarovsk: { name: 'Хабаровск', prep: 'в Хабаровске', href: '/khabarovsk/' },
         komsomolsk: { name: 'Комсомольск-на-Амуре', prep: 'в Комсомольске-на-Амуре', href: '/komsomolsk-na-amure/' },
         vladivostok: { name: 'Владивосток', prep: 'во Владивостоке', href: '/vladivostok/' },
     };
+    const CITY_COORDS = {
+        khabarovsk: { latitude: 48.4827, longitude: 135.0838 },
+        komsomolsk: { latitude: 50.5503, longitude: 137.0079 },
+        vladivostok: { latitude: 43.1155, longitude: 131.8855 },
+    };
+    const CITY_GEO_CACHE_KEY = 'remphone_geo_city_v1';
+    const CITY_GEO_CACHE_TTL = 24 * 60 * 60 * 1000;
+    let citySelectionLocked = false;
     const panels = {
         1: document.getElementById('stepBrand'),
         2: document.getElementById('stepProblem'),
@@ -210,31 +256,147 @@ if (quickForm) {
     const errorBox = document.getElementById('flowSubmitError');
     const flowCity = document.getElementById('flowCity');
     const flowCityId = document.getElementById('flowCityId');
+    const flowCityName = document.getElementById('flowCityName');
+    const toggleFlowCity = document.getElementById('toggleFlowCity');
     const heroTitle = document.getElementById('heroCityTitle');
     const heroLead = document.getElementById('heroCityLead');
+    const heroCityName = document.getElementById('heroCityName');
+    const cityPicker = document.getElementById('cityPicker');
+    const toggleCityPicker = document.getElementById('toggleCityPicker');
     const nearbyBox = document.getElementById('nearbyPartners');
     const nearbyList = document.getElementById('nearbyPartnersList');
 
     function setCity(cityId, opts) {
-        const syncHero = !opts || opts.syncHero !== false;
-        const meta = CITY_MAP[cityId] || CITY_MAP.khabarovsk;
-        state.cityId = meta === CITY_MAP[cityId] ? cityId : 'khabarovsk';
+        opts = opts && typeof opts === 'object' ? opts : {};
+        const syncHero = opts.syncHero !== false;
         if (!CITY_MAP[cityId]) cityId = 'khabarovsk';
+        if (state.cityId !== cityId) resetRequestId();
         state.cityId = cityId;
         state.cityName = CITY_MAP[cityId].name;
-        try { sessionStorage.setItem('remphone_city_id', cityId); } catch (e) {}
+        if (opts.persist !== false) {
+            try { sessionStorage.setItem('remphone_city_id', cityId); } catch (e) {}
+        }
         if (flowCity) flowCity.value = cityId;
         if (flowCityId) flowCityId.value = cityId;
+        if (flowCityName) flowCityName.textContent = CITY_MAP[cityId].name;
         document.querySelectorAll('#cityPicker .city-chip').forEach((btn) => {
             const selected = btn.dataset.cityId === cityId;
             btn.classList.toggle('is-active', selected);
             btn.setAttribute('aria-pressed', selected ? 'true' : 'false');
         });
         if (syncHero && heroTitle) {
-            heroTitle.innerHTML = 'Ремонт телефонов <span>' + CITY_MAP[cityId].prep + '</span>';
+            heroTitle.innerHTML =
+                'Ремонт телефонов <span>' +
+                CITY_MAP[cityId].prep +
+                '</span> — обычно за 30–60 минут';
         }
         if (syncHero && heroLead) {
-            heroLead.textContent = 'Отправьте заявку — мы отремонтируем ' + CITY_MAP[cityId].prep + '.';
+            heroLead.textContent =
+                'Отправьте заявку — мы отремонтируем. Диагностика бесплатно, гарантия 90 дней.';
+        }
+        if (heroCityName) heroCityName.textContent = CITY_MAP[cityId].name;
+    }
+
+    function radians(value) {
+        return value * Math.PI / 180;
+    }
+
+    function distanceKm(from, to) {
+        const earthRadiusKm = 6371;
+        const latDelta = radians(to.latitude - from.latitude);
+        const lonDelta = radians(to.longitude - from.longitude);
+        const a =
+            Math.sin(latDelta / 2) * Math.sin(latDelta / 2) +
+            Math.cos(radians(from.latitude)) *
+                Math.cos(radians(to.latitude)) *
+                Math.sin(lonDelta / 2) *
+                Math.sin(lonDelta / 2);
+        return earthRadiusKm * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    }
+
+    function cityIdFromGeo(data) {
+        const normalizedCity = String(data.city || '')
+            .toLowerCase()
+            .replace(/ё/g, 'е')
+            .replace(/[^a-zа-я0-9]+/g, '-')
+            .replace(/^-|-$/g, '');
+        const aliases = {
+            khabarovsk: 'khabarovsk',
+            'хабаровск': 'khabarovsk',
+            vladivostok: 'vladivostok',
+            'владивосток': 'vladivostok',
+            'komsomolsk-on-amur': 'komsomolsk',
+            'komsomolsk-na-amure': 'komsomolsk',
+            'комсомольск-на-амуре': 'komsomolsk',
+        };
+        if (aliases[normalizedCity]) return aliases[normalizedCity];
+
+        const latitude = Number(data.latitude);
+        const longitude = Number(data.longitude);
+        if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) return '';
+
+        const visitor = { latitude, longitude };
+        const nearest = Object.keys(CITY_COORDS)
+            .map((cityId) => ({ cityId, distance: distanceKm(visitor, CITY_COORDS[cityId]) }))
+            .sort((a, b) => a.distance - b.distance)[0];
+        return nearest && nearest.distance <= 80 ? nearest.cityId : '';
+    }
+
+    function cachedGeoCity() {
+        try {
+            const cached = JSON.parse(localStorage.getItem(CITY_GEO_CACHE_KEY) || 'null');
+            if (
+                cached &&
+                CITY_MAP[cached.cityId] &&
+                Date.now() - Number(cached.detectedAt || 0) < CITY_GEO_CACHE_TTL
+            ) {
+                return cached.cityId;
+            }
+        } catch (e) {}
+        return '';
+    }
+
+    function saveGeoCity(cityId) {
+        try {
+            localStorage.setItem(
+                CITY_GEO_CACHE_KEY,
+                JSON.stringify({ cityId, detectedAt: Date.now() })
+            );
+        } catch (e) {}
+    }
+
+    async function detectCityFromIp() {
+        if (citySelectionLocked) return;
+
+        const cachedCityId = cachedGeoCity();
+        if (cachedCityId) {
+            setCity(cachedCityId, { syncHero: true });
+            return;
+        }
+
+        const controller = typeof AbortController === 'function' ? new AbortController() : null;
+        const timeoutId = controller ? window.setTimeout(() => controller.abort(), 2500) : null;
+        try {
+            const response = await fetch(
+                'https://ipwho.is/?fields=success,country_code,city,latitude,longitude',
+                {
+                    cache: 'no-store',
+                    credentials: 'omit',
+                    referrerPolicy: 'no-referrer',
+                    signal: controller ? controller.signal : undefined,
+                }
+            );
+            if (!response.ok) return;
+            const data = await response.json();
+            if (citySelectionLocked || data.success === false || data.country_code !== 'RU') return;
+            const detectedCityId = cityIdFromGeo(data);
+            if (!detectedCityId) return;
+            setCity(detectedCityId, { syncHero: true });
+            saveGeoCity(detectedCityId);
+        } catch (e) {
+            // Если геосервис недоступен, остаётся безопасный город по умолчанию.
+        } finally {
+            if (timeoutId !== null) window.clearTimeout(timeoutId);
         }
     }
 
@@ -242,8 +404,10 @@ if (quickForm) {
         const params = new URLSearchParams(window.location.search || '');
         let cityId = (params.get('city') || params.get('city_id') || '').toLowerCase();
         if (cityId === 'komsomolsk-na-amure') cityId = 'komsomolsk';
+        let source = CITY_MAP[cityId] ? 'query' : '';
         if (!CITY_MAP[cityId]) {
             try { cityId = sessionStorage.getItem('remphone_city_id') || ''; } catch (e) { cityId = ''; }
+            if (CITY_MAP[cityId]) source = 'session';
         }
         if (!CITY_MAP[cityId] && document.referrer) {
             try {
@@ -257,9 +421,15 @@ if (quickForm) {
                 } else if (/\/khabarovsk(?:\/|\.html$)/.test(referrerPath)) {
                     cityId = 'khabarovsk';
                 }
+                if (CITY_MAP[cityId]) source = 'referrer';
             } catch (e) {}
         }
-        if (!CITY_MAP[cityId]) cityId = 'khabarovsk';
+        citySelectionLocked = Boolean(source);
+        if (!CITY_MAP[cityId]) {
+            setCity('khabarovsk', { syncHero: true, persist: false });
+            detectCityFromIp();
+            return;
+        }
         setCity(cityId, { syncHero: true });
     }
 
@@ -319,13 +489,68 @@ if (quickForm) {
 
     initCityFromQuery();
 
+    function setCityPickerOpen(open) {
+        if (!cityPicker || !toggleCityPicker) return;
+        cityPicker.hidden = !open;
+        toggleCityPicker.setAttribute('aria-expanded', String(open));
+        if (open) {
+            const selected = cityPicker.querySelector('[aria-pressed="true"]');
+            if (selected) selected.focus();
+        }
+    }
+
+    function setFlowCityOpen(open) {
+        if (!flowCity || !toggleFlowCity) return;
+        flowCity.hidden = !open;
+        toggleFlowCity.setAttribute('aria-expanded', String(open));
+        if (open) flowCity.focus();
+    }
+
+    if (toggleCityPicker) {
+        toggleCityPicker.addEventListener('click', () => {
+            setCityPickerOpen(toggleCityPicker.getAttribute('aria-expanded') !== 'true');
+        });
+    }
+
     document.querySelectorAll('#cityPicker .city-chip').forEach((btn) => {
-        btn.addEventListener('click', () => setCity(btn.dataset.cityId || 'khabarovsk'));
+        btn.addEventListener('click', () => {
+            citySelectionLocked = true;
+            setCity(btn.dataset.cityId || 'khabarovsk');
+            setCityPickerOpen(false);
+            if (toggleCityPicker) toggleCityPicker.focus();
+        });
     });
     if (flowCity) {
-        flowCity.addEventListener('change', () => setCity(flowCity.value || 'khabarovsk'));
+        flowCity.addEventListener('change', () => {
+            citySelectionLocked = true;
+            setCity(flowCity.value || 'khabarovsk');
+            setFlowCityOpen(false);
+            if (toggleFlowCity) toggleFlowCity.focus();
+        });
     }
+    if (toggleFlowCity) {
+        toggleFlowCity.addEventListener('click', () => {
+            setFlowCityOpen(toggleFlowCity.getAttribute('aria-expanded') !== 'true');
+        });
+    }
+    const heroPrimaryCta = document.getElementById('heroPrimaryCta');
+    if (heroPrimaryCta) {
+        heroPrimaryCta.addEventListener('click', (event) => {
+            event.preventDefault();
+            goTo(1);
+            if (history.replaceState) history.replaceState(null, '', '#stepBrand');
+        });
+    }
+    document.addEventListener('click', (event) => {
+        const link = event.target.closest('a[href="#stepBrand"]');
+        if (!link || link === heroPrimaryCta) return;
+        event.preventDefault();
+        goTo(1);
+        if (history.replaceState) history.replaceState(null, '', '#stepBrand');
+    });
+
     function goTo(step) {
+        let activePanel = null;
         Object.keys(panels).forEach((key) => {
             const panel = panels[key];
             if (!panel) return;
@@ -333,6 +558,7 @@ if (quickForm) {
             panel.hidden = !active;
             panel.classList.toggle('is-active', active);
             if (active) {
+                activePanel = panel;
                 panel.classList.remove('step-enter');
                 void panel.offsetWidth;
                 panel.classList.add('step-enter');
@@ -343,7 +569,18 @@ if (quickForm) {
             el.classList.toggle('is-active', n === step);
             el.classList.toggle('is-done', n < step);
         });
-        root.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (step === 3) {
+            document.dispatchEvent(new CustomEvent('remphone:form-open'));
+        }
+        if (activePanel) {
+            const heading = activePanel.querySelector('h2');
+            activePanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            window.setTimeout(() => {
+                if (!heading) return;
+                if (!heading.hasAttribute('tabindex')) heading.setAttribute('tabindex', '-1');
+                heading.focus({ preventScroll: true });
+            }, 220);
+        }
     }
 
     applyBrandModelQuery();
@@ -406,10 +643,14 @@ if (quickForm) {
             });
             return false;
         }
-        if (requireContacts && (!data.name || !data.phone)) {
-            showError(!data.name ? 'Укажите имя.' : 'Укажите номер телефона.');
-            const target = document.getElementById(!data.name ? 'flowName' : 'flowPhone');
-            if (target) target.focus();
+        const phoneDigits = String(data.phone || '').replace(/\D/g, '');
+        if (requireContacts && phoneDigits.length < 10) {
+            showError('Проверьте номер телефона: должно быть не менее 10 цифр.');
+            const target = document.getElementById('flowPhone');
+            if (target) {
+                target.setAttribute('aria-invalid', 'true');
+                target.focus();
+            }
             return false;
         }
         return true;
@@ -431,6 +672,7 @@ if (quickForm) {
         if (typeof window.REMPHONE_REACH === 'function') {
             window.REMPHONE_REACH('request-form-submit');
         }
+        resetRequestId();
     }
 
     function showError(message) {
@@ -447,6 +689,8 @@ if (quickForm) {
             errorBox.hidden = true;
             errorBox.textContent = '';
         }
+        const phone = document.getElementById('flowPhone');
+        if (phone) phone.removeAttribute('aria-invalid');
     }
 
     function isRelayConfigured() {
@@ -480,7 +724,7 @@ if (quickForm) {
                     city_id: data.city_id || 'khabarovsk',
                     comment: data.comment || '',
                     source: 'site',
-                    client_request_id: 'site-' + String(data.phone || '').replace(/\D/g, '') + '-' + Date.now(),
+                    client_request_id: requestIdFor(data),
                     utm: data.utm || {},
                     page: typeof location !== 'undefined' ? location.pathname : '',
                 }),
@@ -497,7 +741,7 @@ if (quickForm) {
             json = {};
         }
 
-        if (!res.ok || json.success === false) {
+        if (!res.ok || json.success === false || json.accepted === false) {
             throw new Error(json.message || json.error || ('HTTP ' + res.status));
         }
         return json;
@@ -509,6 +753,9 @@ if (quickForm) {
 
         const data = readFields();
         if (!validateForMessenger(data, true)) return;
+        if (typeof window.REMPHONE_GA_EVENT === 'function') {
+            window.REMPHONE_GA_EVENT('request-form-attempt');
+        }
 
         if (submitBtn) {
             submitBtn.disabled = true;
@@ -520,6 +767,9 @@ if (quickForm) {
             showSuccess(result.partners || []);
         } catch (err) {
             console.error('Relay submit failed', err);
+            if (typeof window.REMPHONE_GA_EVENT === 'function') {
+                window.REMPHONE_GA_EVENT('request-form-error');
+            }
             showError(
                 'Не удалось отправить автоматически. Напишите нам в Telegram или позвоните: ' +
                     phoneDisplay
@@ -527,7 +777,7 @@ if (quickForm) {
         } finally {
             if (submitBtn) {
                 submitBtn.disabled = false;
-                submitBtn.textContent = 'Отправить заявку';
+                submitBtn.textContent = 'Уточнить стоимость';
             }
         }
     }
@@ -538,7 +788,9 @@ if (quickForm) {
                 c.classList.remove('is-selected', 'card-selected');
             });
             card.classList.add('is-selected', 'card-selected');
-            state.brand = card.dataset.brand || '';
+            const nextBrand = card.dataset.brand || '';
+            if (state.brand !== nextBrand) resetRequestId();
+            state.brand = nextBrand;
             if (brandLabel) brandLabel.textContent = state.brand;
             if (flowBrand) flowBrand.value = state.brand;
             if (summaryBrand) summaryBrand.textContent = state.brand;
@@ -553,7 +805,9 @@ if (quickForm) {
                 c.classList.remove('is-selected', 'card-selected');
             });
             card.classList.add('is-selected', 'card-selected');
-            state.problem = card.dataset.problem || '';
+            const nextProblem = card.dataset.problem || '';
+            if (state.problem !== nextProblem) resetRequestId();
+            state.problem = nextProblem;
             if (flowProblem) flowProblem.value = state.problem;
             if (summaryProblem) summaryProblem.textContent = state.problem;
             setTimeout(() => goTo(3), 180);
@@ -600,10 +854,14 @@ if (quickForm) {
     if (form) {
         form.addEventListener('submit', handlePrimarySubmit);
     }
+    [document.getElementById('flowModel'), flowPartPreference].forEach((field) => {
+        if (field) field.addEventListener('change', resetRequestId);
+    });
 
     const restart = document.getElementById('flowRestart');
     if (restart) {
         restart.addEventListener('click', () => {
+            resetRequestId();
             state.brand = '';
             state.problem = '';
             document.querySelectorAll('.flow-card.is-selected, .flow-card.card-selected').forEach((c) => {
@@ -631,6 +889,7 @@ if (quickForm) {
         const brand = opts.brand || '';
         const preference = opts.part_preference || '';
         const problem = opts.problem || 'Разбит экран';
+        resetRequestId();
 
         state.brand = brand;
         state.problem = problem;
