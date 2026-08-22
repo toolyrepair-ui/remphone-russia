@@ -5,6 +5,7 @@
 (function () {
   var root = document.getElementById('displayCompare');
   if (!root) return;
+  if (root.getAttribute('data-auto-show') === 'false') return;
 
   var CONFIG_URL = root.getAttribute('data-config') || 'displays-config.json';
   var tabsEl = root.querySelector('[data-dc-tabs]');

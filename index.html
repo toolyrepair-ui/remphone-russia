@@ -14,7 +14,7 @@
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Space+Grotesk:wght@600;700&display=swap"></noscript>
     <meta name="theme-color" content="#0B1F3A">
     <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
-    <link rel="stylesheet" href="styles.css?v=leadfix2">
+    <link rel="stylesheet" href="styles.css?v=tz-review2">
     <link rel="stylesheet" href="animations.css">
 
     <!-- Open Graph -->
@@ -65,38 +65,13 @@
         "@context": "https://schema.org",
         "@type": "FAQPage",
         "mainEntity": [
-            {
-                "@type": "Question",
-                "name": "Сколько времени занимает ремонт?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Большинство поломок мы чиним за 30–60 минут. Сложные случаи — до 24 часов. Точное время скажет мастер после диагностики."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Сколько стоит ремонт?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Цена зависит от модели и типа поломки. От 1000₽. Отправьте заявку — мы рассчитаем бесплатно."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Какие гарантии вы даёте?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "На все работы и запчасти — 90 дней. Если что-то сломается — починим бесплатно."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "У вас есть выезд?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Да, мастера выезжают по адресу в Хабаровске и крае. Или вы можете привезти телефон в сервис."
-                }
-            }
+            {"@type": "Question", "name": "Сколько времени занимает ремонт?", "acceptedAnswer": {"@type": "Answer", "text": "Большинство типовых ремонтов занимает 30–60 минут. Точный срок мастер назовёт после диагностики."}},
+            {"@type": "Question", "name": "Сколько стоит ремонт?", "acceptedAnswer": {"@type": "Answer", "text": "Стоимость зависит от модели, поломки и выбранной детали. Точную сумму согласуем до начала работ."}},
+            {"@type": "Question", "name": "Диагностика действительно бесплатная?", "acceptedAnswer": {"@type": "Answer", "text": "Да, диагностика устройства бесплатная. После неё объясним причину поломки и варианты ремонта."}},
+            {"@type": "Question", "name": "Какая гарантия на ремонт?", "acceptedAnswer": {"@type": "Answer", "text": "На все выполненные работы действует гарантия 90 дней."}},
+            {"@type": "Question", "name": "Оригинал или аналог — что выбрать?", "acceptedAnswer": {"@type": "Answer", "text": "Выбор зависит от модели и требований к экрану. Гарантия на работы одинаковая, стоимость мастер согласует до ремонта."}},
+            {"@type": "Question", "name": "Есть ли выезд мастера?", "acceptedAnswer": {"@type": "Answer", "text": "Да. После заявки согласуем удобные место и время."}},
+            {"@type": "Question", "name": "В каких городах вы работаете?", "acceptedAnswer": {"@type": "Answer", "text": "Работаем в Хабаровске, Комсомольске-на-Амуре и Владивостоке."}}
         ]
     }
     </script>
@@ -117,11 +92,17 @@
 
 <section class="repair-flow hero" id="repair-flow">
     <div class="container">
-        <div class="flow-intro">
+        <div class="flow-intro" id="heroOffer">
             <div class="hero-badge"><span class="hero-badge-dot"></span>Заявка за 15 секунд · 24/7</div>
-            <h1 id="heroCityTitle">Ремонт телефонов <span>в Хабаровске</span></h1>
-            <p class="flow-lead" id="heroCityLead">Отправьте заявку — мы отремонтируем. Гарантия 90 дней.</p>
-            <div class="city-picker" id="cityPicker" role="group" aria-label="Выбор города">
+            <h1 id="heroCityTitle">Ремонт телефонов <span>в Хабаровске</span> — обычно за 30–60 минут</h1>
+            <p class="flow-lead" id="heroCityLead">Отправьте заявку — мы отремонтируем. Диагностика бесплатно, гарантия 90 дней.</p>
+            <a href="#stepBrand" class="btn-primary hero-primary-cta" id="heroPrimaryCta">Уточнить стоимость ремонта</a>
+            <p class="hero-primary-note">Точную сумму согласуем до начала работ.</p>
+            <div class="hero-city-control">
+                <span>Город: <strong id="heroCityName">Хабаровск</strong></span>
+                <button type="button" id="toggleCityPicker" aria-expanded="false" aria-controls="cityPicker">изменить</button>
+            </div>
+            <div class="city-picker city-picker-compact" id="cityPicker" role="group" aria-label="Выбор города" hidden>
                 <button type="button" class="city-chip is-active" aria-pressed="true" data-city-id="khabarovsk" data-city-name="Хабаровск" data-city-prep="в Хабаровске">Хабаровск</button>
                 <button type="button" class="city-chip" aria-pressed="false" data-city-id="komsomolsk" data-city-name="Комсомольск-на-Амуре" data-city-prep="в Комсомольске-на-Амуре">Комсомольск-на-Амуре</button>
                 <button type="button" class="city-chip" aria-pressed="false" data-city-id="vladivostok" data-city-name="Владивосток" data-city-prep="во Владивостоке">Владивосток</button>
@@ -131,7 +112,6 @@
                 <a href="/komsomolsk-na-amure/">Комсомольск-на-Амуре</a> ·
                 <a href="/vladivostok/">Владивосток</a>
             </p>
-            <p class="brand-trust" style="margin-top:14px">30–60 минут · гарантия 90 дней · диагностика бесплатно</p>
         </div>
 
         <div class="flow-progress" id="flowProgress" aria-label="Прогресс заявки">
@@ -304,7 +284,7 @@
         <div class="flow-panel" id="stepForm" data-panel="3" hidden>
             <div class="flow-panel-head">
                 <button type="button" class="flow-back" id="backToProblem">← Назад</button>
-                <h2 class="flow-panel-title">Оставьте контакты</h2>
+                <h2 class="flow-panel-title" id="stepFormTitle" tabindex="-1">Куда сообщить стоимость?</h2>
             </div>
             <div class="flow-summary" id="flowSummary">
                 <span class="flow-summary-chip" id="summaryBrand">—</span>
@@ -316,22 +296,22 @@
                 <input type="hidden" id="flowProblem" name="problem" value="">
                 <input type="hidden" id="flowPartPreference" name="part_preference" value="">
                 <div class="form-group">
-                    <label for="flowName">Ваше имя *</label>
-                    <input type="text" id="flowName" name="name" placeholder="Алексей" required autocomplete="name">
-                </div>
-                <div class="form-group">
                     <label for="flowPhone">Ваш телефон *</label>
                     <input type="tel" id="flowPhone" name="phone" placeholder="+7 914 411-17-30" required autocomplete="tel" inputmode="tel">
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="flowModel">Модель</label>
-                        <input type="text" id="flowModel" name="model" placeholder="iPhone 13, Galaxy A54..." autocomplete="off" list="repair-model-list">
+                        <label for="flowModel">Модель <span class="form-optional">необязательно</span></label>
+                        <input type="text" id="flowModel" name="model" placeholder="Например, iPhone 13…" autocomplete="off" list="repair-model-list">
                         <!-- repair-models-datalist:start --><datalist id="repair-model-list"><option value="iPhone 17 Pro Max"><option value="iPhone 17 Pro"><option value="iPhone 17"><option value="iPhone 17e"><option value="iPhone 16 Pro Max"><option value="iPhone 16 Pro"><option value="iPhone 16 Plus"><option value="iPhone 16"><option value="iPhone 15 Pro Max"><option value="iPhone 15 Pro"><option value="iPhone 15 Plus"><option value="iPhone 15"><option value="iPhone 14 Pro Max"><option value="iPhone 14 Pro"><option value="iPhone 14 Plus"><option value="iPhone 14"><option value="iPhone 13 Pro Max"><option value="iPhone 13 Pro"><option value="iPhone 13 mini"><option value="iPhone 13"><option value="iPhone 12 Pro Max"><option value="iPhone 12 Pro"><option value="iPhone 12"><option value="iPhone 11 Pro Max"><option value="iPhone 11 Pro"><option value="iPhone 11"><option value="iPhone XS Max"><option value="iPhone XS"><option value="iPhone XR"><option value="iPhone X"><option value="iPhone SE 2022"><option value="iPhone 8 Plus"><option value="iPhone 8"><option value="iPhone 7 Plus"><option value="iPhone 7"><option value="iPhone 6s Plus"><option value="iPhone 6s"><option value="iPhone 6 Plus"><option value="iPhone 6"><option value="Honor 50"><option value="Honor 90"><option value="Honor X8"><option value="Nova 9"><option value="P40 Lite"><option value="Galaxy A51"><option value="Galaxy A52"><option value="Galaxy A54"><option value="Galaxy S21"><option value="Galaxy S22"><option value="POCO X5"><option value="Redmi 10"><option value="Redmi Note 10"><option value="Redmi Note 12"></datalist><!-- repair-models-datalist:end -->
                     </div>
-                    <div class="form-group">
-                        <label for="flowCity">Город *</label>
-                        <select id="flowCity" name="city" required>
+                    <div class="form-group flow-city-group">
+                        <div class="flow-city-confirm">
+                            <span>Город: <strong id="flowCityName">Хабаровск</strong></span>
+                            <button type="button" id="toggleFlowCity" aria-expanded="false" aria-controls="flowCity">изменить</button>
+                        </div>
+                        <label class="sr-only" for="flowCity">Выберите город</label>
+                        <select id="flowCity" name="city" required hidden>
                             <option value="khabarovsk" data-name="Хабаровск">Хабаровск</option>
                             <option value="komsomolsk" data-name="Комсомольск-на-Амуре">Комсомольск-на-Амуре</option>
                             <option value="vladivostok" data-name="Владивосток">Владивосток</option>
@@ -339,29 +319,22 @@
                         <input type="hidden" id="flowCityId" name="city_id" value="khabarovsk">
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="flowComment">Комментарий</label>
-                    <textarea id="flowComment" name="comment" rows="3" placeholder="Удобное время, детали поломки..."></textarea>
-                </div>
-                <p class="flow-actions-label">Отправить заявку</p>
-                <button type="submit" class="form-submit flow-submit-primary" id="flowSubmitBtn">Отправить заявку</button>
+                <details class="flow-extra-details">
+                    <summary>Добавить имя, удобное время или детали</summary>
+                    <div class="flow-extra-fields">
+                        <div class="form-group">
+                            <label for="flowName">Ваше имя <span class="form-optional">необязательно</span></label>
+                            <input type="text" id="flowName" name="name" placeholder="Например, Алексей…" autocomplete="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="flowComment">Комментарий <span class="form-optional">необязательно</span></label>
+                            <textarea id="flowComment" name="comment" rows="3" placeholder="Удобное время или детали поломки…"></textarea>
+                        </div>
+                    </div>
+                </details>
+                <button type="submit" class="form-submit flow-submit-primary" id="flowSubmitBtn">Уточнить стоимость</button>
                 <p id="flowSubmitError" class="flow-submit-error" role="alert" aria-live="assertive" hidden></p>
-                <p class="flow-actions-label flow-actions-label-secondary">Или быстрая связь</p>
-                <div class="flow-actions flow-actions-secondary" id="flowActions">
-                    <button type="button" class="action-btn action-call" data-action="call">
-                        <img src="assets/messengers/phone.svg" alt="" width="20" height="20" onerror="this.src='assets/placeholders/placeholder.svg'">
-                        Позвонить
-                    </button>
-                    <button type="button" class="action-btn action-wa" data-action="whatsapp">
-                        <img src="assets/messengers/whatsapp.svg" alt="" width="20" height="20" onerror="this.src='assets/placeholders/placeholder.svg'">
-                        WhatsApp
-                    </button>
-                    <button type="button" class="action-btn action-tg" data-action="telegram">
-                        <img src="assets/messengers/telegram.svg" alt="" width="20" height="20" onerror="this.src='assets/placeholders/placeholder.svg'">
-                        Telegram
-                    </button>
-                </div>
-                <p class="flow-form-note">Резерв: <a href="tel:+79144111730">+7 914 411-17-30</a> · <a href="https://t.me/REMPHONE_RUSSIA_Bot" target="_blank" rel="noopener">@REMPHONE_RUSSIA_Bot</a></p>
+                <p class="flow-form-note">Мастер свяжется с вами, уточнит модель и согласует стоимость до ремонта.</p>
             </form>
             <div class="form-success" id="flowFormSuccess" hidden>
                 <div class="form-success-icon" aria-hidden="true">✓</div>
@@ -401,39 +374,6 @@
             <div class="trust-bar-item">
                 <div class="trust-bar-icon trust-ico"><img src="assets/brand/remphone-mark.svg" alt="" width="28" height="28"></div>
                 <div class="trust-bar-text"><h3>Диагностика</h3><p>Бесплатно до ремонта</p></div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="calculator-entry reveal" aria-labelledby="calculatorEntryTitle">
-    <div class="container">
-        <div class="calculator-entry-card">
-            <div class="calculator-entry-visual" aria-hidden="true">
-                <div class="calculator-phone">
-                    <span class="calculator-phone-camera"></span>
-                    <span class="calculator-phone-scan"></span>
-                    <span class="calculator-phone-mark calculator-phone-mark-one"></span>
-                    <span class="calculator-phone-mark calculator-phone-mark-two"></span>
-                    <span class="calculator-phone-mark calculator-phone-mark-three"></span>
-                </div>
-                <span class="calculator-visual-label">Интерактивная 3D-модель</span>
-            </div>
-            <div class="calculator-entry-copy">
-                <p class="calculator-entry-eyebrow">Наглядная диагностика</p>
-                <h2 id="calculatorEntryTitle">Не знаете, как описать поломку?</h2>
-                <p>Выберите симптом на 3D-модели телефона. Покажем типичный дефект и передадим мастеру понятное описание проблемы.</p>
-                <div class="calculator-entry-points" aria-label="Возможности калькулятора">
-                    <span>Экран</span>
-                    <span>Вода</span>
-                    <span>Зарядка</span>
-                    <span>Корпус</span>
-                </div>
-                <div class="calculator-entry-actions">
-                    <a href="3d-viewer-iphone15.html" class="btn-primary">Открыть 3D-калькулятор</a>
-                    <a href="#repair-flow" class="calculator-entry-link">Сразу оставить заявку</a>
-                </div>
-                <p class="calculator-entry-note">Модель телефона и стоимость уточним при обратной связи.</p>
             </div>
         </div>
     </div>
@@ -498,7 +438,7 @@
     </div>
 </section>
 
-<section class="display-compare reveal" id="displayCompare" data-config="displays-config.json?v=benefits2" hidden aria-label="Сравнение оригинального и аналогового дисплея">
+<section class="display-compare reveal" id="displayCompare" data-config="displays-config.json?v=benefits2" data-auto-show="false" hidden aria-label="Сравнение оригинального и аналогового дисплея">
     <div class="container">
         <div class="text-center">
             <h2 class="section-title">Оригинал или аналог?</h2>
@@ -574,32 +514,6 @@
     </div>
 </section>
 
-<section class="reviews commitments reveal" id="reviews">
-    <div class="container">
-        <div class="text-center">
-            <h2 class="section-title">Наши обязательства</h2>
-            <p class="section-subtitle">Сначала согласуем условия — затем начинаем ремонт</p>
-        </div>
-        <div class="commitments-grid">
-            <article class="commitment-card">
-                <span class="commitment-num">01</span>
-                <h3>Проверим устройство</h3>
-                <p>Диагностика бесплатна. Объясним причину поломки понятным языком.</p>
-            </article>
-            <article class="commitment-card">
-                <span class="commitment-num">02</span>
-                <h3>Назовём цену заранее</h3>
-                <p>Стоимость и вариант детали согласуем до начала работ.</p>
-            </article>
-            <article class="commitment-card">
-                <span class="commitment-num">03</span>
-                <h3>Дадим гарантию</h3>
-                <p>На выполненные работы действует гарантия 90 дней.</p>
-            </article>
-        </div>
-    </div>
-</section>
-
 <section class="faq reveal" id="faq">
     <div class="container">
         <div class="text-center">
@@ -609,19 +523,63 @@
         <div class="faq-list">
             <div class="faq-item active">
                 <button type="button" class="faq-question">Сколько времени занимает ремонт?</button>
-                <div class="faq-answer">Большинство поломок мы чиним за 30–60 минут. Сложные случаи — до 24 часов. Точное время скажет мастер после диагностики.</div>
+                <div class="faq-answer">Большинство типовых ремонтов занимает 30–60 минут. Точный срок мастер назовёт после диагностики.</div>
             </div>
             <div class="faq-item">
                 <button type="button" class="faq-question">Сколько стоит ремонт?</button>
-                <div class="faq-answer">Цена зависит от модели и типа поломки. От 1000₽. Отправьте заявку — мы рассчитаем бесплатно.</div>
+                <div class="faq-answer">Стоимость зависит от модели, поломки и выбранной детали. Точную сумму согласуем до начала работ.</div>
             </div>
             <div class="faq-item">
-                <button type="button" class="faq-question">Какие гарантии вы даёте?</button>
-                <div class="faq-answer">На все работы и запчасти — 90 дней. Если что-то сломается — починим бесплатно.</div>
+                <button type="button" class="faq-question">Диагностика действительно бесплатная?</button>
+                <div class="faq-answer">Да, диагностика устройства бесплатная. После неё объясним причину поломки и варианты ремонта.</div>
             </div>
             <div class="faq-item">
-                <button type="button" class="faq-question">У вас есть выезд?</button>
-                <div class="faq-answer">Да, мастера выезжают по адресу. Или вы можете привезти телефон в сервис.</div>
+                <button type="button" class="faq-question">Какая гарантия на ремонт?</button>
+                <div class="faq-answer">На все выполненные работы действует гарантия 90 дней.</div>
+            </div>
+            <div class="faq-item">
+                <button type="button" class="faq-question">Оригинал или аналог — что выбрать?</button>
+                <div class="faq-answer">Выбор зависит от модели и требований к экрану. Гарантия на работы одинаковая, стоимость мастер согласует до ремонта.</div>
+            </div>
+            <div class="faq-item">
+                <button type="button" class="faq-question">Есть ли выезд мастера?</button>
+                <div class="faq-answer">Да. После заявки согласуем удобные место и время.</div>
+            </div>
+            <div class="faq-item">
+                <button type="button" class="faq-question">В каких городах вы работаете?</button>
+                <div class="faq-answer">Работаем в Хабаровске, Комсомольске-на-Амуре и Владивостоке.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="calculator-entry reveal" aria-labelledby="calculatorEntryTitle">
+    <div class="container">
+        <div class="calculator-entry-card">
+            <div class="calculator-entry-visual" aria-hidden="true">
+                <div class="calculator-phone">
+                    <span class="calculator-phone-camera"></span>
+                    <span class="calculator-phone-scan"></span>
+                    <span class="calculator-phone-mark calculator-phone-mark-one"></span>
+                    <span class="calculator-phone-mark calculator-phone-mark-two"></span>
+                    <span class="calculator-phone-mark calculator-phone-mark-three"></span>
+                </div>
+                <span class="calculator-visual-label">Интерактивная 3D-модель</span>
+            </div>
+            <div class="calculator-entry-copy">
+                <p class="calculator-entry-eyebrow">Помощник по симптомам</p>
+                <h2 id="calculatorEntryTitle">Не знаете, как описать поломку?</h2>
+                <p>Выберите симптом на 3D-модели телефона. Покажем типичный дефект и передадим мастеру понятное описание проблемы.</p>
+                <div class="calculator-entry-points" aria-label="Возможности калькулятора">
+                    <span>Экран</span>
+                    <span>Вода</span>
+                    <span>Зарядка</span>
+                    <span>Корпус</span>
+                </div>
+                <div class="calculator-entry-actions">
+                    <a href="3d-viewer-iphone15.html" class="btn-primary">Выбрать симптом</a>
+                </div>
+                <p class="calculator-entry-note">Модель телефона и стоимость уточним при обратной связи.</p>
             </div>
         </div>
     </div>
@@ -630,13 +588,9 @@
 <section class="cta reveal" id="form">
     <div class="container">
         <div class="cta-simple">
-            <h2>Готовы к ремонту?</h2>
-            <p class="cta-desc">Выберите марку и поломку сверху — или сразу позвоните / напишите нам.</p>
-            <div class="hero-actions" style="justify-content:center;flex-wrap:wrap">
-                <a href="#repair-flow" class="btn-primary">Оставить заявку</a>
-                <a href="tel:+79144111730" class="btn-secondary">Позвонить</a>
-                <a href="https://t.me/REMPHONE_RUSSIA_Bot" target="_blank" class="btn-secondary" rel="noopener">Написать в Telegram</a>
-            </div>
+            <h2>Нужно уточнить ремонт?</h2>
+            <p class="cta-desc">Выберите марку и поломку — мастер уточнит модель, срок и стоимость.</p>
+            <a href="#stepBrand" class="btn-primary">Описать поломку</a>
         </div>
     </div>
 </section>
@@ -647,10 +601,10 @@
 <div id="site-float"></div>
 <div id="site-footer"></div>
 <script src="config.js"></script>
-<script src="analytics.js?v=pipeline1"></script>
-<script src="site-chrome.js?v=leadfix2" data-base=""></script>
+<script src="analytics.js?v=tz-review1"></script>
+<script src="site-chrome.js?v=tz-review1" data-base=""></script>
 <script src="repair-models.js"></script>
-<script src="script.js?v=pipeline1"></script>
-<script src="displays-compare.js?v=benefits2"></script>
+<script src="script.js?v=tz-review4"></script>
+<script src="displays-compare.js?v=benefits3"></script>
 </body>
 </html>

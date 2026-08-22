@@ -65,6 +65,7 @@
   function chromeMarkup() {
     var contact = contactData();
     var repairHref = repairFlowHref();
+    var mobileRepairHref = repairHref === '#repair-flow' ? '#stepBrand' : repairHref;
     var logoLight = asset('assets/brand/remphone-wordmark.svg');
     var logoDark = asset('assets/brand/remphone-wordmark-inverse.svg');
     // Светлый wordmark: PHONE = navy. В тёмной теме ОС/браузера он тонет в шапке —
@@ -140,11 +141,10 @@
       '</footer>';
 
     var mobile =
-      '<nav class="mobile-contact-bar" id="stickyMobileBar" aria-label="Быстрая связь">' +
+      '<nav class="mobile-contact-bar" id="stickyMobileBar" aria-label="Быстрая связь" aria-hidden="true">' +
         link(contact.phoneTel ? 'tel:' + contact.phoneTel : '', 'mobile-contact-link', '<span aria-hidden="true">☎</span><span>Позвонить</span>') +
-        link(contact.telegram, 'mobile-contact-link', '<span aria-hidden="true">✈</span><span>Telegram</span>', 'target="_blank" rel="noopener"') +
-        '<a class="mobile-contact-link mobile-contact-primary" href="' + repairHref + '">' +
-          '<span aria-hidden="true">→</span><span>Заявка</span>' +
+        '<a class="mobile-contact-link mobile-contact-primary" href="' + mobileRepairHref + '">' +
+          '<span aria-hidden="true">→</span><span>Описать поломку</span>' +
         '</a>' +
       '</nav>';
 
@@ -210,9 +210,36 @@
   function loadAnalytics() {
     if (document.querySelector('script[src*="analytics.js"]')) return;
     var analytics = document.createElement('script');
-    analytics.src = asset('analytics.js');
+    analytics.src = asset('analytics.js?v=tz-review1');
     analytics.defer = true;
     document.body.appendChild(analytics);
+  }
+
+  function bindMobileBar() {
+    var bar = document.getElementById('stickyMobileBar');
+    if (!bar) return;
+    var intro = document.querySelector('.flow-intro');
+
+    function setVisible(visible) {
+      bar.classList.toggle('is-visible', visible);
+      bar.setAttribute('aria-hidden', visible ? 'false' : 'true');
+    }
+
+    if (intro && 'IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function (entries) {
+        var entry = entries[0];
+        setVisible(!entry.isIntersecting && entry.boundingClientRect.top < 0);
+      }, { threshold: 0.05 });
+      observer.observe(intro);
+      return;
+    }
+
+    function updateFromScroll() {
+      var threshold = intro ? intro.offsetTop + intro.offsetHeight : 160;
+      setVisible(window.scrollY > threshold);
+    }
+    window.addEventListener('scroll', updateFromScroll, { passive: true });
+    updateFromScroll();
   }
 
   function mount() {
@@ -227,6 +254,7 @@
       legacyBar.remove();
     });
     bindMenu();
+    bindMobileBar();
     loadAnalytics();
   }
 
