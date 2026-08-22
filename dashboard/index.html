@@ -77,7 +77,13 @@
     .pill.bad { color: var(--err); border-color: #7f1d1d; }
     .health-list { margin-top: 8px; padding-left: 18px; font-size: 12px; color: var(--muted); }
     .contacts { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
+    .pipeline { display: grid; grid-template-columns: repeat(auto-fit, minmax(135px, 1fr)); gap: 12px; }
+    .pipeline .value { font-size: 26px; }
+    .pipeline .oldest { grid-column: span 2; }
     ul.notes { margin-top: 8px; padding-left: 18px; }
+    @media (max-width: 520px) {
+      .pipeline .oldest { grid-column: span 1; }
+    }
   </style>
 </head>
 <body>
@@ -103,7 +109,7 @@
         <div class="hint" id="v-week-h"></div>
       </div>
       <div class="card">
-        <div class="label">Заявки с формы (7 дней)</div>
+        <div class="label">Accepted Метрики (7 дней)</div>
         <div class="value" id="l-week">—</div>
         <div class="hint" id="l-week-h"></div>
       </div>
@@ -121,6 +127,36 @@
         <div class="label">В поиске Яндекса</div>
         <div class="value" id="idx-ya">—</div>
         <div class="hint" id="idx-h">нужен токен Вебмастера</div>
+      </div>
+    </div>
+
+    <h2>Lead pipeline</h2>
+    <p class="sub" style="margin-bottom:12px">Агрегаты защищённого Worker, без контактов и других персональных данных.</p>
+    <div class="pipeline">
+      <div class="card">
+        <div class="label">Accepted</div>
+        <div class="value" id="p-accepted">—</div>
+        <div class="hint" id="p-accepted-h">Worker не подключён</div>
+      </div>
+      <div class="card">
+        <div class="label">Delivered</div>
+        <div class="value" id="p-delivered">—</div>
+        <div class="hint" id="p-delivered-h"></div>
+      </div>
+      <div class="card">
+        <div class="label">Pending</div>
+        <div class="value" id="p-pending">—</div>
+        <div class="hint" id="p-pending-h"></div>
+      </div>
+      <div class="card">
+        <div class="label">Failed</div>
+        <div class="value" id="p-failed">—</div>
+        <div class="hint" id="p-failed-h"></div>
+      </div>
+      <div class="card oldest">
+        <div class="label">Oldest pending</div>
+        <div class="value" id="p-oldest">—</div>
+        <div class="hint">самая старая недоставленная заявка</div>
       </div>
     </div>
 
@@ -170,6 +206,16 @@
       if (v === null || v === undefined) return '—';
       return v + '%';
     }
+    function pipelineValue(p, status) {
+      if (!p) return null;
+      if (p[status] !== null && p[status] !== undefined) return p[status];
+      return p.week && p.week[status] !== undefined ? p.week[status] : null;
+    }
+    function pipelineHint(p, status) {
+      if (!p) return 'Worker не подключён';
+      const value = (period) => fmt(p[period] && p[period][status]);
+      return 'день ' + value('day') + ' · 7д ' + value('week') + ' · 30д ' + value('month');
+    }
     Promise.all([
       fetch('data.json', { cache: 'no-store' }).then((r) => r.json()),
       fetch('health.json', { cache: 'no-store' }).then((r) => r.ok ? r.json() : null).catch(() => null),
@@ -180,8 +226,9 @@
         document.getElementById('v-week').textContent = fmt(d.visits && d.visits.week);
         document.getElementById('v-day-h').textContent = d.visits && d.visits.month != null ? 'месяц: ' + d.visits.month : '';
         document.getElementById('v-week-h').textContent = d.pageviews && d.pageviews.week != null ? 'просмотры: ' + d.pageviews.week : '';
-        document.getElementById('l-week').textContent = fmt(d.leads && d.leads.week);
-        document.getElementById('l-week-h').textContent = (d.leads && d.leads.source) ? d.leads.source : 'цель Метрики request-form-submit';
+        const accepted = d.metrika_accepted || d.leads;
+        document.getElementById('l-week').textContent = fmt(accepted && accepted.week);
+        document.getElementById('l-week-h').textContent = (accepted && accepted.source) ? accepted.source : 'цель Метрики request-form-submit';
         document.getElementById('conv').textContent = conv(d.conversion_visit_to_lead);
         document.getElementById('idx').textContent = fmt(d.index && d.index.sitemap_urls);
         document.getElementById('idx-ya').textContent = fmt(d.index && d.index.yandex_indexed);
@@ -192,6 +239,13 @@
         document.getElementById('c-tg').textContent = fmt(c.telegram);
         document.getElementById('c-open').textContent = fmt(c.form_open);
         document.getElementById('c-call-h').textContent = (d.contacts && d.contacts.note) ? d.contacts.note : 'цель make-call';
+        const p = d.pipeline;
+        ['accepted', 'delivered', 'pending', 'failed'].forEach((status) => {
+          document.getElementById('p-' + status).textContent = fmt(pipelineValue(p, status));
+          document.getElementById('p-' + status + '-h').textContent = pipelineHint(p, status);
+        });
+        document.getElementById('p-oldest').textContent =
+          p && p.oldest_pending_at ? new Date(p.oldest_pending_at).toLocaleString('ru-RU') : '—';
         const h = d.health;
         const hStatus = document.getElementById('h-status');
         const hHint = document.getElementById('h-hint');
@@ -214,7 +268,7 @@
         document.getElementById('updated').textContent = d.updated_at ? new Date(d.updated_at).toLocaleString('ru-RU') : '—';
         document.getElementById('source').textContent = d.source || '—';
         const pill = document.getElementById('pill');
-        const live = d.source === 'metrika' || d.source === 'metrika+lead_api' || d.source === 'metrika_browser';
+        const live = d.source === 'metrika' || d.source === 'metrika+lead_api' || d.source === 'lead_api' || d.source === 'metrika_browser';
         const healthBad = h && h.ok === false;
         pill.textContent = healthBad ? 'ошибки health' : (live ? 'Метрика' : 'без токена');
         pill.className = 'pill ' + (healthBad ? 'bad' : (live ? 'ok' : 'wait'));

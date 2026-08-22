@@ -169,6 +169,9 @@
     document.addEventListener('remphone:form-open', function () {
       openFormOnce('step-3');
     });
+    if (document.documentElement.getAttribute('data-remphone-form-opened') === 'true') {
+      openFormOnce('step-3');
+    }
 
     document.addEventListener(
       'focusin',

@@ -225,6 +225,7 @@ if (quickForm) {
         clientRequestId = '';
         clientRequestSelection = '';
     }
+
     const CITY_MAP = {
         khabarovsk: { name: 'Хабаровск', prep: 'в Хабаровске', href: '/khabarovsk/' },
         komsomolsk: { name: 'Комсомольск-на-Амуре', prep: 'в Комсомольске-на-Амуре', href: '/komsomolsk-na-amure/' },
@@ -570,6 +571,7 @@ if (quickForm) {
             el.classList.toggle('is-done', n < step);
         });
         if (step === 3) {
+            document.documentElement.setAttribute('data-remphone-form-opened', 'true');
             document.dispatchEvent(new CustomEvent('remphone:form-open'));
         }
         if (activePanel) {
