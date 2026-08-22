@@ -1267,6 +1267,11 @@ section {
     padding-left: 1.2em;
 }
 
+.faq-answer ol {
+    margin: 0;
+    padding-left: 1.2em;
+}
+
 .faq-answer li + li {
     margin-top: 0.35em;
 }
@@ -3833,6 +3838,12 @@ textarea:focus-visible,
 .prose p + p,
 .prose ul + p,
 .prose ol + p {
+    margin-top: 16px;
+}
+
+.prose .faq-more {
+    text-align: left;
+    max-width: none;
     margin-top: 16px;
 }
 
