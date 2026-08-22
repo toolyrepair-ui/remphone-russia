@@ -13,6 +13,22 @@
     return base + path;
   }
 
+  function repairFlowHref() {
+    var path = window.location.pathname.toLowerCase();
+    var isHome = path === '/' || /\/index\.html$/.test(path);
+    if (isHome) return '#repair-flow';
+
+    var cityId = '';
+    if (/\/vladivostok(?:\/|\.html$)/.test(path)) cityId = 'vladivostok';
+    else if (/\/komsomolsk-na-amure(?:\/|\.html$)/.test(path) || /\/cities\/komsomolsk\.html$/.test(path)) {
+      cityId = 'komsomolsk';
+    } else if (/\/khabarovsk(?:\/|\.html$)/.test(path)) {
+      cityId = 'khabarovsk';
+    }
+
+    return asset('index.html' + (cityId ? '?city=' + cityId : '') + '#repair-flow');
+  }
+
   function ensureConfig(done) {
     if (window.REMPHONE_CONFIG) {
       done();
@@ -48,6 +64,7 @@
 
   function chromeMarkup() {
     var contact = contactData();
+    var repairHref = repairFlowHref();
     var logoLight = asset('assets/brand/remphone-wordmark.svg');
     var logoDark = asset('assets/brand/remphone-wordmark-inverse.svg');
     // Светлый wordmark: PHONE = navy. В тёмной теме ОС/браузера он тонет в шапке —
@@ -79,7 +96,7 @@
           '</nav>' +
           '<div class="header-actions">' +
             link(contact.phoneTel ? 'tel:' + contact.phoneTel : '', 'header-phone', contact.phoneDisplay) +
-            '<a class="header-cta" href="' + asset('index.html#repair-flow') + '">Оставить заявку</a>' +
+            '<a class="header-cta" href="' + repairHref + '">Оставить заявку</a>' +
           '</div>' +
           '<button class="burger" id="burger" type="button" aria-label="Открыть меню" aria-controls="nav" aria-expanded="false">' +
             '<span></span><span></span><span></span>' +
@@ -126,7 +143,7 @@
       '<nav class="mobile-contact-bar" id="stickyMobileBar" aria-label="Быстрая связь">' +
         link(contact.phoneTel ? 'tel:' + contact.phoneTel : '', 'mobile-contact-link', '<span aria-hidden="true">☎</span><span>Позвонить</span>') +
         link(contact.telegram, 'mobile-contact-link', '<span aria-hidden="true">✈</span><span>Telegram</span>', 'target="_blank" rel="noopener"') +
-        '<a class="mobile-contact-link mobile-contact-primary" href="' + asset('index.html#repair-flow') + '">' +
+        '<a class="mobile-contact-link mobile-contact-primary" href="' + repairHref + '">' +
           '<span aria-hidden="true">→</span><span>Заявка</span>' +
         '</a>' +
       '</nav>';
@@ -206,6 +223,9 @@
     if (header) header.outerHTML = markup.header;
     if (footer) footer.outerHTML = markup.footer;
     if (mobile) mobile.outerHTML = markup.mobile;
+    Array.prototype.forEach.call(document.querySelectorAll('.sticky-mobile-cta'), function (legacyBar) {
+      legacyBar.remove();
+    });
     bindMenu();
     loadAnalytics();
   }

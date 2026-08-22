@@ -2102,6 +2102,28 @@ section {
     animation: flowIn 320ms ease;
 }
 
+.repair-flow.cta-target-active .flow-panel:not([hidden]) {
+    border-radius: 20px;
+    animation: ctaTargetPulse 900ms ease;
+}
+
+@keyframes ctaTargetPulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+    }
+    35% {
+        box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.3);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .repair-flow.cta-target-active .flow-panel:not([hidden]) {
+        animation: none;
+        outline: 3px solid rgba(239, 68, 68, 0.35);
+        outline-offset: 6px;
+    }
+}
+
 .flow-panel[hidden] {
     display: none !important;
 }
