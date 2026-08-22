@@ -1,16 +1,16 @@
 {
-  "updated_at": "2026-08-22T07:10:06.442Z",
+  "updated_at": "2026-08-22T07:54:12.379Z",
   "metrika_id": 111453492,
   "source": "metrika+lead_api",
   "visits": {
-    "day": 68,
-    "week": 226,
-    "month": 237
+    "day": 74,
+    "week": 232,
+    "month": 243
   },
   "pageviews": {
-    "day": 227,
-    "week": 500,
-    "month": 521
+    "day": 250,
+    "week": 523,
+    "month": 544
   },
   "leads": {
     "day": 10,
@@ -50,9 +50,9 @@
     },
     "source": "lead_stats_api"
   },
-  "conversion_visit_to_lead": 4.9,
+  "conversion_visit_to_lead": 4.7,
   "index": {
-    "sitemap_urls": 57,
+    "sitemap_urls": 58,
     "yandex_indexed": 8,
     "google_indexed": null,
     "google_indexed_approx": null,
@@ -63,25 +63,25 @@
       "call": 1,
       "whatsapp": 0,
       "telegram": 0,
-      "form_open": 58
+      "form_open": 59
     },
     "week": {
       "call": 1,
       "whatsapp": 0,
       "telegram": 2,
-      "form_open": 110
+      "form_open": 111
     },
     "source": "metrika_goals",
     "note": "Клики контактов, не заявки. Email в Метрике цели нет — не выдумывать нули."
   },
   "health": {
-    "updated_at": "2026-08-22T07:10:06.393Z",
-    "html_pages": 68,
+    "updated_at": "2026-08-22T07:54:12.330Z",
+    "html_pages": 69,
     "errors": 0,
-    "warnings": 68,
+    "warnings": 69,
     "live": {
-      "checked": 58,
-      "ok": 58,
+      "checked": 59,
+      "ok": 59,
       "fail": 0
     },
     "ok": true,
@@ -126,8 +126,8 @@
     },
     {
       "date": "2026-08-22",
-      "visits": 68,
-      "pageviews": 227,
+      "visits": 74,
+      "pageviews": 250,
       "leads": 10
     }
   ],
