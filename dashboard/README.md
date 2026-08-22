@@ -22,15 +22,18 @@ CI на пуше HTML — `.github/workflows/seo-health.yml` (локальный
 | Блок | Откуда | Честно |
 |------|--------|--------|
 | Визиты | Метрика `111453492` | без токена — прошлые цифры |
-| Заявки | цель `request-form-submit` (595078292) или `LEAD_STATS_URL` | не смешивать с кликами |
-| Конверсия | заявки / визиты за 7 дней | только подтверждённые заявки |
+| Accepted Метрики | цель `request-form-submit` (595078292) | отдельно от фактической доставки Worker |
+| Pipeline | защищённый `LEAD_STATS_URL` | accepted / delivered / pending / failed, oldest pending; только агрегаты без PII |
+| Конверсия | accepted Метрики / визиты за 7 дней | только подтверждённые заявки формы |
 | Клики | цели `make-call`, `whatsapp`, `telegram`, `request-form-open` | если API молчит — «—», не ноль |
 | Индекс Яндекса | Вебмастер `searchable_pages_count` | Google точного API нет |
 | Health | `health.json` | live URL из `seo/pages.json` + sitemap |
 
 Цели Метрики уже есть. Новые имена (`contact-email-click` и т.п.) не создавать. Email в Метрике цели нет.
 
-Заявки из бота / звонков появятся, когда будет `LEAD_STATS_URL`. До тех пор поле заявок = только отправка формы.
+`LEAD_STATS_URL` не подменяет Метрику. Сбор сохраняет её accepted отдельно в
+`metrika_accepted`, а ответ Worker пишет в `pipeline` с периодами `day`, `week`,
+`month`. До подключения endpoint pipeline показывает «—».
 
 ## Токены
 
@@ -39,7 +42,7 @@ CI на пуше HTML — `.github/workflows/seo-health.yml` (локальный
 - `YANDEX_METRIKA_TOKEN` — визиты и цели (`metrika:read`)
 - `YANDEX_WEBMASTER_TOKEN` — индекс (`webmaster:hostinfo` + `webmaster:verify`)
 - `FTP_SERVER` / `FTP_USERNAME` / `FTP_PASSWORD` / `FTP_PATH` — те же, что для выгрузки сайта (`FTP_PATH` со слэшем, на ISPmanager: `www/rem-phone.ru/`)
-- опционально `LEAD_STATS_URL`, `LEAD_API_SECRET`
+- `LEAD_STATS_SECRET` — Bearer-секрет защищённого Worker endpoint; URL уже задан в workflow, ответ без телефонов, имён, комментариев и других PII
 
 OAuth: https://oauth.yandex.ru/client/new — приложение для API, затем
 

@@ -9,7 +9,7 @@
 
 Раздача: виртуальный хостинг REG.RU Host-0 (Apache за nginx, ISPmanager, IP `31.31.196.16`, корень `www/rem-phone.ru/`). DNS зона ns1/ns2.reg.ru: `A @` и `A www` → `31.31.196.16`. GitHub Pages не отключать (резерв). Выгрузка: `.github/workflows/deploy-reg-ru.yml` (`FTP_PATH`=`www/rem-phone.ru/`). HTTPS: Let’s Encrypt `rem-phone.ru_le1` (до 2026-11-15), имена `rem-phone.ru` и `www.rem-phone.ru`. HTTP→HTTPS в `.htaccess` только через `X-Forwarded-Proto =http` (не `%{HTTPS} off` — петля за nginx). www→apex на `https://`. Dotfiles (в т.ч. `.ftp-deploy-sync-state.json`) закрыты. Статика css/js/картинки/woff2 — кеш месяц; html/json без кеша. Не публиковать на хостинг: `docs/`, `seo/` (внутренние данные), `.omniroute-src/`.
 
-Дашборд: `/dashboard/` (noindex). Крон `dashboard.yml` — 08:30 и 16:30 Хабаровск: live `seo/health-check.mjs --live` → `dashboard/health.json`, сбор Метрики → `dashboard/data.json`, коммит, FTP только папки `dashboard/` на REG.RU. Push с `GITHUB_TOKEN` по-прежнему не запускает `deploy-reg-ru.yml`, поэтому FTP в том же джобе обязателен для живой страницы. Заявки = цель `request-form-submit`; клики звонка/WhatsApp/Telegram — отдельные цели, не конверсия. `seo-health.yml` — только CI на пуше HTML (локальный check, без коммита JSON).
+Дашборд: `/dashboard/` (noindex). Крон `dashboard.yml` — 08:30 и 16:30 Хабаровск: live `seo/health-check.mjs --live` → `dashboard/health.json`, сбор Метрики → `dashboard/data.json`, коммит, FTP только папки `dashboard/` на REG.RU. Push с `GITHUB_TOKEN` по-прежнему не запускает `deploy-reg-ru.yml`, поэтому FTP в том же джобе обязателен для живой страницы. Accepted Метрики хранится отдельно в `metrika_accepted`; защищённый Worker `/stats` добавляет `pipeline` (accepted/delivered/pending/failed, без PII). Клики звонка/WhatsApp/Telegram — отдельные цели, не конверсия. `seo-health.yml` — только CI на пуше HTML (локальный check, без коммита JSON).
 
 Скиллы агента: `.cursor/skills/` — свои `content-writer`, `direct-service-voice`, `yandex-local`; каталог: `find-skills`, `web-design-guidelines` (Vercel), `frontend-design` (Anthropic), `systematic-debugging` (obra), `workers-best-practices` (Cloudflare; **не менять** `config.js` `relayUrl`), `accessibility` (Addy Osmani). Поиск новых: `npx skills find "…"`. Next.js и programmatic-SEO не ставить. Бот — `remphone-bot` + Context7 (aiogram 3.x), ответы клиенту не из Cursor.
 
@@ -22,12 +22,18 @@
 Поток заявки:
 
 ```
-форма #repair-flow (script.js) → POST JSON на Cloudflare Worker (config.js relayUrl)
-  → Lead API Telegram-бота → /leads владельцу
+форма #repair-flow / 3D → POST JSON на Cloudflare Worker (config.js relayUrl)
+  → D1 durable inbox (`accepted`) → Queue
+      → Lead API Telegram-бота → SQLite / `/leads` владельцу
+      ↳ Telegram fallback, если API не доставил уведомление
+      ↳ retries → DLQ; cron раз в 5 минут возвращает зависшие D1-записи
       ↳ опционально: черновик ответа (Workers AI), только владельцу
 ```
 
-Пока Worker недоступен — fallback в Telegram (без SQLite). Токен бота **не** хранится на сайте.
+`accepted` означает, что контакт уже сохранён в D1; Render/Telegram больше не
+держат ответ формы. `client_request_id` opaque и хешируется на edge. PII в D1
+очищается через 90 дней. `/health` публичный и минимальный, `/stats` защищён
+отдельным `LEAD_STATS_SECRET` и возвращает только агрегаты. Токен бота **не** хранится на сайте.
 
 Контакты и счётчики — единый источник: `config.js` (`window.REMPHONE_CONFIG`). Дубли в `site-chrome.js` и `data/contacts.json` должны совпадать.
 
@@ -70,7 +76,7 @@
 
 | Система | Значение | Правило |
 |---------|----------|---------|
-| Cloudflare Worker | `https://rem-phone-relay.toolyrepair.workers.dev` | **Не менять** URL. `POST /draft` — черновик владельцу. Живой режим: `REPLY_DRAFT_ENABLED=1` (AI клиенту не пишет) |
+| Cloudflare Worker | `https://rem-phone-relay.toolyrepair.workers.dev` | **Не менять** URL. D1 `remphone-leads` + Queue/DLQ + cron; `GET /health`, защищённый `GET /stats`; `POST /draft` — черновик владельцу. Живой режим: `REPLY_DRAFT_ENABLED=1` (AI клиенту не пишет) |
 | Telegram-бот | `@REMPHONE_RUSSIA_Bot` | Репо `remphone-bot` |
 | Телефон / WhatsApp | `+79144111730` | Единый номер |
 | Email | `toolyrepair@gmail.com` | |

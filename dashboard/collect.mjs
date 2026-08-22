@@ -29,7 +29,11 @@ loadEnvFile(join(root, '.env'));
 const token = (process.env.YANDEX_METRIKA_TOKEN || '').trim();
 const webmasterToken = (process.env.YANDEX_WEBMASTER_TOKEN || token).trim();
 const leadUrl = (process.env.LEAD_STATS_URL || '').trim();
-const leadSecret = (process.env.LEAD_API_SECRET || '').trim();
+const leadSecret = (
+  process.env.LEAD_STATS_SECRET ||
+  process.env.LEAD_API_SECRET ||
+  ''
+).trim();
 const WM_API = 'https://api.webmaster.yandex.net/v4';
 
 function loadEnvFile(path) {
@@ -81,6 +85,39 @@ function emptyContacts() {
     week: { call: null, whatsapp: null, telegram: null, form_open: null },
     source: null,
     note: 'Клики контактов (цели Метрики). Не заявки. Цели email в Метрике нет.',
+  };
+}
+
+function countOrNull(value) {
+  if (value === null || value === undefined || value === '') return null;
+  const n = Number(value);
+  return Number.isFinite(n) && n >= 0 ? n : null;
+}
+
+function pipelinePeriod(raw, period) {
+  const direct = raw?.[period];
+  const block = direct && typeof direct === 'object' ? direct : {};
+  return {
+    accepted: countOrNull(block.accepted ?? (typeof direct === 'number' ? direct : raw?.accepted?.[period])),
+    delivered: countOrNull(block.delivered ?? raw?.delivered?.[period]),
+    pending: countOrNull(block.pending ?? raw?.pending?.[period]),
+    failed: countOrNull(block.failed ?? raw?.failed?.[period]),
+  };
+}
+
+function normalizePipeline(json) {
+  const raw = json?.pipeline && typeof json.pipeline === 'object' ? json.pipeline : json;
+  return {
+    accepted: countOrNull(typeof raw?.accepted === 'object' ? raw.accepted.total : raw?.accepted),
+    delivered: countOrNull(typeof raw?.delivered === 'object' ? raw.delivered.total : raw?.delivered),
+    pending: countOrNull(typeof raw?.pending === 'object' ? raw.pending.total : raw?.pending),
+    failed: countOrNull(typeof raw?.failed === 'object' ? raw.failed.total : raw?.failed),
+    oldest_pending_at:
+      typeof raw?.oldest_pending_at === 'string' && raw.oldest_pending_at ? raw.oldest_pending_at : null,
+    day: pipelinePeriod(raw, 'day'),
+    week: pipelinePeriod(raw, 'week'),
+    month: pipelinePeriod(raw, 'month'),
+    source: 'lead_stats_api',
   };
 }
 
@@ -251,19 +288,14 @@ async function fetchWebmasterIndex() {
   return Number(n);
 }
 
-async function fetchLeads() {
+async function fetchPipeline() {
   if (!leadUrl) return null;
   const headers = { Accept: 'application/json' };
   if (leadSecret) headers.Authorization = `Bearer ${leadSecret}`;
   const res = await fetch(leadUrl, { headers });
   if (!res.ok) throw new Error(`Lead stats ${res.status}`);
   const json = await res.json();
-  return {
-    day: json.day ?? json.leads_day ?? json.today ?? null,
-    week: json.week ?? json.leads_week ?? null,
-    month: json.month ?? json.leads_month ?? null,
-    source: 'lead_api',
-  };
+  return normalizePipeline(json);
 }
 
 const prev = readPrev();
@@ -275,6 +307,9 @@ const data = {
   visits: prev.visits || { day: null, week: null, month: 8 },
   pageviews: prev.pageviews || { day: null, week: null, month: null },
   leads: prev.leads || { day: null, week: null, month: null, source: null },
+  metrika_accepted:
+    prev.metrika_accepted || prev.leads || { day: null, week: null, month: null, source: null },
+  pipeline: prev.pipeline || null,
   conversion_visit_to_lead: prev.conversion_visit_to_lead ?? null,
   index: {
     sitemap_urls: sitemapCount(),
@@ -299,6 +334,7 @@ if (token) {
     data.visits = m.visits;
     data.pageviews = m.pageviews;
     data.leads = m.leads;
+    data.metrika_accepted = m.leads;
     data.series = m.series;
     data.source = 'metrika';
   } catch (e) {
@@ -323,10 +359,11 @@ if (token) {
 }
 
 try {
-  const extra = await fetchLeads();
-  if (extra) {
-    data.leads = extra;
+  const pipeline = await fetchPipeline();
+  if (pipeline) {
+    data.pipeline = pipeline;
     if (data.source === 'metrika') data.source = 'metrika+lead_api';
+    else if (!token) data.source = 'lead_api';
   }
 } catch (e) {
   notes.push(`Заявки API: ${e.message}`);
@@ -344,10 +381,10 @@ try {
   notes.push(`Вебмастер: ${e.message}`);
 }
 
-data.conversion_visit_to_lead = pct(data.leads.week, data.visits.week);
+data.conversion_visit_to_lead = pct(data.metrika_accepted.week, data.visits.week);
 data.notes = notes;
 
 writeFileSync(outPath, JSON.stringify(data, null, 2) + '\n', 'utf8');
 const healthOk = data.health && data.health.ok ? 'ok' : (data.health ? `errors=${data.health.errors}` : 'no-health');
-console.log(`Wrote ${outPath} source=${data.source} visits.week=${data.visits.week} leads.week=${data.leads.week} health=${healthOk}`);
+console.log(`Wrote ${outPath} source=${data.source} visits.week=${data.visits.week} metrika_accepted.week=${data.metrika_accepted.week} health=${healthOk}`);
 if (notes.length) notes.forEach((n) => console.log('  !', n));

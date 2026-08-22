@@ -467,6 +467,7 @@
   </div>
 
   <script src="config.js"></script>
+  <script src="analytics.js?v=pipeline1"></script>
   <script type="module">
     import * as THREE from 'three';
     import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
@@ -487,15 +488,43 @@
       capabilities: { hasHome: false, hasAction: true, hasWireless: false }
     };
     const pageStartedAt = performance.now();
+    let clientRequestId = '';
+    let clientRequestSelection = '';
+
+    function opaqueRequestId(prefix) {
+      if (window.crypto && typeof window.crypto.randomUUID === 'function') {
+        return prefix + '-' + window.crypto.randomUUID();
+      }
+      const bytes = new Uint8Array(16);
+      if (window.crypto && typeof window.crypto.getRandomValues === 'function') {
+        window.crypto.getRandomValues(bytes);
+        return prefix + '-' + Array.from(bytes, (value) => value.toString(16).padStart(2, '0')).join('');
+      }
+      return prefix + '-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2);
+    }
+
+    function requestIdFor(selection) {
+      const key = JSON.stringify(selection);
+      if (!clientRequestId || clientRequestSelection !== key) {
+        clientRequestId = opaqueRequestId('3d');
+        clientRequestSelection = key;
+      }
+      return clientRequestId;
+    }
+
+    function resetRequestId() {
+      clientRequestId = '';
+      clientRequestSelection = '';
+    }
 
     function track3D(eventName, params = {}) {
       const detail = {
-        event: eventName,
         device_type: isCompact() ? 'mobile' : 'desktop',
         ...params
       };
-      window.dispatchEvent(new CustomEvent('remphone:analytics', { detail }));
-      if (Array.isArray(window.dataLayer)) window.dataLayer.push(detail);
+      if (typeof window.REMPHONE_GA_EVENT === 'function') {
+        window.REMPHONE_GA_EVENT(eventName, detail);
+      }
     }
 
     const wrap = document.getElementById('viewerWrap');
@@ -3084,6 +3113,7 @@
     }
 
     function selectProblem(key) {
+      if (calc.problemKey !== key) resetRequestId();
       calc.problemKey = key;
       const problem = currentProblem();
       calc.symptomId = problem.symptoms[0].id;
@@ -3106,6 +3136,7 @@
       if (!problem) return;
       const symptom = problem.symptoms.find((s) => s.id === id);
       if (!symptom) return;
+      if (calc.symptomId !== symptom.id) resetRequestId();
       calc.symptomId = symptom.id;
       document.querySelectorAll('.symptom-btn').forEach((btn) => {
         const active = btn.dataset.id === id;
@@ -3150,6 +3181,7 @@
     renderProblems();
 
     document.getElementById('backToCategories').addEventListener('click', () => {
+      resetRequestId();
       calc.problemKey = '';
       calc.symptomId = '';
       calc.quote = null;
@@ -3451,6 +3483,7 @@
     const success = document.getElementById('flowFormSuccess');
     const submitBtn = document.getElementById('flowSubmitBtn');
     const errorBox = document.getElementById('flowSubmitError');
+    document.getElementById('flowCity').addEventListener('change', resetRequestId);
 
     function isRelayConfigured() {
       if (!relayUrl) return false;
@@ -3507,7 +3540,11 @@
         city_id: cityId,
         comment: [comment, JSON.stringify(payload)].filter(Boolean).join('\n'),
         source: 'iphone-calculator',
-        client_request_id: '3d-' + String(phoneVal).replace(/\D/g, '') + '-' + Date.now(),
+        client_request_id: requestIdFor({
+          problem_key: payload.problemKey,
+          symptom_id: payload.symptomId,
+          city_id: cityId
+        }),
         page: location.pathname
       };
       try {
@@ -3528,13 +3565,19 @@
         }
         let json = {};
         try { json = await res.json(); } catch (e) { json = {}; }
-        if (!res.ok || json.success === false) throw new Error(json.message || json.error || ('HTTP ' + res.status));
+        if (!res.ok || json.success === false || json.accepted === false) {
+          throw new Error(json.message || json.error || ('HTTP ' + res.status));
+        }
         form.hidden = true;
         success.hidden = false;
         track3D('3d_lead_success', payload);
+        if (typeof window.REMPHONE_REACH === 'function') {
+          window.REMPHONE_REACH('request-form-submit');
+        }
+        resetRequestId();
       } catch (err) {
         console.error(err);
-        track3D('3d_lead_error', { ...payload, error: String(err && err.message || err) });
+        track3D('3d_lead_error', { source: 'iphone-calculator' });
         errorBox.hidden = false;
         errorBox.textContent = 'Не удалось отправить автоматически. Напишите в Telegram или позвоните: ' + phoneDisplay;
       } finally {

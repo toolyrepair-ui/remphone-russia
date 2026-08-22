@@ -187,6 +187,45 @@ if (quickForm) {
     const relayUrl = (cfg.relayUrl || '').trim();
 
     const state = { brand: '', problem: '', cityId: 'khabarovsk', cityName: 'Хабаровск' };
+    let clientRequestId = '';
+    let clientRequestSelection = '';
+
+    function opaqueRequestId(prefix) {
+        if (window.crypto && typeof window.crypto.randomUUID === 'function') {
+            return prefix + '-' + window.crypto.randomUUID();
+        }
+        const bytes = new Uint8Array(16);
+        if (window.crypto && typeof window.crypto.getRandomValues === 'function') {
+            window.crypto.getRandomValues(bytes);
+            return prefix + '-' + Array.from(bytes, (value) => value.toString(16).padStart(2, '0')).join('');
+        }
+        return prefix + '-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2);
+    }
+
+    function logicalSelection(data) {
+        return JSON.stringify([
+            data.brand || '',
+            data.problem || '',
+            data.part_preference || '',
+            data.model || '',
+            data.city_id || '',
+        ]);
+    }
+
+    function requestIdFor(data) {
+        const selection = logicalSelection(data);
+        if (!clientRequestId || clientRequestSelection !== selection) {
+            clientRequestId = opaqueRequestId('site');
+            clientRequestSelection = selection;
+        }
+        return clientRequestId;
+    }
+
+    function resetRequestId() {
+        clientRequestId = '';
+        clientRequestSelection = '';
+    }
+
     const CITY_MAP = {
         khabarovsk: { name: 'Хабаровск', prep: 'в Хабаровске', href: '/khabarovsk/' },
         komsomolsk: { name: 'Комсомольск-на-Амуре', prep: 'в Комсомольске-на-Амуре', href: '/komsomolsk-na-amure/' },
@@ -217,9 +256,8 @@ if (quickForm) {
 
     function setCity(cityId, opts) {
         const syncHero = !opts || opts.syncHero !== false;
-        const meta = CITY_MAP[cityId] || CITY_MAP.khabarovsk;
-        state.cityId = meta === CITY_MAP[cityId] ? cityId : 'khabarovsk';
         if (!CITY_MAP[cityId]) cityId = 'khabarovsk';
+        if (state.cityId !== cityId) resetRequestId();
         state.cityId = cityId;
         state.cityName = CITY_MAP[cityId].name;
         try { sessionStorage.setItem('remphone_city_id', cityId); } catch (e) {}
@@ -343,6 +381,10 @@ if (quickForm) {
             el.classList.toggle('is-active', n === step);
             el.classList.toggle('is-done', n < step);
         });
+        if (step === 3) {
+            document.documentElement.setAttribute('data-remphone-form-opened', 'true');
+            document.dispatchEvent(new CustomEvent('remphone:form-open'));
+        }
         root.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
@@ -431,6 +473,7 @@ if (quickForm) {
         if (typeof window.REMPHONE_REACH === 'function') {
             window.REMPHONE_REACH('request-form-submit');
         }
+        resetRequestId();
     }
 
     function showError(message) {
@@ -480,7 +523,7 @@ if (quickForm) {
                     city_id: data.city_id || 'khabarovsk',
                     comment: data.comment || '',
                     source: 'site',
-                    client_request_id: 'site-' + String(data.phone || '').replace(/\D/g, '') + '-' + Date.now(),
+                    client_request_id: requestIdFor(data),
                     utm: data.utm || {},
                     page: typeof location !== 'undefined' ? location.pathname : '',
                 }),
@@ -497,7 +540,7 @@ if (quickForm) {
             json = {};
         }
 
-        if (!res.ok || json.success === false) {
+        if (!res.ok || json.success === false || json.accepted === false) {
             throw new Error(json.message || json.error || ('HTTP ' + res.status));
         }
         return json;
@@ -509,6 +552,9 @@ if (quickForm) {
 
         const data = readFields();
         if (!validateForMessenger(data, true)) return;
+        if (typeof window.REMPHONE_GA_EVENT === 'function') {
+            window.REMPHONE_GA_EVENT('request-form-attempt');
+        }
 
         if (submitBtn) {
             submitBtn.disabled = true;
@@ -520,6 +566,9 @@ if (quickForm) {
             showSuccess(result.partners || []);
         } catch (err) {
             console.error('Relay submit failed', err);
+            if (typeof window.REMPHONE_GA_EVENT === 'function') {
+                window.REMPHONE_GA_EVENT('request-form-error');
+            }
             showError(
                 'Не удалось отправить автоматически. Напишите нам в Telegram или позвоните: ' +
                     phoneDisplay
@@ -538,7 +587,9 @@ if (quickForm) {
                 c.classList.remove('is-selected', 'card-selected');
             });
             card.classList.add('is-selected', 'card-selected');
-            state.brand = card.dataset.brand || '';
+            const nextBrand = card.dataset.brand || '';
+            if (state.brand !== nextBrand) resetRequestId();
+            state.brand = nextBrand;
             if (brandLabel) brandLabel.textContent = state.brand;
             if (flowBrand) flowBrand.value = state.brand;
             if (summaryBrand) summaryBrand.textContent = state.brand;
@@ -553,7 +604,9 @@ if (quickForm) {
                 c.classList.remove('is-selected', 'card-selected');
             });
             card.classList.add('is-selected', 'card-selected');
-            state.problem = card.dataset.problem || '';
+            const nextProblem = card.dataset.problem || '';
+            if (state.problem !== nextProblem) resetRequestId();
+            state.problem = nextProblem;
             if (flowProblem) flowProblem.value = state.problem;
             if (summaryProblem) summaryProblem.textContent = state.problem;
             setTimeout(() => goTo(3), 180);
@@ -600,10 +653,14 @@ if (quickForm) {
     if (form) {
         form.addEventListener('submit', handlePrimarySubmit);
     }
+    [document.getElementById('flowModel'), flowPartPreference].forEach((field) => {
+        if (field) field.addEventListener('change', resetRequestId);
+    });
 
     const restart = document.getElementById('flowRestart');
     if (restart) {
         restart.addEventListener('click', () => {
+            resetRequestId();
             state.brand = '';
             state.problem = '';
             document.querySelectorAll('.flow-card.is-selected, .flow-card.card-selected').forEach((c) => {
@@ -631,6 +688,7 @@ if (quickForm) {
         const brand = opts.brand || '';
         const preference = opts.part_preference || '';
         const problem = opts.problem || 'Разбит экран';
+        resetRequestId();
 
         state.brand = brand;
         state.problem = problem;

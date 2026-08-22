@@ -26,8 +26,8 @@ jobs:
         env:
           YANDEX_METRIKA_TOKEN: ${{ secrets.YANDEX_METRIKA_TOKEN }}
           YANDEX_WEBMASTER_TOKEN: ${{ secrets.YANDEX_WEBMASTER_TOKEN }}
-          LEAD_STATS_URL: ${{ secrets.LEAD_STATS_URL }}
-          LEAD_API_SECRET: ${{ secrets.LEAD_API_SECRET }}
+          LEAD_STATS_URL: https://rem-phone-relay.toolyrepair.workers.dev/stats
+          LEAD_STATS_SECRET: ${{ secrets.LEAD_STATS_SECRET }}
         run: node dashboard/collect.mjs
 
       - name: Commit dashboard JSON
