@@ -3137,13 +3137,17 @@ textarea:focus-visible,
     display: inline-flex;
     align-items: center;
     flex: 0 0 auto;
+    min-width: 0;
+    max-width: calc(100% - 56px);
 }
 
 .site-logo picture,
 .site-logo img {
     display: block;
     width: 178px;
-    height: 44px;
+    max-width: min(178px, 58vw);
+    height: auto;
+    aspect-ratio: 520 / 128;
 }
 
 .header .nav {
@@ -3927,8 +3931,8 @@ textarea:focus-visible,
 
     .site-logo picture,
     .site-logo img {
-        width: 150px;
-        height: 37px;
+        width: min(150px, 52vw);
+        max-width: 52vw;
     }
 
     .header-actions {
@@ -4438,6 +4442,15 @@ textarea:focus-visible,
 
 .price-calculator-result {
     min-height: 220px;
+    scroll-margin-top: 96px;
+}
+
+.price-calculator-result:focus {
+    outline: none;
+}
+
+.price-calculator-result:focus-visible {
+    box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.18);
 }
 
 .calc-result-label {
@@ -4569,6 +4582,11 @@ textarea:focus-visible,
     color: var(--text-light);
     font-size: 13px;
     line-height: 1.5;
+}
+
+.price-calculator-table-grid tr.calc-row-selected td {
+    background: rgba(108, 99, 255, 0.08);
+    font-weight: 700;
 }
 
 @media (max-width: 900px) {

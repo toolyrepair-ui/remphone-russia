@@ -157,12 +157,22 @@
 
   function renderTable() {
     var rows = rowsForModel();
+    var selectedService = els.service.value;
     if (!els.rows) return;
     els.rows.innerHTML = rows.length ? rows.map(function (row) {
-      return '<tr><td>' + serviceLabel(row.service) + '</td><td>' +
+      var selected = row.service === selectedService ? ' calc-row-selected' : '';
+      return '<tr class="calc-row' + selected + '"><td>' + serviceLabel(row.service) + '</td><td>' +
         (row.price ? 'от ' + fmt(row.price) : '<span class="calc-empty">уточним</span>') +
       '</td></tr>';
     }).join('') : '<tr><td colspan="2" class="calc-muted">Модель не выбрана или не найдена.</td></tr>';
+  }
+
+  function scrollToResult() {
+    if (!els.result) return;
+    els.result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    window.setTimeout(function () {
+      els.result.focus({ preventScroll: true });
+    }, 350);
   }
 
   function render() {
@@ -235,7 +245,9 @@
   if (els.form) {
     els.form.addEventListener('submit', function (event) {
       event.preventDefault();
+      renderSuggestions(false);
       render();
+      scrollToResult();
     });
   }
 

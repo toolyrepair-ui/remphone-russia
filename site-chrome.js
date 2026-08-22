@@ -68,12 +68,9 @@
     var mobileRepairHref = repairHref === '#repair-flow' ? '#stepBrand' : repairHref;
     var logoLight = asset('assets/brand/remphone-wordmark.svg');
     var logoDark = asset('assets/brand/remphone-wordmark-inverse.svg');
-    // Светлый wordmark: PHONE = navy. В тёмной теме ОС/браузера он тонет в шапке —
-    // подставляем inverse через prefers-color-scheme.
-    var logo = '<picture>' +
-      '<source media="(prefers-color-scheme: dark)" srcset="' + logoDark + '">' +
-      '<img src="' + logoLight + '" width="178" height="44" alt="" decoding="async">' +
-      '</picture>';
+    // Шапка всегда светлая — wordmark не переключаем по prefers-color-scheme:
+    // inverse SVG (белый PHONE) на белом фоне даёт «только REM» без контура.
+    var logo = '<img src="' + logoLight + '" width="178" height="44" alt="" decoding="async">';
     var logoInverse = '<img src="' + logoDark +
       '" width="190" height="47" alt="" loading="lazy" decoding="async">';
 
