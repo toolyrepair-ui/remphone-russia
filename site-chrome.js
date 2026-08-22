@@ -83,12 +83,16 @@
         '<div class="container header-inner">' +
           '<a href="' + asset('index.html') + '" class="site-logo" aria-label="REMPHONE — на главную">' + logo + '</a>' +
           '<nav class="nav" id="nav" aria-label="Основная навигация">' +
-            '<a class="nav-drawer-feature" href="' + asset('3d-viewer-iphone15.html') + '">' +
-              '<span class="nav-drawer-feature-title">3D-калькулятор</span>' +
-              '<span class="nav-drawer-feature-note">Выберите симптом на модели телефона</span>' +
+            '<a class="nav-drawer-feature" href="' + asset('price-calculator.html') + '">' +
+              '<span class="nav-drawer-feature-title">Цены на ремонт</span>' +
+              '<span class="nav-drawer-feature-note">Подберите модель и вид работ — покажем ориентир по цене</span>' +
             '</a>' +
             '<div class="nav-main-links">' +
               '<a href="' + asset('services/') + '">Услуги</a>' +
+              '<a href="' + asset('price-calculator.html') + '" class="nav-link-prices">' +
+                '<span class="nav-label-full">Цены на ремонт</span>' +
+                '<span class="nav-label-short" aria-hidden="true">Цены</span>' +
+              '</a>' +
               '<a href="' + asset('3d-viewer-iphone15.html') + '" class="nav-link-3d" aria-label="3D-калькулятор">' +
                 '<span class="nav-label-full">3D-калькулятор</span>' +
                 '<span class="nav-label-short" aria-hidden="true">3D</span>' +
@@ -101,6 +105,7 @@
             '</div>' +
             '<div class="nav-drawer-section" aria-label="Популярные услуги">' +
               '<p class="nav-drawer-label">Популярное</p>' +
+              '<a href="' + asset('price-calculator.html') + '">Цены на ремонт</a>' +
               '<a href="' + asset('3d-viewer-iphone15.html') + '">3D-калькулятор</a>' +
               '<a href="' + asset('services/screen.html') + '">Замена экрана</a>' +
               '<a href="' + asset('services/battery.html') + '">Замена батареи</a>' +
@@ -145,6 +150,7 @@
               '<a href="' + asset('services/screen.html') + '">Замена экрана</a>' +
               '<a href="' + asset('services/battery.html') + '">Замена батареи</a>' +
               '<a href="' + asset('services/not-on.html') + '">Телефон не включается</a>' +
+              '<a href="' + asset('price-calculator.html') + '">Цены на ремонт</a>' +
               '<a href="' + asset('3d-viewer-iphone15.html') + '">3D-калькулятор</a>' +
               '<a href="' + asset('services/') + '">Все услуги</a>' +
             '</nav>' +

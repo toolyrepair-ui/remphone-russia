@@ -3209,11 +3209,13 @@ textarea:focus-visible,
 }
 
 @media (max-width: 1280px) {
-    .header .nav .nav-link-3d .nav-label-full {
+    .header .nav .nav-link-3d .nav-label-full,
+    .header .nav .nav-link-prices .nav-label-full {
         display: none;
     }
 
-    .header .nav .nav-link-3d .nav-label-short {
+    .header .nav .nav-link-3d .nav-label-short,
+    .header .nav .nav-link-prices .nav-label-short {
         display: inline;
     }
 }
@@ -3937,11 +3939,13 @@ textarea:focus-visible,
         display: block;
     }
 
-    .header .nav .nav-link-3d .nav-label-full {
+    .header .nav .nav-link-3d .nav-label-full,
+    .header .nav .nav-link-prices .nav-label-full {
         display: inline;
     }
 
-    .header .nav .nav-link-3d .nav-label-short {
+    .header .nav .nav-link-3d .nav-label-short,
+    .header .nav .nav-link-prices .nav-label-short {
         display: none;
     }
 
@@ -4407,5 +4411,172 @@ textarea:focus-visible,
     .brand-card,
     .problem-card {
         transition-duration: 0.01ms;
+    }
+}
+
+/* Price calculator */
+.price-calculator {
+    padding: 0 0 56px;
+}
+
+.price-calculator-layout {
+    display: grid;
+    grid-template-columns: minmax(280px, 420px) minmax(0, 1fr);
+    gap: 24px;
+    align-items: start;
+}
+
+.price-calculator-form {
+    position: sticky;
+    top: 88px;
+}
+
+.price-calculator-side {
+    display: grid;
+    gap: 16px;
+}
+
+.price-calculator-result {
+    min-height: 220px;
+}
+
+.calc-result-label {
+    margin: 0 0 8px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--primary);
+}
+
+.calc-result-price {
+    margin: 0;
+    font-size: clamp(36px, 6vw, 56px);
+    line-height: .95;
+    font-weight: 900;
+    letter-spacing: -.04em;
+    color: var(--dark);
+}
+
+.calc-result-price-muted {
+    font-size: clamp(28px, 5vw, 40px);
+    color: var(--text-light);
+}
+
+.calc-result-note {
+    margin: 14px 0 0;
+    color: var(--text-light);
+    line-height: 1.55;
+}
+
+.calc-result-meta {
+    margin: 18px 0 0;
+    padding-left: 18px;
+    color: var(--text);
+    line-height: 1.6;
+}
+
+.calc-model-search {
+    position: relative;
+}
+
+.calc-suggestions {
+    position: absolute;
+    z-index: 30;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    max-height: 260px;
+    overflow: auto;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 16px 36px rgba(11, 31, 58, .14);
+    padding: 6px;
+}
+
+.calc-suggestions[hidden] {
+    display: none;
+}
+
+.calc-suggestion {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 11px;
+    border-radius: 10px;
+    color: var(--text);
+    cursor: pointer;
+    text-align: left;
+    font: inherit;
+}
+
+.calc-suggestion:hover,
+.calc-suggestion:focus {
+    background: rgba(108, 99, 255, .08);
+    outline: none;
+}
+
+.calc-suggestion-year {
+    color: var(--text-light);
+    font-size: 12px;
+}
+
+.price-calculator-cta {
+    display: inline-flex;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+}
+
+.price-calculator-table-scroll {
+    overflow: auto;
+    max-height: 360px;
+}
+
+.price-calculator-table-grid {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.price-calculator-table-grid th,
+.price-calculator-table-grid td {
+    padding: 10px 8px;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+    vertical-align: top;
+}
+
+.price-calculator-table-grid th {
+    position: sticky;
+    top: 0;
+    background: #fff;
+    color: var(--dark);
+    font-size: 12px;
+}
+
+.calc-empty,
+.calc-muted {
+    color: var(--text-light);
+}
+
+.calc-footnote {
+    margin: 14px 0 0;
+    color: var(--text-light);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+    .price-calculator-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .price-calculator-form {
+        position: static;
     }
 }

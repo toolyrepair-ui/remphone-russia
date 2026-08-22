@@ -1,6 +1,7 @@
 [
   { "path": "/", "changefreq": "weekly", "priority": 1.0 },
   { "path": "/services/", "changefreq": "weekly", "priority": 0.9 },
+  { "path": "/price-calculator.html", "changefreq": "weekly", "priority": 0.9 },
   { "path": "/services/screen.html", "changefreq": "weekly", "priority": 0.85 },
   { "path": "/services/battery.html", "changefreq": "weekly", "priority": 0.85 },
   { "path": "/services/not-on.html", "changefreq": "weekly", "priority": 0.85 },

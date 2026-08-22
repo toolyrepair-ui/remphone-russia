@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" type="image/png" sizes="120x120" href="/favicon-120.png">
+    <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0B1F3A">
+    <title>Цены на ремонт — REMPHONE</title>
+    <meta name="description" content="Цены на ремонт iPhone, Samsung, Xiaomi, Honor и Huawei: подберите модель и вид работ. Хабаровск, КнА и Владивосток. Точную сумму подтверждаем до начала работ.">
+    <link rel="canonical" href="https://rem-phone.ru/price-calculator.html">
+    <link rel="stylesheet" href="styles.css?v=calc1">
+    <link rel="stylesheet" href="animations.css">
+    <meta property="og:title" content="Цены на ремонт — REMPHONE">
+    <meta property="og:description" content="Подберите бренд, модель и вид ремонта — покажем ориентир по цене. Диагностика бесплатно, гарантия 90 дней.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://rem-phone.ru/price-calculator.html">
+    <meta property="og:image" content="https://rem-phone.ru/og-image.jpg">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Цены на ремонт REMPHONE",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "url": "https://rem-phone.ru/price-calculator.html",
+        "provider": {
+            "@type": "LocalBusiness",
+            "name": "REMPHONE",
+            "telephone": "+79144111730",
+            "url": "https://rem-phone.ru/"
+        },
+        "description": "Ориентир по ремонту телефона по модели и виду работ."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://rem-phone.ru/" },
+            { "@type": "ListItem", "position": 2, "name": "Цены на ремонт", "item": "https://rem-phone.ru/price-calculator.html" }
+        ]
+    }
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<main id="main-content">
+
+<section class="page-hero">
+    <div class="container">
+        <nav class="breadcrumbs" aria-label="Хлебные крошки"><a href="/">Главная</a> / Цены на ремонт</nav>
+        <h1 style="margin:0 0 12px;font-size:clamp(28px,5vw,42px)">Цены на ремонт</h1>
+        <p class="page-hero-lead">Подберите бренд, модель и вид работ — покажем ориентир по цене. Точную сумму подтверждаем до начала ремонта.</p>
+        <p style="margin-top:10px">⚡ 30–60 минут · 🛡 гарантия 90 дней · 🔧 диагностика бесплатно</p>
+    </div>
+</section>
+
+<section class="price-calculator">
+    <div class="container">
+        <div class="price-calculator-layout">
+            <form class="form-card price-calculator-form" id="priceCalculatorForm">
+                <h2 style="margin-top:0">Подбор цены</h2>
+                <p class="form-sub">Бренд → модель → ремонт. Можно писать коротко: «s 23», «15 pro», «a51».</p>
+
+                <div class="form-group">
+                    <label for="calcBrand">Бренд</label>
+                    <select id="calcBrand"></select>
+                </div>
+
+                <div class="form-group calc-model-search">
+                    <label for="calcModel">Модель</label>
+                    <input id="calcModel" type="text" placeholder="Например: iPhone 15, Galaxy S23, Redmi Note 12" autocomplete="off">
+                    <div class="calc-suggestions" id="calcModelSuggestions" hidden></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="calcService">Вид ремонта</label>
+                    <select id="calcService"></select>
+                </div>
+
+                <button class="form-submit" type="submit">Показать цену</button>
+            </form>
+
+            <div class="price-calculator-side">
+                <section class="form-card price-calculator-result" id="calcResult" aria-live="polite">
+                    <p class="calc-result-label">Выберите модель</p>
+                    <p class="calc-result-note">Начните писать модель и выберите вид ремонта.</p>
+                </section>
+
+                <a class="btn-primary price-calculator-cta" id="calcCta" href="index.html#repair-flow" hidden>Оставить заявку на ремонт</a>
+
+                <section class="form-card price-calculator-table">
+                    <h2 style="margin:0 0 8px;font-size:20px">Все работы для выбранной модели</h2>
+                    <div class="price-calculator-table-scroll">
+                        <table class="price-calculator-table-grid">
+                            <thead>
+                                <tr><th>Ремонт</th><th>Цена</th></tr>
+                            </thead>
+                            <tbody id="calcModelRows"></tbody>
+                        </table>
+                    </div>
+                    <p class="calc-footnote">Цифры — ориентир. Если по модели нет строки с ценой, напишите в заявке — уточним после диагностики.</p>
+                </section>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="services-preview">
+    <div class="container">
+        <h2 class="section-title">Не нашли модель?</h2>
+        <p style="max-width:720px;margin:0 auto 24px;text-align:center;color:var(--text-light)">Отправьте заявку — мы отремонтируем. Мастер уточнит модель, деталь и финальную сумму до начала работ.</p>
+        <div class="hero-actions" style="justify-content:center;flex-wrap:wrap">
+            <a href="index.html#repair-flow" class="btn-primary">Оставить заявку</a>
+            <a href="tel:+79144111730" class="btn-secondary">+7 914 411-17-30</a>
+            <a href="https://t.me/REMPHONE_RUSSIA_Bot" class="btn-secondary" target="_blank" rel="noopener">Telegram</a>
+        </div>
+    </div>
+</section>
+
+</main>
+<div id="site-footer"></div>
+<div id="site-mobile-bar"></div>
+
+<script src="config.js"></script>
+<script src="site-chrome.js" data-base=""></script>
+<script src="price-calculator-data.js?v=1"></script>
+<script src="price-calculator.js?v=1"></script>
+<script src="analytics.js"></script>
+</body>
+</html>
